@@ -7,7 +7,7 @@ from pprint import pprint
 
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/SaltGUI"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/salt"
 mongo = PyMongo(app)
 
 
@@ -18,43 +18,37 @@ def hello_www():
     return "Hello World Wide Web!"
 
 
-@app.route("/api/minions/get_all")
-def get_all_minions():
-    minions = mongo.db.minions
+@app.route("/api/saltReturns")
+def get_SaltReturns():
+    saltReturns = mongo.db.saltReturns
     res = []
-    minions = minions.find()
-    for j in minions:
+    saltReturns = saltReturns.find()
+    for j in saltReturns:
         j['_id'] = str(j['_id'])
         res.append(j)
     return jsonify(res)
 
 
-@app.route("/api/minions/<id>")
-def get_minion_by_id(id):
-    minions = mongo.db.minions
+
+@app.route("/api/events")
+def get_events():
+    events = mongo.db.events
     res = []
-    minions = minions.find({'_id' : ObjectId(id)})
-    for j in minions:
+    events = events.find()
+    for j in events:
         j['_id'] = str(j['_id'])
         res.append(j)
     return jsonify(res)
 
 
-@app.route("/api/minions/ins", methods=["POST"])
-def insert_minion():
-    if request.method == 'POST':
-        minions = mongo.db.minions
-        jsonData = request.get_json()
-        inserted_id = minions.insert_one(jsonData).inserted_id
-        print(inserted_id)
-        return jsonify({"new minion": str(inserted_id)})
+@app.route("/api/jobs")
+def get_events():
+    jobs = mongo.db.jobs
+    res = []
+    jobs = jobs.find()
+    for j in jobs:
+        j['_id'] = str(j['_id'])
+        res.append(j)
+    return jsonify(res)
 
-    else:
-        print(request)
-        return jsonify("yabalblooo")
-
-# @app.route("/api/minions/insert_minion" , methods=['POST'])
-# def get_minion_by_id(id):
-#     print(request)
-#     return jsonify({'text', 'yabalooloo'})
 
