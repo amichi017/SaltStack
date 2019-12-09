@@ -8,7 +8,6 @@ import urllib.parse
 #from pprint import pprint
 
 app = Flask(__name__)
-#app.config["MONGO_URI"] = "mongodb://saltstack:Salt5t@ck@localhost:27017/salt"
 #mongo = PyMongo(app)
 username = urllib.parse.quote_plus('user')
 #print(username)
