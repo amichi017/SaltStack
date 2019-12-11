@@ -9,15 +9,15 @@ import urllib.parse
 
 app = Flask(__name__)
 #mongo = PyMongo(app)
-username = urllib.parse.quote_plus('user')
+username = urllib.parse.quote_plus('saltstack')
 #print(username)
-pwd = urllib.parse.quote_plus('password')
+pwd = urllib.parse.quote_plus('Salt5t@ck')
 #print(pwd)
 uri = 'mongodb://%s:%s@localhost:27017/salt' % (username,pwd)
-#print(uri)
+print(uri)
 client = MongoClient(uri)
 db = client.salt
-
+print(db)
 
 
 @app.route("/")
