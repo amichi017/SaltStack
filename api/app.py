@@ -9,9 +9,9 @@ import urllib.parse
 
 app = Flask(__name__)
 #mongo = PyMongo(app)
-username = urllib.parse.quote_plus('saltstack')
+username = urllib.parse.quote_plus('username')
 #print(username)
-pwd = urllib.parse.quote_plus('Salt5t@ck')
+pwd = urllib.parse.quote_plus('password')
 #print(pwd)
 uri = 'mongodb://%s:%s@localhost:27017/salt' % (username,pwd)
 print(uri)
@@ -36,6 +36,36 @@ def get_SaltReturns():
         res.append(j)
     return jsonify(res)
 
+
+
+@app.route("/api/saltReturns/apply")
+def get_salt_applies():
+    saltReturns = db.saltReturns
+    print(saltReturns)
+    res = []
+    saltReturns = saltReturns.find({'fun':'state.apply'})
+    for j in saltReturns:
+        jid = j['jid']
+        print(jid.Dat)
+        j['_id'] = str(j['_id'])
+        res.append(j)
+    return jsonify(res)
+
+
+@app.route("/api/saltReturns/apply/<date_url>")
+def get_daily_applies(date_url):
+    saltReturns = db.saltReturns
+    date = date_url
+    print(date)
+    print(saltReturns)
+    res = []
+    saltReturns = saltReturns.find({
+        'fun':'state.apply',
+        'jid': {'$regex':"%s.*" % (date)}})
+    for j in saltReturns:
+        j['_id'] = str(j['_id'])
+        res.append(j)
+    return jsonify(res)
 
 
 @app.route("/api/jobs")
