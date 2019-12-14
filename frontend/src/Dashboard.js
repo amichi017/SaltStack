@@ -186,9 +186,9 @@ export default function Dashboard() {
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              <div className={classes.paper}>
                 <Orders />
-              </Paper>
+              </div>
             </Grid>
           </Grid>
         </Container>

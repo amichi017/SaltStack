@@ -1,64 +1,110 @@
-import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from './Title';
+	
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import MaterialTable from 'material-table';
 
-const rows = [
-  createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-  createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-  createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
+import { forwardRef } from 'react';
 
-const useStyles = makeStyles(theme => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+
+
+const tableIcons = {
+  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Delete: forwardRef((props, ref) =>  <Edit {...props} ref={ref} />),
+  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
+const dataColumns =[
+  { title: 'Name', field: 'name',cellStyle: x=>({
+    color:(x==='Succeeded')?'#208000':'#ff0000'})
   },
-}));
+  { title: 'Surname', field: 'surname' },
+  { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+  {
+    title: 'Birth Place',
+    field: 'birthCity',
+    lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+  },
+]
 
-export default function Orders() {
-  const classes = useStyles();
+const dataTable=[
+  { name: 'Faile', surname: 'rtr', birthYear: 1987, birthCity: 63 },
+  { name: 'Succeeded', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+  { name: 'Succeeded', surname: 'rrf', birthYear: 1987, birthCity: 63 },
+  { name: 'Succeeded', surname: 'ff', birthYear: 1987, birthCity: 63 },
+  { name: 'Faile', surname: 'Bvvvaran', birthYear: 1987, birthCity: 63 },
+  { name: 'Faile', surname: 'Bar  an', birthYear: 1987, birthCity: 63 },
+  { name: 'Succeeded', surname: 'Bardcan', birthYear: 1987, birthCity: 63 },
+  { name: 'Faile', surname: 'Baddxdxran', birthYear: 1987, birthCity: 63 },
+
+  { name: 'Faile', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+    
+ 
+]
+export default class Orders extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRow: null
+    }
+  }
+render(){
   return (
-    <React.Fragment>
-      <Title>Recent Orders</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="javascript:;">
-          See more orders
-        </Link>
-      </div>
-    </React.Fragment>
+    <MaterialTable
+    title="minion table"
+    columns={dataColumns}
+    data={ dataTable}
+    icons={tableIcons}
+    onRowClick={((evt, selectedRow) => this.setState({ selectedRow }))}
+   
+   
+      options={{
+        exportButton: true,
+        filtering: true,
+ 
+        //rowStyle: rowData => ({
+         // color: (rowData.name==='su') ? '#daa9d9' : '#ff1a1a'})
+        
+      }}
+      actions={[
+        {
+
+          icon: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+          tooltip: 'Save User',
+          onClick: (event, rowData) => console.log(  rowData.surname)
+        }
+      ]
+      }
+    />
   );
+
+}
 }
