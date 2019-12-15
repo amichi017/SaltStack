@@ -22,6 +22,16 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
+const time =(str)=>{
+  const year =str.slice(0,4);
+  const month =String(parseInt(str.slice(4,6))-1);
+  const day =str.slice(6,8);
+  const hower= str.slice(8,10);
+  
+  const minet=str.slice(10,12);
+  return String(hower)+":"+String(minet);
+
+}
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -43,29 +53,75 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 const dataColumns =[
-  { title: 'Name', field: 'name',cellStyle: x=>({
+  { title: 'Stutus', field: 'stutus', 
+  //type: 'boolean'
+  cellStyle: x=>({
     color:(x==='Succeeded')?'#208000':'#ff0000'})
+
   },
-  { title: 'Surname', field: 'surname' },
-  { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-  {
-    title: 'Birth Place',
-    field: 'birthCity',
-    lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+  { title: 'Name', field: 'name',
   },
+  { title: 'ID', field: 'id' },
+  { title: 'Time', field: 'time', 
+  //type: 'time'
+ },
+  
+ 
+ 
 ]
 
 const dataTable=[
-  { name: 'Faile', surname: 'rtr', birthYear: 1987, birthCity: 63 },
-  { name: 'Succeeded', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-  { name: 'Succeeded', surname: 'rrf', birthYear: 1987, birthCity: 63 },
-  { name: 'Succeeded', surname: 'ff', birthYear: 1987, birthCity: 63 },
-  { name: 'Faile', surname: 'Bvvvaran', birthYear: 1987, birthCity: 63 },
-  { name: 'Faile', surname: 'Bar  an', birthYear: 1987, birthCity: 63 },
-  { name: 'Succeeded', surname: 'Bardcan', birthYear: 1987, birthCity: 63 },
-  { name: 'Faile', surname: 'Baddxdxran', birthYear: 1987, birthCity: 63 },
+  { 
+    stutus: 'Faile',
+    name: 'sm-stud.jce.ac.il',
+    id: '5de92a636ff1ca1a1bcf3382',
+    time: time('20191205040346780161'),
+  },
 
-  { name: 'Faile', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+  { 
+    stutus: 'Succeeded',
+    name: 'sm-stud.jce.ac.il',
+    id: '5de92aa9441a1f0c7973a234',
+    time: time('20191205180434320550'),
+    
+  },
+ 
+  { 
+    stutus: 'Succeeded',
+    name: 'sm01-stud.jce.ac.il',
+    id: '5de92ad69679def1a498c9cd',
+    time:time( '20191205190523839870'),
+    
+   
+  },
+  { 
+    stutus: 'Succeeded',
+    name: 'sm-stud.jce.ac.il',
+    id: '5de92aa9441a1f0c7973a234',
+    time: time('20191205150434320550'),
+    
+  },
+  { 
+    stutus: 'Faile', 
+    name: 'sm02-stud.jce.ac.il',
+    id: '5de92ad77bbe630a5f637993',
+    time: time('20191205020523839870'),
+
+  },
+  { 
+    stutus: 'Faile',
+    name: 'sm-stud.jce.ac.il',
+    id: '5de92adbe85659e221390bef',
+    time: time('20191205120523839870'),
+    
+  } ,
+  { 
+    stutus: 'Faile', 
+    name: 'sm02-stud.jce.ac.il',
+    id: '5de92ad77bbe630a5f637993',
+    time: time('20191205170523839870'),
+
+  },
     
  
 ]
