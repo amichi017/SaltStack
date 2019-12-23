@@ -87,8 +87,7 @@ export default class Deposits extends React.Component {
        
        
         <Button
-        variant="contained"
-        color="primary"
+        variant="outlined" color="primary"
   
         endIcon={ <SearchIcon>Search</SearchIcon>}
       >
