@@ -37,12 +37,12 @@ export default class Deposits extends React.Component {
   }
   
   handleDateChangeStart= (e)=>{
-    console.log(e)
+    this.setState({start:e})
     // this.setState({start: e.target.value});
     
   }
   handleDateChangeEnd= (e)=>{
-    console.log(e)
+    this.setState({end:e})
     // this.setState({end: e.target.value});
   
   }
