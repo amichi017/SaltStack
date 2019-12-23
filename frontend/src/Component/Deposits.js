@@ -82,7 +82,7 @@ export default class Deposits extends React.Component {
           }}
         />
       
-      <Typography style={{flex: 1,paddingTop:15}}>
+      <Typography style={{flex: 1,paddingTop:25}}>
       
        
        
