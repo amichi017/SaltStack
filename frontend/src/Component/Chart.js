@@ -1,5 +1,13 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer,Tooltip,Legend  } from 'recharts';
+import { LineChart,
+         Line,
+         XAxis,
+         YAxis,
+         Label,
+         ResponsiveContainer,
+         Tooltip,
+         Legend  
+} from 'recharts';
 import Title from './Title';
 
 // Generate Sales Data

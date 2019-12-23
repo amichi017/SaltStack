@@ -185,7 +185,7 @@ export default function Dashboard() {
               </Paper>
             </Grid>
             {/* Recent Orders */}
-            <Grid item xs={12}>
+            <Grid item xs={20}>
               <div className={classes.paper}>
                 <Orders />
               </div>
