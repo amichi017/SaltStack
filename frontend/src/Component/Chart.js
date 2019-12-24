@@ -1,4 +1,6 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import { LineChart,
          Line,
          XAxis,
@@ -30,10 +32,14 @@ const demoOnClick= (e)=>{
   if(e){if(e.activeLabel){console.log(e.activeLabel);}}
   
 }
-export default class Chart extends React.PureComponent {
+
+
+ class Chart extends React.PureComponent {
 
   constructor(props) {
     super(props);
+    console.log(this.props.date[0].start,'jjjjjjjjjjjjjjjjjjjjjjj');
+    this.titleDate= this.props.date[0].start.toLocaleDateString() === this.props.date[1].end.toLocaleDateString() ?( this.props.date[0].start.toLocaleDateString() ): (this.props.date[0].start.toLocaleDateString() + ' - '+ this.props.date[1].end.toLocaleDateString());
     this.state = {
       activeIndex: null
     }
@@ -42,7 +48,7 @@ export default class Chart extends React.PureComponent {
   render(){
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{this.titleDate}</Title>
       <ResponsiveContainer>
         <LineChart
           onClick={demoOnClick}
@@ -58,7 +64,7 @@ export default class Chart extends React.PureComponent {
           </XAxis> 
           <YAxis>
             <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-            AMOUNT
+             (A/T)
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="Faile" stroke="#ff6666" onClick={demoOnClick} />
@@ -71,3 +77,11 @@ export default class Chart extends React.PureComponent {
   );
  }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    date: state.date
+  }
+}
+
+export default connect(mapStateToProps)(Chart);

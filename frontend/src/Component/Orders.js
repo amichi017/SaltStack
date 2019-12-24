@@ -1,7 +1,8 @@
 	
 
 import React, { Component } from "react";
-
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import MaterialTable from 'material-table';
 
 import { forwardRef } from 'react';
@@ -127,13 +128,18 @@ const dataTable=[
     
  
 ]
-export default class Orders extends React.Component {
+
+
+
+ class Orders extends React.Component {
   constructor(props) {
     super(props);
+   
     this.state = {
       selectedRow: null
     }
   }
+  
 render(){
   return (
     <MaterialTable
@@ -157,7 +163,7 @@ render(){
 
           icon: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
           tooltip: 'Save User',
-          onClick: (event, rowData) => console.log(  rowData.surname)
+          onClick: (event, rowData) => {console.log(  rowData.surname); console.log(this.props.date,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');}
         }
       ]
       }
@@ -166,3 +172,11 @@ render(){
 
 }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    date: state.date
+  }
+}
+
+export default connect(mapStateToProps)(Orders);

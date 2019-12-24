@@ -7,6 +7,8 @@ import {Typography,Button,Grid} from '@material-ui/core';
 import Title from './Title';
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker,MuiPickersUtilsProvider,DatePicker} from "@material-ui/pickers";
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 //import DateTime from 'react-datetime';
 
@@ -28,21 +30,25 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 
 
-export default class Deposits extends React.Component {
+ class Deposits extends React.Component {
   constructor(props) {
     super(props);
     this.handleDateChangeStart = this.handleDateChangeStart.bind(this);
     this.handleDateChangeEnd = this.handleDateChangeEnd.bind(this);
-    this.state = {start:new Date(),end:new Date()};
+    this.state = this.props.date;
   }
   
-  handleDateChangeStart= (e)=>{
-    this.setState({start:e})
+  handleDateChangeStart(e){
+    this.setState({start:e});
+    this.props.date[0]=e;
+    console.log(this.props.date);
     // this.setState({start: e.target.value});
     
   }
-  handleDateChangeEnd= (e)=>{
-    this.setState({end:e})
+  handleDateChangeEnd (e){
+    this.setState({end:e});
+    this.props.date[1]=e;
+    console.log(this.props.date);
     // this.setState({end: e.target.value});
   
   }
@@ -104,3 +110,11 @@ export default class Deposits extends React.Component {
   }
     
 }
+
+ const mapStateToProps = (state, ownProps) => {
+  return {
+    date: state.date
+  }
+}
+
+export default connect(mapStateToProps)(Deposits);

@@ -22,18 +22,7 @@ import Chart from './Component/Chart';
 import Deposits from './Component/Deposits';
 import Orders from './Component/Orders';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const drawerWidth = 240;
 
@@ -192,7 +181,7 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-        <Copyright />
+    
       </main>
     </div>
   );
