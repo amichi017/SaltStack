@@ -7,10 +7,22 @@ import RegisterForm from './Component/RegisterForm';
 import { createStore } from 'redux';
 import appReducer from './reducers/index';
 import {Provider} from 'react-redux';
+import App from './App';
+// import store from './store';
+
+// ReactDOM.render(
+//     <Provider store={store}>
+//       <App />
+
+//     </Provider>, document.getElementById('root'),
+//   );
+
 const store = createStore(appReducer);
+
 ReactDOM.render( <Provider store={store}>
-                   <Dashboard />
-                </Provider> , document.getElementById('root'));
+   <Dashboard />
+</Provider> , document.getElementById('root'));
+
 
 
 // If you want your app to work offline and load faster, you can change

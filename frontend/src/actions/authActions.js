@@ -1,0 +1,92 @@
+import axios from 'axios';
+import { returnErrors } from './errorActions';
+
+import {
+AUTH_ERROR,
+LOGIN_SUCCESS,
+LOGIN_FAIL,
+LOGOUT_SUCCESS,
+LOGOUT_FAIL,
+REGISTER_SUCCESS,
+REGISTER_FAIL,
+USER_LOADING,
+USER_LOADED
+} from './types';
+import { BrowserRouter } from 'react-router-dom';
+
+
+export const register = ({ first_name, last_name, email, password }) => dispatch => {
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    // Request body
+    const body = JSON.stringify({first_name, last_name, email, password });
+
+    axios.post('"http://127.0.0.1:5000/register"', body, config)
+    .then(res => dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+    }))
+    .catch(err => {
+        dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+        dispatch({
+            type: REGISTER_FAIL
+        })
+    })
+}
+
+export const login = ({ email, password }) => dispatch => {
+    // Headers
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    // Request body
+    const body = JSON.stringify({ email, password });
+
+    axios.post('http://127.0.0.1:5000/login', body, config)
+    .then(res => dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+    }))
+    .catch(err => {
+        dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'));
+        dispatch({
+            type: LOGIN_FAIL
+        })
+    })
+}
+
+// Logout User
+export const logout = () => {
+    return {
+      type: LOGOUT_SUCCESS
+    };
+  };
+
+  
+// Setup config/headers and token
+export const tokenConfig = getState => {
+       // Get token from localstorage
+       const token = getState().auth.token;
+
+       // Headers
+       const config = {
+           headers: {
+               "Content-type": "application/json"
+           }
+       }
+   
+       // If token, add to headers
+       if(token) {
+           config.headers['x-auth-token'] = token;
+       }
+
+    return config;
+}

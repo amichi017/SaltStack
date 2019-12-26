@@ -15,9 +15,9 @@ import urllib.parse
 #from pprint import pprint
 
 #mongo = PyMongo(app)
-mongo_username = urllib.parse.quote_plus('username')
+mongo_username = urllib.parse.quote_plus('saltstack')
 # print(mongo_username)
-mongo_pwd = urllib.parse.quote_plus('password')
+mongo_pwd = urllib.parse.quote_plus('Salt5t@ck')
 # print(mongo_pwd)
 uri = 'mongodb://%s:%s@localhost:27017/salt' % (mongo_username,mongo_pwd)
 # print(uri)
