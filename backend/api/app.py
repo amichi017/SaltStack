@@ -15,9 +15,9 @@ import urllib.parse
 #from pprint import pprint
 
 #mongo = PyMongo(app)
-mongo_username = urllib.parse.quote_plus('saltstack')
+mongo_username = urllib.parse.quote_plus('username')
 # print(mongo_username)
-mongo_pwd = urllib.parse.quote_plus('Salt5t@ck')
+mongo_pwd = urllib.parse.quote_plus('pwd')
 # print(mongo_pwd)
 uri = 'mongodb://%s:%s@localhost:27017/salt' % (mongo_username,mongo_pwd)
 # print(uri)
@@ -59,7 +59,7 @@ def register():
         users.insert_one(user_info)
         return jsonify(message="User added sucessfully"), 201
         
-@app.route("/login", methods=["POST"])
+@app.route("/auth", methods=["POST"])
 def login():
     if request.is_json:
         email = request.json["email"]
@@ -75,6 +75,14 @@ def login():
             access_token = create_access_token(identity=email)
             return jsonify(message="Login Succeeded!", access_token=access_token), 201
     return jsonify(message="Bad Email or Password"), 401
+
+        
+@app.route("/auth/user", methods=["GET"])
+@jwt_required
+def user():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
 
 
 @app.route("/")

@@ -2,26 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Dashboard from './Dashboard';
 import * as serviceWorker from './serviceWorker';
-import LoginForm from './Component/LoginForm';
-import RegisterForm from './Component/RegisterForm';
 import { createStore } from 'redux';
 import appReducer from './reducers/index';
 import {Provider} from 'react-redux';
 import App from './App';
-// import store from './store';
+import store from './store';
 
-// ReactDOM.render(
-//     <Provider store={store}>
-//       <App />
+// const store = createStore(appReducer);
 
-//     </Provider>, document.getElementById('root'),
-//   );
+ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>, document.getElementById('root'),
+  );
 
-const store = createStore(appReducer);
 
-ReactDOM.render( <Provider store={store}>
-   <Dashboard />
-</Provider> , document.getElementById('root'));
+// ReactDOM.render( <Provider store={store}>
+//    <Dashboard />
+// </Provider> , document.getElementById('root'));
 
 
 

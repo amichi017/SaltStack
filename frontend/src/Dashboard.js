@@ -21,6 +21,7 @@ import { mainListItems, secondaryListItems } from './Component/listItems';
 import Chart from './Component/Chart';
 import Deposits from './Component/Deposits';
 import Orders from './Component/Orders';
+import { Logout } from './Component/auth/Logout';
 
 
 
@@ -121,6 +122,7 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
+
           <IconButton
             edge="start"
             color="inherit"
@@ -128,6 +130,7 @@ export default function Dashboard() {
             onClick={handleDrawerOpen}
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
+
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
@@ -138,6 +141,8 @@ export default function Dashboard() {
               <NotificationsIcon />
             </Badge>
           </IconButton>
+         
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -181,7 +186,7 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
-    
+        <Logout />
       </main>
     </div>
   );
