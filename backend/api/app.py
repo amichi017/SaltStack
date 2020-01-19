@@ -1,6 +1,6 @@
 from bson.objectid import ObjectId
 from flask import Flask, jsonify, request
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, jwt_refresh_token_required, create_refresh_token,get_jwt_identity
 
 from flask_bcrypt import Bcrypt, generate_password_hash,check_password_hash
 from flask_cors import CORS
@@ -12,12 +12,13 @@ from pymongo import MongoClient
 import pprint
 import urllib.parse
 
+
 #from pprint import pprint
 
 #mongo = PyMongo(app)
-mongo_username = urllib.parse.quote_plus('username')
+mongo_username = urllib.parse.quote_plus('saltstack')
 # print(mongo_username)
-mongo_pwd = urllib.parse.quote_plus('pwd')
+mongo_pwd = urllib.parse.quote_plus('Salt5t@ck')
 # print(mongo_pwd)
 uri = 'mongodb://%s:%s@localhost:27017/salt' % (mongo_username,mongo_pwd)
 # print(uri)
@@ -25,7 +26,9 @@ client = MongoClient(uri)
 db = client.salt
 users = db.users
 
+
 app = Flask(__name__)
+app.debug = True
 CORS(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
@@ -33,7 +36,7 @@ jwt = JWTManager(app)
 
 # JWT Config
 app.config["JWT_SECRET_KEY"] = "this-is-secret-key" #change it
-
+# app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -73,9 +76,18 @@ def login():
     if test:
         if check_password_hash(test["password"],password):
             access_token = create_access_token(identity=email)
-            return jsonify(message="Login Succeeded!", access_token=access_token), 201
+            refresh_token = create_refresh_token(identity=email)
+            return jsonify(message="Login Succeeded!", access_token=access_token,refresh_token=refresh_token), 201
     return jsonify(message="Bad Email or Password"), 401
 
+@app.route('/auth/refresh', methods=['POST'])
+@jwt_refresh_token_required
+def refresh():
+    current_user = get_jwt_identity()
+    ret = {
+        'access_token': create_access_token(identity=current_user)
+    }
+    return jsonify(ret), 200
         
 @app.route("/auth/user", methods=["GET"])
 @jwt_required
@@ -161,4 +173,4 @@ def get_events():
 
 
 if __name__ == '__main__':
- app.run(debug=True)
+ app.run()

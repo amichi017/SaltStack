@@ -91,7 +91,6 @@ class LoginForm extends React.Component {
 
    signIn(event){
     event.preventDefault();
-
     if (this.emailInput.value === "") {
       this.setState({
         email: {
@@ -108,7 +107,8 @@ class LoginForm extends React.Component {
         password: this.passwordInput.value,
        };
   
-      this.props.login(user);
+      const log = this.props.login(user);
+      console.log(log)
       this.props.history.push('/'); 
     }
 

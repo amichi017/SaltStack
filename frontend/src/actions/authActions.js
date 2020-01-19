@@ -11,8 +11,6 @@ REGISTER_FAIL,
 USER_LOADING,
 USER_LOADED
 } from './types';
-import { BrowserRouter } from 'react-router-dom';
-import { Router, CallMissedOutgoingOutlined } from '@material-ui/icons';
 
 
 
@@ -30,7 +28,7 @@ export const loadUser = () => (dispatch, getState) => {
       )
       .catch(err => {
         dispatch(returnErrors(err.response.data, err.response.status));
-        dispatch({
+         dispatch({
           type: AUTH_ERROR
         });
       });
@@ -87,10 +85,10 @@ export const login = ({ email, password }) => dispatch => {
 }
 
 // Logout User
-export const logout = () =>  dispatch => {
-    return {
-        type: LOGIN_SUCCESS,            
-    };
+export const logout = dispatch => {
+    dispatch({
+        type: LOGOUT_SUCCESS
+    })
   };
 
   
