@@ -24,7 +24,6 @@ import Orders from './Component/Orders';
 import { Logout } from './Component/auth/Logout';
 
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -188,8 +187,9 @@ export default function Dashboard() {
             </Grid>
           </Grid>
         </Container>
+        <Logout />
+
       </main>
-      <Logout />
 
     </div>
   );

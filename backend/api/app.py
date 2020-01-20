@@ -38,29 +38,6 @@ jwt = JWTManager(app)
 app.config["JWT_SECRET_KEY"] = "this-is-secret-key" #change it
 # app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
 
-@app.route("/register", methods=["POST"])
-def register():
-    if request.is_json:
-        first_name = request.json["first_name"]
-        last_name = request.json["last_name"]
-        email = request.json["email"]
-        password = request.json["password"]
-    else:
-        email = request.form["email"]
-        first_name = request.form["first_name"]
-        last_name = request.form["last_name"]
-        password = request.form["password"]
-
-    # test = User.query.filter_by(email=email).first()
-    test = users.find_one({"email": email})
-    if test:
-        return jsonify(message="User Already Exist"), 409
-    
-    else:
-        user_info = dict(first_name=first_name, last_name=last_name, email=email, password=bcrypt.generate_password_hash(password))
-        print(user_info)
-        users.insert_one(user_info)
-        return jsonify(message="User added sucessfully"), 201
         
 @app.route("/auth", methods=["POST"])
 def login():

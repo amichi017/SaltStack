@@ -170,7 +170,7 @@ class LoginForm extends React.Component {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/changePass" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
