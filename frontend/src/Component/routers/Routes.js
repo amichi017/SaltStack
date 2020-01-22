@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route , Redirect} from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as authActions from '../../actions/authActions'
 import Dashboard from '../../Dashboard';
 import LoginForm from '../auth/LoginForm';
 import RegisterForm from '../auth/RegisterForm';
-import ChangePassword from '../auth/ChangePasswordForm';
-import store from '../../store';
+import ChangePasswordForm from '../auth/ChangePasswordForm';
 
 import PropTypes from 'prop-types';
-import ChangePasswordForm from '../auth/ChangePasswordForm';
 
 class Routes extends Component {
 

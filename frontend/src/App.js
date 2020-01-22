@@ -35,6 +35,7 @@ class App extends Component {
 
   
   render() {
+    console.log(store.getState())
      return (
       <Routes />
      ) 
