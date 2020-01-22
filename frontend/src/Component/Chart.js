@@ -1,6 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {dateSelect} from '../Actions/date';
 import { LineChart,
          Line,
          XAxis,
@@ -10,8 +11,9 @@ import { LineChart,
          Tooltip,
          Legend  
 } from 'recharts';
+import store from '../store';
 import Title from './Title';
-
+// import SaltData from'../demo/jsonPars.json';
 // Generate Sales Data
 function createData(time,Succeeded,Faile, amount) {
   return { time,Succeeded,Faile, amount };
@@ -30,7 +32,6 @@ const data = [
 ];
 const demoOnClick= (e)=>{
   if(e){if(e.activeLabel){console.log(e.activeLabel);}}
-  
 }
 
 
@@ -38,17 +39,28 @@ const demoOnClick= (e)=>{
 
   constructor(props) {
     super(props);
-    console.log(this.props.date[0].start,'jjjjjjjjjjjjjjjjjjjjjjj');
-    this.titleDate= this.props.date[0].start.toLocaleDateString() === this.props.date[1].end.toLocaleDateString() ?( this.props.date[0].start.toLocaleDateString() ): (this.props.date[0].start.toLocaleDateString() + ' - '+ this.props.date[1].end.toLocaleDateString());
     this.state = {
-      activeIndex: null
+      start: new Date(),
+      end:new Date()
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+  
+  
+    if((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ){ 
+      this.setState({start:nextProps.date.start,end:nextProps.date.end});
+      console.log("props                             ",this.props);
+      console.log("state                               ",this.state);
+      return true;
     }
+ 
+    return false;
   }
  
   render(){
   return (
     <React.Fragment>
-      <Title>{this.titleDate}</Title>
+      <Title>{this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
       <ResponsiveContainer>
         <LineChart
           onClick={demoOnClick}
@@ -78,10 +90,13 @@ const demoOnClick= (e)=>{
  }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    date: state.date
+    date: state.date 
   }
 }
 
-export default connect(mapStateToProps)(Chart);
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({dateSelect: dateSelect}, dispatch);
+}
+export default connect(mapStateToProps,matchDispatchToProps)(Chart);

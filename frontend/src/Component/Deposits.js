@@ -1,7 +1,6 @@
-
 import React from 'react';
 import Link from '@material-ui/core/Link';
-
+import {DATE_SELECT} from "../Actions/types";
 import SearchIcon from '@material-ui/icons/Search';
 import {Typography,Button,Grid} from '@material-ui/core';
 import Title from './Title';
@@ -11,7 +10,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 //import DateTime from 'react-datetime';
-
+import {dateSelect} from '../Actions/date.js';
+import store from '../store';
 // <DatePicker
 // disableFuture
 // openTo="year"
@@ -35,25 +35,33 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
     super(props);
     this.handleDateChangeStart = this.handleDateChangeStart.bind(this);
     this.handleDateChangeEnd = this.handleDateChangeEnd.bind(this);
-    this.state = this.props.date;
-  }
+    this.dateIsChanged = this.dateIsChanged.bind(this);
   
-  handleDateChangeStart(e){
-    this.setState({start:e});
-    this.props.date[0]=e;
-    console.log(this.props.date);
-    // this.setState({start: e.target.value});
+    this.state={start:this.props.date.start , end:this.props.date.end ,date:null};
+  
+  }
+//   shouldComponentUpdate(nextProps, nextState) {
+//   return this.state.value != nextState.value;
+// }
+  handleDateChangeStart(date){
+    this.setState({booleanStart:true,start:date});
+  }
     
-  }
-  handleDateChangeEnd (e){
-    this.setState({end:e});
-    this.props.date[1]=e;
-    console.log(this.props.date);
-    // this.setState({end: e.target.value});
   
+  handleDateChangeEnd (date){
+   this.setState({booleanEnd:true,end:date});
   }
  
-  
+  dateIsChanged(){
+      let start=this.state.start;
+      let end=this.state.end;
+     
+      store.dispatch({
+        type: DATE_SELECT,
+        payload: {start:start,end:end}
+       } );
+      console.log("store",store.getState());
+  }
  
   //onChange = date => this.setState({ date })
  
@@ -70,7 +78,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
             label="Start Date"
             format="dd/MM/yyyy"
             value={this.state.start}
-            onChange={this.handleDateChangeStart}
+            onChange={(date)=>{this.handleDateChangeStart(date)}}
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
@@ -82,7 +90,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
           label="End Date"
           format="dd/MM/yyyy"
           value={this.state.end}
-          onChange={this.handleDateChangeEnd}
+          onChange={(date)=>{this.handleDateChangeEnd(date)}}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
@@ -94,7 +102,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
        
         <Button
         variant="outlined" color="primary"
-  
+        onClick={this.dateIsChanged}
         endIcon={ <SearchIcon>Search</SearchIcon>}
       >
       Search
@@ -115,6 +123,9 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
   return {
     date: state.date
   }
+}
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({dateSelect: dateSelect}, dispatch);
 }
 
 export default connect(mapStateToProps)(Deposits);
