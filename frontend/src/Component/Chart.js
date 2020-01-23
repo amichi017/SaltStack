@@ -45,25 +45,21 @@ const demoOnClick= (e)=>{
     };
   }
   componentWillReceiveProps(nextProps) {
-  
-    if(this.props.date.start !== undefined && this.props.date.end !== undefined)
-    {
+    // if(this.props.state !== undefined){
       if((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ){ 
         this.setState({start:nextProps.date.start,end:nextProps.date.end});
         console.log("props                             ",this.props);
         console.log("state                               ",this.state);
         return true;
       }
-   
       return false;
     }
-    
-  }
+  // }
  
   render(){
   return (
     <React.Fragment>
-      <Title>{this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
+      <Title>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
       <ResponsiveContainer>
         <LineChart
           onClick={demoOnClick}

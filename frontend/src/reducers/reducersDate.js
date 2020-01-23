@@ -1,4 +1,4 @@
- import {DATE_SELECT, CLEAR_DATE} from '../Actions/types';
+ import {DATE_SELECT, CLEAR_DATE} from '../actions/types';
 
 
  const initialState = {
