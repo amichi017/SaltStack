@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
-import {DATE_SELECT} from "../Actions/types";
+import {DATE_SELECT} from "../actions/types";
 import SearchIcon from '@material-ui/icons/Search';
 import {Typography,Button,Grid} from '@material-ui/core';
 import Title from './Title';
@@ -10,7 +10,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 //import DateTime from 'react-datetime';
-import {dateSelect} from '../Actions/date.js';
+import {dateSelect} from '../actions/date.js';
 import store from '../store';
 // <DatePicker
 // disableFuture

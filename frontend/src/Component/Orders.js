@@ -56,7 +56,7 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 const dataColumns =[
-  { title: 'Stutus', field: 'stutus', 
+  { title: 'status', field: 'status', 
   //type: 'boolean'
   cellStyle: x=>({
     color:(x==='Succeeded')?'#208000':'#ff0000'})
@@ -75,14 +75,14 @@ const dataColumns =[
 
 const dataTable=[
   { 
-    stutus: 'Faile',
+    status: 'Faile',
     name: 'sm-stud.jce.ac.il',
     id: '5de92a636ff1ca1a1bcf3382',
     time: time('20191205040346780161'),
   },
 
   { 
-    stutus: 'Succeeded',
+    status: 'Succeeded',
     name: 'sm-stud.jce.ac.il',
     id: '5de92aa9441a1f0c7973a234',
     time: time('20191205180434320550'),
@@ -90,7 +90,7 @@ const dataTable=[
   },
  
   { 
-    stutus: 'Succeeded',
+    status: 'Succeeded',
     name: 'sm01-stud.jce.ac.il',
     id: '5de92ad69679def1a498c9cd',
     time:time( '20191205190523839870'),
@@ -98,28 +98,28 @@ const dataTable=[
    
   },
   { 
-    stutus: 'Succeeded',
+    status: 'Succeeded',
     name: 'sm-stud.jce.ac.il',
     id: '5de92aa9441a1f0c7973a234',
     time: time('20191205150434320550'),
     
   },
   { 
-    stutus: 'Faile', 
+    status: 'Faile', 
     name: 'sm02-stud.jce.ac.il',
     id: '5de92ad77bbe630a5f637993',
     time: time('20191205020523839870'),
 
   },
   { 
-    stutus: 'Faile',
+    status: 'Faile',
     name: 'sm-stud.jce.ac.il',
     id: '5de92adbe85659e221390bef',
     time: time('20191205120523839870'),
     
   } ,
   { 
-    stutus: 'Faile', 
+    status: 'Faile', 
     name: 'sm02-stud.jce.ac.il',
     id: '5de92ad77bbe630a5f637993',
     time: time('20191205170523839870'),
@@ -143,7 +143,7 @@ const dataTable=[
 render(){
   return (
     <MaterialTable
-    title="minion table"
+    title="minion_table"
     columns={dataColumns}
     data={ dataTable}
     icons={tableIcons}

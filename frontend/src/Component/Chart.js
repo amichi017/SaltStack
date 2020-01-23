@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {dateSelect} from '../Actions/date';
+import {dateSelect} from '../actions/date';
 import { LineChart,
          Line,
          XAxis,
@@ -46,15 +46,18 @@ const demoOnClick= (e)=>{
   }
   componentWillReceiveProps(nextProps) {
   
-  
-    if((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ){ 
-      this.setState({start:nextProps.date.start,end:nextProps.date.end});
-      console.log("props                             ",this.props);
-      console.log("state                               ",this.state);
-      return true;
+    if(this.props.date.start !== undefined && this.props.date.end !== undefined)
+    {
+      if((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ){ 
+        this.setState({start:nextProps.date.start,end:nextProps.date.end});
+        console.log("props                             ",this.props);
+        console.log("state                               ",this.state);
+        return true;
+      }
+   
+      return false;
     }
- 
-    return false;
+    
   }
  
   render(){

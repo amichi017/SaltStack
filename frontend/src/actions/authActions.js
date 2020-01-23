@@ -27,10 +27,12 @@ export const loadUser = () => (dispatch, getState) => {
         })
       )
       .catch(err => {
-        dispatch(returnErrors(err.response.data, err.response.status));
-         dispatch({
-          type: AUTH_ERROR
-        });
+        if(err.response){
+            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({
+                type: AUTH_ERROR
+              });
+        }
       });
   };
 
@@ -66,7 +68,6 @@ export const login = ({ email, password }) => dispatch => {
             'Content-Type': 'application/json'
         }
     }
-
     // Request body
     const body = JSON.stringify({ email, password });
 
