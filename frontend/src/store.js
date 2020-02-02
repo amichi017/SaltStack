@@ -15,5 +15,5 @@ const store = createStore(
   composeEnhancers(applyMiddleware(...middleWare))
 );
 
-store.dispatch(loadUser());
+// store.dispatch(loadUser());
 export default store;

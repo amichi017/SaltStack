@@ -25,6 +25,7 @@ uri = 'mongodb://%s:%s@localhost:27017/salt' % (mongo_username,mongo_pwd)
 client = MongoClient(uri)
 db = client.salt
 users = db.users
+print(db)
 
 
 app = Flask(__name__)
@@ -72,6 +73,29 @@ def user():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+@app.route("/register", methods=["POST"])
+def register():
+    if request.is_json:
+        first_name = request.json["first_name"]
+        last_name = request.json["last_name"]
+        email = request.json["email"]
+        password = request.json["password"]
+    else:
+        email = request.form["email"]
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        password = request.form["password"]
+
+    # test = User.query.filter_by(email=email).first()
+    test = users.find_one({"email": email})
+    if test:
+        return jsonify(message="User Already Exist"), 409
+    
+    else:
+        user_info = dict(first_name=first_name, last_name=last_name, email=email, password=bcrypt.generate_password_hash(password))
+        print(user_info)
+        users.insert_one(user_info)
+        return jsonify(message="User added sucessfully"), 201
 
 
 @app.route("/")
