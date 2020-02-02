@@ -9,5 +9,5 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const DATE_SELECT = "DATE_SELECT";
-export const SALT_RETURNS = "SALT_RETURNS";
+export const CLEAR_DATE = "CLEAR_DATE";
 

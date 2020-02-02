@@ -13,7 +13,7 @@ const RddNwe = RDD[0]
             _id:item._id,
             id:item.full_ret.id,
             time:item.full_ret.jid,
-            stutus:item.full_ret.success,
+            status:item.full_ret.success,
             return:item.return
            }
 })
