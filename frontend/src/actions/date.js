@@ -1,6 +1,6 @@
 import axios from 'axios';
-
- import { DATE_SELECT, CLEAR_DATE} from './types';
+import store from '../store'
+ import { DATE_SELECT, SALT_RETURNS} from './types';
  // Date is select
  export const dateSelect = (start , end) => {
    
@@ -14,11 +14,11 @@ import axios from 'axios';
  }
  
  // Clear date
- export const saltReturns =  () => (dispatch, getState) => {
+ export const saltReturns =  ()  => {
      axios.get('"http://127.0.0.1:5000/api/saltReturns"')
-    .then(res => dispatch({
-        type: CLEAR_DATE,
-        payload: res.data
+    .then(res => store.dispatch({
+        type: SALT_RETURNS,
+        payload: {saltReturns:res.data}
     }))
     // .catch(err => {
     //     dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));

@@ -1,10 +1,11 @@
- import {DATE_SELECT, CLEAR_DATE} from '../actions/types';
+ import {DATE_SELECT} from '../actions/types';
 
 
  const initialState = {
  
      start: new Date(),
-     end: new Date()
+     end: new Date(),
+     
 
 };
 
@@ -17,10 +18,7 @@ console.log("state",state);
                 end:action.payload.end,
               
               };
-        case CLEAR_DATE:
-          return {
-
-          };
+       
 
         default:
                return state;
