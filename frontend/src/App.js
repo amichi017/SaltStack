@@ -18,12 +18,12 @@ import Routes from './Component/routers/Routes';
 
 class App extends Component {
   constructor(props) {
-    console.log("rendering")
+    // console.log("rendering")
     super(props);
   }
 
   componentDidMount() {
-    console.log("dispatchhhhh from App")
+    // console.log("dispatchhhhh from App")
     store.dispatch(loadUser());
    
   }

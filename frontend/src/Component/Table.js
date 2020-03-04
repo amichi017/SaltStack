@@ -1,10 +1,12 @@
 	
-
+import axios from 'axios';
 import React, { Component } from "react";
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import MaterialTable from 'material-table';
-
+import {SALT_RETURNS} from "../actions/types";
+import store from '../store';
+import { saltReturns } from '../actions/date';
 import { forwardRef } from 'react';
 import {
   AddBox,
@@ -80,72 +82,47 @@ const dataTable=[
     id: '5de92a636ff1ca1a1bcf3382',
     time: time('20191205040346780161'),
   },
-
-  { 
-    status: 'Succeeded',
-    name: 'sm-stud.jce.ac.il',
-    id: '5de92aa9441a1f0c7973a234',
-    time: time('20191205180434320550'),
-    
-  },
- 
-  { 
-    status: 'Succeeded',
-    name: 'sm01-stud.jce.ac.il',
-    id: '5de92ad69679def1a498c9cd',
-    time:time( '20191205190523839870'),
-    
-   
-  },
-  { 
-    status: 'Succeeded',
-    name: 'sm-stud.jce.ac.il',
-    id: '5de92aa9441a1f0c7973a234',
-    time: time('20191205150434320550'),
-    
-  },
-  { 
-    status: 'Faile', 
-    name: 'sm02-stud.jce.ac.il',
-    id: '5de92ad77bbe630a5f637993',
-    time: time('20191205020523839870'),
-
-  },
-  { 
-    status: 'Faile',
-    name: 'sm-stud.jce.ac.il',
-    id: '5de92adbe85659e221390bef',
-    time: time('20191205120523839870'),
-    
-  } ,
-  { 
-    status: 'Faile', 
-    name: 'sm02-stud.jce.ac.il',
-    id: '5de92ad77bbe630a5f637993',
-    time: time('20191205170523839870'),
-
-  },
-    
- 
 ]
+
 
 
 
  class Orders extends React.Component {
   constructor(props) {
     super(props);
-   
+    store.dispatch(saltReturns());
+    
     this.state = {
-      selectedRow: null
+      saltReturns: dataTable
     }
   }
-  
+
+  componentWillReceiveProps(nextProps,nextState) {
+    if(nextProps.saltReturns!==this.props.saltReturns){
+      this.state.saltReturns=nextProps.saltReturns.saltReturns.map((item)=>{
+        return {
+                status:(item.full_ret.success === true)?'Succeeded':'Faile',
+                name:item.minion,
+                id:item._id,
+                // id:item.full_ret.id,
+                time: time(item.full_ret.jid),
+                
+                // return:item.return
+               };}
+          )
+      // this.setState({saltReturns:nextProps.saltReturns});
+      console.log(this.state.saltReturns,"kkkkkkkkkkkkkkkk")
+   
+    }
+  }
+
 render(){
+
   return (
     <MaterialTable
     title="minion_table"
     columns={dataColumns}
-    data={ dataTable}
+    data={ this.state.saltReturns}
     icons={tableIcons}
     onRowClick={((evt, selectedRow) => this.setState({ selectedRow }))}
    
@@ -163,7 +140,7 @@ render(){
 
           icon: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
           tooltip: 'Save User',
-          onClick: (event, rowData) => {console.log(  rowData.surname); console.log(this.props.date,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');}
+          // onClick: (event, rowData) => {console.log(  rowData.surname); console.log(this.props.date,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');}
         }
       ]
       }
@@ -175,8 +152,12 @@ render(){
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    date: state.date
+    saltReturns: state.saltReturns,
   }
 }
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({saltReturns: saltReturns}, dispatch);
+}
+
 
 export default connect(mapStateToProps)(Orders);

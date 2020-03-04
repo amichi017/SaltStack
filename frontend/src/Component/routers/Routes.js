@@ -38,7 +38,7 @@ class Routes extends Component {
 }
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => (
-  console.log("private routhh", authed),
+  // console.log("private routhh", authed),
   <Route
     {...rest}
     render={props => (

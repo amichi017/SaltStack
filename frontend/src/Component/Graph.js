@@ -31,7 +31,7 @@ const data = [
   createData('24:00',34,56, 45),
 ];
 const demoOnClick= (e)=>{
-  if(e){if(e.activeLabel){console.log(e.activeLabel);}}
+  // if(e){if(e.activeLabel){console.log(e.activeLabel);}}
 }
 
 
@@ -47,8 +47,8 @@ const demoOnClick= (e)=>{
   componentWillReceiveProps(nextProps) {
     if((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ){ 
       this.setState({start:nextProps.date.start,end:nextProps.date.end});
-      console.log("props                             ",this.props);
-      console.log("state                               ",this.state);
+      // console.log("props                             ",this.props);
+      // console.log("state                               ",this.state);
       return true;
     }
     return false;

@@ -14,16 +14,38 @@ import store from '../store'
  }
  
  // Clear date
- export const saltReturns =  ()  => {
-     axios.get('"http://127.0.0.1:5000/api/saltReturns"')
-    .then(res => store.dispatch({
+ export const saltReturns =  () => (dispatch, getState) => {
+     const time =new Date().toDateString();
+     axios.get('http://127.0.0.1:5000/api/saltReturns/apply', tokenConfig(getState))
+    .then((res) => { 
+        console.log(res,"res");
+    store.dispatch({
         type: SALT_RETURNS,
-        payload: {saltReturns:res.data}
-    }))
-    // .catch(err => {
-    //     dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
-    //     dispatch({
-    //         type: REGISTER_FAIL
-    //     })
-    //    })
+        payload: res.data
+    })})
+    .catch(err => {
+        console.log(err,"error in data");
+       });
 };
+
+
+
+// Setup config/headers and token
+export const tokenConfig = getState => {
+    // Get token from localstorage
+    const token = getState().auth.token;
+  
+    // Headers
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    // If token, add to headers
+    if(token) {
+       config.headers["Authorization"] = ` Bearer ${token} `;
+    }
+
+ return config;
+}

@@ -60,7 +60,7 @@ import store from '../store';
         type: DATE_SELECT,
         payload: {start:start,end:end}
        } );
-      console.log("store",store.getState());
+      // console.log("store",store.getState());
   }
  
   //onChange = date => this.setState({ date })
