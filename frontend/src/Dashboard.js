@@ -18,9 +18,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './Component/listItems';
-import Chart from './Component/Chart';
-import Deposits from './Component/Deposits';
-import Orders from './Component/Orders';
+import Graph from './Component/Graph';
+import SearchTime from './Component/SearchTime';
+import Table from './Component/Table';
 import { Logout } from './Component/auth/Logout';
 
 
@@ -167,22 +167,22 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
+            {/* Graph */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <Graph />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* Recent SearchTime */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits />
+                <SearchTime />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Recent Table */}
             <Grid item xs={20}>
               <div className={classes.paper}>
-                <Orders />
+                <Table />
               </div>
             </Grid>
           </Grid>
