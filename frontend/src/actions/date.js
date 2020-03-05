@@ -17,7 +17,7 @@ import store from '../store'
  export const saltReturns =  () => (dispatch, getState) => {
      
      const time =new Date().toDateString();
-     axios.get('http://127.0.0.1:5000/api/saltReturns/apply', tokenConfig(getState))
+     axios.get('http://127.0.0.1:5000/api/saltReturns', tokenConfig(getState))
     .then((res) => { 
         console.log(res,"res");
     store.dispatch({

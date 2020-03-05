@@ -99,8 +99,15 @@ const dataTable=[
   }
 
   componentWillReceiveProps(nextProps,nextState) {
-    if(nextProps.saltReturns!==this.props.saltReturns){
-      this.state.saltReturns=nextProps.saltReturns.saltReturns.map((item)=>{
+    console.log(store.getState(),";;;;;;;;;;");
+    const start=store.getState().date.start;
+    const end=store.getState().date.end;
+    if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
+      this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{
+        let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+        let time=new Date(str);
+        if(time >= start && time<= end){return item;}
+      }).map((item)=>{
         return {
                 status:(item.full_ret.success === true)?'Succeeded':'Faile',
                 name:item.minion,
@@ -159,6 +166,7 @@ render(){
 const mapStateToProps = (state, ownProps) => {
   return {
     saltReturns: state.saltReturns,
+    date: state.date 
   }
 }
 function matchDispatchToProps(dispatch){
