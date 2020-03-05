@@ -93,7 +93,8 @@ const dataTable=[
     store.dispatch(saltReturns());
     
     this.state = {
-      saltReturns: dataTable
+      saltReturns: dataTable,
+      Returns:null
     }
   }
 
@@ -110,8 +111,13 @@ const dataTable=[
                 // return:item.return
                };}
           )
+          this.state.Returns=nextProps.saltReturns.saltReturns.map((item)=>{
+            return{Returns:item.full_ret.return}
+          })
+
+          console.log(store.getState());
       // this.setState({saltReturns:nextProps.saltReturns});
-      console.log(this.state.saltReturns,"kkkkkkkkkkkkkkkk")
+      console.log(this.state.Returns,"kkkkkkkkkkkkkkkk")
    
     }
   }
