@@ -1,5 +1,10 @@
 	
 import axios from 'axios';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import React, { Component } from "react";
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -8,6 +13,7 @@ import {SALT_RETURNS} from "../actions/types";
 import store from '../store';
 import { saltReturns } from '../actions/date';
 import { forwardRef } from 'react';
+import Button from '@material-ui/core/Button';
 import {
   AddBox,
   ArrowDownward,
@@ -87,17 +93,36 @@ const dataTable=[
 
 
 
+
+
  class Orders extends React.Component {
   constructor(props) {
     super(props);
+    this.selestMinion=this.selestMinion.bind(this);
+    this.handleClickOpen=this.handleClickOpen.bind(this);
+    this.handleClose=this.handleClose.bind(this);
     store.dispatch(saltReturns());
     
     this.state = {
       saltReturns: dataTable,
-      Returns:null
+      Returns:null,
+      dialogOpen:false,
     }
   }
+  selestMinion(event, rowData){
+    let res = store.getState().saltReturns.saltReturns
+    .filter((item)=>{if((item.full_ret.success===false) && (item._id === rowData.id))
+      {this.setState({dialogOpen:true}); return item;}})
+    
 
+  }
+   handleClickOpen () {
+    this.setState({dialogOpen:true});
+  };
+  
+  handleClose () {
+    this.setState({dialogOpen:false});
+  };
   componentWillReceiveProps(nextProps,nextState) {
     console.log(store.getState(),";;;;;;;;;;");
     const start=store.getState().date.start;
@@ -132,6 +157,7 @@ const dataTable=[
 render(){
 
   return (
+    <div>
     <MaterialTable
     title="minion_table"
     columns={dataColumns}
@@ -153,11 +179,37 @@ render(){
 
           icon: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
           tooltip: 'Save User',
-          // onClick: (event, rowData) => {console.log(  rowData.surname); console.log(this.props.date,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');}
+           onClick: (event, rowData) => {this.selestMinion(event, rowData)}
         }
       ]
       }
     />
+    <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+    Open alert dialog
+  </Button>
+    <Dialog
+        open={this.state.dialogOpen}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={this.handleClose} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+     </div>
   );
 
 }
