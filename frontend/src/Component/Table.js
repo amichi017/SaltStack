@@ -184,9 +184,7 @@ render(){
       ]
       }
     />
-    <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-    Open alert dialog
-  </Button>
+  
     <Dialog
         open={this.state.dialogOpen}
         onClose={this.handleClose}
