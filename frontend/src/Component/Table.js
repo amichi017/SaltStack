@@ -13,7 +13,14 @@ import {SALT_RETURNS} from "../actions/types";
 import store from '../store';
 import { saltReturns } from '../actions/date';
 import { forwardRef } from 'react';
-import Button from '@material-ui/core/Button';
+import {
+Typography,
+Button,
+Card,
+CardActions,
+CardContent  
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   AddBox,
   ArrowDownward,
@@ -29,7 +36,9 @@ import {
   Remove,
   SaveAlt,
   Search,
-  ViewColumn
+  ViewColumn,
+ 
+  
 }from '@material-ui/icons';
 
 
@@ -44,6 +53,13 @@ const time =(str)=>{
 
 }
 
+const  date=(str)=>{
+  const year =str.slice(0,4);
+  const month =String(parseInt(str.slice(4,6))-1);
+  const day =str.slice(6,8);
+  return String(day)+"/"+String(month)+"/"+String(year);
+
+}
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -90,29 +106,26 @@ const dataTable=[
   },
 ]
 
-
-
-
-
-
  class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.selestMinion=this.selestMinion.bind(this);
     this.handleClickOpen=this.handleClickOpen.bind(this);
     this.handleClose=this.handleClose.bind(this);
+  
     store.dispatch(saltReturns());
     
     this.state = {
       saltReturns: dataTable,
       Returns:null,
       dialogOpen:false,
+      minion:"",
     }
   }
   selestMinion(event, rowData){
     let res = store.getState().saltReturns.saltReturns
     .filter((item)=>{if((item.full_ret.success===false) && (item._id === rowData.id))
-      {this.setState({dialogOpen:true}); return item;}})
+      {this.setState({dialogOpen:true,minion:item}); return item;}})
     
 
   }
@@ -155,7 +168,7 @@ const dataTable=[
   }
 
 render(){
-
+  
   return (
     <div>
     <MaterialTable
@@ -184,34 +197,67 @@ render(){
       ]
       }
     />
-  
+ 
     <Dialog
         open={this.state.dialogOpen}
         onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
+       
         aria-describedby="alert-dialog-description"
+        maxWidth="sm"
+        scroll="paper"
+        aria-labelledby="confirmation-dialog-title"
       >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-          </DialogContentText>
+     
+          <DialogTitle id="alert-dialog-title">
+          
+          <Typography style={{color:"#ff6666",fontSize:18,float:'right'} }>
+          {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "} 
+          {' בתאריך '}
+          {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
+          {" בשעה "}
+          {this.state.minion.minion} 
+          {" התקנות שנכשלו ב "} 
+          </Typography>
+          </DialogTitle>
+
+
+        <DialogContent dividers>
+          <div style={{minWidth: 500,}}>
+                <div>
+                    <Typography style={{fontSize: 14,float:'right'}} color="textSecondary" gutterBottom>
+                      בבבבבבבבבב
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                    vvvvvvv
+                    </Typography>
+                    <Typography style={{marginBottom: 12}} color="textSecondary">
+                      adjective
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      well meaning and kindly.
+                      <br />
+                      {'"a benevolent smile"'}
+                    </Typography>
+                    <CardActions>
+                    <Button size="small">Learn More</Button>
+                  </CardActions>
+                </div>
+          </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose} color="primary">
-            Disagree
-          </Button>
           <Button onClick={this.handleClose} color="primary" autoFocus>
-            Agree
+            סגור
           </Button>
         </DialogActions>
+      
       </Dialog>
      </div>
+  
   );
 
 }
 }
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
