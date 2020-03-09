@@ -21,8 +21,11 @@ import { mainListItems, secondaryListItems } from './Component/listItems';
 import Graph from './Component/Graph';
 import SearchTime from './Component/SearchTime';
 import Table from './Component/Table';
+import { saltReturns } from './actions/date';
+import store from './store';
 import { Logout } from './Component/auth/Logout';
 
+store.dispatch(saltReturns());
 
 const drawerWidth = 240;
 
@@ -95,7 +98,10 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(4),
   },
   paper: {
-    padding: theme.spacing(2),
+    paddingRight: theme.spacing(3.5),
+    paddingTop:theme.spacing(2),
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(3),
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
@@ -106,6 +112,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard() {
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {

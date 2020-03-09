@@ -13,6 +13,8 @@ import { LineChart,
 } from 'recharts';
 import store from '../store';
 import Title from './Title';
+import { saltReturns } from '../actions/date';
+import { Store } from '@material-ui/icons';
 // import SaltData from'../demo/jsonPars.json';
 // Generate Sales Data
 
@@ -65,21 +67,19 @@ const parseNumber= (str)=>{
 
   constructor(props) {
     super(props);
-   
+    
     this.state = {
       start: new Date(),
       end:new Date(),
-      data:[
-        createData('00:00',54,67, 0),
-        createData('03:00',67,89, 300),
-        createData('06:00',45,67, 600),
-        createData('09:00',34,56, 800),
-        createData('12:00',23,45, 1500),
-        createData('15:00',89,45, 2000),
-        createData('18:00',34,56, 2400),
-        createData('21:00',23,47, 2400),
-        createData('24:00',34,56, 45),
-      ]
+      data:  [{ time:"00:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"03:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"06:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"09:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"12:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"15:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"18:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"21:00",Succeeded:0,Faile:0, amount:0 },
+              { time:"24:00",Succeeded:0,Faile:0, amount:0 },]
   };
 }
   componentWillReceiveProps(nextProps) {
@@ -127,12 +127,50 @@ const parseNumber= (str)=>{
       //  console.log("state                               ",store.getState());
     }
   }
-
+  componentWillUpdate() {
+    const start=store.getState().date.start;
+    const end=store.getState().date.end;
+    console.log(store.getState());
+    // while (store.getState().saltReturns.saltReturns === null) {  }
+   let temp=  
+   [{ time:"00:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"03:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"06:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"09:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"12:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"15:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"18:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"21:00",Succeeded:0,Faile:0, amount:0 },
+   { time:"24:00",Succeeded:0,Faile:0, amount:0 },];
+    store.getState().saltReturns.saltReturns.filter((item)=>{
+    let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+    let time=new Date(str);
+    if(time >= start && time<= end){return item;}
+  }).forEach(item => {
+  if(parseNumber(item.full_ret.jid)==="03:00")
+  { item.full_ret.success === true ?(temp[1].Succeeded++):(temp[1].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="06:00")
+  { item.full_ret.success === true ?(temp[2].Succeeded++):(temp[2].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="09:00")
+  { item.full_ret.success === true ?(temp[3].Succeeded++):(temp[3].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="12:00")
+  { item.full_ret.success === true ?(temp[4].Succeeded++):(temp[4].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="15:00")
+  { item.full_ret.success === true ?(temp[5].Succeeded++):(temp[5].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="18:00")
+  { item.full_ret.success === true ?(temp[6].Succeeded++):(temp[6].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="21:00")
+  { item.full_ret.success === true ?(temp[7].Succeeded++):(temp[7].Faile++)};
+  if(parseNumber(item.full_ret.jid)==="24:00")
+  { item.full_ret.success === true ?(temp[8].Succeeded++):(temp[8].Faile++)};
+  });
+  this.state.data= temp;
   
+}
   render(){
   return (
     <React.Fragment>
-      <Title>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
+      <Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
       <ResponsiveContainer>
         <LineChart
           onClick={demoOnClick}

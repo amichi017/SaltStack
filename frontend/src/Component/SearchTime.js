@@ -96,7 +96,7 @@ import store from '../store';
           }}
         />
       
-      <Typography style={{flex: 1,paddingTop:25}}>
+      <Typography style={{flex: 1,paddingTop:15}}>
       
        
        
