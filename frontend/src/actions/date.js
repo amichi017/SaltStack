@@ -19,7 +19,7 @@ import store from '../store'
      const time =new Date().toDateString();
      axios.get('http://127.0.0.1:5000/api/saltReturns', tokenConfig(getState))
     .then((res) => { 
-        console.log(res,"res");
+        // console.log(res,"res");
     store.dispatch({
         type: SALT_RETURNS,
         payload: res.data

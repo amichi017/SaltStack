@@ -137,10 +137,11 @@ const dataTable=[
     this.setState({dialogOpen:false});
   };
   componentWillReceiveProps(nextProps,nextState) {
-    console.log(store.getState(),";;;;;;;;;;");
+    // console.log(store.getState(),";;;;;;;;;;");
     const start=store.getState().date.start;
     const end=store.getState().date.end;
     if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
+     
       this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{
         let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
         let time=new Date(str);
@@ -160,9 +161,9 @@ const dataTable=[
             return{Returns:item.full_ret.return}
           })
 
-          console.log(store.getState());
+          // console.log(store.getState());
       // this.setState({saltReturns:nextProps.saltReturns});
-      console.log(this.state.Returns,"kkkkkkkkkkkkkkkk")
+      // console.log(this.state.Returns,"kkkkkkkkkkkkkkkk")
    
     }
   }
