@@ -17,8 +17,11 @@ import store from '../store'
  export const saltReturns =  () => (dispatch, getState) => {
      
      const time =new Date().toDateString();
+console.log(store.getState(),"the store ");
+  if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
      axios.get('http://127.0.0.1:5000/api/saltReturns', tokenConfig(getState))
     .then((res) => { 
+        
         // console.log(res,"res");
     store.dispatch({
         type: SALT_RETURNS,
@@ -26,6 +29,7 @@ import store from '../store'
     })})
     .catch(err => {
         console.log(err,"error in data");
+       
        });
 };
 
@@ -34,12 +38,12 @@ import store from '../store'
 // Setup config/headers and token
 export const tokenConfig = getState => {
     // Get token from localstorage
-    const token = getState().auth.token;
+    const token = getState().auth.access_token;
   
     // Headers
     const config = {
         headers: {
-            "Content-type": "application/json"
+            "Content-type": "multipart/form-data"
         }
     }
 

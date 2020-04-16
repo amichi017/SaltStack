@@ -136,17 +136,20 @@ const dataTable=[
     this.setState({dialogOpen:false});
   };
   componentWillReceiveProps(nextProps,nextState) {
+    
     // console.log(store.getState(),";;;;;;;;;;");
     const start=store.getState().date.start;
     const end=store.getState().date.end;
     if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
      
-      this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{
-        let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+      this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
+        let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
         let time=new Date(str);
         if(time >= start && time<= end){return item;}
       }).map((item)=>{
+        console.log(item,"item for apply");
         return {
+          
                 status:(item.full_ret.success === true)?'Succeeded':'Faile',
                 name:item.minion,
                 id:item._id,

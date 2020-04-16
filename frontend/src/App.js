@@ -7,6 +7,7 @@ import { createStore } from 'redux';
 import appReducer from './reducers/index';
 import {Provider} from 'react-redux';
 import { loadUser } from './actions/authActions';
+import { saltReturns } from './actions/date';
 import { Store, ExitToApp } from '@material-ui/icons';
 import store from './store';
 
@@ -25,6 +26,8 @@ class App extends Component {
   componentDidMount() {
     // console.log("dispatchhhhh from App")
     store.dispatch(loadUser());
+    console.log(store.getState(),"state from app")
+    store.dispatch(saltReturns());
    
   }
   

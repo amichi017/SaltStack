@@ -25,8 +25,10 @@ import { saltReturns } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
 
+
 store.dispatch(saltReturns());
 
+ //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -112,7 +114,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard() {
-
+  
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -122,7 +124,7 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
+  
   return (
     <div className={classes.root}>
 

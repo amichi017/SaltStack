@@ -98,7 +98,7 @@ const parseNumber= (str)=>{
         { time:"21:00",Succeeded:0,Faile:0, amount:0 },
         { time:"24:00",Succeeded:0,Faile:0, amount:0 },
       ];
-       nextProps.saltReturns.saltReturns.filter((item)=>{
+       nextProps.saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
           let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
           let time=new Date(str);
           if(time >= start && time<= end){return item;}
@@ -142,7 +142,7 @@ const parseNumber= (str)=>{
    { time:"18:00",Succeeded:0,Faile:0, amount:0 },
    { time:"21:00",Succeeded:0,Faile:0, amount:0 },
    { time:"24:00",Succeeded:0,Faile:0, amount:0 },];
-    store.getState().saltReturns.saltReturns.filter((item)=>{
+    store.getState().saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
     let time=new Date(str);
     if(time >= start && time<= end){return item;}
