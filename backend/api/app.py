@@ -228,41 +228,41 @@ app.config["JWT_SECRET_KEY"] = "this-is-secret-key"  # change it
 # app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
 
 
-def check_updates():
-    pass
-def get_priority_deamons():
-    pass
+# def check_updates():
+#     pass
+# def get_priority_deamons():
+#     pass
 
-def set_priority_deamons():
-    pass
+# def set_priority_deamons():
+#     pass
 
-def get_priority_mails():
-    pass
+# def get_priority_mails():
+#     pass
 
-def set_priority_mails():
-    pass
-
-
+# def set_priority_mails():
+#     pass
 
 
-def send_mails():
-    # Mail config
-    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
-    # app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = True
-    mail = Mail(app)
-    msg = Message('Hello',sender='notifsalt@gmail.com', recipients=['aviher11@gmail.com'])
-    msg.body = "This is the email body"
-    print(msg)
-    try:
-        mail.send(msg)
-    except ValueError:
-        print(ValueError)
-        return "err"
-    return "Sent"
+
+
+# def send_mails():
+#     # Mail config
+#     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+#     app.config['MAIL_PORT'] = 465
+#     app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
+#     app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
+#     # app.config['MAIL_USE_TLS'] = True
+#     app.config['MAIL_USE_SSL'] = True
+#     mail = Mail(app)
+#     msg = Message('Hello',sender='notifsalt@gmail.com', recipients=['aviher11@gmail.com'])
+#     msg.body = "This is the email body"
+#     print(msg)
+#     try:
+#         mail.send(msg)
+#     except ValueError:
+#         print(ValueError)
+#         return "err"
+#     return "Sent"
 
 @app.route("/auth", methods=["POST"])
 def login():
@@ -357,9 +357,9 @@ def hello_www():
     return "Hello World!"
 
 
-@app.route("/mail")
-def mail():
-    return send_mails()
+# @app.route("/mail")
+# def mail():
+#     return send_mails()
 
 
 @app.route("/api/saltReturns")
