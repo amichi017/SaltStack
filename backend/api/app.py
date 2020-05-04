@@ -9,6 +9,9 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 
+import subprocess
+
+
 import pprint
 import urllib.parse
 
@@ -362,6 +365,19 @@ def hello_www():
 #     return send_mails()
 
 
+@app.route("/saltstack_cmd")
+def saltstack_cmd():
+    cmd = [""]
+    p = subprocess.Popen(cmd, # <----
+                     stdout=subprocess.PIPE,
+                     stderr=subprocess.PIPE,
+                     stdin=subprocess.PIPE)
+    out, err = p.communicate()
+    print(out,err)
+    return out
+
+
+
 @app.route("/api/saltReturns")
 @jwt_required
 def get_SaltReturns():
@@ -450,7 +466,7 @@ def get_monthly_applies(month):
     :return:
     """
     saltReturns = db.saltReturns
-    date = date_url
+    date = month
     print(date)
     print(saltReturns)
     res = []
