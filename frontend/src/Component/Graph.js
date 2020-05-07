@@ -123,14 +123,14 @@ const parseNumber= (str)=>{
         
         });
         this.state.data=temp;
-        console.log("this.state.data                             ",this.state.data);
+        //console.log("this.state.data                             ",this.state.data);
       //  console.log("state                               ",store.getState());
     }
   }
   componentWillUpdate() {
     const start=store.getState().date.start;
     const end=store.getState().date.end;
-    console.log(store.getState());
+    //console.log(store.getState());
     // while (store.getState().saltReturns.saltReturns === null) {  }
    let temp=  
    [{ time:"00:00",Succeeded:0,Faile:0, amount:0 },

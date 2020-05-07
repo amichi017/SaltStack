@@ -87,7 +87,7 @@ const dataColumns =[
   },
   { title: 'Name', field: 'name',
   },
-  { title: 'ID', field: 'id' },
+  { title: 'Date', field: 'date' },
   { title: 'Time', field: 'time', 
   //type: 'time'
  },
@@ -100,7 +100,7 @@ const dataTable=[
   { 
     status: 'Faile',
     name: 'sm-stud.jce.ac.il',
-    id: '5de92a636ff1ca1a1bcf3382',
+    date: date('20191205040346780161'),
     time: time('20191205040346780161'),
   },
 ]
@@ -113,7 +113,7 @@ const dataTable=[
     this.handleClose=this.handleClose.bind(this);
   
     store.dispatch(saltReturns());
-    
+ 
     this.state = {
       saltReturns: dataTable,
       Returns:null,
@@ -122,9 +122,10 @@ const dataTable=[
     }
   }
   selestMinion(event, rowData){
+    console.log(rowData, " equl");
     let res = store.getState().saltReturns.saltReturns
     .filter((item)=>{if((item.full_ret.success===false) && (item._id === rowData.id))
-      {this.setState({dialogOpen:true,minion:item}); return item;}})
+      { this.setState({dialogOpen:true,minion:item}); return item;}})
     
 
   }
@@ -141,19 +142,19 @@ const dataTable=[
     const start=store.getState().date.start;
     const end=store.getState().date.end;
     if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
-     
+      console.log(this.props.saltReturns, 'this.props.saltReturns')
       this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
         let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
         let time=new Date(str);
         if(time >= start && time<= end){return item;}
       }).map((item)=>{
-        console.log(item,"item for apply");
+       
         return {
           
                 status:(item.full_ret.success === true)?'Succeeded':'Faile',
                 name:item.minion,
+                date:date(item.full_ret.jid),
                 id:item._id,
-                // id:item.full_ret.id,
                 time: time(item.full_ret.jid),
                 
                 // return:item.return
@@ -175,7 +176,7 @@ render(){
   return (
     <div>
     <MaterialTable
-    title="minion_table"
+    title="Minion Table"
     columns={dataColumns}
     data={ this.state.saltReturns}
     icons={tableIcons}
@@ -213,13 +214,14 @@ render(){
      
           <DialogTitle id="alert-dialog-title">
           
-          <Typography style={{color:"#ff6666",fontSize:18,float:'right'} }>
-          {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "} 
-          {' בתאריך '}
-          {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
-          {" בשעה "}
+          <Typography style={{color:"#ff6666",fontSize:18} }>
+          {"Failed "}
           {this.state.minion.minion} 
-          {" התקנות שנכשלו ב "} 
+          {" at date "}
+          {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
+          {' at hour '}
+          {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "} 
+        {console.log(this.state.minion,"comment")}
           </Typography>
           </DialogTitle>
 
@@ -227,22 +229,14 @@ render(){
         <DialogContent dividers>
           <div style={{minWidth: 500,}}>
                 <div>
-                    <Typography style={{fontSize: 14,float:'right'}} color="textSecondary" gutterBottom>
-                      בבבבבבבבבב
+                    <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
+                    _id : {this.state.minion._id}
                     </Typography>
-                    <Typography variant="h5" component="h2">
-                    vvvvvvv
-                    </Typography>
-                    <Typography style={{marginBottom: 12}} color="textSecondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
+                    <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
+                    
                     </Typography>
                     <CardActions>
-                    <Button size="small">Learn More</Button>
+                   
                   </CardActions>
                 </div>
           </div>

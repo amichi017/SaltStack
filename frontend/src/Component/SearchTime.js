@@ -12,6 +12,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 //import DateTime from 'react-datetime';
 import {dateSelect} from '../actions/date.js';
 import store from '../store';
+import { saltReturns } from '../actions/date';
 // <DatePicker
 // disableFuture
 // openTo="year"
@@ -60,6 +61,9 @@ import store from '../store';
         type: DATE_SELECT,
         payload: {start:start,end:end}
        } );
+       store.dispatch(saltReturns());
+
+
       // console.log("store",store.getState());
   }
  
