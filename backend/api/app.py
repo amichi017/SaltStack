@@ -1,12 +1,4 @@
-from bson.objectid import ObjectId
-from flask import Flask, jsonify, request
-from flask_jwt_extended import JWTManager, jwt_required, jwt_refresh_token_required
 
-from flask_bcrypt import Bcrypt
-from flask_cors import CORS
-
-
-from pymongo import MongoClient
 
 import subprocess
 
@@ -337,7 +329,9 @@ def get_events():
 
 
 #-------------------Commands Option Section----------------------------------
+
 @app.route("/saltstack_cmd")
+@jwt_required
 def saltstack_cmd():
     cmd = [""]
     p = subprocess.Popen(cmd, # <----
