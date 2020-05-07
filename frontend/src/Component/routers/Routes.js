@@ -21,7 +21,7 @@ class Routes extends Component {
 
     // Similar to componentDidMount and componentDidUpdate:
   render() {
-    
+
     return (
       <BrowserRouter>
         <div>
@@ -29,10 +29,10 @@ class Routes extends Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/register" component={RegisterForm} />
           <Route exact path="/changePass" component={ChangePasswordForm} />
-        
+
         </div>
-      </BrowserRouter>  
-      
+      </BrowserRouter>
+
     );
   }
 }
