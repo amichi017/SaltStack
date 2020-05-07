@@ -26,7 +26,7 @@ import store from './store';
 import { Logout } from './Component/auth/Logout';
 
 
-store.dispatch(saltReturns());
+
 
  //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;

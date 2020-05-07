@@ -196,7 +196,7 @@ from pymongo import MongoClient
 import pprint
 import urllib.parse
 
-from flask_mail import Mail, Message
+#from flask_mail import Mail, Message
 
 # from pprint import pprint
 
