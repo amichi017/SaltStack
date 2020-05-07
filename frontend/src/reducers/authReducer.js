@@ -18,7 +18,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action){
-    // console.log(state);
     switch(action.type){
         case USER_LOADING:
             return {
@@ -47,12 +46,12 @@ export default function(state = initialState, action){
         case LOGOUT_SUCCESS:
         case REGISTER_FAIL:
             localStorage.removeItem('token');
-    
+
             return {
                 ...state,
                 token: null,
                 user: null,
-                isAuthenticated: false, 
+                isAuthenticated: false,
                 isLoading: false
             };
         default:

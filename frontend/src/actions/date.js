@@ -3,28 +3,28 @@ import store from '../store'
  import { DATE_SELECT, SALT_RETURNS} from './types';
  // Date is select
  export const dateSelect = (start , end) => {
-   
+
      return {
                  type: DATE_SELECT,
                  payload:{start,end}
               };
      // console.log("start ",start);
      // console.log("end ",end);
-     
+
  }
- 
+
 //  // Clear date
 //   export const saltReturns =  () => (dispatch, getState) => {
-     
+
 //     const time =new Date().toDateString();
 //     let Month= String(parseInt(store.getState().date.start.getMonth()));
 //     Month=parseInt(Month)<10?"0"+Month:Month;
 //     let year=String(store.getState().date.start.getFullYear());
 
-    
+
 //     let startYear=new Date(year,Month,store.getState().date.start.getDate());
 //     let endYear=store.getState().date.end;
-    
+
 //     console.log(startYear,"startYear");
 //     console.log(endYear,"endYear");
 
@@ -38,43 +38,43 @@ import store from '../store'
 //     let url='http://127.0.0.1:5000/api/saltReturns/apply/'+index.getFullYear();
 //     console.log("url" ,url);
 //     axios.get(url, tokenConfig(getState))
-//     .then((res) => { 
+//     .then((res) => {
 //         console.log("res.data" ,res.data);
 //         store.dispatch({
 //             type: SALT_RETURNS,
 //             payload: res.data
 //         })
-       
+
 //     })
 //     .catch(err => {
 //         console.log(err,"error in data");
-       
+
 //        });
 //  //}
- 
-// console.log(store.getState(),"the store from date "); 
+
+// console.log(store.getState(),"the store from date ");
 // };
  //Clear date
  export const saltReturns =  () => (dispatch, getState) => {
-     
+     console.log("----------------------storeeeee--------------\n",store)
      const time =new Date().toDateString();
      let Month= String(parseInt(store.getState().date.start.getMonth()));
          Month=parseInt(Month)<10?"0"+Month:Month;
          let year=String(store.getState().date.start.getFullYear());
-     
-         
+
+
          let startYear=new Date(year,Month,store.getState().date.start.getDate());
          let endYear=store.getState().date.end;
          let index = startYear;
  // if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
         let minions=[];
  for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
- 
+
      let url='http://127.0.0.1:5000/api/saltReturns/apply/'+index.getFullYear();
      console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
-    .then((res) => { 
-        
+    .then((res) => {
+
         minions=minions.concat(res.data);
        /// if(index === endYear){console.log(res,"res ");}
         store.dispatch({
@@ -85,11 +85,11 @@ import store from '../store'
     })
     .catch(err => {
         console.log(err,"error in data");
-       
+
        });
     }
-    
-  
+
+
        console.log(store.getState(),"the store ");
        console.log(minions,"minions ");
 };
@@ -99,8 +99,8 @@ import store from '../store'
 // Setup config/headers and token
 export const tokenConfig = getState => {
     // Get token from localstorage
-    const token = getState().auth.access_token;
-  
+    const token = getState().auth.token;
+
     // Headers
     const config = {
         headers: {
@@ -120,13 +120,13 @@ export const tokenConfig = getState => {
 
 
 // export const saltReturns =  () => (dispatch, getState) => {
-     
+
 //     const time =new Date().toDateString();
 
 // // if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
 //     axios.get('http://127.0.0.1:5000/api/saltReturns/apply/2020', tokenConfig(getState))
-//    .then((res) => { 
-       
+//    .then((res) => {
+
 //        // console.log(res,"res");
 //    store.dispatch({
 //        type: SALT_RETURNS,
@@ -134,7 +134,7 @@ export const tokenConfig = getState => {
 //    })})
 //    .catch(err => {
 //        console.log(err,"error in data");
-      
+
 //       });
 
 //       console.log(store.getState(),"the store ");
