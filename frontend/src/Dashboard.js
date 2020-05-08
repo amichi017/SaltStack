@@ -21,10 +21,13 @@ import { mainListItems, secondaryListItems } from './Component/listItems';
 import Graph from './Component/Graph';
 import SearchTime from './Component/SearchTime';
 import Table from './Component/Table';
+import MinionCard from './Component/MinionCard';
 import { saltReturns } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
 import { withStyles } from "@material-ui/core/styles";
+import SendComments from './Component/SendComments';
+import SelectMinion from './Component/SelectMinion';
 
 import {
   ListItem,
@@ -119,6 +122,18 @@ const styles = theme => ({
     overflow: 'auto',
     flexDirection: 'column',
   },
+  table: {
+    marginLeft:theme.spacing(90),
+    marginTop:theme.spacing(-29),
+    paddingRight: theme.spacing(3.5),
+    paddingTop:theme.spacing(2),
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(3),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+    width:500
+  },
   fixedHeight: {
     height: 240,
   },
@@ -203,12 +218,12 @@ class Dashboard extends React.Component {
             <ListItemText primary="Dashboard" />
           </ListItem>
           <ListItem button
-          onClick={()=>{this.SelectMenu('Orders')}}
+          onClick={()=>{this.SelectMenu('SaltStack')}}
           >
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary="SaltStack" />
           </ListItem>
           <ListItem button
           onClick={()=>{this.SelectMenu('Customers')}}
@@ -234,10 +249,6 @@ class Dashboard extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Integrations" />
           </ListItem>
-            
-            
-            
-            
             </List>
             <Divider />
             <List>{secondaryListItems}</List>
@@ -329,12 +340,12 @@ class Dashboard extends React.Component {
               <ListItemText primary="Dashboard" />
             </ListItem>
             <ListItem button
-            onClick={()=>{this.SelectMenu('Orders')}}
+            onClick={()=>{this.SelectMenu('SaltStack')}}
             >
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary="Orders" />
+              <ListItemText primary="SaltStack" />
             </ListItem>
             <ListItem button
             onClick={()=>{this.SelectMenu('Customers')}}
@@ -360,33 +371,38 @@ class Dashboard extends React.Component {
               </ListItemIcon>
               <ListItemText primary="Integrations" />
             </ListItem>
-              
-              
-              
-              
               </List>
               <Divider />
               <List>{secondaryListItems}</List>
             </Drawer>
+
             <main className={this.props.classes.content}>
-              
-      
+              <div className={this.props.classes.appBarSpacer} />
+              <Container maxWidth="lg" className={this.props.classes.container}>
+
+                  <Grid item xs >
+                    <SendComments/>
+                  </Grid>
+                  
+                  
+                  <Grid item  md={4}  >
+                    <div className={this.props.classes.paper}>
+                        <MinionCard/>
+                    </div>
+                  </Grid>
+
+                  <Grid item  xs >
+                  <div className={this.props.classes.table}>
+                      <SelectMinion/>
+                  </div>
+                </Grid>
+
+              </Container>
             </main>
       
           </div>
         );
-      
-
-
-
-
       }
-
-
-
-    
-  
-
 }
 
 }
