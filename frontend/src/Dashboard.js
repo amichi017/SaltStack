@@ -24,14 +24,25 @@ import Table from './Component/Table';
 import { saltReturns } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
+import { withStyles } from "@material-ui/core/styles";
 
+import {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader
+}from '@material-ui/core/';
 
-
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
 
  //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -111,95 +122,273 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
-}));
-
-export default function Dashboard() {
+});
+class Dashboard extends React.Component {
+  constructor(props) {
+      super(props);
+      this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+      this.handleDrawerClose = this.handleDrawerClose.bind(this);
+      this.SelectMenu = this.SelectMenu.bind(this);
+      this.state={open:true,menu:"Dashboard"};
+  }
   
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
+ 
+
+  handleDrawerOpen = () => {
+    this.setState({open:true});
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+  handleDrawerClose = () => {
+    this.setState({open:false});
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  
-  return (
-    <div className={classes.root}>
+ 
+  SelectMenu = (str) => {
+    this.setState({menu:str});
+  };
+  render(){  
+    const fixedHeightPaper = clsx(this.props.classes.paper, this.props.classes.fixedHeight);
 
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-
-        <Toolbar className={classes.toolbar}>
-
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+    if(this.state.menu==='Dashboard')
+    {
+      return (
+        <div className={this.props.classes.root}>
+    
+          <CssBaseline />
+          <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
+    
+            <Toolbar className={this.props.classes.toolbar}>
+    
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={this.handleDrawerOpen}
+                className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
+              >
+    
+                <MenuIcon />
+              </IconButton>
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
+                Dashboard
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+             
+    
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
+            }}
+            open={this.state.open}
           >
-
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-         
-
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
+            <div className={this.props.classes.toolbarIcon}>
+              <IconButton onClick={this.handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+    
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Dashboard')}}
+            >
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <ListItem button
+          onClick={()=>{this.SelectMenu('Orders')}}
+          >
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Orders" />
+          </ListItem>
+          <ListItem button
+          onClick={()=>{this.SelectMenu('Customers')}}
+          >
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Customers" />
+          </ListItem>
+          <ListItem button
+          onClick={()=>{this.SelectMenu('Reports')}}
+          >
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+          </ListItem>
+          <ListItem button
+          onClick={()=>{this.SelectMenu('Integrations')}}
+          >
+            <ListItemIcon>
+              <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Integrations" />
+          </ListItem>
+            
+            
+            
+            
+            </List>
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Drawer>
+          <main className={this.props.classes.content}>
+            <div className={this.props.classes.appBarSpacer} />
+            <Container maxWidth="lg" className={this.props.classes.container}>
+              <Grid container spacing={3}>
+                {/* Graph */}
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper className={fixedHeightPaper}>
+                    <Graph />
+                  </Paper>
+                </Grid>
+                {/* Recent SearchTime */}
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper className={fixedHeightPaper}>
+                    <SearchTime />
+                  </Paper>
+                </Grid>
+                {/* Recent Table */}
+                <Grid item xs={20}>
+                  <div className={this.props.classes.paper}>
+                    <Table />
+                  </div>
+                </Grid>
+              </Grid>
+            </Container>
+            <Logout />
+    
+          </main>
+    
         </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Graph */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Graph />
-              </Paper>
-            </Grid>
-            {/* Recent SearchTime */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <SearchTime />
-              </Paper>
-            </Grid>
-            {/* Recent Table */}
-            <Grid item xs={20}>
-              <div className={classes.paper}>
-                <Table />
+      );
+    }
+      else{
+
+        return (
+          <div className={this.props.classes.root}>
+      
+            <CssBaseline />
+            <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
+      
+              <Toolbar className={this.props.classes.toolbar}>
+      
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={this.handleDrawerOpen}
+                  className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
+                >
+      
+                  <MenuIcon />
+                </IconButton>
+                <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
+                  Dashboard
+                </Typography>
+                <IconButton color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+               
+      
+              </Toolbar>
+            </AppBar>
+            <Drawer
+              variant="permanent"
+              classes={{
+                paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
+              }}
+              open={this.state.open}
+            >
+              <div className={this.props.classes.toolbarIcon}>
+                <IconButton onClick={this.handleDrawerClose}>
+                  <ChevronLeftIcon />
+                </IconButton>
               </div>
-            </Grid>
-          </Grid>
-        </Container>
-        <Logout />
+              <Divider />
+              <List>
+      
+              <ListItem button
+              onClick={()=>{this.SelectMenu('Dashboard')}}
+              >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Orders')}}
+            >
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Orders" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Customers')}}
+            >
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Customers" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Reports')}}
+            >
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Reports" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Integrations')}}
+            >
+              <ListItemIcon>
+                <LayersIcon />
+              </ListItemIcon>
+              <ListItemText primary="Integrations" />
+            </ListItem>
+              
+              
+              
+              
+              </List>
+              <Divider />
+              <List>{secondaryListItems}</List>
+            </Drawer>
+            <main className={this.props.classes.content}>
+              
+      
+            </main>
+      
+          </div>
+        );
+      
 
-      </main>
 
-    </div>
-  );
+
+
+      }
+
+
+
+    
+  
+
 }
+
+}
+
+export default withStyles(styles)(Dashboard);
