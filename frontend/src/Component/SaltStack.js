@@ -26,7 +26,7 @@ import {
 }from '@material-ui/icons';
 import { withAlert } from 'react-alert';
 import { Alert, AlertTitle } from '@material-ui/lab';
-
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -70,7 +70,7 @@ const tableIcons = {
 
 const styles = theme => ({
     MaterialTable:{
-        marginLeft: theme.spacing(70),
+        marginLeft: theme.spacing(80),
         marginTop: 0,
         width:450,
       
@@ -109,6 +109,17 @@ const styles = theme => ({
           marginTop: theme.spacing(2),
         },
     },
+    Comments:{
+        marginTop: theme.spacing(4),
+    },
+    ButtonGroup: {
+        display: 'flex',
+        flexDirection: 'column',
+        
+        '& > *': {
+          margin: theme.spacing(0.5),
+        },
+      },
     
   });
 
@@ -147,115 +158,134 @@ class SaltStack extends React.Component {
     }
   render(){
     return (
-        <div >
-
-
-
-        <div className={this.props.classes.MaterialTable}>
+<div >
+    <div className={this.props.classes.MaterialTable}>
         {
-            this.state.alert? 
-            (<Alert severity="success">
-            <AlertTitle>Success</AlertTitle>
-            The minions you selected were  — <strong>accepted in the system</strong>
-            </Alert>)
-            :<div></div>
-
-            }
-        <MaterialTable
-    
-        title='minions'
-        icons={tableIcons}
-        columns={[
-        { title: 'Name', field: 'name' },
-        ]}
-        data={[
-        { name: 'Mehmet' },
-        { name: 'Zerya Betül' },
-        ]} 
-        options={{
-            selection: true
-        }}       
-        actions={[
-        {
-        
-            icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-            tooltip: 'Save Minions',
-            onClick: (event, rowData) => {this.clickOpen()}
-            
-            
+            this.state.alert?
+            (   <div className={this.props.classes.msg}>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            The minions you selected were  — <strong>accepted in the system</strong>
+                        </Alert>
+                    </Snackbar>
+                </div>
+            ):<div></div>
         }
-        ]}
-         />
+        <MaterialTable
+            title='minions'
+            icons={tableIcons}
+            columns={[{ title: 'Name', field: 'name' },]}
+            data={[{ name: 'Mehmet' },{ name: 'Zerya Betül' },]} 
+            options={{selection: true}}       
+            actions=
+            {[{
+                icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+                tooltip: 'Save Minions',
+                onClick: (event, rowData) => {this.clickOpen()
+            }}]}
+        />
         {
             this.state.clickSave === true?
-            (<div className={this.props.classes.msg}>
-            
-                <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                    <Alert onClose={this.handleClose} severity="success">
-                    The commands you made were received in the system!
-                    </Alert>
-                </Snackbar>
-            </div>
-             ):<div></div>
-         }
-         {
-                (this.state.clickSave === true && this.state.msg === false)?
                 (<div className={this.props.classes.msg}>
-                
-                <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                    <Alert onClose={this.handleClose} severity="success">
-                    warining!
-                    </Alert>
-                </Snackbar>
-            </div>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            The commands you made were received in the system!
+                        </Alert>
+                    </Snackbar>
+                </div>
                 ):<div></div>
         }
-
-        
+        {
+            (this.state.clickSave === true && this.state.msg === false)?
+                (<div className={this.props.classes.msg}>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            warining!
+                        </Alert>
+                    </Snackbar>
+                </div>
+                ):<div></div>
+        }
     </div>
 
-
-
-
-                <Paper component="form" className={this.props.classes.root}>
-                    <IconButton className={this.props.classes.iconButton} aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-        
-                    <InputBase
-                    className={this.props.classes.input}
-                    placeholder="Send comments"
-                    inputProps={{ 'aria-label': 'Send comments' }}
-                    />
-                
-                 
+    <Paper component="form" className={this.props.classes.root}>
+        <IconButton className={this.props.classes.iconButton} aria-label="menu">
+            <MenuIcon />
+        </IconButton>
+            
+        <InputBase
+        className={this.props.classes.input}
+        placeholder="Send comments"
+        inputProps={{ 'aria-label': 'Send comments' }}
+        />
                     
-                        <IconButton color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
-                            <SendIcon />
-                        </IconButton>
-                </Paper>
-
-                 
-                    <div className={this.props.classes.Divider}>
-                        History
-                        <Divider light  style={{width:400}}/>
-                    </div>
+        <IconButton color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
+            <SendIcon />
+        </IconButton>
+    </Paper>
 
 
-                 <div className={this.props.classes.minionStyle}>
-                    <MinionCard></MinionCard>
-                    <MinionCard></MinionCard>
-                    <MinionCard></MinionCard>
-                    
-                 </div>
-               
-
-
-
-
-
-             
+    <div className={this.props.classes.Comments}>
+        Comments
+        <Divider light  style={{width:400}}/>
     </div>
+
+    <div className={this.props.classes.ButtonGroup}>
+        <ButtonGroup 
+        color="primary" 
+        orientation="horizontal"
+        color="primary"
+        aria-label="vertical contained primary button group"
+        variant="contained" 
+            style={{ marginTop:35,width:380,height:50,}}>
+         
+
+                <Button>state.apply</Button>
+                <Button>state.apply</Button>
+                <Button>state.apply</Button>
+
+        </ButtonGroup>
+
+        <ButtonGroup size="large" 
+        color="primary" 
+        orientation="horizontal"
+        color="primary"
+        aria-label="vertical contained primary button group"
+        variant="contained" 
+            style={{ width:380,height:50}}>
+
+            <Button>state.apply</Button>
+            <Button>state.apply</Button>
+            <Button>state.apply</Button>
+                            
+        </ButtonGroup>
+
+        <ButtonGroup size="large" 
+            color="primary" 
+            orientation="horizontal"
+            color="primary"
+            aria-label="vertical contained primary button group"
+            variant="contained" 
+            style={{ width:380,height:50}}>
+
+            <Button>state.apply</Button>
+            <Button>state.apply</Button>
+            <Button>state.apply</Button>
+        </ButtonGroup>
+    </div>
+
+    <div className={this.props.classes.Divider}>
+        History
+        <Divider light  style={{width:400}}/>
+    </div>
+
+    <div className={this.props.classes.minionStyle}>
+        <MinionCard></MinionCard>
+         <MinionCard></MinionCard>
+        <MinionCard></MinionCard>
+    </div>   
+
+</div>
     );
   }
 
