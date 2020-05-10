@@ -26,8 +26,8 @@ import { saltReturns } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
 import { withStyles } from "@material-ui/core/styles";
-import SendComments from './Component/SendComments';
-import SelectMinion from './Component/SelectMinion';
+
+import SaltStack from './Component/SaltStack';
 
 import {
   ListItem,
@@ -123,16 +123,16 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   table: {
-    marginLeft:theme.spacing(90),
-    marginTop:theme.spacing(-29),
+    // marginLeft:theme.spacing(0),
+    // marginTop:theme.spacing(4),
     paddingRight: theme.spacing(3.5),
-    paddingTop:theme.spacing(2),
+    paddingTop:theme.spacing(1),
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(3),
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-    width:500
+  
   },
   fixedHeight: {
     height: 240,
@@ -380,21 +380,11 @@ class Dashboard extends React.Component {
               <div className={this.props.classes.appBarSpacer} />
               <Container maxWidth="lg" className={this.props.classes.container}>
 
-                  <Grid item xs >
-                    <SendComments/>
-                  </Grid>
-                  
-                  
-                  <Grid item  md={4}  >
-                    <div className={this.props.classes.paper}>
-                        <MinionCard/>
-                    </div>
-                  </Grid>
-
-                  <Grid item  xs >
-                  <div className={this.props.classes.table}>
-                      <SelectMinion/>
-                  </div>
+              <Grid item  xs >
+              <div className={this.props.classes.table}>
+                  <SaltStack/>
+              </div>
+   
                 </Grid>
 
               </Container>
