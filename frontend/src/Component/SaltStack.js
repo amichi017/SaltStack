@@ -73,6 +73,7 @@ const styles = theme => ({
         marginLeft: theme.spacing(80),
         marginTop: 0,
         width:450,
+        hight:1000
       
     },
     root: {
@@ -159,7 +160,7 @@ class SaltStack extends React.Component {
   render(){
     return (
 <div >
-    <div className={this.props.classes.MaterialTable}>
+   <div className={this.props.classes.MaterialTable}>
         {
             this.state.alert?
             (   <div className={this.props.classes.msg}>
@@ -207,7 +208,6 @@ class SaltStack extends React.Component {
                 ):<div></div>
         }
     </div>
-
     <Paper component="form" className={this.props.classes.root}>
         <IconButton className={this.props.classes.iconButton} aria-label="menu">
             <MenuIcon />
@@ -232,27 +232,30 @@ class SaltStack extends React.Component {
 
     <div className={this.props.classes.ButtonGroup}>
         <ButtonGroup 
-        color="primary" 
-        orientation="horizontal"
-        color="primary"
-        aria-label="vertical contained primary button group"
-        variant="contained" 
+            size="large" 
+            color="primary" 
+            orientation="horizontal"
+            color="primary"
+            aria-label="vertical contained primary button group"
+            variant="text"
             style={{ marginTop:35,width:380,height:50,}}>
+           
          
 
-                <Button>state.apply</Button>
+                <Button>state</Button>
                 <Button>state.apply</Button>
                 <Button>state.apply</Button>
 
         </ButtonGroup>
 
-        <ButtonGroup size="large" 
-        color="primary" 
-        orientation="horizontal"
-        color="primary"
-        aria-label="vertical contained primary button group"
-        variant="contained" 
-            style={{ width:380,height:50}}>
+        <ButtonGroup 
+            size="large" 
+            color="primary" 
+            orientation="horizontal"
+            color="primary"
+            aria-label="vertical contained primary button group"
+            variant="text"
+            style={{ marginTop:15,width:380,height:50,}}>
 
             <Button>state.apply</Button>
             <Button>state.apply</Button>
@@ -265,8 +268,8 @@ class SaltStack extends React.Component {
             orientation="horizontal"
             color="primary"
             aria-label="vertical contained primary button group"
-            variant="contained" 
-            style={{ width:380,height:50}}>
+            variant="text"
+            style={{ marginTop:15,width:380,height:50,}}>
 
             <Button>state.apply</Button>
             <Button>state.apply</Button>
@@ -280,9 +283,9 @@ class SaltStack extends React.Component {
     </div>
 
     <div className={this.props.classes.minionStyle}>
-        <MinionCard></MinionCard>
          <MinionCard></MinionCard>
-        <MinionCard></MinionCard>
+         <MinionCard></MinionCard>
+         <MinionCard></MinionCard>
     </div>   
 
 </div>
