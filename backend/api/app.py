@@ -1,7 +1,7 @@
 
 
 import subprocess
-
+import click
 
 import urllib.parse
 
@@ -330,10 +330,10 @@ def get_events():
 
 #-------------------Commands Option Section----------------------------------
 
-@app.route("/saltstack_cmd")
-@jwt_required
-def saltstack_cmd():
-    cmd = [""]
+@app.route("/saltstack_cmd/<cmd>")
+# @jwt_required
+def saltstack_cmd(cmd):
+    cmd = ["sudo","salt","*","state.apply"]
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
