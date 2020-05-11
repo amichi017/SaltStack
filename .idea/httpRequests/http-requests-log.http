@@ -1,0 +1,261 @@
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T051528.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "/"
+}
+
+<> 2020-05-11T051516.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "cmsa",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T051508.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T051500.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "hello"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "hello"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "hello"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "hello"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T050707.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T050633.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello"
+}
+
+<> 2020-05-11T050548.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "/"
+}
+
+<> 2020-05-11T050533.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "/"
+}
+
+<> 2020-05-11T050516.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "ls"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "chmod",
+  "tgt": "ls"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "chmod",
+  "tgt": "ls"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "ls"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "/"
+}
+
+<> 2020-05-11T050357.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "ls",
+  "tgt": "ls"
+}
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "hello",
+  "tgt": "echo"
+}
+
+<> 2020-05-11T045409.200.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello world"
+}
+
+<> 2020-05-11T045335.500.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json
+
+{
+  "func": "echo",
+  "tgt": "hello world",
+}
+
+<> 2020-05-11T045326.400.html
+
+###
+
+POST http://localhost:5000/saltstack_cmd
+Content-Type: application/json;
+
+{"func": "echo","tgt": "hello world"}
+
+<> 2020-05-11T044948.500.html
+
+###
+
+GET http://127.0.0.1:5000/saltstack_cmd
+
+<> 2020-05-11T044651.405.html
+
+###
+

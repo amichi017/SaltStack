@@ -330,17 +330,31 @@ def get_events():
 
 #-------------------Commands Option Section----------------------------------
 
-@app.route("/saltstack_cmd/<cmd>")
+@app.route("/saltstack_cmd" ,methods=["POST"])
 # @jwt_required
-def saltstack_cmd(cmd):
-    cmd = ["sudo","salt","*","state.apply"]
+def saltstack_cmd():
+
+    if request.is_json:
+        func = request.json["func"]
+        tgt = request.json["tgt"]
+        cmd = request.json["cmd"]
+    else:
+        func = request.form["func"]
+        tgt = request.form["tgt"]
+        cmd = request.json["cmd"]
+    if cmd is not None:
+        pass
+    cmd = ["sudo","salt",func,tgt]
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
                      stdin=subprocess.PIPE)
     out, err = p.communicate()
-    print(out,err)
-    return out
+    print("out",out,len(out))
+    print("err",err,len(err))
+    if len(out) > 0:
+        return out
+    return err
 
 
 
