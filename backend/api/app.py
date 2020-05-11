@@ -56,7 +56,6 @@ app.config["JWT_SECRET_KEY"] = "this-is-secret-key" #change it
 @app.route("/auth", methods=["POST"])
 def login():
     """
-
     :return:
     """
     if request.is_json:
@@ -86,7 +85,6 @@ def login():
 @jwt_refresh_token_required
 def refresh():
     """
-
     :return:
     """
     current_user = get_jwt_identity()
@@ -104,7 +102,6 @@ def user():
 @app.route("/register", methods=["POST"])
 def register():
     """
-
     :return:
     """
     if request.is_json:
@@ -147,7 +144,6 @@ def hello_www():
 @jwt_required
 def get_SaltReturns():
     """
-
     :return:
     """
     saltReturns = db.saltReturns
@@ -165,7 +161,6 @@ def get_SaltReturns():
 @jwt_required
 def get_salt_applies():
     """
-
     :return:
     """
     saltReturns = db.saltReturns
@@ -183,7 +178,6 @@ def get_salt_applies():
 @jwt_required
 def get_daily_applies(date_url):
     """
-
     :param date_url:
     :return:
     """
@@ -204,7 +198,6 @@ def get_daily_applies(date_url):
 @jwt_required
 def get_monthly_applies(month):
     """
-
     :param month:
     :return:
     """
@@ -226,7 +219,6 @@ def get_monthly_applies(month):
 @jwt_required
 def get_yearly_applies(year):
     """
-
     :param year:
     :return:
     """
@@ -250,7 +242,6 @@ def get_yearly_applies(year):
 @jwt_required
 def get_jobs():
     """
-
     :return:
     """
     jobs = db.jobs
@@ -266,7 +257,6 @@ def get_jobs():
 @jwt_required
 def get_events():
     """
-
     :return:
     """
     events = db.events
@@ -330,17 +320,31 @@ def get_events():
 
 #-------------------Commands Option Section----------------------------------
 
-@app.route("/saltstack_cmd/<cmd>")
+@app.route("/saltstack_cmd" ,methods=["POST"])
 # @jwt_required
-def saltstack_cmd(cmd):
-    cmd = ["sudo","salt","*","state.apply"]
+def saltstack_cmd():
+
+    if request.is_json:
+        func = request.json["func"]
+        tgt = request.json["tgt"]
+        cmd = request.json["cmd"]
+    else:
+        func = request.form["func"]
+        tgt = request.form["tgt"]
+        cmd = request.json["cmd"]
+    if cmd is not None:
+        pass
+    cmd = ["sudo","salt",func,tgt]
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
                      stdin=subprocess.PIPE)
     out, err = p.communicate()
-    print(out,err)
-    return out
+    print("out",out,len(out))
+    print("err",err,len(err))
+    if len(out) > 0:
+        return out
+    return err
 
 
 
