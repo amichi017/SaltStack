@@ -70,10 +70,12 @@ const tableIcons = {
 
 const styles = theme => ({
     MaterialTable:{
-        marginLeft: theme.spacing(80),
-        marginTop: 0,
+        marginLeft: theme.spacing(20),
+        marginTop: theme.spacing(0),
+    
         width:450,
-        hight:1000
+        
+        
       
     },
     root: {
@@ -82,7 +84,7 @@ const styles = theme => ({
       alignItems: 'center',
       width: 500,
       height:70,
-      marginTop: theme.spacing(-53)
+      marginTop: theme.spacing(0)
     },
    
     input: {
@@ -159,55 +161,14 @@ class SaltStack extends React.Component {
     }
   render(){
     return (
-<div >
-   <div className={this.props.classes.MaterialTable}>
-        {
-            this.state.alert?
-            (   <div className={this.props.classes.msg}>
-                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                        <Alert onClose={this.handleClose} severity="success">
-                            The minions you selected were  — <strong>accepted in the system</strong>
-                        </Alert>
-                    </Snackbar>
-                </div>
-            ):<div></div>
-        }
-        <MaterialTable
-            title='minions'
-            icons={tableIcons}
-            columns={[{ title: 'Name', field: 'name' },]}
-            data={[{ name: 'Mehmet' },{ name: 'Zerya Betül' },]} 
-            options={{selection: true}}       
-            actions=
-            {[{
-                icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-                tooltip: 'Save Minions',
-                onClick: (event, rowData) => {this.clickOpen()
-            }}]}
-        />
-        {
-            this.state.clickSave === true?
-                (<div className={this.props.classes.msg}>
-                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                        <Alert onClose={this.handleClose} severity="success">
-                            The commands you made were received in the system!
-                        </Alert>
-                    </Snackbar>
-                </div>
-                ):<div></div>
-        }
-        {
-            (this.state.clickSave === true && this.state.msg === false)?
-                (<div className={this.props.classes.msg}>
-                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                        <Alert onClose={this.handleClose} severity="success">
-                            warining!
-                        </Alert>
-                    </Snackbar>
-                </div>
-                ):<div></div>
-        }
-    </div>
+
+     
+
+
+<div style={{display: 'flex',flexDirection: 'row',}}>
+
+<div style={{display: 'flex',flexDirection: 'column',}}>
+   
     <Paper component="form" className={this.props.classes.root}>
         <IconButton className={this.props.classes.iconButton} aria-label="menu">
             <MenuIcon />
@@ -286,8 +247,70 @@ class SaltStack extends React.Component {
          <MinionCard></MinionCard>
          <MinionCard></MinionCard>
          <MinionCard></MinionCard>
-    </div>   
+         <MinionCard></MinionCard>
+         <MinionCard></MinionCard>
+         <MinionCard></MinionCard>
+    </div> 
+    
+    <div className={this.props.classes.Divider}>
+        <Divider light  style={{width:400}}/>
+    </div>
 
+
+    </div>
+<div>
+  
+
+    <div className={this.props.classes.MaterialTable}>
+        {
+            this.state.alert?
+            (   <div className={this.props.classes.msg}>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            The minions you selected were  — <strong>accepted in the system</strong>
+                        </Alert>
+                    </Snackbar>
+                </div>
+            ):<div></div>
+        }
+        <MaterialTable
+            title='minions'
+            icons={tableIcons}
+            columns={[{ title: 'Name', field: 'name' },]}
+            data={[{ name: 'Mehmet' },{ name: 'Zerya Betül' },]} 
+            options={{selection: true}}       
+            actions=
+            {[{
+                icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+                tooltip: 'Save Minions',
+                onClick: (event, rowData) => {this.clickOpen()
+            }}]}
+        />
+        {
+            this.state.clickSave === true?
+                (<div className={this.props.classes.msg}>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            The commands you made were received in the system!
+                        </Alert>
+                    </Snackbar>
+                </div>
+                ):<div></div>
+        }
+        {
+            (this.state.clickSave === true && this.state.msg === false)?
+                (<div className={this.props.classes.msg}>
+                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            warining!
+                        </Alert>
+                    </Snackbar>
+                </div>
+                ):<div></div>
+        }
+    </div>
+
+</div>
 </div>
     );
   }
