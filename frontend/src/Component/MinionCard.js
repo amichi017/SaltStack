@@ -8,12 +8,35 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
+
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 const styles = theme => ({
   root: {
-    maxWidth: 300,
+    maxWidth: 260,
+   
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
+  },
+  root2: {
+    width: 230,
+    maxWidth: 360,
+    fontSize:12,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
   },
   bullet: {
     display: 'inline-block',
@@ -43,19 +66,25 @@ const LargeTree = ()=> {
 class MinionCard extends React.Component {
     constructor(props) {
         super(props);
+        
         this.onClickMinion = this.onClickMinion.bind(this);
+        this.handleClickButton = this.handleClickButton.bind(this);
         const commentg= this.props.comment;
        this.state={ 
           open: false,
           defer: false,
           click:false,
-          comment: commentg
+          comment: commentg,
+          listOpen:false
         };
     }
     onClickMinion(){
        this.setState({click:true})
     }
-  
+    handleClickButton(){
+      this.state.listOpen=!(this.state.listOpen);
+      console.log(  this.state.listOpen,"  this.state.listOpen")
+    }
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}
     const bull = <span className={this.props.classes.bullet}>•</span>;
@@ -76,39 +105,56 @@ render(){
 
             <div>
 
-               <Button
-               variant="outlined"
-               color="primary"
-              className={this.props.classes.button}
-              startIcon={<ArrowDownwardIcon />}
-               size="small"
-               onClick={() =>
-                this.setState({
-                  open: !this.state.open,
-                  defer: false,
-                })
-              }
-            >
-              
-               
-               See minions
-               
-               
-               </Button>
                <div className={this.props.classes.container}>
-               {this.state.open ? (
-                 <React.Fragment>
-                     <LargeTree />  
-                 </React.Fragment>
-               ) : null}
+
+
+
+               <List
+                  component="nav"
+                  aria-labelledby="nested-list-subheader"
+                  className={this.props.classes.root2}
+                >
+                  <ListItem 
+                    button   
+                    onClick={() =>
+                      this.setState({
+                      listOpen: !this.state.listOpen,
+                      })}
+                    >
+
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                      
+                    <ListItemText primary="See minions" />
+                        {this.state.listOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    {
+                      this.props.minion.map((item)=>{
+                        return(
+                        <Collapse in={this.state.listOpen} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem  className={this.props.classes.nested}>
+                              <ListItemIcon>
+                                  <StarBorder />
+                              </ListItemIcon>
+                              <ListItemText primary={item} />
+                          </ListItem>
+                        </List>
+                      </Collapse>
+                      )
+                      })
+                    }
+                    
+
+                </List>
+
              </div>
                </div>
 
 
             </Typography>
-            <Typography variant="h5" component="h2">
-            {this.props.minion}
-         </Typography>
+            
           {/*button*/}
           </CardContent>
           <CardActions>
