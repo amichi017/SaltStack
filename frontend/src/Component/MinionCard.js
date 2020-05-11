@@ -12,6 +12,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 const styles = theme => ({
   root: {
     minWidth: 275,
+    margin: theme.spacing(3),
+    marginLeft: theme.spacing(0),
   },
   bullet: {
     display: 'inline-block',
@@ -41,26 +43,32 @@ const LargeTree = ()=> {
 class MinionCard extends React.Component {
     constructor(props) {
         super(props);
-   
+        this.onClickMinion = this.onClickMinion.bind(this);
        this.state={ 
           open: false,
-          defer: false 
+          defer: false,
+          click:false 
         };
     }
-
+    onClickMinion(){
+       this.setState({click:true})
+    }
   
 render(){
    
     const bull = <span className={this.props.classes.bullet}>•</span>;
+    if(this.state.click === false)
     return (
      
         <Card className={this.props.classes.root}>
           <CardContent>
+          <Button onClick={()=>{this.onClickMinion()}}>
             <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
             fun: state.apply
             {/*this.props.fun*/}
              
             </Typography>
+            </Button>
             <Typography variant="h5" component="h2">
 
             <div>
@@ -108,8 +116,10 @@ render(){
       
           </CardActions>
         </Card>
+     
        
       );
+      else{return(<div></div>);}
 }
   
 }
@@ -117,74 +127,3 @@ render(){
 export default withStyles(styles)(MinionCard);
 
 
-// <Button
-// variant="outlined"
-//  color="secondary"
-// className={this.props.classes.button}
-// startIcon={<DeleteIcon />}
-// >
-// Delete
-// </Button>
-
-
-// import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import NoSsr from '@material-ui/core/NoSsr';
-
-// const useStyles = makeStyles({
-//   container: {
-//     width: 300,
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-// });
-
-// function LargeTree() {
-//   return Array.from(new Array(5000)).map((_, index) => <span key={index}>.</span>);
-// }
-
-// export default function FrameDeferring() {
-//   const classes = useStyles();
-//   const [state, setState] = React.useState({ open: false, defer: false });
-
-//   return (
-//     <div>
-//       <button
-//         type="button"
-//         onClick={() =>
-//           setState({
-//             open: !state.open,
-//             defer: false,
-//           })
-//         }
-//       >
-//         {'Render NoSsr defer="false"'}
-//       </button>
-//       <br />
-//       <button
-//         type="button"
-//         onClick={() =>
-//           setState({
-//             open: !state.open,
-//             defer: true,
-//           })
-//         }
-//       >
-//         {'Render NoSsr defer="true"'}
-//       </button>
-//       <br />
-//       <br />
-//       <div className={classes.container}>
-//         {state.open ? (
-//           <React.Fragment>
-//             <div>Outside NoSsr</div>
-//             <NoSsr defer={state.defer}>
-//               .....Inside NoSsr
-//               <LargeTree />
-//             </NoSsr>
-//           </React.Fragment>
-//         ) : null}
-//       </div>
-//     </div>
-//   );
-// }
