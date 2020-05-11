@@ -94,7 +94,7 @@ const styles = theme => ({
       flex: 1,
     },
     minionStyle:{
-        marginTop:20,
+        marginTop: theme.spacing(5),
         width:200
     },
     iconButton: {
@@ -136,8 +136,9 @@ class SaltStack extends React.Component {
         this.clickOpen = this.clickOpen.bind(this);
          this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        // this.renderItem = this.renderItem.bind(this);
         this.state={alert:false,msg:false,menu:"Dashboard",open: false,
-        defer: false,clickSave:false };
+        defer: false,clickSave:false,history:[],input:'',saveMinion:[] };
     }
     
     handleClose = (event, reason) => {
@@ -148,17 +149,39 @@ class SaltStack extends React.Component {
         this.setState({msg:false});
       };
        handleClick = () => {
+        
+       
         this.setState({msg:true});
         setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
+      
+        this.state.saveMinion[0].comment=this.state.input;
+        console.log(this.state.history,'this.state.history')
+
+        this.state.history.unshift(this.state.saveMinion[0]);
+        console.log(this.state.saveMinion,'this.state.saveMinion')
+        this.setState({input:''});
+        console.log(this.state.history,'this.state.history')
+
       };
    
-     clickOpen (){
+     clickOpen (rowData){
+        //  console.log(rowData,'rowData')
+        const data=rowData.map((row)=>row.name);
+        let commntId=this.state.saveMinion.length+1;
+        //  console.log(data,'data')
+        this.setState({alert:true,clickSave:true});
+       
+        this.state.saveMinion.unshift({minions:data,id:commntId,comment:''});
+     
         
-        this.setState({alert:true,clickSave:true,clickSave:true});
-    
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
     }
+
+  
+
+
+
   render(){
     return (
 
@@ -175,6 +198,10 @@ class SaltStack extends React.Component {
         </IconButton>
             
         <InputBase
+        autoComplete
+        autoFocus='true'
+        value={this.state.input}
+        onChange={(event)=>{this.setState({input:event.target.value})}}
         className={this.props.classes.input}
         placeholder="Send comments"
         inputProps={{ 'aria-label': 'Send comments' }}
@@ -243,14 +270,13 @@ class SaltStack extends React.Component {
         <Divider light  style={{width:400}}/>
     </div>
 
-    <div className={this.props.classes.minionStyle}>
-         <MinionCard></MinionCard>
-         <MinionCard></MinionCard>
-         <MinionCard></MinionCard>
-         <MinionCard></MinionCard>
-         <MinionCard></MinionCard>
-         <MinionCard></MinionCard>
-    </div> 
+
+    {
+        this.state.history.map(item =>
+          <MinionCard  key={item.id} minion={item.minions} comment={item.comment} />
+        )
+    }  
+
     
     <div className={this.props.classes.Divider}>
         <Divider light  style={{width:400}}/>
@@ -283,8 +309,8 @@ class SaltStack extends React.Component {
             {[{
                 icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
                 tooltip: 'Save Minions',
-                onClick: (event, rowData) => {this.clickOpen()
-            }}]}
+                onClick: (event, rowData) => {this.clickOpen(rowData)}
+            }]}
         />
         {
             this.state.clickSave === true?

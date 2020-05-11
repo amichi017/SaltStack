@@ -11,8 +11,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 const styles = theme => ({
   root: {
-    minWidth: 275,
-    margin: theme.spacing(3),
+    maxWidth: 300,
+    margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
   },
   bullet: {
@@ -44,10 +44,12 @@ class MinionCard extends React.Component {
     constructor(props) {
         super(props);
         this.onClickMinion = this.onClickMinion.bind(this);
+        const commentg= this.props.comment;
        this.state={ 
           open: false,
           defer: false,
-          click:false 
+          click:false,
+          comment: commentg
         };
     }
     onClickMinion(){
@@ -55,8 +57,9 @@ class MinionCard extends React.Component {
     }
   
 render(){
-   
+  // id={item.id} minion={item.minions} comment={item.comment}
     const bull = <span className={this.props.classes.bullet}>•</span>;
+    if(this.state.comment===''){this.state.click =true}
     if(this.state.click === false)
     return (
      
@@ -64,7 +67,7 @@ render(){
           <CardContent>
           <Button onClick={()=>{this.onClickMinion()}}>
             <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-            fun: state.apply
+            fun: {this.props.comment}
             {/*this.props.fun*/}
              
             </Typography>
@@ -95,11 +98,7 @@ render(){
                <div className={this.props.classes.container}>
                {this.state.open ? (
                  <React.Fragment>
-                   <div>Outside NoSsr</div>
-                   <NoSsr defer={this.state.defer}>
-                     .....Inside NoSsr
-                     <LargeTree />
-                   </NoSsr>
+                     <LargeTree />  
                  </React.Fragment>
                ) : null}
              </div>
@@ -108,12 +107,12 @@ render(){
 
             </Typography>
             <Typography variant="h5" component="h2">
-            {/*this.props.minion*/}
+            {this.props.minion}
          </Typography>
           {/*button*/}
           </CardContent>
           <CardActions>
-      
+           
           </CardActions>
         </Card>
      
