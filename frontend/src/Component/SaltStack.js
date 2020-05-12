@@ -41,7 +41,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import SendIcon from '@material-ui/icons/Send';
 import MinionCard from './MinionCard';
-
+import SaveIcon from '@material-ui/icons/Save';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -115,6 +115,7 @@ const styles = theme => ({
     Comments:{
         marginTop: theme.spacing(4),
     },
+   
     ButtonGroup: {
         display: 'flex',
         flexDirection: 'column',
@@ -134,38 +135,50 @@ class SaltStack extends React.Component {
     constructor(props) {
         super(props);
         this.clickOpen = this.clickOpen.bind(this);
-         this.handleClose = this.handleClose.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
-        // this.renderItem = this.renderItem.bind(this);
+        this.sentCommand = this.sentCommand.bind(this);
         this.state={alert:false,msg:false,menu:"Dashboard",open: false,
-        defer: false,clickSave:false,history:[],input:'',saveMinion:[] };
+        defer: false,clickSave:false,history:[],input:'',saveMinion:[],countSaveMinion:0,warninginput:false,
+        warningNoMinionSelected:false };
     }
     
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
         }
-    
-        this.setState({msg:false});
+     
+        this.setState({msg:false,warninginput:false,warningNoMinionSelected:false});
       };
        handleClick = () => {
+        this.state.countSaveMinion--;
+        console.log(  this.state.countSaveMinion,'  this.state.countSaveMinion')
+        if((this.state.input !== '')  &&  (this.state.countSaveMinion===0)){
+            this.setState({msg:true});
+            setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
+            this.state.saveMinion[0].comment=this.state.input;
+            this.state.history.unshift(this.state.saveMinion[0]);
+         
+        }
         
-       
-        this.setState({msg:true});
-        setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
-      
-        this.state.saveMinion[0].comment=this.state.input;
-        console.log(this.state.history,'this.state.history')
+        if(this.state.input === ''){ 
+            this.setState({warninginput:true});
+            setTimeout(()=>{this.setState({warninginput:false});}, 2200);
+        }
+        if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1) &&(this.state.input !== '')  ){ 
+            this.setState({warningNoMinionSelected:true});
+            setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
+        }
 
-        this.state.history.unshift(this.state.saveMinion[0]);
-        console.log(this.state.saveMinion,'this.state.saveMinion')
         this.setState({input:''});
-        console.log(this.state.history,'this.state.history')
+
 
       };
    
      clickOpen (rowData){
         //  console.log(rowData,'rowData')
+        this.state.countSaveMinion=0;
+        this.state.countSaveMinion++;
         const data=rowData.map((row)=>row.name);
         let commntId=this.state.saveMinion.length+1;
         //  console.log(data,'data')
@@ -178,15 +191,30 @@ class SaltStack extends React.Component {
         
     }
 
-  
+    sentCommand(command){
+        console.log('fff')
+        this.state.countSaveMinion--;
+        if( (this.state.countSaveMinion===0)){
+            
+            this.state.saveMinion[0].comment=command;
+            this.state.history.unshift(this.state.saveMinion[0]);
+            console.log(this.state.history,'this.state.history')
+            this.setState({msg:true});
+            setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
+         
+        }
+      
+        if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1)   ){ 
+            this.setState({warningNoMinionSelected:true});
+            setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
+        }
+
+    }
 
 
 
   render(){
     return (
-
-     
-
 
 <div style={{display: 'flex',flexDirection: 'row',}}>
 
@@ -230,9 +258,9 @@ class SaltStack extends React.Component {
            
          
 
-                <Button>state</Button>
-                <Button>state.apply</Button>
-                <Button>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
+            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
 
         </ButtonGroup>
 
@@ -245,9 +273,9 @@ class SaltStack extends React.Component {
             variant="text"
             style={{ marginTop:15,width:380,height:50,}}>
 
-            <Button>state.apply</Button>
-            <Button>state.apply</Button>
-            <Button>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
+            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
                             
         </ButtonGroup>
 
@@ -259,9 +287,9 @@ class SaltStack extends React.Component {
             variant="text"
             style={{ marginTop:15,width:380,height:50,}}>
 
-            <Button>state.apply</Button>
-            <Button>state.apply</Button>
-            <Button>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
+            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
         </ButtonGroup>
     </div>
 
@@ -272,9 +300,13 @@ class SaltStack extends React.Component {
 
 
     {
-        this.state.history.map(item =>
-          <MinionCard  key={item.id} minion={item.minions} comment={item.comment} />
-        )
+        <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:550}}>
+        {this.state.history.map(item =>{
+            return(
+                
+                  <MinionCard  key={item.id} minion={item.minions} comment={item.comment} />
+        )})}
+        </div>
     }  
 
     
@@ -291,11 +323,11 @@ class SaltStack extends React.Component {
         {
             this.state.alert?
             (   <div className={this.props.classes.msg}>
-                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                        <Alert onClose={this.handleClose} severity="success">
-                            The minions you selected were  — <strong>accepted in the system</strong>
+                   
+                        <Alert severity="success">
+                                The minions you selected were  — <strong>accepted in the system</strong>
                         </Alert>
-                    </Snackbar>
+                   
                 </div>
             ):<div></div>
         }
@@ -307,7 +339,7 @@ class SaltStack extends React.Component {
             options={{selection: true}}       
             actions=
             {[{
-                icon: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+                icon: forwardRef((props, ref) => <SaveIcon color='action' {...props} ref={ref} />),
                 tooltip: 'Save Minions',
                 onClick: (event, rowData) => {this.clickOpen(rowData)}
             }]}
@@ -324,16 +356,37 @@ class SaltStack extends React.Component {
                 ):<div></div>
         }
         {
-            (this.state.clickSave === true && this.state.msg === false)?
-                (<div className={this.props.classes.msg}>
-                    <Snackbar open={this.state.msg} autoHideDuration={6000} onClose={this.handleClose}>
-                        <Alert onClose={this.handleClose} severity="success">
-                            warining!
+            this.state.warninginput === true ?
+            (   <div className={this.props.classes.msg}>
+                <Snackbar open={this.state.warninginput} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="warning">
+                          command not sent because     <strong> no command entered   </strong>
                         </Alert>
+                  
                     </Snackbar>
+                   
                 </div>
-                ):<div></div>
+            )
+            :<div></div>
         }
+        {
+            this.state.warningNoMinionSelected === true ?
+            (   <div className={this.props.classes.msg}>
+                <Snackbar open={this.state.warningNoMinionSelected} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="warning">
+                              command not sent because <strong>no minion selected   </strong>
+                        </Alert>
+                  
+                    </Snackbar>
+                   
+                </div>
+            )
+            :<div></div>
+        }
+
+
+
+
     </div>
 
 </div>
