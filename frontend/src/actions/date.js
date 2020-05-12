@@ -1,10 +1,10 @@
 import axios from 'axios';
 import store from '../store'
- import { DATE_SELECT, SALT_RETURNS} from './types';
+ import { DATE_SELECT, SALT_RETURNS,SAVE_MINION} from './types';
  // Date is select
  export const dateSelect = (start , end) => {
 
-     return {
+     return  {
                  type: DATE_SELECT,
                  payload:{start,end}
               };
@@ -12,6 +12,7 @@ import store from '../store'
      // console.log("end ",end);
 
  }
+
 
 //  // Clear date
 //   export const saltReturns =  () => (dispatch, getState) => {

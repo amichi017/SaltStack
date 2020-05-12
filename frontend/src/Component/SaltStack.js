@@ -5,6 +5,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import MaterialTable from 'material-table';
 import { forwardRef } from 'react';
+import store from '../store';
+import { saveMinion } from '../actions/date';
+import {SAVE_MINION} from "../actions/types";
 import {
     AddBox,
     ArrowDownward,
@@ -139,8 +142,9 @@ class SaltStack extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.sentCommand = this.sentCommand.bind(this);
         this.state={alert:false,msg:false,menu:"Dashboard",open: false,
-        defer: false,clickSave:false,history:[],input:'',saveMinion:[],countSaveMinion:0,warninginput:false,
+        defer: false,clickSave:false,history:[],input:'',saveMinion:{},countSaveMinion:0,warninginput:false,
         warningNoMinionSelected:false };
+       
     }
     
     handleClose = (event, reason) => {
@@ -152,13 +156,21 @@ class SaltStack extends React.Component {
       };
        handleClick = () => {
         this.state.countSaveMinion--;
-        console.log(  this.state.countSaveMinion,'  this.state.countSaveMinion')
+        
         if((this.state.input !== '')  &&  (this.state.countSaveMinion===0)){
             this.setState({msg:true});
             setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
-            this.state.saveMinion[0].comment=this.state.input;
-            this.state.history.unshift(this.state.saveMinion[0]);
-         
+            this.state.saveMinion.comment=this.state.input;
+            this.state.history.unshift(this.state.saveMinion);
+            let minions =store.getState().saveMinion.saveMinion;
+            minions.unshift(this.state.saveMinion);
+            // minions.unshift(this.state.saveMinion[0]);
+            store.dispatch({
+                type: SAVE_MINION,
+                payload: minions
+            });
+            //console.log(store.getState(),"store from saltstack");
+            
         }
         
         if(this.state.input === ''){ 
@@ -180,11 +192,11 @@ class SaltStack extends React.Component {
         this.state.countSaveMinion=0;
         this.state.countSaveMinion++;
         const data=rowData.map((row)=>row.name);
-        let commntId=this.state.saveMinion.length+1;
+        let commntId=(store.getState().saveMinion.saveMinion.length)+1;
         //  console.log(data,'data')
         this.setState({alert:true,clickSave:true});
        
-        this.state.saveMinion.unshift({minions:data,id:commntId,comment:''});
+        this.state.saveMinion={minions:data,id:commntId,comment:''};
      
         
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
@@ -192,13 +204,21 @@ class SaltStack extends React.Component {
     }
 
     sentCommand(command){
-        console.log('fff')
+        
         this.state.countSaveMinion--;
         if( (this.state.countSaveMinion===0)){
             
-            this.state.saveMinion[0].comment=command;
-            this.state.history.unshift(this.state.saveMinion[0]);
-            console.log(this.state.history,'this.state.history')
+            this.state.saveMinion.comment=command;
+            this.state.history.unshift(this.state.saveMinion);
+            let minions =store.getState().saveMinion.saveMinion;
+           
+            minions.unshift(this.state.saveMinion);
+            // minions.unshift(this.state.saveMinion[0]);
+            store.dispatch({
+                type: SAVE_MINION,
+                payload: minions
+            });
+           // console.log(this.state.history,'this.state.history')
             this.setState({msg:true});
             setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
          
@@ -301,10 +321,10 @@ class SaltStack extends React.Component {
 
     {
         <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:550}}>
-        {this.state.history.map(item =>{
+        {store.getState().saveMinion.saveMinion.map(item =>{
             return(
                 
-                  <MinionCard  key={item.id} minion={item.minions} comment={item.comment} />
+                  <MinionCard  id={item.id} minion={item.minions} comment={item.comment} />
         )})}
         </div>
     }  
