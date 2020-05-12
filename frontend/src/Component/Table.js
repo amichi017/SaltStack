@@ -151,7 +151,7 @@ class Orders extends React.Component {
 
                 return {
 
-                    status:(item.full_ret.success === true)?'Succeeded':'Faile',
+                    status:(item.full_ret.success === true)?'Success':'Fail',
                     name:item.minion,
                     date:date(item.full_ret.jid),
                     id:item._id,
@@ -176,7 +176,7 @@ class Orders extends React.Component {
         return (
             <div>
                 <MaterialTable
-                    title="Minion Table"
+                    title="Minions Table"
                     columns={dataColumns}
                     data={ this.state.saltReturns}
                     icons={tableIcons}

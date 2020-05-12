@@ -189,8 +189,8 @@ const parseNumber= (str)=>{
              (A/T)
             </Label>
           </YAxis>
-          <Line type="monotone" dataKey="Faile" stroke="#ff6666" onClick={demoOnClick} />
-          <Line type="monotone" dataKey="Succeeded" stroke="#82ca9d"  onClick={demoOnClick}/>
+          <Line type="monotone" dataKey="Fail" stroke="#ff6666" onClick={demoOnClick} />
+          <Line type="monotone" dataKey="Success" stroke="#82ca9d"  onClick={demoOnClick}/>
           <Legend />
           <Tooltip />
         </LineChart>
