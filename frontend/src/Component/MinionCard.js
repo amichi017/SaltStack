@@ -59,9 +59,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
 });
-const LargeTree = ()=> {
-  return Array.from(new Array(10)).map((_, index) => <span key={index}>.</span>);
-}
+
 
 class MinionCard extends React.Component {
     constructor(props) {

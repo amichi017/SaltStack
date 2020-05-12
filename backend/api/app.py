@@ -56,6 +56,7 @@ app.config["JWT_SECRET_KEY"] = "this-is-secret-key" #change it
 @app.route("/auth", methods=["POST"])
 def login():
     """
+
     :return:
     """
     if request.is_json:
@@ -85,6 +86,7 @@ def login():
 @jwt_refresh_token_required
 def refresh():
     """
+
     :return:
     """
     current_user = get_jwt_identity()
@@ -102,6 +104,7 @@ def user():
 @app.route("/register", methods=["POST"])
 def register():
     """
+
     :return:
     """
     if request.is_json:
@@ -144,6 +147,7 @@ def hello_www():
 @jwt_required
 def get_SaltReturns():
     """
+
     :return:
     """
     saltReturns = db.saltReturns
@@ -161,6 +165,7 @@ def get_SaltReturns():
 @jwt_required
 def get_salt_applies():
     """
+
     :return:
     """
     saltReturns = db.saltReturns
@@ -178,6 +183,7 @@ def get_salt_applies():
 @jwt_required
 def get_daily_applies(date_url):
     """
+
     :param date_url:
     :return:
     """
@@ -198,6 +204,7 @@ def get_daily_applies(date_url):
 @jwt_required
 def get_monthly_applies(month):
     """
+
     :param month:
     :return:
     """
@@ -219,6 +226,7 @@ def get_monthly_applies(month):
 @jwt_required
 def get_yearly_applies(year):
     """
+
     :param year:
     :return:
     """
@@ -242,6 +250,7 @@ def get_yearly_applies(year):
 @jwt_required
 def get_jobs():
     """
+
     :return:
     """
     jobs = db.jobs
@@ -257,6 +266,7 @@ def get_jobs():
 @jwt_required
 def get_events():
     """
+
     :return:
     """
     events = db.events
