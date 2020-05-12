@@ -231,8 +231,8 @@ class SaltStack extends React.Component {
         value={this.state.input}
         onChange={(event)=>{this.setState({input:event.target.value})}}
         className={this.props.classes.input}
-        placeholder="Send comments"
-        inputProps={{ 'aria-label': 'Send comments' }}
+        placeholder="Command Line"
+        inputProps={{ 'aria-label': 'Command Line' }}
         />
                     
         <IconButton color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
@@ -242,7 +242,7 @@ class SaltStack extends React.Component {
 
 
     <div className={this.props.classes.Comments}>
-        Comments
+        commands
         <Divider light  style={{width:400}}/>
     </div>
 
@@ -332,7 +332,7 @@ class SaltStack extends React.Component {
             ):<div></div>
         }
         <MaterialTable
-            title='minions'
+            title='Minions'
             icons={tableIcons}
             columns={[{ title: 'Name', field: 'name' },]}
             data={[{ name: 'Mehmet' },{ name: 'Zerya Betül' },]} 
