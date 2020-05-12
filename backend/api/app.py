@@ -321,6 +321,12 @@ def send_mails(err):
 
 #-------------------Commands Option Section----------------------------------
 
+@app.route("/get_connected_minions")
+# @jwt_required
+def get_connected_minions():
+
+    return ['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il']
+
 @app.route("/saltstack_cmd" ,methods=["POST"])
 # @jwt_required
 def saltstack_cmd():
