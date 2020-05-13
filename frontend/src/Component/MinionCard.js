@@ -8,7 +8,9 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
+import store from '../store';
 
+import {SAVE_MINION} from "../actions/types";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -68,6 +70,7 @@ class MinionCard extends React.Component {
         this.onClickMinion = this.onClickMinion.bind(this);
         this.handleClickButton = this.handleClickButton.bind(this);
         const commentg= this.props.comment;
+        console.log(this.props.id,'constructor');
        this.state={ 
           open: false,
           defer: false,
@@ -77,11 +80,27 @@ class MinionCard extends React.Component {
         };
     }
     onClickMinion(){
-       this.setState({click:true})
+       this.setState({click:true});
+       let array =store.getState().saveMinion.saveMinion;
+       
+      
+       let minions=array.filter((item)=>{
+         if(item.id !==this.props.id){return (item)}
+       });
+       minions=minions.map((item,index)=>{
+        return( {...item,id:index+1});
+       })
+       // minions.unshift(this.state.saveMinion[0]);
+       store.dispatch({
+           type: SAVE_MINION,
+           payload: minions
+       });
+       console.log(store.getState(),"store.getState() from minionCard");
     }
     handleClickButton(){
       this.state.listOpen=!(this.state.listOpen);
-      console.log(  this.state.listOpen,"  this.state.listOpen")
+  
+  
     }
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}

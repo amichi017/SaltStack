@@ -82,7 +82,7 @@ const dataColumns =[
     { title: 'status', field: 'status',
         //type: 'boolean'
         cellStyle: x=>({
-            color:(x==='Succeeded')?'#208000':'#ff0000'})
+            color:(x==='Success')?'#208000':'#ff0000'})
 
     },
     { title: 'Name', field: 'name',
