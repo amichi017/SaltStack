@@ -69,28 +69,28 @@ def login():
     if test:
         if check_password_hash(test["password"], password):
             access_token = create_access_token(identity=email)
-            refresh_token = create_refresh_token(identity=email)
+            # refresh_token = create_refresh_token(identity=email)
             return (
                 jsonify(
                     message="Login Succeeded!",
                     access_token=access_token,
-                    refresh_token=refresh_token,
+                    # refresh_token=refresh_token,
                 ),
                 201,
             )
     return jsonify(message="Bad Email or Password"), 401
 
-
-@app.route("/auth/refresh", methods=["POST"])
-@jwt_refresh_token_required
-def refresh():
-    """
-
-    :return:
-    """
-    current_user = get_jwt_identity()
-    ret = {"access_token": create_access_token(identity=current_user)}
-    return jsonify(ret), 200
+#
+# @app.route("/auth/refresh", methods=["POST"])
+# @jwt_refresh_token_required
+# def refresh():
+#     """
+#
+#     :return:
+#     """
+#     current_user = get_jwt_identity()
+#     ret = {"access_token": create_access_token(identity=current_user)}
+#     return jsonify(ret), 200
 
 
 @app.route("/auth/user", methods=["GET"])
