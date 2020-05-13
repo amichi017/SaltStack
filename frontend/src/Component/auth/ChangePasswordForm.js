@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
+
 
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
@@ -168,6 +170,13 @@ class LoginForm extends React.Component {
             >
               Sign In
             </Button>
+
+            {this.state.msg  ? (
+            <Alert severity="error">{this.state.msg}</Alert>
+              ) : (
+              null
+              )}
+              
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

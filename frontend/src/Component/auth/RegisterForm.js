@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
+
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -252,6 +254,13 @@ class RegisterForm extends React.Component {
           >
             Sign Up
           </Button>
+
+          {this.state.msg  ? (
+            <Alert severity="error">{this.state.msg}</Alert>
+              ) : (
+              null
+              )}
+          
           <Grid container>
             <Grid item xs>
             </Grid>
@@ -265,6 +274,7 @@ class RegisterForm extends React.Component {
   );
     }
 }
+
 
 
 
