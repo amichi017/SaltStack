@@ -147,14 +147,17 @@ class SaltStack extends React.Component {
        
     }
     
-    handleClose = (event, reason) => {
+    handleClose = (event, reason) => 
+    {
         if (reason === 'clickaway') {
           return;
         }
      
         this.setState({msg:false,warninginput:false,warningNoMinionSelected:false});
-      };
-       handleClick = () => {
+    };
+
+    handleClick = () => 
+    {
         this.state.countSaveMinion--;
         
         if((this.state.input !== '')  &&  (this.state.countSaveMinion===0)){
@@ -187,18 +190,15 @@ class SaltStack extends React.Component {
 
       };
    
-     clickOpen (rowData){
+    clickOpen (rowData){
         //  console.log(rowData,'rowData')
         this.state.countSaveMinion=0;
         this.state.countSaveMinion++;
         const data=rowData.map((row)=>row.name);
-        let commntId=(store.getState().saveMinion.saveMinion.length)+1;
-        //  console.log(data,'data')
-        this.setState({alert:true,clickSave:true});
-       
+        let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
         this.state.saveMinion={minions:data,id:commntId,comment:''};
-     
-        
+       
+        this.setState({alert:true,clickSave:true});
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
     }

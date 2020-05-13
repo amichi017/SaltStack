@@ -9,7 +9,8 @@ import { LineChart,
          Label,
          ResponsiveContainer,
          Tooltip,
-         Legend  
+         Legend,
+         CartesianGrid  
 } from 'recharts';
 import store from '../store';
 import Title from './Title';
@@ -109,35 +110,35 @@ const parseNumber= (str)=>{
         })
         .forEach(item => {
         if(parseNumber(item.full_ret.jid)==="03:00")
-        { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Faile++)};
+        { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Fail++)};
         if(parseNumber(item.full_ret.jid)==="06:00")
-        { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Faile++)};
+        { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Fail++)};
         if(parseNumber(item.full_ret.jid)==="09:00")
-        { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Faile++)};
+        { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Fail++)};
         if(parseNumber(item.full_ret.jid)==="12:00")
-        { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Faile++)};
+        { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Fail++)};
         if(parseNumber(item.full_ret.jid)==="15:00")
-        { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Faile++)};
+        { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Fail++)};
         if(parseNumber(item.full_ret.jid)==="18:00")
-        { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Faile++)};
+        { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Fail++)};
         if(parseNumber(item.full_ret.jid)==="21:00")
-        { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Faile++)};
+        { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Fail++)};
         if(parseNumber(item.full_ret.jid)==="24:00")
-        { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Faile++)};
+        { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Fail++)};
        
         
         });
       }
         this.state.data=temp;
 
-        //console.log("this.state.data                             ",this.state.data);
+        //console.log(this.state.data,"this.state.data                             ");
       //  console.log("state                               ",store.getState());
     }
   }
   componentWillUpdate() {
     const start=store.getState().date.start;
     const end=store.getState().date.end;
-    console.log(store.getState());
+   // console.log(store.getState());
     // while (store.getState().saltReturns.saltReturns === null) {  }
    let temp=  
    [{ time:"00:00",Success:0,Fail:0, amount:0 },
@@ -149,11 +150,17 @@ const parseNumber= (str)=>{
    { time:"18:00",Success:0,Fail:0, amount:0 },
    { time:"21:00",Success:0,Fail:0, amount:0 },
    { time:"24:00",Success:0,Fail:0, amount:0 },];
-    store.getState().saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
+
+   if( store.getState().saltReturns.saltReturns!==null)
+   {
+    store.getState().saltReturns.saltReturns
+    .filter((item)=>{return item.full_ret.fun === "state.apply"})
+    .filter((item)=>{
     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
     let time=new Date(str);
     if(time >= start && time<= end){return item;}
-  }).forEach(item => {
+  })
+  .forEach(item => {
   if(parseNumber(item.full_ret.jid)==="03:00")
   { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Fail++)};
   if(parseNumber(item.full_ret.jid)==="06:00")
@@ -171,8 +178,10 @@ const parseNumber= (str)=>{
   if(parseNumber(item.full_ret.jid)==="24:00")
   { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Fail++)};
   });
+  
+  }
   this.state.data= temp;
-  console.log( this.state.data," this.state.data")
+  //console.log(this.state.data,"this.state.data                             ");
   
 }
   render(){
@@ -180,27 +189,16 @@ const parseNumber= (str)=>{
     <React.Fragment>
       <Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
       <ResponsiveContainer>
-        <LineChart
-          onClick={demoOnClick}
-          data={ this.state.data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-         <XAxis dataKey="time">
-          </XAxis> 
-          <YAxis>
-              {/*    <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-             (A/T)
-            </Label>*/ } 
+          <LineChart
+            onClick={demoOnClick}
+            data={ this.state.data}
+            margin={{top: 16,right: 16,bottom: 0,left: 24,}}>
+          <XAxis dataKey="time" /><YAxis >{/* <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>(A/T)</Label>*/ }   
           </YAxis>
+          <Tooltip />
+          <Legend />
           <Line type="monotone" dataKey="Fail" stroke="#ff6666" onClick={demoOnClick} />
           <Line type="monotone" dataKey="Success" stroke="#82ca9d"  onClick={demoOnClick}/>
-          <Legend />
-          <Tooltip />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

@@ -26,7 +26,7 @@ import { saltReturns } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
 import { withStyles } from "@material-ui/core/styles";
-
+import SimCardIcon from '@material-ui/icons/SimCard';
 import SaltStack from './Component/SaltStack';
 
 import {
@@ -41,10 +41,10 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
  //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;
-
+store.dispatch(saltReturns());
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -137,6 +137,17 @@ const styles = theme => ({
   fixedHeight: {
     height: 240,
   },
+  Logout:{
+   
+  },
+  AccountCircleIcon:{
+  
+  },
+  NotificationsIcon:{
+    display:'flex',
+    justifyContent:'space-between',
+    width:43
+  }
 });
 class Dashboard extends React.Component {
   constructor(props) {
@@ -171,7 +182,7 @@ class Dashboard extends React.Component {
           <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
     
             <Toolbar className={this.props.classes.toolbar}>
-    
+          
               <IconButton
                 edge="start"
                 color="inherit"
@@ -185,12 +196,22 @@ class Dashboard extends React.Component {
               <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
                 Dashboard
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              
              
+
+                <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
+                  <Badge badgeContent={4} color="secondary">
+                 
+                    <NotificationsIcon />
+                  </Badge>
+                  {/*<AccountCircleIcon />*/}
+                </IconButton>
+
+                <Logout />
+             
+            
+            
+         
     
             </Toolbar>
           </AppBar>
@@ -221,7 +242,7 @@ class Dashboard extends React.Component {
           onClick={()=>{this.SelectMenu('SaltStack')}}
           >
             <ListItemIcon>
-              <ShoppingCartIcon />
+            <SimCardIcon />
             </ListItemIcon>
             <ListItemText primary="SaltStack" />
           </ListItem>
@@ -277,7 +298,7 @@ class Dashboard extends React.Component {
                 </Grid>
               </Grid>
             </Container>
-            <Logout />
+       
     
           </main>
     
@@ -292,29 +313,39 @@ class Dashboard extends React.Component {
             <CssBaseline />
             <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
       
-              <Toolbar className={this.props.classes.toolbar}>
-      
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={this.handleDrawerOpen}
-                  className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
-                >
-      
-                  <MenuIcon />
-                </IconButton>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-                  Dashboard
-                </Typography>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
+            <Toolbar className={this.props.classes.toolbar}>
+          
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerOpen}
+              className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
+            >
+  
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
+              Dashboard
+            </Typography>
+            
+           
+
+              <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
+                <Badge badgeContent={4} color="secondary">
                
-      
-              </Toolbar>
+                  <NotificationsIcon />
+                </Badge>
+                {/*<AccountCircleIcon />*/}
+              </IconButton>
+
+              <Logout />
+           
+          
+          
+       
+  
+          </Toolbar>
             </AppBar>
             <Drawer
               variant="permanent"
@@ -343,7 +374,7 @@ class Dashboard extends React.Component {
             onClick={()=>{this.SelectMenu('SaltStack')}}
             >
               <ListItemIcon>
-                <ShoppingCartIcon />
+                <SimCardIcon />
               </ListItemIcon>
               <ListItemText primary="SaltStack" />
             </ListItem>

@@ -122,7 +122,7 @@ class Orders extends React.Component {
         }
     }
     selestMinion(event, rowData){
-        console.log(rowData, " equl");
+        //console.log(rowData, " equl");
         let res = store.getState().saltReturns.saltReturns
             .filter((item)=>{if((item.full_ret.success===false) && (item._id === rowData.id))
             { this.setState({dialogOpen:true,minion:item}); return item;}})
@@ -141,13 +141,18 @@ class Orders extends React.Component {
         // console.log(store.getState(),";;;;;;;;;;");
         const start=store.getState().date.start;
         const end=store.getState().date.end;
+        if(nextProps.saltReturns.saltReturns!==null)
+        {
         if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
-            console.log(this.props.saltReturns, 'this.props.saltReturns')
-            this.state.saltReturns=nextProps.saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
+           // console.log(this.props.saltReturns, 'this.props.saltReturns')
+            this.state.saltReturns=nextProps.saltReturns.saltReturns
+            .filter((item)=>{return item.full_ret.fun === "state.apply"})
+            .filter((item)=>{
                 let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
                 let time=new Date(str);
                 if(time >= start && time<= end){return item;}
-            }).map((item)=>{
+            })
+            .map((item)=>{
 
                 return {
 
@@ -163,6 +168,7 @@ class Orders extends React.Component {
             this.state.Returns=nextProps.saltReturns.saltReturns.map((item)=>{
                 return{Returns:item.full_ret.return}
             })
+        }
 
             // console.log(store.getState());
             // this.setState({saltReturns:nextProps.saltReturns});
@@ -221,7 +227,7 @@ class Orders extends React.Component {
                             {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
                             {' at hour '}
                             {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "}
-                            {console.log(this.state.minion,"comment")}
+                            {/*console.log(this.state.minion,"comment")*/}
                         </Typography>
                     </DialogTitle>
 
