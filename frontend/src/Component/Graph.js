@@ -29,8 +29,8 @@ const time =(str)=>{
   return String(hower)+":"+String(minet);
 
 }
-function createData(time,Succeeded,Faile, amount) {
-  return { time,Succeeded,Faile, amount };
+function createData(time,Success,Fail, amount) {
+  return { time,Success,Fail, amount };
 }
 
 const INIT_DATA = [
@@ -71,15 +71,15 @@ const parseNumber= (str)=>{
     this.state = {
       start: new Date(),
       end:new Date(),
-      data:  [{ time:"00:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"03:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"06:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"09:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"12:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"15:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"18:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"21:00",Succeeded:0,Faile:0, amount:0 },
-              { time:"24:00",Succeeded:0,Faile:0, amount:0 },]
+      data:  [{ time:"00:00",Success:0,Fail:0, amount:0 },
+              { time:"03:00",Success:0,Fail:0, amount:0 },
+              { time:"06:00",Success:0,Fail:0, amount:0 },
+              { time:"09:00",Success:0,Fail:0, amount:0 },
+              { time:"12:00",Success:0,Fail:0, amount:0 },
+              { time:"15:00",Success:0,Fail:0, amount:0 },
+              { time:"18:00",Success:0,Fail:0, amount:0 },
+              { time:"21:00",Success:0,Fail:0, amount:0 },
+              { time:"24:00",Success:0,Fail:0, amount:0 },]
   };
 }
   componentWillReceiveProps(nextProps) {
@@ -88,41 +88,48 @@ const parseNumber= (str)=>{
       const start=store.getState().date.start;
       const end=store.getState().date.end;
       let temp=[
-        { time:"00:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"03:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"06:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"09:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"12:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"15:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"18:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"21:00",Succeeded:0,Faile:0, amount:0 },
-        { time:"24:00",Succeeded:0,Faile:0, amount:0 },
+        { time:"00:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"03:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"06:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"09:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"12:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"15:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"18:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"21:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"24:00",Succeeded:0,Fail:0, amount:0 },
       ];
-       nextProps.saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
+      if(nextProps.saltReturns.saltReturns!==null)
+      {
+       nextProps.saltReturns.saltReturns
+       .filter((item)=>{return item.full_ret.fun === "state.apply"})
+       .filter((item)=>{
           let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
           let time=new Date(str);
           if(time >= start && time<= end){return item;}
-        }).forEach(item => {
+        })
+        .forEach(item => {
         if(parseNumber(item.full_ret.jid)==="03:00")
-        { item.full_ret.success === true ?(temp[1].Succeeded++):(temp[1].Faile++)};
+        { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Faile++)};
         if(parseNumber(item.full_ret.jid)==="06:00")
-        { item.full_ret.success === true ?(temp[2].Succeeded++):(temp[2].Faile++)};
+        { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Faile++)};
         if(parseNumber(item.full_ret.jid)==="09:00")
-        { item.full_ret.success === true ?(temp[3].Succeeded++):(temp[3].Faile++)};
+        { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Faile++)};
         if(parseNumber(item.full_ret.jid)==="12:00")
-        { item.full_ret.success === true ?(temp[4].Succeeded++):(temp[4].Faile++)};
+        { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Faile++)};
         if(parseNumber(item.full_ret.jid)==="15:00")
-        { item.full_ret.success === true ?(temp[5].Succeeded++):(temp[5].Faile++)};
+        { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Faile++)};
         if(parseNumber(item.full_ret.jid)==="18:00")
-        { item.full_ret.success === true ?(temp[6].Succeeded++):(temp[6].Faile++)};
+        { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Faile++)};
         if(parseNumber(item.full_ret.jid)==="21:00")
-        { item.full_ret.success === true ?(temp[7].Succeeded++):(temp[7].Faile++)};
+        { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Faile++)};
         if(parseNumber(item.full_ret.jid)==="24:00")
-        { item.full_ret.success === true ?(temp[8].Succeeded++):(temp[8].Faile++)};
+        { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Faile++)};
        
         
         });
+      }
         this.state.data=temp;
+
         //console.log("this.state.data                             ",this.state.data);
       //  console.log("state                               ",store.getState());
     }
@@ -130,41 +137,42 @@ const parseNumber= (str)=>{
   componentWillUpdate() {
     const start=store.getState().date.start;
     const end=store.getState().date.end;
-    //console.log(store.getState());
+    console.log(store.getState());
     // while (store.getState().saltReturns.saltReturns === null) {  }
    let temp=  
-   [{ time:"00:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"03:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"06:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"09:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"12:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"15:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"18:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"21:00",Succeeded:0,Faile:0, amount:0 },
-   { time:"24:00",Succeeded:0,Faile:0, amount:0 },];
+   [{ time:"00:00",Success:0,Fail:0, amount:0 },
+   { time:"03:00",Success:0,Fail:0, amount:0 },
+   { time:"06:00",Success:0,Fail:0, amount:0 },
+   { time:"09:00",Success:0,Fail:0, amount:0 },
+   { time:"12:00",Success:0,Fail:0, amount:0 },
+   { time:"15:00",Success:0,Fail:0, amount:0 },
+   { time:"18:00",Success:0,Fail:0, amount:0 },
+   { time:"21:00",Success:0,Fail:0, amount:0 },
+   { time:"24:00",Success:0,Fail:0, amount:0 },];
     store.getState().saltReturns.saltReturns.filter((item)=>{return item.full_ret.fun === "state.apply"}).filter((item)=>{
     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
     let time=new Date(str);
     if(time >= start && time<= end){return item;}
   }).forEach(item => {
   if(parseNumber(item.full_ret.jid)==="03:00")
-  { item.full_ret.success === true ?(temp[1].Succeeded++):(temp[1].Faile++)};
+  { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Fail++)};
   if(parseNumber(item.full_ret.jid)==="06:00")
-  { item.full_ret.success === true ?(temp[2].Succeeded++):(temp[2].Faile++)};
+  { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Fail++)};
   if(parseNumber(item.full_ret.jid)==="09:00")
-  { item.full_ret.success === true ?(temp[3].Succeeded++):(temp[3].Faile++)};
+  { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Fail++)};
   if(parseNumber(item.full_ret.jid)==="12:00")
-  { item.full_ret.success === true ?(temp[4].Succeeded++):(temp[4].Faile++)};
+  { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Fail++)};
   if(parseNumber(item.full_ret.jid)==="15:00")
-  { item.full_ret.success === true ?(temp[5].Succeeded++):(temp[5].Faile++)};
+  { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Fail++)};
   if(parseNumber(item.full_ret.jid)==="18:00")
-  { item.full_ret.success === true ?(temp[6].Succeeded++):(temp[6].Faile++)};
+  { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Fail++)};
   if(parseNumber(item.full_ret.jid)==="21:00")
-  { item.full_ret.success === true ?(temp[7].Succeeded++):(temp[7].Faile++)};
+  { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Fail++)};
   if(parseNumber(item.full_ret.jid)==="24:00")
-  { item.full_ret.success === true ?(temp[8].Succeeded++):(temp[8].Faile++)};
+  { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Fail++)};
   });
   this.state.data= temp;
+  console.log( this.state.data," this.state.data")
   
 }
   render(){
@@ -174,7 +182,7 @@ const parseNumber= (str)=>{
       <ResponsiveContainer>
         <LineChart
           onClick={demoOnClick}
-          data={this.state.data}
+          data={ this.state.data}
           margin={{
             top: 16,
             right: 16,
@@ -182,12 +190,12 @@ const parseNumber= (str)=>{
             left: 24,
           }}
         >
-          <XAxis dataKey="time">
+         <XAxis dataKey="time">
           </XAxis> 
           <YAxis>
-            <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
+              {/*    <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
              (A/T)
-            </Label>
+            </Label>*/ } 
           </YAxis>
           <Line type="monotone" dataKey="Fail" stroke="#ff6666" onClick={demoOnClick} />
           <Line type="monotone" dataKey="Success" stroke="#82ca9d"  onClick={demoOnClick}/>
