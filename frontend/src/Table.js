@@ -96,14 +96,7 @@ const dataColumns =[
 
 ]
 
-const dataTable=[
-    {
-        status: 'Faile',
-        name: 'sm-stud.jce.ac.il',
-        date: date('20191205040346780161'),
-        time: time('20191205040346780161'),
-    },
-]
+const dataTable=[];
 
 class Orders extends React.Component {
     constructor(props) {
@@ -112,7 +105,7 @@ class Orders extends React.Component {
         this.handleClickOpen=this.handleClickOpen.bind(this);
         this.handleClose=this.handleClose.bind(this);
 
-        store.dispatch(saltReturns());
+        store.dispatch(saltReturns())
 
         this.state = {
             saltReturns: dataTable,
@@ -142,7 +135,7 @@ class Orders extends React.Component {
         const start=store.getState().date.start;
         const end=store.getState().date.end;
         let endTemp=new Date(end.getTime());
-        endTemp.setDate(end.getDate()+1);
+        endTemp.setDate(endTemp.getDate() + 1);
         if(nextProps.saltReturns.saltReturns!==null)
         {
         if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
@@ -152,6 +145,7 @@ class Orders extends React.Component {
             .filter((item)=>{
                 let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
                 let time=new Date(str);
+                
                 if(time >= start && time<= endTemp){return item;}
             })
             .map((item)=>{

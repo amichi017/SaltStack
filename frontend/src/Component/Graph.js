@@ -105,8 +105,14 @@ const parseNumber= (str)=>{
        .filter((item)=>{return item.full_ret.fun === "state.apply"})
        .filter((item)=>{
           let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+          //let time=new Date(str);
+          // if(time >= start && time<= end){return item;}
           let time=new Date(str);
-          if(time >= start && time<= end){return item;}
+          let startTemp=new Date(end.getTime());
+          let endTemp=new Date(end.getTime());
+          startTemp.setHours(0,0,0);
+          endTemp.setHours(23,59,59);
+          if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
         })
         .forEach(item => {
         if(parseNumber(item.full_ret.jid)==="03:00")
@@ -157,8 +163,15 @@ const parseNumber= (str)=>{
     .filter((item)=>{return item.full_ret.fun === "state.apply"})
     .filter((item)=>{
     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+    // let time=new Date(str);
+    // // if(time >= start && time<= end){return item;}
+    
     let time=new Date(str);
-    if(time >= start && time<= end){return item;}
+    let startTemp=new Date(end.getTime());
+    let endTemp=new Date(end.getTime());
+    startTemp.setHours(0,0,0);
+    endTemp.setHours(23,59,59);
+    if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
   })
   .forEach(item => {
   if(parseNumber(item.full_ret.jid)==="03:00")

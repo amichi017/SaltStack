@@ -352,6 +352,7 @@ class SaltStack extends React.Component {
             ):<div></div>
         }
         <MaterialTable
+        
             title='Minions'
             icons={tableIcons}
             columns={[{ title: 'Name', field: 'name' },]}
