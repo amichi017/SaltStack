@@ -12,12 +12,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
 
 import { login } from '../../actions/authActions';
 import { clearErrors } from '../../actions/errorActions';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { StoreTwoTone } from '@material-ui/icons';
+import store from '../../store';
 
 function Copyright() {
   return (
@@ -57,6 +60,7 @@ const styles = theme => ({
 
 class LoginForm extends React.Component {
   constructor(props) {
+    console.log(store.getState())
     super(props);
     this.signIn = this.signIn.bind(this);
     this.state = {
@@ -78,7 +82,8 @@ class LoginForm extends React.Component {
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'LOGIN_FAIL') {
-        this.setState({ msg: error.msg.msg });
+        console.log("login faileeeeed")
+        this.setState({ msg: error.msg });
       } else {
         this.setState({ msg: null });
       }
@@ -168,6 +173,13 @@ class LoginForm extends React.Component {
             >
               Sign In
             </Button>
+
+            {this.state.msg  ? (
+            <Alert severity="error">{this.state.msg}</Alert>
+              ) : (
+              null
+              )}
+
             <Grid container>
               <Grid item xs>
                 <Link href="/changePass" variant="body2">

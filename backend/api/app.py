@@ -1,7 +1,6 @@
 
-
 import subprocess
-
+from getpass import getpass
 
 import urllib.parse
 
@@ -19,14 +18,13 @@ from flask_jwt_extended import (
 from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
 from flask_cors import CORS
 
-
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 
 import pprint
 import urllib.parse
 
-#from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 
 # from pprint import pprint
 
@@ -70,28 +68,28 @@ def login():
     if test:
         if check_password_hash(test["password"], password):
             access_token = create_access_token(identity=email)
-            refresh_token = create_refresh_token(identity=email)
+            # refresh_token = create_refresh_token(identity=email)
             return (
                 jsonify(
                     message="Login Succeeded!",
                     access_token=access_token,
-                    refresh_token=refresh_token,
+                    # refresh_token=refresh_token,
                 ),
                 201,
             )
     return jsonify(message="Bad Email or Password"), 401
 
-
-@app.route("/auth/refresh", methods=["POST"])
-@jwt_refresh_token_required
-def refresh():
-    """
-
-    :return:
-    """
-    current_user = get_jwt_identity()
-    ret = {"access_token": create_access_token(identity=current_user)}
-    return jsonify(ret), 200
+#
+# @app.route("/auth/refresh", methods=["POST"])
+# @jwt_refresh_token_required
+# def refresh():
+#     """
+#
+#     :return:
+#     """
+#     current_user = get_jwt_identity()
+#     ret = {"access_token": create_access_token(identity=current_user)}
+#     return jsonify(ret), 200
 
 
 @app.route("/auth/user", methods=["GET"])
@@ -298,48 +296,67 @@ def get_events():
 
 
 
-# def send_mails():
-#     # Mail config
-#     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-#     app.config['MAIL_PORT'] = 465
-#     app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
-#     app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
-#     # app.config['MAIL_USE_TLS'] = True
-#     app.config['MAIL_USE_SSL'] = True
-#     mail = Mail(app)
-#     msg = Message('Hello',sender='notifsalt@gmail.com', recipients=['aviher11@gmail.com'])
-#     msg.body = "This is the email body"
-#     print(msg)
-#     try:
-#         mail.send(msg)
-#     except ValueError:
-#         print(ValueError)
-#         return "err"
-#     return "Sent"
+def send_mails(err):
+    # Mail config
+    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
+    app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
+    # app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = True
+    mail = Mail(app)
+    msg = Message("error",sender='notifsalt@gmail.com', recipients=['aviher11@gmail.com'])
+    msg.body = err
+    print(msg)
+    try:
+        mail.send(msg)
+    except ValueError:
+        print(ValueError)
+        return "err"
+    return "Sent"
 
 
-
-
-
-
-
-# @app.route("/mail")
-# def mail():
-#     return send_mails()
 
 
 #-------------------Commands Option Section----------------------------------
 
+@app.route("/get_connected_minions")
+# @jwt_required
+def get_connected_minions():
+
+    return ['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il']
+
+@app.route("/saltstack_cmd" ,methods=["POST"])
+# @jwt_required
+def saltstack_cmd():
+
+    if request.is_json:
+        func = request.json["func"]
+        tgt = request.json["tgt"]
+        salt_cmd = request.json["salt_cmd"]
+    else:
+        func = request.form["func"]
+        tgt = request.form["tgt"]
+        salt_cmd = request.json["salt_cmd"]
+    if salt_cmd is not None:
+        pass
+
+<<<<<<< ours
 @app.route("/saltstack_cmd")
 @jwt_required
 def saltstack_cmd():
     cmd = ["sudo","salt","*","state.apply"]
+=======
+    cmd = [func,tgt]
+>>>>>>> theirs
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
                      stdin=subprocess.PIPE)
     out, err = p.communicate()
-    print(out,err)
+    print("a")
+    if len(err) > 0:
+        return err
     return out
 
 
