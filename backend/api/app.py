@@ -73,7 +73,7 @@ def login():
             return (
                 jsonify(
                     message="Login Succeeded!",
-                    access_token=access_token,
+                    cdaccess_token=access_token,
                     # refresh_token=refresh_token,
                 ),
                 201,
@@ -321,6 +321,17 @@ def send_mails(err):
 
 #-------------------Commands Option Section----------------------------------
 
+# REAL MINIONS FUNCTION
+# @app.route("/get_connected_minions")
+# # @jwt_required
+# def get_connected_minions():
+#
+#     return ['salt','*','test.ping']
+#
+# @app.route("/saltstack_cmd" ,methods=["POST"])
+
+
+
 @app.route("/get_connected_minions")
 # @jwt_required
 def get_connected_minions():
@@ -353,6 +364,31 @@ def saltstack_cmd():
         return err
     return out
 
+
+# REAL COMMANDS FUNCTION
+# @app.route("/saltstack_cmd" ,methods=["POST"])
+# # @jwt_required
+# def saltstack_cmd():
+#     import salt.config
+#     import salt.client
+#
+#     local = salt.client.LocalClient()
+#     if request.is_json:
+#         func = request.json["func"]
+#         tgt = request.json["tgt"]
+#         salt_cmd = request.json["salt_cmd"]
+#     else:
+#         func = request.form["func"]
+#         tgt = request.form["tgt"]
+#         salt_cmd = request.json["salt_cmd"]
+#     if salt_cmd is not None:
+#         pass
+#
+#     asc = local.cmd_async('*','state.apply')
+#     print("asc")
+#     if len(err) > 0:
+#         return err
+#     return out
 
 
 
