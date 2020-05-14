@@ -333,7 +333,7 @@ def get_events():
 @app.route("/saltstack_cmd")
 @jwt_required
 def saltstack_cmd():
-    cmd = [""]
+    cmd = ["sudo","salt","*","state.apply"]
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
