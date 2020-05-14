@@ -27,34 +27,43 @@ class CurrentYear extends PureComponent {
       dataInit(){
         let dataInit=[];
         // let temp=new Date(2019,10);
-        let temp=new Date();
-        let mnonthDay =new Date(temp.getFullYear(), temp.getMonth()+1, 0).getDate();
-           for (let i=1;i<=mnonthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
-       
-        let mnontStart=new Date(temp.getFullYear(), temp.getMonth());
     
-
-        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth(), mnonthDay);
-        mnontEnd.setHours(23,59,59);
-
+        dataInit.push( { name: String('January'), Fail:0, Success:0 });
+        dataInit.push( { name: String('February'), Fail:0, Success:0 });
+        dataInit.push( { name: String('March'), Fail:0, Success:0 });
+        dataInit.push( { name: String('April'), Fail:0, Success:0 });
+        dataInit.push( { name: String('May '), Fail:0, Success:0 });
+        dataInit.push( { name: String('June  '), Fail:0, Success:0 });
+        dataInit.push( { name: String('July  '), Fail:0, Success:0 });
+        dataInit.push( { name: String('August '), Fail:0, Success:0 });
+        dataInit.push( { name: String('September '),Fail:0, Success:0 });
+        dataInit.push( { name: String('October '), Fail:0, Success:0 });
+        dataInit.push( { name: String('November  '),Fail:0, Success:0 });
+        dataInit.push( { name: String('December '), Fail:0, Success:0 });
+    
         // console.log(mnontStart,"gggggggggggggggggggggg");
         // console.log(mnontEnd,"gggggggggggggggggggggg");
+        if(store.getState().saltReturns.saltReturns!==null){
+
+     
         let funSaltReturns=store.getState().saltReturns.saltReturns
         .filter((item)=>{return item.full_ret.fun === "state.apply"})
+        //To check I put the next 6 lines in the comment
         .filter((item)=>{
+          let temp=new Date();
         let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
         let time=new Date(str);
-        if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
+        if(time.getFullYear() === temp.getFullYear()){return item;}
       })
       .forEach((item,index) => {
-          let place= (parseInt(item.jid.slice(6,8)));
-          console.log(place,"day");
-          {item.full_ret.success === true ?(dataInit[place-1].Success++):(dataInit[place-1].Fail++)}
+        let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+        let time=new Date(str);
+        // console.log(time,"time")
+        let place=time.getMonth();
+          {item.full_ret.success === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
         })
 
-    
+      }
         
     
       
