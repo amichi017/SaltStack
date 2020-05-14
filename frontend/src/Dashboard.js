@@ -354,7 +354,7 @@ class Dashboard extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-              Dashboard
+            SaltStack
             </Typography>
             
            
@@ -505,7 +505,7 @@ class Dashboard extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-                Dashboard
+              Current month
               </Typography>
               
              
@@ -656,7 +656,7 @@ class Dashboard extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-                Dashboard
+              Current year
               </Typography>
               
              
@@ -809,7 +809,7 @@ class Dashboard extends React.Component {
                       <MenuIcon />
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-                      Dashboard
+                    Last three months
                     </Typography>
                     
                    
