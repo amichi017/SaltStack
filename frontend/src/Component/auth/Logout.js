@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
 import PropTypes from 'prop-types';
 import store from '../../store';
-
+import Button from '@material-ui/core/Button';
 export class Logout extends Component {
   static propTypes = {
     logout: PropTypes.func.isRequired,
@@ -13,9 +13,9 @@ export class Logout extends Component {
   render() {
     // console.log(this.props)
     return (
-        <button onClick={()=> store.dispatch(logout())}>
-          Logout
-        </button>
+        <Button  style={{color:'#fff',border:'none'}}  variant='outlined'  onClick={()=> store.dispatch(logout())}>
+          Log out
+        </Button>
     );
   }
 }

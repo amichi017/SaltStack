@@ -1,8 +1,8 @@
 
-
 import subprocess
 from getpass import getpass
-
+#     import salt.config
+#     import salt.client
 import urllib.parse
 
 
@@ -326,7 +326,7 @@ def send_mails(err):
 # # @jwt_required
 # def get_connected_minions():
 #
-#     return ['salt','*','test.ping']
+#     return local.cmd_async('*','state.apply')
 #
 # @app.route("/saltstack_cmd" ,methods=["POST"])
 
@@ -354,6 +354,7 @@ def saltstack_cmd():
         pass
 
     cmd = [func,tgt]
+
     p = subprocess.Popen(cmd, # <----
                      stdout=subprocess.PIPE,
                      stderr=subprocess.PIPE,
@@ -369,8 +370,7 @@ def saltstack_cmd():
 # @app.route("/saltstack_cmd" ,methods=["POST"])
 # # @jwt_required
 # def saltstack_cmd():
-#     import salt.config
-#     import salt.client
+
 #
 #     local = salt.client.LocalClient()
 #     if request.is_json:

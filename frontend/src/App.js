@@ -27,21 +27,21 @@ class App extends Component {
     // console.log("dispatchhhhh from App")
     store.dispatch(loadUser());
     //console.log(store.getState(),"state from app");
-    // store.dispatch(saltReturns());
-   
+
+
   }
-  
-  
+
+
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
 
-  
+
   render() {
      return (
       <Routes />
-     ) 
-             
+     )
+
   }
 }
 

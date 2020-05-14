@@ -70,7 +70,7 @@ class MinionCard extends React.Component {
         this.onClickMinion = this.onClickMinion.bind(this);
         this.handleClickButton = this.handleClickButton.bind(this);
         const commentg= this.props.comment;
-        console.log(this.props.id,'constructor');
+       // console.log(this.props.id,'constructor');
        this.state={ 
           open: false,
           defer: false,
@@ -95,7 +95,7 @@ class MinionCard extends React.Component {
            type: SAVE_MINION,
            payload: minions
        });
-       console.log(store.getState(),"store.getState() from minionCard");
+      // console.log(store.getState(),"store.getState() from minionCard");
     }
     handleClickButton(){
       this.state.listOpen=!(this.state.listOpen);

@@ -11,3 +11,4 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const DATE_SELECT = "DATE_SELECT";
 export const SALT_RETURNS = "SALT_RETURNS";
 export const SAVE_MINION = "SAVE_MINION";
+export const SCREEN = "SCREEN";
