@@ -49,7 +49,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
  //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;
-store.dispatch(saltReturns());
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -157,6 +157,9 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   constructor(props) {
       super(props);
+      console.log(store.getState(),"store from dashboard 1");
+      store.dispatch(saltReturns());
+      //console.log(store.getState(),"store from dashboard 2");
       this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
       this.handleDrawerClose = this.handleDrawerClose.bind(this);
       this.SelectMenu = this.SelectMenu.bind(this);

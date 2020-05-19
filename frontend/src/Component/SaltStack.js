@@ -8,6 +8,7 @@ import { forwardRef } from 'react';
 import store from '../store';
 import { saveMinion } from '../actions/date';
 import {SAVE_MINION} from "../actions/types";
+import axios from 'axios';
 import {
     AddBox,
     ArrowDownward,
@@ -141,12 +142,46 @@ class SaltStack extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.sentCommand = this.sentCommand.bind(this);
+        this.tokenConfig = this.tokenConfig.bind(this);
+        this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
         this.state={alert:false,msg:false,menu:"Dashboard",open: false,
         defer: false,clickSave:false,history:[],input:'',saveMinion:{},countSaveMinion:0,warninginput:false,
-        warningNoMinionSelected:false };
+        warningNoMinionSelected:false,getMinions:[] };
+        this.getMinionsFromServer();
        
-    }
+    };
+    tokenConfig = () => {
+        //console.log("getstatteeeeeslatl",store.getState())
+        // Get token from localstorage
+        const token = store.getState().auth.token;
     
+        // Headers
+        const config = {
+            headers: {
+                "Content-type": "multipart/form-data"
+            }
+        }
+    
+        // If token, add to headers
+        if(token) {
+           config.headers["Authorization"] = ` Bearer ${token} `;
+        }
+    
+     return config;
+    };
+    getMinionsFromServer(){
+        console.log(this.tokenConfig(),"this.tokenConfig()")
+        axios.get('http://127.0.0.1:5000/get_connected_minions/',this.tokenConfig())
+        .then((res) => {
+          
+                this.setState({getMinions:res.data})
+        })
+        .catch(err => {
+            console.log(err,"err get_connected_minions");
+    
+           });
+        };
+   
     handleClose = (event, reason) => 
     {
         if (reason === 'clickaway') {
@@ -201,7 +236,7 @@ class SaltStack extends React.Component {
         this.setState({alert:true,clickSave:true});
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
-    }
+    };
 
     sentCommand(command){
         
@@ -211,7 +246,7 @@ class SaltStack extends React.Component {
             this.state.saveMinion.comment=command;
             this.state.history.unshift(this.state.saveMinion);
             let minions =store.getState().saveMinion.saveMinion;
-           
+          //  console.log(store.getState().saveMinion.saveMinion,"store.getState().saveMinion.saveMinion")
             minions.unshift(this.state.saveMinion);
             // minions.unshift(this.state.saveMinion[0]);
             store.dispatch({
@@ -229,7 +264,7 @@ class SaltStack extends React.Component {
             setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
         }
 
-    }
+    };
 
 
 
@@ -356,7 +391,7 @@ class SaltStack extends React.Component {
             title='Minions'
             icons={tableIcons}
             columns={[{ title: 'Name', field: 'name' },]}
-            data={[{ name: 'Mehmet' },{ name: 'Zerya Betül' },]} 
+            data={this.state.getMinions} 
             options={{selection: true}}       
             actions=
             {[{

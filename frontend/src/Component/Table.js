@@ -96,14 +96,7 @@ const dataColumns =[
 
 ]
 
-const dataTable=[
-    {
-        status: 'Faile',
-        name: 'sm-stud.jce.ac.il',
-        date: date('20191205040346780161'),
-        time: time('20191205040346780161'),
-    },
-]
+const dataTable=[]
 
 class Orders extends React.Component {
     constructor(props) {
@@ -229,7 +222,7 @@ class Orders extends React.Component {
                             {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
                             {' at hour '}
                             {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "}
-                            {/*console.log(this.state.minion,"comment")*/}
+                            {console.log(this.state.minion,"comment")}
                         </Typography>
                     </DialogTitle>
 

@@ -51,7 +51,7 @@ class CurrentMonth extends PureComponent {
       })
       .forEach((item,index) => {
           let place= (parseInt(item.jid.slice(6,8)));
-          console.log(place,"day");
+         // console.log(place,"day");
           {item.full_ret.success === true ?(dataInit[place-1].Success++):(dataInit[place-1].Fail++)}
         })
 
