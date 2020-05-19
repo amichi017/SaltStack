@@ -333,13 +333,13 @@ def send_mails(err):
 
 
 @app.route("/get_connected_minions")
-# @jwt_required
+@jwt_required
 def get_connected_minions():
 
     return ['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il']
 
 @app.route("/saltstack_cmd" ,methods=["POST"])
-# @jwt_required
+@jwt_required
 def saltstack_cmd():
 
     if request.is_json:
@@ -354,16 +354,16 @@ def saltstack_cmd():
         pass
 
     cmd = [func,tgt]
-
-    p = subprocess.Popen(cmd, # <----
-                     stdout=subprocess.PIPE,
-                     stderr=subprocess.PIPE,
-                     stdin=subprocess.PIPE)
-    out, err = p.communicate()
-    print("a")
-    if len(err) > 0:
-        return err
-    return out
+    #
+    # p = subprocess.Popen(cmd, # <----
+    #                  stdout=subprocess.PIPE,
+    #                  stderr=subprocess.PIPE,
+    #                  stdin=subprocess.PIPE)
+    # out, err = p.communicate()
+    # print("a")
+    # if len(err) > 0:
+    #     return err
+    return cmd
 
 
 # REAL COMMANDS FUNCTION
