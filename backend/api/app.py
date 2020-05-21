@@ -1,34 +1,23 @@
-
-import subprocess
-from getpass import getpass
+import datetime
 #     import salt.config
 #     import salt.client
 import urllib.parse
+import urllib.parse
 
-
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
+from flask_bcrypt import Bcrypt, check_password_hash
+from flask_cors import CORS
 from flask_jwt_extended import (
     JWTManager,
     jwt_required,
     create_access_token,
-    jwt_refresh_token_required,
-    create_refresh_token,
+    decode_token,
     get_jwt_identity,
 )
-
-from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
-from flask_cors import CORS
-
-from flask_pymongo import PyMongo
+from flask_mail import Mail, Message
 from pymongo import MongoClient
 
-import pprint
-import urllib.parse
-
-from flask_mail import Mail, Message
-
 # from pprint import pprint
-
 
 mongo_username = urllib.parse.quote_plus('saltstack')
 mongo_pwd = urllib.parse.quote_plus('Salt5t@ck')
@@ -41,11 +30,18 @@ print(db)
 
 
 app = Flask(__name__)
-app.debug = True
+# app.debug = True
 CORS(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-
+# Mail config
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
+# app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 # JWT Config
 app.config["JWT_SECRET_KEY"] = "this-is-secret-key" #change it
@@ -133,6 +129,69 @@ def register():
         users.insert_one(user_info)
         return jsonify(message="User added sucessfully"), 201
 
+
+
+@app.route("/forgot_password", methods=["POST"])
+def forgot_password():
+    print(request)
+
+    if request.is_json:
+        email = request.json["email"]
+    else:
+        email = request.form["email"]
+
+    print(email)
+    if not email:
+        return jsonify(message="Bad Email"), 401
+
+    user = users.find_one({"email": email})
+    if not user:
+         return jsonify(message="Bad Email"), 401
+
+    expires = datetime.timedelta(hours=24)
+    reset_token = create_access_token(identity=email, expires_delta=expires)
+    print(reset_token)
+    try:
+         backend.api.services.mail_service.send_email('SaltStack GUI Reset Your Password',
+                                                      sender='notifsalt@gmail.com',
+                                                      recipients=[email],
+                                                      text_body=render_template('email/reset_password.txt',
+                                                        url=request.host_url + reset_token),
+                                                      html_body=render_template('email/reset_password.html',
+                                                    url=request.host_url + reset_token))
+    except ValueError:
+        return "err"
+
+@app.route("/reset_password/<reset_token>", methods=["POST"])
+def reset_password(reset_token):
+    """
+
+    :return:
+    """
+    if request.is_json:
+        reset_token = request.json["reset_token"]
+        password = request.json["password"]
+
+    else:
+        reset_token = request.form["reset_token"]
+        password = request.form["password"]
+
+    print(decode_token(reset_token))
+    # test = users.find_one({"reset_token": reset_token})
+    # if test:
+    #     return jsonify(message="User Already Exist"), 409
+
+    # else:
+    #     user_info = dict(
+    #         first_name=first_name,
+    #         last_name=last_name,
+    #         email=email,
+    #         password=bcrypt.generate_password_hash(password),
+    #     )
+    #     print(user_info)
+    #     users.insert_one(user_info)
+    #     return jsonify(message="User added sucessfully"), 201
+    #
 
 
 @app.route("/")
@@ -298,14 +357,14 @@ def get_events():
 
 
 def send_mails(err):
-    # Mail config
-    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
-    # app.config['MAIL_USE_TLS'] = True
-    app.config['MAIL_USE_SSL'] = True
-    mail = Mail(app)
+    # # Mail config
+    # app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    # app.config['MAIL_PORT'] = 465
+    # app.config['MAIL_USERNAME'] = 'notifsalt@gmail.com'
+    # app.config['MAIL_PASSWORD'] = 'Salt5t@ck'
+    # # app.config['MAIL_USE_TLS'] = True
+    # app.config['MAIL_USE_SSL'] = True
+    # mail = Mail(app)
     msg = Message("error",sender='notifsalt@gmail.com', recipients=['aviher11@gmail.com'])
     msg.body = err
     print(msg)
@@ -391,6 +450,6 @@ def saltstack_cmd():
 #     return out
 
 
-
-if __name__ == "__main__":
-    app.run()
+#
+# if __name__ == "__main__":
+#     app.run()
