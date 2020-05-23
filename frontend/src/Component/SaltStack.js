@@ -142,7 +142,6 @@ class SaltStack extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.sentCommand = this.sentCommand.bind(this);
-<<<<<<< HEAD
         this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
         this.tokenConfig = this.tokenConfig.bind(this);
         this.state={
@@ -194,48 +193,6 @@ class SaltStack extends React.Component {
         
          return config;
         };
-=======
-        this.tokenConfig = this.tokenConfig.bind(this);
-        this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
-        this.state={alert:false,msg:false,menu:"Dashboard",open: false,
-        defer: false,clickSave:false,history:[],input:'',saveMinion:{},countSaveMinion:0,warninginput:false,
-        warningNoMinionSelected:false,getMinions:[] };
-        this.getMinionsFromServer();
-       
-    };
-    tokenConfig = () => {
-        //console.log("getstatteeeeeslatl",store.getState())
-        // Get token from localstorage
-        const token = store.getState().auth.token;
-    
-        // Headers
-        const config = {
-            headers: {
-                "Content-type": "multipart/form-data"
-            }
-        }
-    
-        // If token, add to headers
-        if(token) {
-           config.headers["Authorization"] = ` Bearer ${token} `;
-        }
-    
-     return config;
-    };
-    getMinionsFromServer(){
-        console.log(this.tokenConfig(),"this.tokenConfig()")
-        axios.get('http://127.0.0.1:5000/get_connected_minions/',this.tokenConfig())
-        .then((res) => {
-          
-                this.setState({getMinions:res.data})
-        })
-        .catch(err => {
-            console.log(err,"err get_connected_minions");
-    
-           });
-        };
-   
->>>>>>> b09497653ba4d35c2ac3e2b44e5617592951bfb1
     handleClose = (event, reason) => 
     {
         if (reason === 'clickaway') {
