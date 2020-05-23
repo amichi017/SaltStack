@@ -157,13 +157,18 @@ class SaltStack extends React.Component {
         countSaveMinion:0,
         warninginput:false,
         warningNoMinionSelected:false,
+<<<<<<< HEAD
         data:[],
+=======
+        data:[{ name: 'Mehmet' },{ name: 'Zerya Betül' },{ name: 'fgf' },{ name: 'sds' }],
+>>>>>>> 0221891b0232b334fa4e8f42dcc14c1a9532b5b5
         };
         this.getMinionsFromServer();
     }
     getMinionsFromServer(){
         
         let tokenTemp=this.tokenConfig();
+<<<<<<< HEAD
         console.log(tokenTemp,"tokenTemp")
         axios.get('http://127.0.0.1:5000/get_connected_minions',tokenTemp)
         .then((res) => {
@@ -173,6 +178,12 @@ class SaltStack extends React.Component {
                    arr.push(minion);
                 }             
                 this.setState({data:arr})
+=======
+        axios.get('http://127.0.0.1:5000/get_connected_minions',tokenTemp)
+        .then((res) => {
+            console.log(res,"res")
+                this.setState({data:res.data})
+>>>>>>> 0221891b0232b334fa4e8f42dcc14c1a9532b5b5
         })
         .catch(err => {
             console.log(err,"err get_connected_minions");
@@ -249,7 +260,11 @@ class SaltStack extends React.Component {
         let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
         this.state.saveMinion={minions:data,id:commntId,comment:''};
         this.getMinionsFromServer();
+<<<<<<< HEAD
         this.setState({alert:true,clickSave:true,});
+=======
+        this.setState({alert:true,clickSave:true,data:[{ name: 'Mehmet' },{ name: 'Zerya Betül' },{ name: 'fgf' },{ name: 'sds' }]});
+>>>>>>> 0221891b0232b334fa4e8f42dcc14c1a9532b5b5
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
     };
