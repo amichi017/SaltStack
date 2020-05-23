@@ -48,13 +48,14 @@ class LastThreeMonths extends PureComponent {
         let listMonth=['January','February','March','April',
         'May','June','July','August','September',
         'October','November','December'];
-        let temp=new Date();
-        let tempMonth=temp.getMonth()-1;
+         // let temp=new Date();
+         let temp=new Date();
+        let tempMonth=temp.getMonth()-2;
         if(tempMonth<0){tempMonth+=12}
      
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
       
         //this.state.nameThree=listMonth[monthDay-2];
       
@@ -62,10 +63,10 @@ class LastThreeMonths extends PureComponent {
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
        
-        let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-2);
+        let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-3);
     
 
-        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-2, monthDay);
+        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-3, monthDay);
         mnontEnd.setHours(23,59,59);
 
        // console.log(mnontStart,"gggggggggggggggggggggg");
@@ -105,13 +106,14 @@ class LastThreeMonths extends PureComponent {
         let listMonth=['January','February','March','April',
         'May','June','July','August','September',
         'October','November','December'];
+        // let temp=new Date();
         let temp=new Date();
-        let tempMonth=temp.getMonth();
+        let tempMonth=temp.getMonth()-1;
         if(tempMonth<0){tempMonth+=12}
      
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
       
         //this.state.nameThree=listMonth[monthDay-2];
       
@@ -119,10 +121,10 @@ class LastThreeMonths extends PureComponent {
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
        
-        let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-1);
+        let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-2);
     
 
-        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-1, monthDay);
+        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-2, monthDay);
         mnontEnd.setHours(23,59,59);
 
        // console.log(mnontStart,"gggggggggggggggggggggg");
@@ -166,14 +168,15 @@ class LastThreeMonths extends PureComponent {
         'May','June','July','August','September',
         'October','November','December'];
         let temp=new Date();
-        let tempMonth=temp.getMonth()+1;
+        //let temp=new Date(2020,1);
+        let tempMonth=temp.getMonth();
         if(tempMonth<0){tempMonth+=12}
      
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         // let temp=new Date(2019,10);
       
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()+1, 0).getDate();
+        let monthDay =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
        
         // this.state.nameThree=this.state.month[monthDay-2];
         //console.log(this.state.month,"this.state.month");
@@ -181,10 +184,10 @@ class LastThreeMonths extends PureComponent {
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
        
-        let mnontStart=new Date(temp.getFullYear(), temp.getMonth());
+        let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-1);
     
 
-        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth(), monthDay);
+        let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-1, monthDay);
         mnontEnd.setHours(23,59,59);
 
         // console.log(mnontStart,"gggggggggggggggggggggg");
@@ -229,11 +232,13 @@ class LastThreeMonths extends PureComponent {
         'May','June','July','August','September',
         'October','November','December'];
         let temp=new Date();
-        let tempMonth=temp.getMonth()+1;
-        if(tempMonth<0){tempMonth+=12}
-          this.state.nameThree=listMonth[tempMonth-1];
-          this.state.nameTow=listMonth[tempMonth-2];
-          this.state.nameOne=listMonth[tempMonth-3];
+        let tempMonth=temp.getMonth();
+        if((tempMonth-1)<0){tempMonth+=12;}
+        this.state.nameThree=listMonth[tempMonth-1];
+        if((tempMonth-2)<0){tempMonth+=12;}
+        this.state.nameTow=listMonth[tempMonth-2];
+        if((tempMonth-3)<0){tempMonth+=12;}
+        this.state.nameOne=listMonth[tempMonth-3];
     
         return (
             
