@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store'
- import { DATE_SELECT, SALT_RETURNS,SAVE_MINION} from './types';
+ import { DATE_SELECT, SALT_RETURNS} from './types';
  // Date is select
  export const dateSelect = (start , end) => {
 
@@ -57,7 +57,7 @@ import store from '../store'
 // };
  //Clear date
  export const saltReturns =  () => (dispatch, getState) => {
-     console.log("----------------------storeeeee--------------\n",store)
+     //console.log("----------------------storeeeee--------------\n",store)
      const time =new Date().toDateString();
      let Month= String(parseInt(store.getState().date.start.getMonth()));
          Month=parseInt(Month)<10?"0"+Month:Month;
@@ -72,7 +72,7 @@ import store from '../store'
  for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
 
      let url='http://127.0.0.1:5000/api/saltReturns/apply/'+index.getFullYear();
-     console.log("url" ,url);
+     //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
     .then((res) => {
 
@@ -91,14 +91,15 @@ import store from '../store'
     }
 
 
-       console.log(store.getState(),"the store ");
-       console.log(minions,"minions ");
+       //console.log(store.getState(),"the store ");
+       //console.log(minions,"minions ");
 };
 
 
 
 // Setup config/headers and token
 export const tokenConfig = getState => {
+   // console.log("getstatteeeeeslatl",getState())
     // Get token from localstorage
     const token = getState().auth.token;
 

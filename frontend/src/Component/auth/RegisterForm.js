@@ -81,7 +81,10 @@ class RegisterForm extends React.Component {
     if(error !== prevProps.error){
       // Check for register error
       if(error.id === 'REGISTER_FAIL'){
-        this.setState({ msg: error.msg.msg})
+        this.setState({ msg: error.msg})
+        setTimeout(function(){
+          this.setState({msg:null});
+          }.bind(this),3000);  // clear error after 3 seconds
       }
 
     }

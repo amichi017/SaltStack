@@ -40,9 +40,7 @@ class CurrentYear extends PureComponent {
         dataInit.push( { name: String('October '), Fail:0, Success:0 });
         dataInit.push( { name: String('November  '),Fail:0, Success:0 });
         dataInit.push( { name: String('December '), Fail:0, Success:0 });
-    
-        // console.log(mnontStart,"gggggggggggggggggggggg");
-        // console.log(mnontEnd,"gggggggggggggggggggggg");
+        
         if(store.getState().saltReturns.saltReturns!==null){
 
      
@@ -67,7 +65,7 @@ class CurrentYear extends PureComponent {
         
     
       
-       console.log(dataInit,"dataInit");
+       //console.log(dataInit,"dataInit");
        
         // for (let i=1;i<=mnonthDay;i++){
         //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });

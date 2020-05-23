@@ -60,7 +60,6 @@ const styles = theme => ({
 
 class LoginForm extends React.Component {
   constructor(props) {
-    console.log(store.getState())
     super(props);
     this.signIn = this.signIn.bind(this);
     this.state = {
@@ -82,8 +81,10 @@ class LoginForm extends React.Component {
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'LOGIN_FAIL') {
-        console.log("login faileeeeed")
         this.setState({ msg: error.msg });
+        setTimeout(function(){
+          this.setState({msg:null});
+          }.bind(this),3000);  // clear error after 3 seconds
       } else {
         this.setState({ msg: null });
       }
