@@ -56,6 +56,7 @@ def user():
 
 
 @bp.route("/register", methods=["POST"])
+@jwt_required
 def register():
     """
 
