@@ -1,3 +1,166 @@
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T021417.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T013822.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T110621.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T105158.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T104738.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T104450.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T104419.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T104305.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T104015.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T103907.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T103834.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T103831.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T103806.500.html
+
+###
+
+POST http://localhost:5000/forgot_password
+Content-Type: application/json
+
+{
+  "email":"havraham@gmail.com"
+}
+
+<> 2020-05-31T103525.500.html
+
+###
+
 POST http://localhost:5000/saltstack_cmd
 Content-Type: application/json
 
@@ -448,198 +611,6 @@ Content-Type: application/json
   "tgt": "ls",
   "salt_cmd": ""
 }
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "salt",
-  "tgt": "*",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T104633.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "salt",
-  "tgt": "*",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T104610.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T104546.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T104445.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T103906.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T103810.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T102258.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T102235.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T102106.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T102024.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T101955.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello",
-  "salt_cmd": "state.apply"
-}
-
-<> 2020-05-12T101837.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello"
-}
-
-<> 2020-05-12T101811.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "echo",
-  "tgt": "hello"
-}
-
-<> 2020-05-11T051528.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/"
-}
-
-<> 2020-05-11T051516.200.html
 
 ###
 
