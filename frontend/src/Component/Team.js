@@ -5,6 +5,8 @@ import store from '../store';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Button from '@material-ui/core/Button';
 
+import {REGISTER_SUCCESS,REGISTER_FAIL} from '../actions/types';
+import {returnErrors}  from '../actions/errorActions';
 
 import IconButton from '@material-ui/core/IconButton';
 
@@ -26,6 +28,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ContactsOutlined } from "@material-ui/icons";
 import Snackbar from '@material-ui/core/Snackbar';
+import axios from 'axios';
 const styles = theme => ({
     root: {
       // maxWidth: 1000,
@@ -78,7 +81,25 @@ const styles = theme => ({
     },
 });
 
-
+ const tokenConfig = getState => {
+    // console.log("getstatteeeeeslatl",getState())
+     // Get token from localstorage
+     const token = getState().auth.token;
+ 
+     // Headers
+     const config = {
+         headers: {
+            'Content-Type': 'application/json'
+         }
+     }
+ 
+     // If token, add to headers
+     if(token) {
+        config.headers["Authorization"] = ` Bearer ${token} `;
+     }
+ 
+  return config;
+ }
 class Team extends React.Component {
     constructor(props) {
         super(props);
@@ -144,9 +165,30 @@ class Team extends React.Component {
       const { password, ReturnPassword,Role,Email,Name } = this.state;
       //send cardTeam to server
       let cardTeam={password:password,Role:Role,Email:Email,Name:Name};
-      this.state.Team.push({name:Name,mail:Email,role:Role});
-      console.log(cardTeam ,"cardTeam");
+
       if(password===ReturnPassword){
+        this.state.Team.push({name:Name,mail:Email,role:Role});
+
+        const body = JSON.stringify({first_name:Name,last_name:'fffff',email:Email, password:password });
+        console.log(body,'body')
+        axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
+       .then(res => 
+        // store.dispatch({
+        //     type: REGISTER_SUCCESS,
+        //     payload: res.data
+        // }))
+        console.log(res,'res.data')
+       )
+        .catch(err => {
+        console.log(err)
+        // store.dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+        // store.dispatch({
+            // type: REGISTER_FAIL
+        //  })
+        })
+
+
+
         this.setState({expanded:false,
           fab:false,
           Name:'',
@@ -166,7 +208,6 @@ class Team extends React.Component {
       }
       else{
         this.setState({errPassword:true});
-        console.log(this.state,"fffffffffffffffffffffffffff");
         setTimeout(()=>{this.setState({errPassword:false});}, 2200);
         
       }
