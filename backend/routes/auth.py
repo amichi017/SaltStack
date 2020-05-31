@@ -2,11 +2,12 @@ from flask import Blueprint, request, jsonify
 from flask_bcrypt import check_password_hash, bcrypt
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from backend.database import db
+from backend.app import db
 
-auth = Blueprint('auth',__name__)
+bp = Blueprint('auth',__name__)
 
-@auth.route("/auth", methods=["POST"])
+
+@bp.route("/auth", methods=["POST"])
 def login():
     """
 
@@ -35,7 +36,7 @@ def login():
     return jsonify(message="Bad Email or Password"), 401
 
 #
-# @auth.route("/auth/refresh", methods=["POST"])
+# @bp.route("/auth/refresh", methods=["POST"])
 # @jwt_refresh_token_required
 # def refresh():
 #     """
@@ -47,14 +48,14 @@ def login():
 #     return jsonify(ret), 200
 
 
-@auth.route("/auth/user", methods=["GET"])
+@bp.route("/auth/user", methods=["GET"])
 @jwt_required
 def user():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
 
-@auth.route("/register", methods=["POST"])
+@bp.route("/register", methods=["POST"])
 def register():
     """
 

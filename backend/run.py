@@ -1,4 +1,8 @@
-from backend import app
+# from backend import app
+from app import app
+
+from backend.database import db
 
 if __name__ == "__main__":
-   app.run()
+    print(db)
+    app.run()

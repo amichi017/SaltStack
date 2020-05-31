@@ -1,11 +1,11 @@
 from flask import jsonify, Blueprint
 from flask_jwt_extended import jwt_required
 
-from backend.database import db
+from backend.app import db
 
-salt = Blueprint('api',__name__)
+bp = Blueprint('api',__name__)
 
-@salt.route("/api/saltReturns")
+@bp.route("/api/saltReturns")
 @jwt_required
 def get_SaltReturns():
     """
@@ -23,7 +23,7 @@ def get_SaltReturns():
 
 
 
-@salt.route("/api/saltReturns/apply")
+@bp.route("/api/saltReturns/apply")
 @jwt_required
 def get_salt_applies():
     """
@@ -41,7 +41,7 @@ def get_salt_applies():
     return jsonify(res)
 
 
-@salt.route("/api/saltReturns/apply/<date_url>")
+@bp.route("/api/saltReturns/apply/<date_url>")
 @jwt_required
 def get_daily_applies(date_url):
     """
@@ -62,7 +62,7 @@ def get_daily_applies(date_url):
         res.append(j)
     return jsonify(res)
 
-@salt.route("/api/saltReturns/apply/month/<month>")
+@bp.route("/api/saltReturns/apply/month/<month>")
 @jwt_required
 def get_monthly_applies(month):
     """
@@ -84,7 +84,7 @@ def get_monthly_applies(month):
     return jsonify(res)
 
 
-@salt.route("/api/saltReturns/apply/year/<year>")
+@bp.route("/api/saltReturns/apply/year/<year>")
 @jwt_required
 def get_yearly_applies(year):
     """
@@ -108,7 +108,7 @@ def get_yearly_applies(year):
 
 
 
-@salt.route("/api/jobs")
+@bp.route("/api/jobs")
 @jwt_required
 def get_jobs():
     """
@@ -124,7 +124,7 @@ def get_jobs():
     return jsonify(res)
 
 
-@salt.route("/api/events")
+@bp.route("/api/events")
 @jwt_required
 def get_events():
     """

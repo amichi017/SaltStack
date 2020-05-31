@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
 
-cmd = Blueprint('cmd',__name__)
+from backend.app import db
+
+bp = Blueprint('cmd',__name__)
 
 
 # REAL MINIONS FUNCTION
@@ -15,13 +17,13 @@ cmd = Blueprint('cmd',__name__)
 
 
 
-@cmd.route("/get_connected_minions")
+@bp.route("/get_connected_minions")
 @jwt_required
 def get_connected_minions():
 
     return jsonify(result=['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il'])
 
-@cmd.route("/saltstack_cmd" ,methods=["POST"])
+@bp.route("/saltstack_cmd" ,methods=["POST"])
 @jwt_required
 def saltstack_cmd():
 
@@ -50,7 +52,7 @@ def saltstack_cmd():
 
 
 # REAL COMMANDS FUNCTION
-# @cmd.route("/saltstack_cmd" ,methods=["POST"])
+# @bp.route("/saltstack_cmd" ,methods=["POST"])
 # # @jwt_required
 # def saltstack_cmd():
 

@@ -3,11 +3,12 @@ import datetime
 from flask import Blueprint, request, jsonify, render_template
 from flask_jwt_extended import create_access_token, decode_token
 
-from backend.database import db
+from backend.app import db
 from backend.services.mail_service import send_email
 
-fp = Blueprint('forgot_password',__name__)
-@fp.route("/forgot_password", methods=["POST"])
+bp = Blueprint('forgot_password',__name__)
+
+@bp.route("/forgot_password", methods=["POST"])
 def forgot_password():
     print(request)
 
@@ -38,7 +39,7 @@ def forgot_password():
     except ValueError:
         return "err"
 
-@fp.route("/reset_password/<reset_token>", methods=["POST"])
+@bp.route("/reset_password/<reset_token>", methods=["POST"])
 def reset_password(reset_token):
     """
 

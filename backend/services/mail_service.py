@@ -4,7 +4,7 @@ from threading import Thread
 from flask_mail import Message
 from werkzeug.exceptions import InternalServerError
 
-from backend import mail
+from backend.app import mail
 
 
 def send_async_email(app, msg):
