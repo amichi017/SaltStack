@@ -2,7 +2,14 @@ import {SCREEN } from '../actions/types';
 
 
 const initialState = {
-    screen:null,
+    screen:[{Dashboard:false,
+            SaltStack:false,
+            Customers:false,
+            Reports:false,
+            Integrations:false,
+            CurrentMonth:false,
+            CurrentYear:false,
+            }],
 };
 
 export default function(state=initialState, action) { 

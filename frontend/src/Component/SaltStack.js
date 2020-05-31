@@ -47,8 +47,8 @@ import SendIcon from '@material-ui/icons/Send';
 import MinionCard from './MinionCard';
 import SaveIcon from '@material-ui/icons/Save';
 import Grid from '@material-ui/core/Grid';
-
-
+import { returnErrors } from '../actions/errorActions';
+import { listMinions } from '../actions/date';
 
 
 const tableIcons = {
@@ -144,6 +144,8 @@ class SaltStack extends React.Component {
         this.sentCommand = this.sentCommand.bind(this);
         this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
         this.tokenConfig = this.tokenConfig.bind(this);
+        store.dispatch(listMinions());
+       // console.log(store.getState(),"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
         this.state={
         alert:false,
         msg:false,
@@ -159,12 +161,14 @@ class SaltStack extends React.Component {
         warningNoMinionSelected:false,
         data:[],
         };
-        this.getMinionsFromServer();
+        
+        
+       this.getMinionsFromServer();
     }
     getMinionsFromServer(){
-        
+       
         let tokenTemp=this.tokenConfig();
-        console.log(tokenTemp,"tokenTemp")
+      
         axios.get('http://127.0.0.1:5000/get_connected_minions',tokenTemp)
         .then((res) => {
                 let arr=[];
@@ -264,7 +268,26 @@ class SaltStack extends React.Component {
             let minions =store.getState().saveMinion.saveMinion;
           //  console.log(store.getState().saveMinion.saveMinion,"store.getState().saveMinion.saveMinion")
             minions.unshift(this.state.saveMinion);
-            // minions.unshift(this.state.saveMinion[0]);
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            // Request body
+           // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
+           // console.log(this.state.saveMinion,"this.state.saveMinion");
+            const body = JSON.stringify(this.state.saveMinion);
+            let tokenTemp=this.tokenConfig();
+            axios.post('http://127.0.0.1:5000/saltstack_cmd',body, tokenTemp)
+            .then((res) => {
+            })
+            .catch(err => {
+                console.log("err from SaltStack")
+                store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
+                // dispatch({
+                //     type: LOGIN_FAIL
+                // })
+            })
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
@@ -285,7 +308,7 @@ class SaltStack extends React.Component {
 
 
   render(){
-    
+  
     return (
 
 <div style={{display: 'flex',flexDirection: 'row',}}>

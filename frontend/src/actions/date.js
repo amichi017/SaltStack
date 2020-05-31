@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store'
- import { DATE_SELECT, SALT_RETURNS} from './types';
+ import { DATE_SELECT, SALT_RETURNS,LIST_MINIONS} from './types';
  // Date is select
  export const dateSelect = (start , end) => {
 
@@ -12,7 +12,29 @@ import store from '../store'
      // console.log("end ",end);
 
  }
+ export const listMinions =  () => (dispatch, getState) => {
 
+    axios.get('http://127.0.0.1:5000/get_connected_minions',tokenConfig(getState))
+    .then((res) => {
+            let minions=[];
+            for(let i=0;i<res.data.result.length;i++){
+               let minion={name:res.data.result[i]};
+               minions.push(minion);
+            }
+            console.log(minions,"minions");   
+            store.dispatch({
+                type: LIST_MINIONS,
+                payload: minions
+            });
+    })
+    .catch(err => {
+        console.log(err,"err get_connected_minions");
+
+       });
+    // console.log("start ",start);
+    // console.log("end ",end);
+
+}
 
 //  // Clear date
 //   export const saltReturns =  () => (dispatch, getState) => {
