@@ -66,12 +66,14 @@ def register():
     if request.is_json:
         first_name = request.json["first_name"]
         last_name = request.json["last_name"]
+        role = request.json["role"]
         email = request.json["email"]
         password = request.json["password"]
     else:
         email = request.form["email"]
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
+        role = request.form["role"]
         password = request.form["password"]
 
     # test = User.query.filter_by(email=email).first()
@@ -82,6 +84,7 @@ def register():
         user_info = dict(
             first_name=first_name,
             last_name=last_name,
+            role = role,
             email=email,
             password=bcrypt.generate_password_hash(password),
         )
