@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
-from flask_bcrypt import check_password_hash, bcrypt
+from flask_bcrypt import check_password_hash, generate_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
+from backend.app import bcrypt
 from backend.app import db
 
 bp = Blueprint('auth',__name__)
@@ -77,7 +78,6 @@ def register():
     test = db.users.find_one({"email": email})
     if test:
         return jsonify(message="User Already Exist"), 409
-
     else:
         user_info = dict(
             first_name=first_name,
@@ -88,4 +88,19 @@ def register():
         # print(user_info)
         db.users.insert_one(user_info)
         return jsonify(message="User added sucessfully"), 201
+
+
+@bp.route("/get_users", methods=["GET"])
+# @jwt_required
+def get_users():
+    users = db.users.find({})
+    res = []
+    for user in users:
+        user["_id"] = str(user["_id"])
+        if "reset_token" in user:
+            del user['reset_token']
+        del user['password']
+
+        res.append(user)
+    return jsonify(res)
 

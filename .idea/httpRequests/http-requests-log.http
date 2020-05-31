@@ -1,3 +1,185 @@
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T063547.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T063431.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T063337.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T063102.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T063004.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062759.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062744.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062713.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062647.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062613.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062502.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062441.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062419.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062401.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062321.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062255.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062150.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T062013.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061932.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061906.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061849.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061753.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061738.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061725.200.json
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061651.500.html
+
+###
+
+GET http://localhost:5000/get_users
+Accept: application/json
+
+<> 2020-05-31T061622.500.html
+
+###
+
 POST http://localhost:5000/forgot_password
 Content-Type: application/json
 
@@ -265,352 +447,6 @@ Content-Type: application/json
 }
 
 <> 2020-05-12T111736.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T111729.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T111456.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T111311.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "sadsaasd",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T111240.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T111226.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110556.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110542.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110319.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "whoami",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110247.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110245.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110245.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "whoami",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110120.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110118.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110118.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110019.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110016.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T110016.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105842.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105842.400.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105842.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105643.200.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105643.400.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105643.500.html
-
-###
-
-POST http://localhost:5000/saltstack_cmd
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "/",
-  "salt_cmd": ""
-}
-
-<> 2020-05-12T105549.200.html
-
-###
-
-POST http://localhost:80/api/item
-Content-Type: application/json
-
-{
-  "func": "ls",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
-
-###
-
-POST http://localhost:80/api/item
-Content-Type: application/json
-
-{
-  "func": "lsr",
-  "tgt": "ls",
-  "salt_cmd": ""
-}
 
 ###
 

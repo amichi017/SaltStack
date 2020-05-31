@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_pymongo import MongoClient
 
-from .database.db import initialize_db
+# from .database.db import initialize_db
 
 
 app = Flask(__name__)
