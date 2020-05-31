@@ -200,7 +200,8 @@ const parseNumber= (str)=>{
   render(){
   return (
     <React.Fragment>
-      <Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>
+      {/*<Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>*/}
+       {<Title style={{paddingLeft:5}}> {this.state.end.toLocaleDateString()}</Title>}
       <ResponsiveContainer>
           <LineChart
             onClick={demoOnClick}

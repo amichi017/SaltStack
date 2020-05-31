@@ -47,7 +47,7 @@ export const register = ({ first_name, last_name, email, password }) => dispatch
 
     // Request body
     const body = JSON.stringify({first_name, last_name, email, password });
-
+     
     axios.post('"http://127.0.0.1:5000/register"', body, config)
     .then(res => dispatch({
         type: REGISTER_SUCCESS,
@@ -98,7 +98,7 @@ export const logout = () => dispatch => {
 export const tokenConfig = getState => {
        // Get token from localstorage
        const token = getState().auth.token;
-     
+  
        // Headers
        const config = {
            headers: {

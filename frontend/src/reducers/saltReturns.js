@@ -7,7 +7,7 @@
 };
 
 export default function(state=initialState, action) { 
- //console.log("SALT_RETURNS",action.payload);
+//console.log("SALT_RETURNS",action.payload);
 switch(action.type){
     case SALT_RETURNS:
     return {

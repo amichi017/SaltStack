@@ -29,9 +29,8 @@ import { withStyles } from "@material-ui/core/styles";
 import SimCardIcon from '@material-ui/icons/SimCard';
 
 import SaltStack from './Component/SaltStack';
-import CurrentMonth from './Component/CurrentMonth';
-import CurrentYear from './Component/CurrentYear';
-import LastThreeMonths from './Component/LastThreeMonths';
+
+
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
 import {
@@ -46,7 +45,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { listMinions } from './actions/date';
  //while(store.getState().saltReturns.saltReturns===null);
 const drawerWidth = 240;
 
@@ -157,8 +156,9 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   constructor(props) {
       super(props);
-      console.log(store.getState(),"store from dashboard 1");
+      //console.log(store.getState(),"store from dashboard 1");
       store.dispatch(saltReturns());
+     // store.dispatch(listMinions());
       //console.log(store.getState(),"store from dashboard 2");
       this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
       this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -254,55 +254,8 @@ class Dashboard extends React.Component {
             </ListItemIcon>
             <ListItemText primary="SaltStack" />
           </ListItem>
-          <ListItem button
-          onClick={()=>{this.SelectMenu('Customers')}}
-          >
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Customers" />
-          </ListItem>
-          <ListItem button
-          onClick={()=>{this.SelectMenu('Reports')}}
-          >
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItem>
-          <ListItem button
-          onClick={()=>{this.SelectMenu('Integrations')}}
-          >
-            <ListItemIcon>
-              <LayersIcon />
-            </ListItemIcon>
-            <ListItemText primary="Integrations" />
-          </ListItem>
-            </List>
-            <Divider />
-            <ListSubheader inset>Saved reports</ListSubheader>
-            <List>
-            <ListItem button   onClick={()=>{this.SelectMenu('Current month')}}>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Current month" />
-          </ListItem>
-          <ListItem button   onClick={()=>{this.SelectMenu('Last three months')}}>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Last three months" />
-          </ListItem>
-          <ListItem button   onClick={()=>{this.SelectMenu('Current year')}}>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Current year" />
-          </ListItem>
-            
-            
-            
+         
+  
             </List>
           </Drawer>
           <main className={this.props.classes.content}>
@@ -359,9 +312,7 @@ class Dashboard extends React.Component {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
             SaltStack
             </Typography>
-            
-           
-
+  
               <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
                 <Badge badgeContent={4} color="secondary">
                
@@ -371,11 +322,7 @@ class Dashboard extends React.Component {
               </IconButton>
 
               <Logout />
-           
-          
-          
-       
-  
+ 
           </Toolbar>
             </AppBar>
             <Drawer
@@ -409,63 +356,10 @@ class Dashboard extends React.Component {
               </ListItemIcon>
               <ListItemText primary="SaltStack" />
             </ListItem>
-            <ListItem button
-            onClick={()=>{this.SelectMenu('Customers')}}
-            >
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Customers" />
-            </ListItem>
-            <ListItem button
-            onClick={()=>{this.SelectMenu('Reports')}}
-            >
-              <ListItemIcon>
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Reports" />
-            </ListItem>
-            <ListItem button
-            onClick={()=>{this.SelectMenu('Integrations')}}
-            >
-              <ListItemIcon>
-                <LayersIcon />
-              </ListItemIcon>
-              <ListItemText primary="Integrations" />
-            </ListItem>
+           
+           
               </List>
-              <Divider />
-
-              <ListSubheader inset>Saved reports</ListSubheader>
-
-              <List>
-              <ListItem button   onClick={()=>{this.SelectMenu('Current month')}}>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Current month" />
-            </ListItem>
-            <ListItem button   onClick={()=>{this.SelectMenu('Last three months')}}>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Last three months" />
-            </ListItem>
-            <ListItem button   onClick={()=>{this.SelectMenu('Current year')}}>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Current year" />
-            </ListItem>
-              
-              
-              
-              </List>
-
-
-
-
-
+            
             </Drawer>
 
             <main className={this.props.classes.content}>
@@ -484,462 +378,114 @@ class Dashboard extends React.Component {
       
           </div>
         );}
+                    
+              // else if (this.state.menu==='Team'){
 
-
-
-        else if (this.state.menu==='Current month'){
-
-          return (
-            <div className={this.props.classes.root}>
-        
-              <CssBaseline />
-              <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
-        
-              <Toolbar className={this.props.classes.toolbar}>
-            
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={this.handleDrawerOpen}
-                className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
-              >
-    
-                <MenuIcon />
-              </IconButton>
-              <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-              Current month
-              </Typography>
+              //   return (
+              //     <div className={this.props.classes.root}>
               
-             
-  
-                <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                  <Badge badgeContent={4} color="secondary">
-                 
-                    <NotificationsIcon />
-                  </Badge>
-                  {/*<AccountCircleIcon />*/}
-                </IconButton>
-  
-                <Logout />
-             
-            
-            
-         
-    
-            </Toolbar>
-              </AppBar>
-              <Drawer
-                variant="permanent"
-                classes={{
-                  paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
-                }}
-                open={this.state.open}
-              >
-                <div className={this.props.classes.toolbarIcon}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
-                </div>
-                <Divider />
-                <List>
-        
-                <ListItem button
-                onClick={()=>{this.SelectMenu('Dashboard')}}
-                >
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('SaltStack')}}
-              >
-                <ListItemIcon>
-                  <SimCardIcon />
-                </ListItemIcon>
-                <ListItemText primary="SaltStack" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Customers')}}
-              >
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Customers" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Reports')}}
-              >
-                <ListItemIcon>
-                  <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Reports" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Integrations')}}
-              >
-                <ListItemIcon>
-                  <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Integrations" />
-              </ListItem>
-                </List>
-                <Divider />
-  
-                <ListSubheader inset>Saved reports</ListSubheader>
-  
-                <List>
-                <ListItem button   onClick={()=>{this.SelectMenu('Current month')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Current month" />
-              </ListItem>
-              <ListItem button   onClick={()=>{this.SelectMenu('Last three months')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Last three months" />
-              </ListItem>
-              <ListItem button   onClick={()=>{this.SelectMenu('Current year')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Current year" />
-              </ListItem>
-                
-                
-                
-                </List>
-  
-  
-  
-  
-  
-              </Drawer>
-  
-              <main className={this.props.classes.content}>
-                <div className={this.props.classes.appBarSpacer} />
-                <Container maxWidth="lg" className={this.props.classes.container}>
-  
-                <Grid item  xs >
-                <div className={this.props.classes.table}>
-                    <CurrentMonth/>
-                </div>
-     
-                  </Grid>
-  
-                </Container>
-              </main>
-        
-            </div>
-          );
-              }
-
+              //       <CssBaseline />
+              //       <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
               
-        else if (this.state.menu==='Current year'){
-
-          return (
-            <div className={this.props.classes.root}>
-        
-              <CssBaseline />
-              <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
-        
-              <Toolbar className={this.props.classes.toolbar}>
-            
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={this.handleDrawerOpen}
-                className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
-              >
-    
-                <MenuIcon />
-              </IconButton>
-              <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-              Current year
-              </Typography>
-              
-             
-  
-                <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                  <Badge badgeContent={4} color="secondary">
-                 
-                    <NotificationsIcon />
-                  </Badge>
-                  {/*<AccountCircleIcon />*/}
-                </IconButton>
-  
-                <Logout />
-             
-            
-            
-         
-    
-            </Toolbar>
-              </AppBar>
-              <Drawer
-                variant="permanent"
-                classes={{
-                  paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
-                }}
-                open={this.state.open}
-              >
-                <div className={this.props.classes.toolbarIcon}>
-                  <IconButton onClick={this.handleDrawerClose}>
-                    <ChevronLeftIcon />
-                  </IconButton>
-                </div>
-                <Divider />
-                <List>
-        
-                <ListItem button
-                onClick={()=>{this.SelectMenu('Dashboard')}}
-                >
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('SaltStack')}}
-              >
-                <ListItemIcon>
-                  <SimCardIcon />
-                </ListItemIcon>
-                <ListItemText primary="SaltStack" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Customers')}}
-              >
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Customers" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Reports')}}
-              >
-                <ListItemIcon>
-                  <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Reports" />
-              </ListItem>
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Integrations')}}
-              >
-                <ListItemIcon>
-                  <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Integrations" />
-              </ListItem>
-                </List>
-                <Divider />
-  
-                <ListSubheader inset>Saved reports</ListSubheader>
-  
-                <List>
-                <ListItem button   onClick={()=>{this.SelectMenu('Current month')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Current month" />
-              </ListItem>
-              <ListItem button   onClick={()=>{this.SelectMenu('Last three months')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Last three months" />
-              </ListItem>
-              <ListItem button   onClick={()=>{this.SelectMenu('Current year')}}>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Current year" />
-              </ListItem>
-                
-                
-                
-                </List>
-  
-  
-  
-  
-  
-              </Drawer>
-  
-              <main className={this.props.classes.content}>
-                <div className={this.props.classes.appBarSpacer} />
-                <Container maxWidth="lg" className={this.props.classes.container}>
-  
-                <Grid item  xs >
-                <div className={this.props.classes.table}>
-                    <CurrentYear/>
-                </div>
-     
-                  </Grid>
-  
-                </Container>
-              </main>
-        
-            </div>
-          );
-              }
-
-
-
-
-              else {
-
-                return (
-                  <div className={this.props.classes.root}>
-              
-                    <CssBaseline />
-                    <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
-              
-                    <Toolbar className={this.props.classes.toolbar}>
+              //       <Toolbar className={this.props.classes.toolbar}>
                   
-                    <IconButton
-                      edge="start"
-                      color="inherit"
-                      aria-label="open drawer"
-                      onClick={this.handleDrawerOpen}
-                      className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
-                    >
+              //       <IconButton
+              //         edge="start"
+              //         color="inherit"
+              //         aria-label="open drawer"
+              //         onClick={this.handleDrawerOpen}
+              //         className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
+              //       >
           
-                      <MenuIcon />
-                    </IconButton>
-                    <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-                    Last three months
-                    </Typography>
+              //         <MenuIcon />
+              //       </IconButton>
+              //       <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
+              //       Team
+              //       </Typography>
                     
                    
         
-                      <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                        <Badge badgeContent={4} color="secondary">
+              //         <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
+              //           <Badge badgeContent={4} color="secondary">
                        
-                          <NotificationsIcon />
-                        </Badge>
-                        {/*<AccountCircleIcon />*/}
-                      </IconButton>
+              //             <NotificationsIcon />
+              //           </Badge>
+              //           {/*<AccountCircleIcon />*/}
+              //         </IconButton>
         
-                      <Logout />
+              //         <Logout />
                    
                   
                   
                
           
-                  </Toolbar>
-                    </AppBar>
-                    <Drawer
-                      variant="permanent"
-                      classes={{
-                        paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
-                      }}
-                      open={this.state.open}
-                    >
-                      <div className={this.props.classes.toolbarIcon}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                          <ChevronLeftIcon />
-                        </IconButton>
-                      </div>
-                      <Divider />
-                      <List>
+              //     </Toolbar>
+              //       </AppBar>
+              //       <Drawer
+              //         variant="permanent"
+              //         classes={{
+              //           paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
+              //         }}
+              //         open={this.state.open}
+              //       >
+              //         <div className={this.props.classes.toolbarIcon}>
+              //           <IconButton onClick={this.handleDrawerClose}>
+              //             <ChevronLeftIcon />
+              //           </IconButton>
+              //         </div>
+              //         <Divider />
+              //         <List>
               
-                      <ListItem button
-                      onClick={()=>{this.SelectMenu('Dashboard')}}
-                      >
-                      <ListItemIcon>
-                        <DashboardIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Dashboard" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('SaltStack')}}
-                    >
-                      <ListItemIcon>
-                        <SimCardIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="SaltStack" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('Customers')}}
-                    >
-                      <ListItemIcon>
-                        <PeopleIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Customers" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('Reports')}}
-                    >
-                      <ListItemIcon>
-                        <BarChartIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Reports" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('Integrations')}}
-                    >
-                      <ListItemIcon>
-                        <LayersIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Integrations" />
-                    </ListItem>
-                      </List>
-                      <Divider />
+              //         <ListItem button
+              //         onClick={()=>{this.SelectMenu('Dashboard')}}
+              //         >
+              //         <ListItemIcon>
+              //           <DashboardIcon />
+              //         </ListItemIcon>
+              //         <ListItemText primary="Dashboard" />
+              //       </ListItem>
+              //       <ListItem button
+              //       onClick={()=>{this.SelectMenu('SaltStack')}}
+              //       >
+              //         <ListItemIcon>
+              //           <SimCardIcon />
+              //         </ListItemIcon>
+              //         <ListItemText primary="SaltStack" />
+              //       </ListItem>
+              //       <ListItem button
+              //       onClick={()=>{this.SelectMenu('Team')}}
+              //       >
+              //         <ListItemIcon>
+              //           <PeopleIcon />
+              //         </ListItemIcon>
+              //         <ListItemText primary="Team" />
+              //       </ListItem>
         
-                      <ListSubheader inset>Saved reports</ListSubheader>
-        
-                      <List>
-                      <ListItem button   onClick={()=>{this.SelectMenu('Current month')}}>
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Current month" />
-                    </ListItem>
-                    <ListItem button   onClick={()=>{this.SelectMenu('Last three months')}}>
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Last three months" />
-                    </ListItem>
-                    <ListItem button   onClick={()=>{this.SelectMenu('Current year')}}>
-                      <ListItemIcon>
-                        <AssignmentIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Current year" />
-                    </ListItem>
-                      
-                      
-                      
-                      </List>
+              //         </List>
         
         
         
         
         
-                    </Drawer>
+              //       </Drawer>
         
-                    <main className={this.props.classes.content}>
-                      <div className={this.props.classes.appBarSpacer} />
-                      <Container maxWidth="lg" className={this.props.classes.container}>
+              //       <main className={this.props.classes.content}>
+              //         <div className={this.props.classes.appBarSpacer} />
+              //         <Container maxWidth="lg" className={this.props.classes.container}>
         
-                      <Grid item  xs >
-                      <div className={this.props.classes.table}>
-                          <LastThreeMonths/>
-                      </div>
+              //         <Grid item  xs >
+              //         <div className={this.props.classes.table}>
+              //             <Team/>
+              //         </div>
            
-                        </Grid>
+              //           </Grid>
         
-                      </Container>
-                    </main>
+              //         </Container>
+              //       </main>
               
-                  </div>
-                );
-                    }
+              //     </div>
+              //   );
+              //       }
               
               
 }

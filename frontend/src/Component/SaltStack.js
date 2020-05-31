@@ -47,8 +47,8 @@ import SendIcon from '@material-ui/icons/Send';
 import MinionCard from './MinionCard';
 import SaveIcon from '@material-ui/icons/Save';
 import Grid from '@material-ui/core/Grid';
-
-
+import { returnErrors } from '../actions/errorActions';
+import { listMinions } from '../actions/date';
 
 
 const tableIcons = {
@@ -142,46 +142,66 @@ class SaltStack extends React.Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.sentCommand = this.sentCommand.bind(this);
-        this.tokenConfig = this.tokenConfig.bind(this);
         this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
-        this.state={alert:false,msg:false,menu:"Dashboard",open: false,
-        defer: false,clickSave:false,history:[],input:'',saveMinion:{},countSaveMinion:0,warninginput:false,
-        warningNoMinionSelected:false,getMinions:[] };
-        this.getMinionsFromServer();
-       
-    };
-    tokenConfig = () => {
-        //console.log("getstatteeeeeslatl",store.getState())
-        // Get token from localstorage
-        const token = store.getState().auth.token;
-    
-        // Headers
-        const config = {
-            headers: {
-                "Content-type": "multipart/form-data"
-            }
-        }
-    
-        // If token, add to headers
-        if(token) {
-           config.headers["Authorization"] = ` Bearer ${token} `;
-        }
-    
-     return config;
-    };
+        this.tokenConfig = this.tokenConfig.bind(this);
+        store.dispatch(listMinions());
+       // console.log(store.getState(),"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+        this.state={
+        alert:false,
+        msg:false,
+        menu:"Dashboard",
+        open: false,
+        defer: false,
+        clickSave:false,
+        history:[],
+        input:'',
+        saveMinion:{},
+        countSaveMinion:0,
+        warninginput:false,
+        warningNoMinionSelected:false,
+        data:[],
+        };
+        
+        
+       this.getMinionsFromServer();
+    }
     getMinionsFromServer(){
-        console.log(this.tokenConfig(),"this.tokenConfig()")
-        axios.get('http://127.0.0.1:5000/get_connected_minions/',this.tokenConfig())
+       
+        let tokenTemp=this.tokenConfig();
+      
+        axios.get('http://127.0.0.1:5000/get_connected_minions',tokenTemp)
         .then((res) => {
-          
-                this.setState({getMinions:res.data})
+                let arr=[];
+                for(let i=0;i<res.data.result.length;i++){
+                   let minion={name:res.data.result[i]}
+                   arr.push(minion);
+                }             
+                this.setState({data:arr})
         })
         .catch(err => {
             console.log(err,"err get_connected_minions");
     
            });
         };
-   
+        tokenConfig = () => {
+            //console.log("getstatteeeeeslatl",store.getState())
+            // Get token from localstorage
+            const token = store.getState().auth.token;
+        
+            // Headers
+            const config = {
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+        
+            // If token, add to headers
+            if(token) {
+               config.headers["Authorization"] = ` Bearer ${token} `;
+            }
+        
+         return config;
+        };
     handleClose = (event, reason) => 
     {
         if (reason === 'clickaway') {
@@ -232,8 +252,8 @@ class SaltStack extends React.Component {
         const data=rowData.map((row)=>row.name);
         let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
         this.state.saveMinion={minions:data,id:commntId,comment:''};
-       
-        this.setState({alert:true,clickSave:true});
+        this.getMinionsFromServer();
+        this.setState({alert:true,clickSave:true,});
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
     };
@@ -248,7 +268,26 @@ class SaltStack extends React.Component {
             let minions =store.getState().saveMinion.saveMinion;
           //  console.log(store.getState().saveMinion.saveMinion,"store.getState().saveMinion.saveMinion")
             minions.unshift(this.state.saveMinion);
-            // minions.unshift(this.state.saveMinion[0]);
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            // Request body
+           // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
+           // console.log(this.state.saveMinion,"this.state.saveMinion");
+            const body = JSON.stringify(this.state.saveMinion);
+            let tokenTemp=this.tokenConfig();
+            axios.post('http://127.0.0.1:5000/saltstack_cmd',body, tokenTemp)
+            .then((res) => {
+            })
+            .catch(err => {
+                console.log("err from SaltStack")
+                store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
+                // dispatch({
+                //     type: LOGIN_FAIL
+                // })
+            })
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
@@ -269,6 +308,7 @@ class SaltStack extends React.Component {
 
 
   render(){
+  
     return (
 
 <div style={{display: 'flex',flexDirection: 'row',}}>
@@ -391,7 +431,7 @@ class SaltStack extends React.Component {
             title='Minions'
             icons={tableIcons}
             columns={[{ title: 'Name', field: 'name' },]}
-            data={this.state.getMinions} 
+            data={this.state.data} 
             options={{selection: true}}       
             actions=
             {[{
