@@ -62,7 +62,7 @@ def register():
 
     :return:
     """
-    if request.is_json:pp
+    if request.is_json:
         first_name = request.json["first_name"]
         last_name = request.json["last_name"]
         email = request.json["email"]
