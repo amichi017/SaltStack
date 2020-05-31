@@ -56,12 +56,13 @@ def user():
 
 
 @bp.route("/register", methods=["POST"])
+@jwt_required
 def register():
     """
 
     :return:
     """
-    if request.is_json:
+    if request.is_json:pp
         first_name = request.json["first_name"]
         last_name = request.json["last_name"]
         email = request.json["email"]
