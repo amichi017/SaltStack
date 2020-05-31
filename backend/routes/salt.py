@@ -31,7 +31,7 @@ def get_salt_applies():
     :return:
     """
     saltReturns = db.saltReturns
-    print(saltReturns)
+    # print(saltReturns)
     res = []
     saltReturns = saltReturns.find({"fun": "state.apply"})
     for j in saltReturns:
@@ -51,8 +51,8 @@ def get_daily_applies(date_url):
     """
     saltReturns = db.saltReturns
     date = date_url
-    print(date)
-    print(saltReturns)
+    # print(date)
+    # print(saltReturns)
     res = []
     saltReturns = saltReturns.find(
         {"fun": "state.apply", "jid": {"$regex": "%s.*" % (date)}}
@@ -72,8 +72,8 @@ def get_monthly_applies(month):
     """
     saltReturns = db.saltReturns
     date = month
-    print(date)
-    print(saltReturns)
+    # print(date)
+    # print(saltReturns)
     res = []
     saltReturns = saltReturns.find(
         {"fun": "state.apply", "jid": {"$regex": "%s.*" % (date)}}
@@ -94,8 +94,8 @@ def get_yearly_applies(year):
     """
     saltReturns = db.saltReturns
     year = year
-    print(year)
-    print(saltReturns)
+    # print(year)
+    # print(saltReturns)
     res = []
     saltReturns = saltReturns.find(
         {"fun": "state.apply", "jid": {"$regex": "%s.*" % (year)}}

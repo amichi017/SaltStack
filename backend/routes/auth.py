@@ -84,7 +84,7 @@ def register():
             email=email,
             password=bcrypt.generate_password_hash(password),
         )
-        print(user_info)
+        # print(user_info)
         db.users.insert_one(user_info)
         return jsonify(message="User added sucessfully"), 201
 

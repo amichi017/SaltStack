@@ -13,9 +13,10 @@ app.config.from_pyfile('config.py')
 # print(app.config)
 app.debug = True
 CORS(app)
+mail = Mail(app)
+
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-mail = Mail()
 db = MongoClient().salt
 # print(db)
 
