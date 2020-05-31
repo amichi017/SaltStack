@@ -89,7 +89,7 @@ const styles = theme => ({
      // Headers
      const config = {
          headers: {
-             "Content-type": "multipart/form-data"
+            'Content-Type': 'application/json'
          }
      }
  
@@ -165,22 +165,26 @@ class Team extends React.Component {
       const { password, ReturnPassword,Role,Email,Name } = this.state;
       //send cardTeam to server
       let cardTeam={password:password,Role:Role,Email:Email,Name:Name};
-      
-      console.log(cardTeam ,"cardTeam");
+
       if(password===ReturnPassword){
         this.state.Team.push({name:Name,mail:Email,role:Role});
-        const body = JSON.stringify({first_name:Name,email:Email, password:password });
-        axios.post('"http://127.0.0.1:5000/register"', body, tokenConfig(store.getState))
-       .then(res => store.dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data
-        }))
+
+        const body = JSON.stringify({first_name:Name,last_name:'fffff',email:Email, password:password });
+        console.log(body,'body')
+        axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
+       .then(res => 
+        // store.dispatch({
+        //     type: REGISTER_SUCCESS,
+        //     payload: res.data
+        // }))
+        console.log(res,'res.data')
+       )
         .catch(err => {
         console.log(err)
-        store.dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
-        store.dispatch({
-            type: REGISTER_FAIL
-         })
+        // store.dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+        // store.dispatch({
+            // type: REGISTER_FAIL
+        //  })
         })
 
 
