@@ -24,6 +24,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import FormatListBulletedRoundedIcon from '@material-ui/icons/FormatListBulletedRounded';
 const styles = theme => ({
   root: {
     maxWidth: 260,
@@ -109,75 +110,65 @@ render(){
     if(this.state.click === false)
     return (
      
-        <Card className={this.props.classes.root}>
-          <CardContent>
+      <Card className={this.props.classes.root}>
+        <CardContent>
+
           <Button onClick={()=>{this.onClickMinion()}}>
             <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
             fun: {this.props.comment}
             {/*this.props.fun*/}
-             
             </Typography>
-            </Button>
+          </Button>
+
             <Typography variant="h5" component="h2">
-
-            <div>
-
-               <div className={this.props.classes.container}>
-
-
-
-               <List
-                  component="nav"
-                  aria-labelledby="nested-list-subheader"
-                  className={this.props.classes.root2}
-                >
-                  <ListItem 
-                    button   
-                    onClick={() =>
-                      this.setState({
-                      listOpen: !this.state.listOpen,
-                      })}
+              <div>
+                <div className={this.props.classes.container}>
+                  <List
+                      component="nav"
+                      aria-labelledby="nested-list-subheader"
+                      className={this.props.classes.root2}
                     >
-
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
+                    <ListItem 
+                      button   
+                      onClick={() =>
+                        this.setState({
+                        listOpen: !this.state.listOpen,
+                        })}
+                      >
+                      <ListItemIcon>
+                        <FormatListBulletedRoundedIcon />
+                      </ListItemIcon>
                       
-                    <ListItemText primary="See minions" />
-                        {this.state.listOpen ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    {
-                      this.props.minion.map((item)=>{
-                        return(
-                        <Collapse in={this.state.listOpen} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <ListItem  className={this.props.classes.nested}>
-                              <ListItemIcon>
-                                  <StarBorder />
-                              </ListItemIcon>
-                              <ListItemText primary={item} />
-                          </ListItem>
-                        </List>
-                      </Collapse>
-                      )
-                      })
-                    }
-                    
-
-                </List>
-
-             </div>
+                      <ListItemText primary="See minions" />
+                          {this.state.listOpen ? <ExpandLess /> : <ExpandMore />}
+                      </ListItem>
+                      {
+                          this.props.minion.map((item)=>{
+                            return(
+                            <Collapse in={this.state.listOpen} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                              <ListItem  className={this.props.classes.nested}>
+                                  <ListItemIcon>
+                                      <StarBorder />
+                                  </ListItemIcon>
+                                  <ListItemText primary={item} />
+                              </ListItem>
+                            </List>
+                          </Collapse>
+                          )
+                          })
+                        }
+                  </List>
+                </div>
                </div>
-
-
             </Typography>
             
           {/*button*/}
           </CardContent>
           <CardActions>
            
-          </CardActions>
-        </Card>
+        </CardActions>
+      </Card>
      
        
       );

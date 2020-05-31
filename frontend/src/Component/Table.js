@@ -39,7 +39,7 @@ import {
 
 
 }from '@material-ui/icons';
-
+//import data from './f.json';
 
 const time =(str)=>{
     const year =str.slice(0,4);
@@ -232,10 +232,19 @@ class Orders extends React.Component {
                             <div>
                                 <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
                                     _id : {this.state.minion._id}
+                                    {//this.state.minion.return=data
+                                    } 
                                 </Typography>
-                                <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
+                             
 
+
+
+
+
+                                <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
+                                    return:{this.state.minion.return} 
                                 </Typography>
+                                
                                 <CardActions>
 
                                 </CardActions>
@@ -244,7 +253,7 @@ class Orders extends React.Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>
-                            סגור
+                          close
                         </Button>
                     </DialogActions>
 

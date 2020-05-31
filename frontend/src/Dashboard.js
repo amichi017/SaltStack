@@ -30,7 +30,7 @@ import SimCardIcon from '@material-ui/icons/SimCard';
 
 import SaltStack from './Component/SaltStack';
 
-
+import Team from './Component/Team';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
 import {
@@ -237,7 +237,7 @@ class Dashboard extends React.Component {
             </div>
             <Divider />
             <List>
-    
+              
             <ListItem button
             onClick={()=>{this.SelectMenu('Dashboard')}}
             >
@@ -250,12 +250,19 @@ class Dashboard extends React.Component {
           onClick={()=>{this.SelectMenu('SaltStack')}}
           >
             <ListItemIcon>
-            <SimCardIcon />
+              <SimCardIcon />
             </ListItemIcon>
             <ListItemText primary="SaltStack" />
           </ListItem>
-         
-  
+          <ListItem button
+          onClick={()=>{this.SelectMenu('Team')}}
+          >
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Team" />
+          </ListItem>
+
             </List>
           </Drawer>
           <main className={this.props.classes.content}>
@@ -339,26 +346,33 @@ class Dashboard extends React.Component {
               </div>
               <Divider />
               <List>
-      
-              <ListItem button
-              onClick={()=>{this.SelectMenu('Dashboard')}}
-              >
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button
-            onClick={()=>{this.SelectMenu('SaltStack')}}
-            >
-              <ListItemIcon>
-                <SimCardIcon />
-              </ListItemIcon>
-              <ListItemText primary="SaltStack" />
-            </ListItem>
-           
-           
-              </List>
+              
+                      <ListItem button
+                      onClick={()=>{this.SelectMenu('Dashboard')}}
+                      >
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Dashboard" />
+                    </ListItem>
+                    <ListItem button
+                    onClick={()=>{this.SelectMenu('SaltStack')}}
+                    >
+                      <ListItemIcon>
+                        <SimCardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="SaltStack" />
+                    </ListItem>
+                    <ListItem button
+                    onClick={()=>{this.SelectMenu('Team')}}
+                    >
+                      <ListItemIcon>
+                        <PeopleIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Team" />
+                    </ListItem>
+        
+                      </List>
             
             </Drawer>
 
@@ -379,113 +393,113 @@ class Dashboard extends React.Component {
           </div>
         );}
                     
-              // else if (this.state.menu==='Team'){
+              else if (this.state.menu==='Team'){
 
-              //   return (
-              //     <div className={this.props.classes.root}>
+                return (
+                  <div className={this.props.classes.root}>
               
-              //       <CssBaseline />
-              //       <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
+                    <CssBaseline />
+                    <AppBar position="absolute" className={clsx(this.props.classes.appBar, this.state.open && this.props.classes.appBarShift)}>
               
-              //       <Toolbar className={this.props.classes.toolbar}>
+                    <Toolbar className={this.props.classes.toolbar}>
                   
-              //       <IconButton
-              //         edge="start"
-              //         color="inherit"
-              //         aria-label="open drawer"
-              //         onClick={this.handleDrawerOpen}
-              //         className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
-              //       >
+                    <IconButton
+                      edge="start"
+                      color="inherit"
+                      aria-label="open drawer"
+                      onClick={this.handleDrawerOpen}
+                      className={clsx(this.props.classes.menuButton, this.state.open && this.props.classes.menuButtonHidden)}
+                    >
           
-              //         <MenuIcon />
-              //       </IconButton>
-              //       <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
-              //       Team
-              //       </Typography>
+                      <MenuIcon />
+                    </IconButton>
+                    <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
+                    Team
+                    </Typography>
                     
                    
         
-              //         <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-              //           <Badge badgeContent={4} color="secondary">
+                      <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
+                        <Badge badgeContent={4} color="secondary">
                        
-              //             <NotificationsIcon />
-              //           </Badge>
-              //           {/*<AccountCircleIcon />*/}
-              //         </IconButton>
+                          <NotificationsIcon />
+                        </Badge>
+                        {/*<AccountCircleIcon />*/}
+                      </IconButton>
         
-              //         <Logout />
+                      <Logout />
                    
                   
                   
                
           
-              //     </Toolbar>
-              //       </AppBar>
-              //       <Drawer
-              //         variant="permanent"
-              //         classes={{
-              //           paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
-              //         }}
-              //         open={this.state.open}
-              //       >
-              //         <div className={this.props.classes.toolbarIcon}>
-              //           <IconButton onClick={this.handleDrawerClose}>
-              //             <ChevronLeftIcon />
-              //           </IconButton>
-              //         </div>
-              //         <Divider />
-              //         <List>
+                  </Toolbar>
+                    </AppBar>
+                    <Drawer
+                      variant="permanent"
+                      classes={{
+                        paper: clsx(this.props.classes.drawerPaper, !this.state.open && this.props.classes.drawerPaperClose),
+                      }}
+                      open={this.state.open}
+                    >
+                      <div className={this.props.classes.toolbarIcon}>
+                        <IconButton onClick={this.handleDrawerClose}>
+                          <ChevronLeftIcon />
+                        </IconButton>
+                      </div>
+                      <Divider />
+                      <List>
               
-              //         <ListItem button
-              //         onClick={()=>{this.SelectMenu('Dashboard')}}
-              //         >
-              //         <ListItemIcon>
-              //           <DashboardIcon />
-              //         </ListItemIcon>
-              //         <ListItemText primary="Dashboard" />
-              //       </ListItem>
-              //       <ListItem button
-              //       onClick={()=>{this.SelectMenu('SaltStack')}}
-              //       >
-              //         <ListItemIcon>
-              //           <SimCardIcon />
-              //         </ListItemIcon>
-              //         <ListItemText primary="SaltStack" />
-              //       </ListItem>
-              //       <ListItem button
-              //       onClick={()=>{this.SelectMenu('Team')}}
-              //       >
-              //         <ListItemIcon>
-              //           <PeopleIcon />
-              //         </ListItemIcon>
-              //         <ListItemText primary="Team" />
-              //       </ListItem>
+                      <ListItem button
+                      onClick={()=>{this.SelectMenu('Dashboard')}}
+                      >
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Dashboard" />
+                    </ListItem>
+                    <ListItem button
+                    onClick={()=>{this.SelectMenu('SaltStack')}}
+                    >
+                      <ListItemIcon>
+                        <SimCardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="SaltStack" />
+                    </ListItem>
+                    <ListItem button
+                    onClick={()=>{this.SelectMenu('Team')}}
+                    >
+                      <ListItemIcon>
+                        <PeopleIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Team" />
+                    </ListItem>
         
-              //         </List>
-        
-        
+                      </List>
         
         
         
-              //       </Drawer>
         
-              //       <main className={this.props.classes.content}>
-              //         <div className={this.props.classes.appBarSpacer} />
-              //         <Container maxWidth="lg" className={this.props.classes.container}>
         
-              //         <Grid item  xs >
-              //         <div className={this.props.classes.table}>
-              //             <Team/>
-              //         </div>
+                    </Drawer>
+        
+                    <main className={this.props.classes.content}>
+                      <div className={this.props.classes.appBarSpacer} />
+                      <Container maxWidth="lg" className={this.props.classes.container}>
+        
+                      <Grid item  xs >
+                      <div className={this.props.classes.table}>
+                          <Team/>
+                      </div>
            
-              //           </Grid>
+                        </Grid>
         
-              //         </Container>
-              //       </main>
+                      </Container>
+                    </main>
               
-              //     </div>
-              //   );
-              //       }
+                  </div>
+                );
+                    }
               
               
 }
