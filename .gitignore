@@ -1,8 +1,7 @@
-backend/api/venv/
-backend/api/win_env/
 backend/__pycache__/
 frontend/node_modules/
 backend/Lib/
 backend/Scripts/
 backend/pyvenv.cfg
 backend/win_env/
+backend/venv/
