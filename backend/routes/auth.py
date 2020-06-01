@@ -1,12 +1,10 @@
 from flask import Blueprint, request, jsonify
-from flask_bcrypt import check_password_hash, generate_password_hash
+from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
-from backend.app import bcrypt
-from backend.app import db
+from backend.app import db, bcrypt
 
 bp = Blueprint('auth',__name__)
-
 
 @bp.route("/auth", methods=["POST"])
 def login():
