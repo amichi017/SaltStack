@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Blueprint, request, jsonify
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -88,11 +89,11 @@ def register():
         )
         # print(user_info)
         db.users.insert_one(user_info)
-        return jsonify(message="User added sucessfully"), 201
+        return jsonify(message="User added successfully"), 201
 
 
 @bp.route("/get_users", methods=["GET"])
-# @jwt_required
+@jwt_required
 def get_users():
     users = db.users.find({})
     res = []
@@ -104,4 +105,21 @@ def get_users():
 
         res.append(user)
     return jsonify(res)
+
+@bp.route("/delete/<id>", methods=["DELETE"])
+@jwt_required
+def delete_user(id):
+    try:
+        user_id = ObjectId(id)
+        user = db.users.find_one({"_id": user_id})
+        if user:
+            db.users.delete_one({"_id": user_id})
+            return jsonify(message=user['email'] + " deleted successfully")
+        return jsonify(message=user_id + " doesn't exist"), 400
+    except:
+        return jsonify(message=id + " doesn't exist"), 400
+
+
+
+
 
