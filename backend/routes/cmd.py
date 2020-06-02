@@ -48,7 +48,7 @@ def saltstack_cmd():
     # print("a")
     # if len(err) > 0:
     #     return err
-    return cmd
+    return jsonify(res = cmd)
 
 
 # REAL COMMANDS FUNCTION

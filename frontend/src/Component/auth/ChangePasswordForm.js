@@ -15,26 +15,9 @@ import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 
 
-import { login } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-
 
 
 const styles = theme => ({
@@ -57,29 +40,24 @@ const styles = theme => ({
   },
 });
 
-class LoginForm extends React.Component {
+class ChangePasswordForm extends React.Component {
   constructor(props) {
     super(props);
     this.signIn = this.signIn.bind(this);
     this.state = {
       email: { value: null, error: false, helperText: null },
-      password: { value: null, error: false, helperText: null },
+      Password1: { value: null, error: false, helperText: null },
+      Password2: { value: null, error: false, helperText: null },
       msg: null
     };
   }
 
-  static propTypes = {
-    isAuthenticated: PropTypes.bool,
-    error: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
-  };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === 'LOGIN_FAIL') {
+      if (error.id === 'Weak Password') {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
@@ -88,33 +66,6 @@ class LoginForm extends React.Component {
   }
 
 
-      
-  
-
-   signIn(event){
-    event.preventDefault();
-    if (this.emailInput.value === "") {
-      this.setState({
-        email: {
-          value: this.emailInput.value,
-          error: true,
-          helperText: "Your email must be specified."
-        }
-      });
-      this.emailInput.focus();
-    }
-    else{
-      const user = {
-        email: this.emailInput.value,
-        password: this.passwordInput.value,
-       };
-  
-      const log = this.props.login(user);
-      console.log(log)
-      this.props.history.push('/'); 
-    }
-
-  }
   
 
   render(){
@@ -150,17 +101,26 @@ class LoginForm extends React.Component {
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
+              name="password1"
+              label="Password1"
+              type="password1"
+              id="password1"
               autoComplete="current-password"
               inputRef={input => (this.passwordInput = input)}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password2"
+              label="Password2"
+              type="password2"
+              id="password2"
+              autoComplete="current-password"
+              inputRef={input => (this.passwordInput = input)}
             />
+           
             <Button
               type="submit"
               fullWidth
@@ -168,7 +128,7 @@ class LoginForm extends React.Component {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Update Password
             </Button>
 
             {this.state.msg  ? (
@@ -177,35 +137,16 @@ class LoginForm extends React.Component {
               null
               )}
               
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            
           </form>
         </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
+        
       </Container>
     );
   }
 }
 
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
-})
 
 export default connect(
-    mapStateToProps,
-    { login, clearErrors }
-)(withStyles(styles)(LoginForm))
+)(withStyles(styles)(ChangePasswordForm))

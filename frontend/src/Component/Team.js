@@ -15,7 +15,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import TeamCard from './TeamCard';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import RegisterForm from './auth/RegisterForm';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -28,6 +27,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ContactsOutlined } from "@material-ui/icons";
 import Snackbar from '@material-ui/core/Snackbar';
+import { teamList } from '../actions/date';
 import axios from 'axios';
 const styles = theme => ({
     root: {
@@ -112,12 +112,14 @@ class Team extends React.Component {
         this.handleMouseDownPassword = this.handleMouseDownPassword.bind(this);
         this.handleClickShowPasswordReturn = this.handleClickShowPasswordReturn.bind(this);
         this.handleMouseDownPasswordReturn = this.handleMouseDownPasswordReturn.bind(this);
-        
+        this.initTeam = this.initTeam.bind(this);
+       
         this.state=
         {
           expanded:false,
           fab:false,
-          Name:'',
+          first_name:'',
+          last_name:'',
           Role:'',
           Email:'',
           Password:'',
@@ -128,7 +130,23 @@ class Team extends React.Component {
           saveCard:false,
           Team:[],
         };
+        this.initTeam();
     }
+
+    initTeam(){
+      axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
+      .then((res) => { 
+        console.log(res.data,'team oooooooooooooooooo')
+        this.setState({Team:res.data});
+      })
+      .catch(err => {
+          console.log(err);
+  
+         });
+      console.log(store.getState(),'data init');
+      
+    }
+
     handleClickShowPassword(){
       this.setState({showPassword:'text'});
     }
@@ -155,22 +173,29 @@ class Team extends React.Component {
     }
  
     ClickFab(){
-      this.setState((prevState) => ({fab:!prevState.fab,password:''}));
+      this.setState((prevState) => ({
+      fab:!prevState.fab,password:'',
+      first_name:'',
+      lastName:'',
+      Role:'',
+      Email:'',
+      Password:'',
+      ReturnPassword:'',}));
     
     }
    
     signIn(event){
     
       event.preventDefault();
-      const { password, ReturnPassword,Role,Email,Name } = this.state;
+      const { password, ReturnPassword,Role,Email,first_name,last_name } = this.state;
       //send cardTeam to server
-      let cardTeam={password:password,Role:Role,Email:Email,Name:Name};
+      
 
       if(password===ReturnPassword){
-        this.state.Team.push({name:Name,mail:Email,role:Role});
+        this.state.Team.push({first_name:first_name,mail:Email,role:Role,last_name:last_name});
 
-        const body = JSON.stringify({first_name:Name,last_name:'fffff',email:Email, password:password });
-        console.log(body,'body')
+        const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
+        //console.log(body,'body')
         axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
        .then(res => 
         // store.dispatch({
@@ -187,11 +212,12 @@ class Team extends React.Component {
         //  })
         })
 
-
+        
 
         this.setState({expanded:false,
           fab:false,
-          Name:'',
+          first_name:'',
+          last_name:'',
           Role:'',
           Email:'',
           Password:'',
@@ -199,12 +225,15 @@ class Team extends React.Component {
           showPasswordReturn:'password',
           showPassword:'password',
           errPassword:false,
+          UnsecuredPassword:false,
         });
           this.setState({saveCard:true});
           setTimeout(()=>{this.setState({saveCard:false});}, 4000);
          this.setState((prevState) => ({fab:false}));
        
-
+      
+         
+       
       }
       else{
         this.setState({errPassword:true});
@@ -220,14 +249,12 @@ class Team extends React.Component {
     //   if(this.state.Password === nextState.ReturnPassword || nextState.Password === this.state.ReturnPassword){
     //     console.log("7878787")
     //     //this.setState((prevState) => ({fab:false}));
-    //   }
+    //   }UnsecuredPassword:false
     // }
     handleInputChange(e) {
-       
-       this.setState({ [e.target.name] : e.target.value});
-      console.log(this.state);
   
-
+      this.setState({ [e.target.name] : e.target.value});
+      // console.log(this.state);
     }
     handleClose (event, reason) 
     {
@@ -250,9 +277,9 @@ class Team extends React.Component {
             <div>
         
               <div className={this.props.classes.root}>
-                {this.state.Team.map((item)=>{
+                {this.state.Team.map((item,arr)=>{
                   if(this.state.Team.length !== 0){ 
-                    return <TeamCard  name={item.name} role={item.role} mail={item.mail} />
+                    return <TeamCard  arr={arr} first_name={item.first_name}  last_name={item.last_name} role={item.role} mail={item.mail} id={item._id}/>
                   }
                   
                 })}
@@ -286,11 +313,11 @@ class Team extends React.Component {
               <TextField
                 className={this.props.classes.margin}
                 id="input-with-icon-textfield"
-                label="Name"
+                label="First Name"
                 required
                 fullWidth
-                name='Name'
-                value={this.state.Name}
+                name='first_name'
+                value={this.state.first_name}
                 onChange={this.handleInputChange}
                 InputProps={{
                   startAdornment: (
@@ -303,6 +330,29 @@ class Team extends React.Component {
   
             </div>
   
+
+            <div className={this.props.classes.input}>
+  
+            <TextField
+              className={this.props.classes.margin}
+              id="input-with-icon-textfield"
+              label="Last Name"
+              fullWidth
+              name='last_name'
+             
+              value={this.state.last_name}
+              onChange={this.handleInputChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+          </div>
+
             <div className={this.props.classes.input}>
   
               <TextField

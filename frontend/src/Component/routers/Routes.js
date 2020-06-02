@@ -4,10 +4,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import * as authActions from '../../actions/authActions'
 import Dashboard from '../../Dashboard';
 import LoginForm from '../auth/LoginForm';
-import RegisterForm from '../auth/RegisterForm';
 import ChangePasswordForm from '../auth/ChangePasswordForm';
-
 import PropTypes from 'prop-types';
+import ForgotPasswordForm from '../auth/ForgotPasswordForm';
 
 class Routes extends Component {
 
@@ -27,8 +26,9 @@ class Routes extends Component {
         <div>
           <PrivateRoute exact path="/" component={Dashboard} authed={this.props.auth.isAuthenticated} />
           <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/register" component={RegisterForm} />
           <Route exact path="/changePass" component={ChangePasswordForm} />
+          <Route exact path="/forgotPass" component={ForgotPasswordForm} />
+
 
         </div>
       </BrowserRouter>

@@ -183,21 +183,19 @@ class LoginForm extends React.Component {
 
             <Grid container>
               <Grid item xs>
-                <Link href="/changePass" variant="body2">
+                <Link href="/forgotPass" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/changePass" variant="body2">
+                  {"Do you want to update your password?"}
                 </Link>
               </Grid>
             </Grid>
           </form>
         </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
+      
       </Container>
     );
   }

@@ -7,9 +7,8 @@ from flask_pymongo import MongoClient
 
 # from .database.db import initialize_db
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
 app.config.from_pyfile('config.py')
-app.debug = True
 CORS(app)
 mail = Mail(app)
 
@@ -25,4 +24,8 @@ app.register_blueprint(auth.bp)
 app.register_blueprint(cmd.bp)
 app.register_blueprint(forgot_password.bp)
 app.register_blueprint(salt.bp)
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 

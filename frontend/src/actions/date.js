@@ -37,21 +37,15 @@ import store from '../store'
 }
 export const teamList =  () => (dispatch, getState) => {
 
-    axios.get('http://127.0.0.1:5000/get_connected_minions',tokenConfig(getState))
-    .then((res) => {
-            let minions=[];
-            for(let i=0;i<res.data.result.length;i++){
-               let minion={name:res.data.result[i]};
-               minions.push(minion);
-            }
-            console.log(minions,"minions");   
+    axios.get('http://127.0.0.1:5000/get_users',tokenConfig(getState))
+    .then((res) => { 
             store.dispatch({
-                type: LIST_MINIONS,
-                payload: minions
+                type: TEAM_LIST,
+                payload: res.data
             });
     })
     .catch(err => {
-        console.log(err,"err get_connected_minions");
+        console.log(err);
 
        });
     // console.log("start ",start);

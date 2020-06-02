@@ -86,6 +86,7 @@ export const login = ({ email, password }) => dispatch => {
     })
 }
 
+
 // Logout User
 export const logout = () => dispatch => {
     dispatch({
