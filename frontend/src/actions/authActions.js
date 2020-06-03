@@ -19,7 +19,7 @@ export const loadUser = () => (dispatch, getState) => {
     // User loading
     dispatch({ type: USER_LOADING });
     axios
-      .get('http://127.0.0.1:5000/auth/user', tokenConfig(getState))
+      .get('/auth/user', tokenConfig(getState))
       .then(res =>
         dispatch({
           type: USER_LOADED,
@@ -48,7 +48,7 @@ export const register = ({ first_name, last_name, email, password }) => dispatch
     // Request body
     const body = JSON.stringify({first_name, last_name, email, password });
      
-    axios.post('"http://127.0.0.1:5000/register"', body, config)
+    axios.post('/register', body, config)
     .then(res => dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
@@ -72,7 +72,7 @@ export const login = ({ email, password }) => dispatch => {
     // Request body
     const body = JSON.stringify({ email, password });
 
-    axios.post('http://127.0.0.1:5000/auth', body, config)
+    axios.post('/auth', body, config)
     .then(res => dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,

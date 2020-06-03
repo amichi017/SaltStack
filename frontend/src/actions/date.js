@@ -14,7 +14,7 @@ import store from '../store'
  }
  export const listMinions =  () => (dispatch, getState) => {
 
-    axios.get('http://127.0.0.1:5000/get_connected_minions',tokenConfig(getState))
+    axios.get('/get_connected_minions',tokenConfig(getState))
     .then((res) => {
             let minions=[];
             for(let i=0;i<res.data.result.length;i++){
@@ -37,7 +37,7 @@ import store from '../store'
 }
 export const teamList =  () => (dispatch, getState) => {
 
-    axios.get('http://127.0.0.1:5000/get_users',tokenConfig(getState))
+    axios.get('/get_users',tokenConfig(getState))
     .then((res) => { 
             store.dispatch({
                 type: TEAM_LIST,
@@ -74,7 +74,7 @@ export const teamList =  () => (dispatch, getState) => {
 
 // //  for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
 //     let index = startYear
-//     let url='http://127.0.0.1:5000/api/saltReturns/apply/'+index.getFullYear();
+//     let url='/api/saltReturns/apply/'+index.getFullYear();
 //     console.log("url" ,url);
 //     axios.get(url, tokenConfig(getState))
 //     .then((res) => {
@@ -109,7 +109,7 @@ export const teamList =  () => (dispatch, getState) => {
         let minions=[];
  for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
 
-     let url='http://127.0.0.1:5000/api/saltReturns/apply/'+index.getFullYear();
+     let url='/api/saltReturns/apply/'+index.getFullYear();
      //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
     .then((res) => {
@@ -164,7 +164,7 @@ export const tokenConfig = getState => {
 //     const time =new Date().toDateString();
 
 // // if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
-//     axios.get('http://127.0.0.1:5000/api/saltReturns/apply/2020', tokenConfig(getState))
+//     axios.get('/api/saltReturns/apply/2020', tokenConfig(getState))
 //    .then((res) => {
 
 //        // console.log(res,"res");
