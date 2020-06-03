@@ -85,7 +85,7 @@ class ForgotPassword extends React.Component {
         // Request body
         const body = JSON.stringify({ email });
     
-        axios.post('http://127.0.0.1:5000/forgot_password', body, config)
+        axios.post('/forgot_password', body, config)
         .then(res =>{
             this.setState({ msg: res.message })
             }
