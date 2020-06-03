@@ -1,0 +1,438 @@
+{
+    "_id": "5eccf6fe13645c77861fff9f",
+    "full_ret": {
+        "fun": "state.apply",
+        "fun_args": [],
+        "id": "it-sys-3.minhala.jce.ac.il",
+        "jid": "20200526110011911227",
+        "out": "highstate",
+        "retcode": 0,
+        "return": {
+            "certutil_|-salt://win/certs/decrypt/decrypt-cer_|-salt://win/certs/decrypt/decrypt-cer_|-add_store": {
+                "_id_": "salt://win/certs/decrypt/decrypt.cer",
+                "_run_num_": 1,
+                "_sls_": "win/certs/decrypt",
+                "changes": {},
+                "comment": "salt://win/certs/decrypt/decrypt.cer already stored.",
+                "duration": 194.882,
+                "name": "salt://win/certs/decrypt/decrypt.cer",
+                "result": true,
+                "start_time": "14:00:14.265804"
+            },
+            "chocolatey_|-Configure Ansible_|-ansible_|-upgraded": {
+                "_id_": "Configure Ansible",
+                "_run_num_": 5,
+                "_sls_": "win/chocolatey/ansible",
+                "changes": {},
+                "comment": "ansible 1.0.3 is already installed",
+                "duration": 3143.1,
+                "name": "ansible",
+                "result": true,
+                "start_time": "14:00:17.867856"
+            },
+            "chocolatey_|-Install 7zip_|-7zip_|-upgraded": {
+                "_id_": "Install 7zip",
+                "_run_num_": 13,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "7zip 19.0.0 is already installed",
+                "duration": 3495.885,
+                "name": "7zip",
+                "result": true,
+                "start_time": "14:01:02.375645"
+            },
+            "chocolatey_|-Install Chocolatey Package_|-chocolatey_|-upgraded": {
+                "_id_": "Install Chocolatey Package",
+                "_run_num_": 7,
+                "_sls_": "win/chocolatey/chocolatey",
+                "changes": {},
+                "comment": "Package chocolatey upgraded successfully",
+                "duration": 3902.654,
+                "name": "chocolatey",
+                "result": true,
+                "start_time": "14:00:21.016953"
+            },
+            "chocolatey_|-Install Palo Alto Traps_|-traps_|-upgraded": {
+                "_id_": "Install Palo Alto Traps",
+                "_run_num_": 4,
+                "_sls_": "win/chocolatey/traps",
+                "changes": {},
+                "comment": "traps 6.1.4.32252 is already installed",
+                "duration": 3401.173,
+                "name": "traps",
+                "result": true,
+                "start_time": "14:00:14.466683"
+            },
+            "chocolatey_|-Install adobereader_|-adobereader_|-upgraded": {
+                "_id_": "Install adobereader",
+                "_run_num_": 16,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "adobereader 2020.006.20042 is already installed",
+                "duration": 3186.072,
+                "name": "adobereader",
+                "result": true,
+                "start_time": "14:01:12.385651"
+            },
+            "chocolatey_|-Install firefox_|-firefox_|-upgraded": {
+                "_id_": "Install firefox",
+                "_run_num_": 12,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "firefox 76.0 is already installed",
+                "duration": 3745.735,
+                "name": "firefox",
+                "result": true,
+                "start_time": "14:00:58.629910"
+            },
+            "chocolatey_|-Install notepadpp_|-notepadpp_|-upgraded": {
+                "_id_": "Install notepadpp",
+                "_run_num_": 14,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "notepadpp 7.8.6 is already installed",
+                "duration": 3340.979,
+                "name": "notepadpp",
+                "result": true,
+                "start_time": "14:01:05.871530"
+            },
+            "chocolatey_|-Install topia_|-topia_|-upgraded": {
+                "_id_": "Install topia",
+                "_run_num_": 17,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "topia 4.0.38 is already installed",
+                "duration": 3144.098,
+                "name": "topia",
+                "result": true,
+                "start_time": "14:01:15.571723"
+            },
+            "chocolatey_|-Install vlc_|-vlc_|-upgraded": {
+                "_id_": "Install vlc",
+                "_run_num_": 15,
+                "_sls_": "win/chocolatey/installpkgs",
+                "changes": {},
+                "comment": "vlc 3.0.10 is already installed",
+                "duration": 3172.142,
+                "name": "vlc",
+                "result": true,
+                "start_time": "14:01:09.212509"
+            },
+            "cmd_|-Remove Hibernate_|-powercfg-exe hibernate off_|-run": {
+                "_run_num_": 3,
+                "_sls_": "win/removeHibernate",
+                "_state_ran_": false,
+                "changes": {},
+                "comment": "State was not run because onfail req did not change",
+                "duration": 0,
+                "result": true,
+                "start_time": "14:00:14.463684"
+            },
+            "cmd_|-Set Check Salt-Minion Update Task_|-Set Check Salt-Minion Update Task_|-script": {
+                "_id_": "Set Check Salt-Minion Update Task",
+                "_run_num_": 11,
+                "_sls_": "win/scheduleHighstate",
+                "changes": {
+                    "changed": "true",
+                    "pid": 9808,
+                    "retcode": 0,
+                    "stderr": "",
+                    "stdout": "\r\nTaskPath                                       TaskName                          State     \r\n--------                                       --------                          -----     \r\n\\                                              Check Salt-Minion Update          Ready     \r"
+                },
+                "comment": "updated task interval and delay",
+                "duration": 1793.914,
+                "name": "Set Check Salt-Minion Update Task",
+                "result": true,
+                "start_time": "14:00:56.835996"
+            },
+            "cmd_|-Set Salt HighState Scheduled Task_|-Set Salt HighState Scheduled Task_|-script": {
+                "_id_": "Set Salt HighState Scheduled Task",
+                "_run_num_": 8,
+                "_sls_": "win/scheduleHighstate",
+                "changes": {
+                    "changed": "true",
+                    "pid": 9524,
+                    "retcode": 0,
+                    "stderr": "",
+                    "stdout": "\r\nTaskPath                                       TaskName                          State     \r\n--------                                       --------                          -----     \r\n\\                                              Salt HighState                    Running   \r"
+                },
+                "comment": "updated task interval and delay",
+                "duration": 8335.477,
+                "name": "Set Salt HighState Scheduled Task",
+                "result": true,
+                "start_time": "14:00:24.920606"
+            },
+            "cmd_|-Set Salt Last Seen Scheduled Task_|-Set Salt Last Seen Scheduled Task_|-script": {
+                "_id_": "Set Salt Last Seen Scheduled Task",
+                "_run_num_": 10,
+                "_sls_": "win/scheduleHighstate",
+                "changes": {},
+                "comment": "",
+                "duration": 1799.912,
+                "name": "Set Salt Last Seen Scheduled Task",
+                "result": true,
+                "start_time": "14:00:55.035085"
+            },
+            "cmd_|-Set Salt Refresh Grains Scheduled Task_|-Set Salt Refresh Grains Scheduled Task_|-script": {
+                "_id_": "Set Salt Refresh Grains Scheduled Task",
+                "_run_num_": 9,
+                "_sls_": "win/scheduleHighstate",
+                "changes": {},
+                "comment": "",
+                "duration": 21778.003,
+                "name": "Set Salt Refresh Grains Scheduled Task",
+                "result": true,
+                "start_time": "14:00:33.256083"
+            },
+            "file_|-Academy CA Certificate_|-C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert-pem_|-append": {
+                "_id_": "Academy CA Certificate",
+                "_run_num_": 0,
+                "_sls_": "win/certs/academy-ca",
+                "changes": {},
+                "comment": "File C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert.pem is in correct state",
+                "duration": 93.943,
+                "name": "C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert.pem",
+                "result": true,
+                "start_time": "14:00:14.169862"
+            },
+            "file_|-Check Hibernate File Exists_|-c:\\hiberfil-sys_|-missing": {
+                "_id_": "Check Hibernate File Exists",
+                "_run_num_": 2,
+                "_sls_": "win/removeHibernate",
+                "changes": {},
+                "comment": "Path c:\\hiberfil.sys is missing",
+                "duration": 0.999,
+                "name": "c:\\hiberfil.sys",
+                "result": true,
+                "start_time": "14:00:14.462685"
+            },
+            "file_|-Configure Chocolatey JCE Repo_|-C:\\ProgramData\\chocolatey\\config\\chocolatey-config_|-replace": {
+                "_id_": "Configure Chocolatey JCE Repo",
+                "_run_num_": 6,
+                "_sls_": "win/chocolatey/chocolatey",
+                "changes": {},
+                "comment": "No changes needed to be made",
+                "duration": 3.999,
+                "name": "C:\\ProgramData\\chocolatey\\config\\chocolatey.config",
+                "result": true,
+                "start_time": "14:00:21.011955"
+            }
+        },
+        "success": true
+    },
+    "fun": "state.apply",
+    "jid": "20200526110011911227",
+    "minion": "it-sys-5.minhala.jce.ac.il",
+    "out": "highstate",
+    "return": {
+        "certutil_|-salt://win/certs/decrypt/decrypt-cer_|-salt://win/certs/decrypt/decrypt-cer_|-add_store": {
+            "_id_": "salt://win/certs/decrypt/decrypt.cer",
+            "_run_num_": 1,
+            "_sls_": "win/certs/decrypt",
+            "changes": {},
+            "comment": "salt://win/certs/decrypt/decrypt.cer already stored.",
+            "duration": 194.882,
+            "name": "salt://win/certs/decrypt/decrypt.cer",
+            "result": true,
+            "start_time": "14:00:14.265804"
+        },
+        "chocolatey_|-Configure Ansible_|-ansible_|-upgraded": {
+            "_id_": "Configure Ansible",
+            "_run_num_": 5,
+            "_sls_": "win/chocolatey/ansible",
+            "changes": {},
+            "comment": "ansible 1.0.3 is already installed",
+            "duration": 3143.1,
+            "name": "ansible",
+            "result": true,
+            "start_time": "14:00:17.867856"
+        },
+        "chocolatey_|-Install 7zip_|-7zip_|-upgraded": {
+            "_id_": "Install 7zip",
+            "_run_num_": 13,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "7zip 19.0.0 is already installed",
+            "duration": 3495.885,
+            "name": "7zip",
+            "result": true,
+            "start_time": "14:01:02.375645"
+        },
+        "chocolatey_|-Install Chocolatey Package_|-chocolatey_|-upgraded": {
+            "_id_": "Install Chocolatey Package",
+            "_run_num_": 7,
+            "_sls_": "win/chocolatey/chocolatey",
+            "changes": {},
+            "comment": "Package chocolatey upgraded successfully",
+            "duration": 3902.654,
+            "name": "chocolatey",
+            "result": true,
+            "start_time": "14:00:21.016953"
+        },
+        "chocolatey_|-Install Palo Alto Traps_|-traps_|-upgraded": {
+            "_id_": "Install Palo Alto Traps",
+            "_run_num_": 4,
+            "_sls_": "win/chocolatey/traps",
+            "changes": {},
+            "comment": "traps 6.1.4.32252 is already installed",
+            "duration": 3401.173,
+            "name": "traps",
+            "result": true,
+            "start_time": "14:00:14.466683"
+        },
+        "chocolatey_|-Install adobereader_|-adobereader_|-upgraded": {
+            "_id_": "Install adobereader",
+            "_run_num_": 16,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "adobereader 2020.006.20042 is already installed",
+            "duration": 3186.072,
+            "name": "adobereader",
+            "result": true,
+            "start_time": "14:01:12.385651"
+        },
+        "chocolatey_|-Install firefox_|-firefox_|-upgraded": {
+            "_id_": "Install firefox",
+            "_run_num_": 12,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "firefox 76.0 is already installed",
+            "duration": 3745.735,
+            "name": "firefox",
+            "result": true,
+            "start_time": "14:00:58.629910"
+        },
+        "chocolatey_|-Install notepadpp_|-notepadpp_|-upgraded": {
+            "_id_": "Install notepadpp",
+            "_run_num_": 14,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "notepadpp 7.8.6 is already installed",
+            "duration": 3340.979,
+            "name": "notepadpp",
+            "result": true,
+            "start_time": "14:01:05.871530"
+        },
+        "chocolatey_|-Install topia_|-topia_|-upgraded": {
+            "_id_": "Install topia",
+            "_run_num_": 17,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "topia 4.0.38 is already installed",
+            "duration": 3144.098,
+            "name": "topia",
+            "result": true,
+            "start_time": "14:01:15.571723"
+        },
+        "chocolatey_|-Install vlc_|-vlc_|-upgraded": {
+            "_id_": "Install vlc",
+            "_run_num_": 15,
+            "_sls_": "win/chocolatey/installpkgs",
+            "changes": {},
+            "comment": "vlc 3.0.10 is already installed",
+            "duration": 3172.142,
+            "name": "vlc",
+            "result": true,
+            "start_time": "14:01:09.212509"
+        },
+        "cmd_|-Remove Hibernate_|-powercfg-exe hibernate off_|-run": {
+            "_run_num_": 3,
+            "_sls_": "win/removeHibernate",
+            "_state_ran_": false,
+            "changes": {},
+            "comment": "State was not run because onfail req did not change",
+            "duration": 0,
+            "result": true,
+            "start_time": "14:00:14.463684"
+        },
+        "cmd_|-Set Check Salt-Minion Update Task_|-Set Check Salt-Minion Update Task_|-script": {
+            "_id_": "Set Check Salt-Minion Update Task",
+            "_run_num_": 11,
+            "_sls_": "win/scheduleHighstate",
+            "changes": {
+                "changed": "true",
+                "pid": 9808,
+                "retcode": 0,
+                "stderr": "",
+                "stdout": "\r\nTaskPath                                       TaskName                          State     \r\n--------                                       --------                          -----     \r\n\\                                              Check Salt-Minion Update          Ready     \r"
+            },
+            "comment": "updated task interval and delay",
+            "duration": 1793.914,
+            "name": "Set Check Salt-Minion Update Task",
+            "result": true,
+            "start_time": "14:00:56.835996"
+        },
+        "cmd_|-Set Salt HighState Scheduled Task_|-Set Salt HighState Scheduled Task_|-script": {
+            "_id_": "Set Salt HighState Scheduled Task",
+            "_run_num_": 8,
+            "_sls_": "win/scheduleHighstate",
+            "changes": {
+                "changed": "true",
+                "pid": 9524,
+                "retcode": 0,
+                "stderr": "",
+                "stdout": "\r\nTaskPath                                       TaskName                          State     \r\n--------                                       --------                          -----     \r\n\\                                              Salt HighState                    Running   \r"
+            },
+            "comment": "updated task interval and delay",
+            "duration": 8335.477,
+            "name": "Set Salt HighState Scheduled Task",
+            "result": true,
+            "start_time": "14:00:24.920606"
+        },
+        "cmd_|-Set Salt Last Seen Scheduled Task_|-Set Salt Last Seen Scheduled Task_|-script": {
+            "_id_": "Set Salt Last Seen Scheduled Task",
+            "_run_num_": 10,
+            "_sls_": "win/scheduleHighstate",
+            "changes": {},
+            "comment": "",
+            "duration": 1799.912,
+            "name": "Set Salt Last Seen Scheduled Task",
+            "result": true,
+            "start_time": "14:00:55.035085"
+        },
+        "cmd_|-Set Salt Refresh Grains Scheduled Task_|-Set Salt Refresh Grains Scheduled Task_|-script": {
+            "_id_": "Set Salt Refresh Grains Scheduled Task",
+            "_run_num_": 9,
+            "_sls_": "win/scheduleHighstate",
+            "changes": {},
+            "comment": "",
+            "duration": 21778.003,
+            "name": "Set Salt Refresh Grains Scheduled Task",
+            "result": true,
+            "start_time": "14:00:33.256083"
+        },
+        "file_|-Academy CA Certificate_|-C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert-pem_|-append": {
+            "_id_": "Academy CA Certificate",
+            "_run_num_": 0,
+            "_sls_": "win/certs/academy-ca",
+            "changes": {},
+            "comment": "File C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert.pem is in correct state",
+            "duration": 93.943,
+            "name": "C:\\salt\\bin\\lib\\site-packages\\certifi\\cacert.pem",
+            "result": true,
+            "start_time": "14:00:14.169862"
+        },
+        "file_|-Check Hibernate File Exists_|-c:\\hiberfil-sys_|-missing": {
+            "_id_": "Check Hibernate File Exists",
+            "_run_num_": 2,
+            "_sls_": "win/removeHibernate",
+            "changes": {},
+            "comment": "Path c:\\hiberfil.sys is missing",
+            "duration": 0.999,
+            "name": "c:\\hiberfil.sys",
+            "result": true,
+            "start_time": "14:00:14.462685"
+        },
+        "file_|-Configure Chocolatey JCE Repo_|-C:\\ProgramData\\chocolatey\\config\\chocolatey-config_|-replace": {
+            "_id_": "Configure Chocolatey JCE Repo",
+            "_run_num_": 6,
+            "_sls_": "win/chocolatey/chocolatey",
+            "changes": {},
+            "comment": "No changes needed to be made",
+            "duration": 3.999,
+            "name": "C:\\ProgramData\\chocolatey\\config\\chocolatey.config",
+            "result": true,
+            "start_time": "14:00:21.011955"
+        }
+    }
+}

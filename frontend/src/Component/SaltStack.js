@@ -75,12 +75,8 @@ const tableIcons = {
 const styles = theme => ({
     MaterialTable:{
         marginLeft: theme.spacing(20),
-        marginTop: theme.spacing(0),
-    
-        width:450,
-        
-        
-      
+        marginTop: theme.spacing(1),
+        width:450, 
     },
     root: {
       padding: '2px 4px',
@@ -88,7 +84,7 @@ const styles = theme => ({
       alignItems: 'center',
       width: 500,
       height:70,
-      marginTop: theme.spacing(0)
+      marginTop: theme.spacing(1)
     },
    
     input: {

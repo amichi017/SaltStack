@@ -129,6 +129,13 @@ class Team extends React.Component {
           errPassword:false,
           saveCard:false,
           Team:[],
+          counter:0,
+          err_first_name:false,
+          err_last_name:false,
+          err_Role:false,
+          err_Email:false,
+          err_Password:false,
+          
         };
         this.initTeam();
     }
@@ -136,14 +143,14 @@ class Team extends React.Component {
     initTeam(){
       axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
       .then((res) => { 
-        console.log(res.data,'team oooooooooooooooooo')
+       
         this.setState({Team:res.data});
       })
       .catch(err => {
           console.log(err);
   
          });
-      console.log(store.getState(),'data init');
+   
       
     }
 
@@ -185,62 +192,72 @@ class Team extends React.Component {
     }
    
     signIn(event){
-    
+      
       event.preventDefault();
       const { password, ReturnPassword,Role,Email,first_name,last_name } = this.state;
       //send cardTeam to server
-      
-
-      if(password===ReturnPassword){
-        this.state.Team.push({first_name:first_name,mail:Email,role:Role,last_name:last_name});
-
-        const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
-        //console.log(body,'body')
-        axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
-       .then(res => 
-        // store.dispatch({
-        //     type: REGISTER_SUCCESS,
-        //     payload: res.data
-        // }))
-        console.log(res,'res.data')
-       )
-        .catch(err => {
-        console.log(err)
-        // store.dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
-        // store.dispatch({
-            // type: REGISTER_FAIL
-        //  })
-        })
-
-        
-
-        this.setState({expanded:false,
-          fab:false,
-          first_name:'',
-          last_name:'',
-          Role:'',
-          Email:'',
-          Password:'',
-          ReturnPassword:'',
-          showPasswordReturn:'password',
-          showPassword:'password',
-          errPassword:false,
-          UnsecuredPassword:false,
-        });
-          this.setState({saveCard:true});
-          setTimeout(()=>{this.setState({saveCard:false});}, 4000);
-         this.setState((prevState) => ({fab:false}));
-       
-      
-         
-       
-      }
-      else{
+      const strongRegex = new RegExp("^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[!@#\$%\^&\*])(?=.{8,})");
+      const emailRegex = new RegExp("[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}");    
+      let flag=true;
+      if((strongRegex.test(password)) || ( password.length>50)  ){flag=false;this.setState({err_Password:true});setTimeout(()=>{this.setState({err_Password:false});}, 4000);}
+      if(first_name.length>25 ){flag=false;this.setState({err_first_name:true});setTimeout(()=>{this.setState({err_first_name:false});}, 4000);}
+      if(last_name.length>25 ){flag=false;this.setState({err_last_name:true});setTimeout(()=>{this.setState({err_last_name:false});}, 4000);}
+      if(Role.length>25 ){flag=false;this.setState({err_Role:true});setTimeout(()=>{this.setState({err_Role:false});}, 4000);}
+      if((Email.length>50) || (emailRegex.test(this.state.Email.toUpperCase())===false)){flag=false;this.setState({err_Email:true});setTimeout(()=>{this.setState({err_Email:false});}, 4000);}
+      if (password===ReturnPassword){}
+      else
+      {
         this.setState({errPassword:true});
         setTimeout(()=>{this.setState({errPassword:false});}, 2200);
-        
       }
-    
+
+      if((password===ReturnPassword) && (flag==true)){
+
+
+            this.state.Team.push({first_name:first_name,mail:Email,role:Role,last_name:last_name});
+
+            const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
+            //console.log(body,'body')
+            axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
+          .then(res => 
+            // store.dispatch({
+            //     type: REGISTER_SUCCESS,
+            //     payload: res.data
+            // }))
+            console.log(res,'res.data')
+          )
+            .catch(err => {
+            console.log(err)
+            // store.dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+            // store.dispatch({
+                // type: REGISTER_FAIL
+            //  })
+            })
+
+            
+
+            this.setState({expanded:false,
+              fab:false,
+              first_name:'',
+              last_name:'',
+              Role:'',
+              Email:'',
+              Password:'',
+              ReturnPassword:'',
+              showPasswordReturn:'password',
+              showPassword:'password',
+              errPassword:false,
+              UnsecuredPassword:false,
+            });
+              this.setState({saveCard:true});
+              setTimeout(()=>{this.setState({saveCard:false});}, 4000);
+            this.setState((prevState) => ({fab:false}));
+          
+          
+            setTimeout(()=>{this.initTeam();}, 500);
+         
+      }
+   
       
    
     }
@@ -267,23 +284,40 @@ class Team extends React.Component {
     // shouldComponentUpdate(nextProps, nextState) {
     //   console.log(nextState,"nextState");
     //  }
+    // componentWillReceiveProps(){
+    //   this.initTeam();
+    // }
+    // shouldComponentUpdate(){
+    //   this.initTeam();
+    // }
+    // componentWillUpdate(){
+    //  console.log(this.state.counter,'this.state.counter');
+    //   if(this.state.counter<=1)
+    //   { 
+        
+    //     axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
+    //   .then((res) => { 
+       
+    //     this.setState({Team:res.data});
+    //   })
+    //   .catch(err => {
+    //       console.log(err);
+  
+    //      });
+    //      this.setState((prevState) => ({counter:2}));
+    // }}
+     
     render()
-    
+   
     {
+      
       if(this.state.fab === false){
 
           return(
 
             <div>
-        
-              <div className={this.props.classes.root}>
-                {this.state.Team.map((item,arr)=>{
-                  if(this.state.Team.length !== 0){ 
-                    return <TeamCard  arr={arr} first_name={item.first_name}  last_name={item.last_name} role={item.role} mail={item.mail} id={item._id}/>
-                  }
-                  
-                })}
-              </div>
+              
+              
               <div className={this.props.classes.msg}>
                 <Snackbar open={this.state.saveCard} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} severity="success">
@@ -292,9 +326,18 @@ class Team extends React.Component {
                     </Snackbar>
                 </div>
                
-                   
-               
-
+                <div className={this.props.classes.root}> 
+                {
+                
+                  this.state.Team.map((item,arr)=>{
+                  if(this.state.Team.length !== 0){ 
+                    
+                    return <TeamCard  arr={arr} first_name={item.first_name}  last_name={item.last_name} role={item.role} mail={item.email} id={item._id}/>
+                  }
+                  
+                })
+              }
+              </div>
               <Fab color="primary" aria-label="add" className={this.props.classes.fab} onClick={this.ClickFab}>
               <AddIcon />
             </Fab>
@@ -305,6 +348,7 @@ class Team extends React.Component {
 
       else
       {
+       
         return(
           <div className={this.props.classes.field}>
           <form className={this.props.classes.form} onSubmit={this.signIn} >
@@ -330,7 +374,17 @@ class Team extends React.Component {
   
             </div>
   
-
+            {
+              this.state.first_name===true?
+              (   <div className={this.props.classes.msg}>
+                
+                  <Alert onClose={this.handleClose} severity="error">
+                   Passwords  <strong>unequal   </strong>
+                  </Alert>
+                  </div>
+              )
+              :<div></div>
+           }
             <div className={this.props.classes.input}>
   
             <TextField
@@ -353,6 +407,18 @@ class Team extends React.Component {
 
           </div>
 
+
+          {
+            this.state.last_name===true?
+            (   <div className={this.props.classes.msg}>
+              
+                <Alert onClose={this.handleClose} severity="error">
+                 Passwords  <strong>unequal   </strong>
+                </Alert>
+                </div>
+            )
+            :<div></div>
+         }
             <div className={this.props.classes.input}>
   
               <TextField
@@ -375,6 +441,18 @@ class Team extends React.Component {
   
             </div>
   
+
+            {
+              this.state.Email===true?
+              (   <div className={this.props.classes.msg}>
+                
+                  <Alert onClose={this.handleClose} severity="error">
+                   Passwords  <strong>unequal   </strong>
+                  </Alert>
+                  </div>
+              )
+              :<div></div>
+           }
   
             <div className={this.props.classes.input}>
   
@@ -397,6 +475,18 @@ class Team extends React.Component {
               />
   
             </div>
+
+            {
+              this.state.Role===true?
+              (   <div className={this.props.classes.msg}>
+                
+                  <Alert onClose={this.handleClose} severity="error">
+                   Passwords  <strong>unequal   </strong>
+                  </Alert>
+                  </div>
+              )
+              :<div></div>
+           }
             <div className={this.props.classes.input}>
   
               <TextField
@@ -436,6 +526,7 @@ class Team extends React.Component {
   
             </div>
   
+            
             <div className={this.props.classes.input}>
   
             <TextField

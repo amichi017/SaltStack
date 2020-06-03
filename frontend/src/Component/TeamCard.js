@@ -50,7 +50,8 @@ const styles = theme => ({
         backgroundColor: red[500],
       },
       paragraph:{
-          paddingLeft:theme.spacing(7.8)
+          paddingLeft:theme.spacing(7.8),
+          wordWrap:'break-word',
       },
 });
 
@@ -89,15 +90,9 @@ class TeamCard extends React.Component {
       const { password, ReturnPassword,Role,Email,first_name,last_name } = this.state;
       const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
       axios.delete("http://127.0.0.1:5000/delete/"+this.props.id, tokenConfig(store.getState))
-      .then((res)=> 
-      this.setState({isDelete:true})
-      )
-    
-          //  let temp =this.props.arr.filter((item)=>{if(item.)});
+      .then((res)=> {
+        this.setState({isDelete:true});});
           //  this.props.arr=temp;
-         
-       
-      console.log(";;;;;;;;;;;;;;;;;;;;;;;;")
     }
     handleClickOpen(){
       this.setState((prevState) => ({open:!prevState.open}));
@@ -113,90 +108,93 @@ class TeamCard extends React.Component {
 
     render()
     {
+      const colors = ['#ff0000', '#00ff00', '#0000ff'];
+      const random_color = colors[Math.floor(Math.random() * colors.length)];
+      console.log(this.props);
         return (
- this.state.isDelete===false?
- (<Card className={this.props.classes.root}>
-  <CardHeader
-    avatar={
-      <Avatar aria-label="recipe" className={this.props.classes.avatar}>
-         {this.state.UpperCase}
-      </Avatar>
-    }
-// action={
-//       <IconButton aria-label="settings">
-//         <AccountCircleIcon />
-//       </IconButton>
-//     }first_name
-    title={this.props.first_name+' '+this.props.last_name}
-    subheader={this.props.role}
-  />
- 
-  <CardContent>
-    <Typography paragraph className={this.props.classes.paragraph}>
-    Email:{this.props.mail}
-    </Typography>
-    <Typography paragraph className={this.props.classes.paragraph}>
-   {/* number:0549494949*/}
-    </Typography>
+      this.state.isDelete===false?
+      (<Card className={this.props.classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe" className={this.props.classes.avatar}>
+              {this.state.UpperCase}
+            </Avatar>
+          }
+      // action={
+      //       <IconButton aria-label="settings">
+      //         <AccountCircleIcon />
+      //       </IconButton>
+      //     }first_name
+          title={this.props.first_name+' '+this.props.last_name}
+          subheader={this.props.role}
+        />
+      
+        <CardContent>
+          <Typography paragraph className={this.props.classes.paragraph}>
+          Email:{this.props.mail}
+          </Typography>
+          <Typography paragraph className={this.props.classes.paragraph}>
+        {/* number:0549494949*/}
+          </Typography>
 
-  </CardContent>
+        </CardContent>
 
-  <CardActions disableSpacing>
-   
- <IconButton 
- aria-label="share"
- variant="outlined" 
- //color="primary" 
- onClick={this.handleClickOpen}
-  //onClick={this.handleExpandClick}
- color='secondary'
-  >
-      <DeleteIcon />
-</IconButton>
-<Dialog
-open={this.state.open}
-onClose={this.handleClose}
-aria-labelledby="alert-dialog-title"
-aria-describedby="alert-dialog-description"
->
+        <CardActions disableSpacing>
+        
+      <IconButton 
+      aria-label="share"
+      variant="outlined" 
+      //color="primary" 
+      onClick={this.handleClickOpen}
+        //onClick={this.handleExpandClick}
+      color='secondary'
+        >
+            <DeleteIcon />
+      </IconButton>
+      <Dialog
+      open={this.state.open}
+      onClose={this.handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      >
 
-<DialogContent>
-  <DialogContentText id="alert-dialog-description">
-  Are you sure you want to delete a user from the system?
-  </DialogContentText>
-</DialogContent>
-<DialogActions>
-<Button onClick={this.handleClickOpen} color="primary">
-  Disagree
-</Button>
-  <Button onClick={this.handleClose} color="secondary" autoFocus>
-    Delete
-  </Button>
-</DialogActions>
-</Dialog>
- {/*
-    <IconButton
-      className={clsx(this.props.classes.expand, {
-        [this.props.classes.expandOpen]: this.state.expanded,
-      })}
-      onClick={this.handleExpandClick}
-      aria-expanded={this.state.expanded}
-      aria-label="show more"
-    >
-      <ExpandMoreIcon />
-    </IconButton>
-    */}
-  </CardActions>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+        Are you sure you want to delete a user from the system?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+      <Button onClick={this.handleClickOpen} color="primary">
+        Disagree
+      </Button>
+        <Button onClick={this.handleClose} color="secondary" autoFocus>
+          Delete
+        </Button>
+      </DialogActions>
+      </Dialog>
+      {/*
+          <IconButton
+            className={clsx(this.props.classes.expand, {
+              [this.props.classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+          */}
+        </CardActions>
 
 
-  {/*<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-    <CardContent>
-      <Typography paragraph>
-        Heat
-      </Typography>
-    </CardContent>
-  </Collapse>*/}
-</Card>)
+        {/*<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>
+              Heat
+            </Typography>
+          </CardContent>
+        </Collapse>*/}
+      </Card>)
 :<div></div>
     
 
