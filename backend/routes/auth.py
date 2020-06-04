@@ -121,5 +121,37 @@ def delete_user(id):
 
 
 
+@bp.route("/update_password", methods=["POST"])
+def update_password():
+    """
+
+    :return:
+    """
+    if request.is_json:
+        email = request.json["email"]
+        old_password1 = request.json["old_password1"]
+        old_password2 = request.json["old_password2"]
+        new_password = request.json["new_password"]
+
+    else:
+        email = request.form["email"]
+        old_password1 = request.form["old_password1"]
+        old_password2 = request.form["old_password2"]
+        new_password = request.form["new_password"]
+
+    test = db.users.find_one({"email":email})
+    if old_password1 != old_password2:
+        return jsonify(message="Bad Password Confirmation"), 401
+    if test:
+        myquery = {"email":email}
+        newvalues = {"$unset": {"reset_token": ""}, "$set": {"password": bcrypt.generate_password_hash(new_password)}}
+        try:
+            user = db.users.update_one(myquery, newvalues)
+            return jsonify(message="Password upadate Succeeded!"), 201
+        except:
+            return jsonify(message="Bad Email or Password"), 401
+
+    return jsonify(message="Bad Email or Password"), 401
+
 
 

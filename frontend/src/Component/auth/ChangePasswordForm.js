@@ -14,10 +14,9 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 
-
+import axios from 'axios';
 
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 
 const styles = theme => ({
@@ -43,11 +42,12 @@ const styles = theme => ({
 class ChangePasswordForm extends React.Component {
   constructor(props) {
     super(props);
-    this.signIn = this.signIn.bind(this);
+    this.updatePass = this.updatePass.bind(this);
     this.state = {
       email: { value: null, error: false, helperText: null },
-      Password1: { value: null, error: false, helperText: null },
-      Password2: { value: null, error: false, helperText: null },
+      old_password1: { value: null, error: false, helperText: null },
+      old_password2: { value: null, error: false, helperText: null },
+      new_password: { value: null, error: false, helperText: null },
       msg: null
     };
   }
@@ -66,7 +66,52 @@ class ChangePasswordForm extends React.Component {
   }
 
 
-  
+  updatePass(event){
+    event.preventDefault();
+    if (this.emailInput.value === "") {
+      this.setState({
+        email: {
+          value: this.emailInput.value,
+          error: true,
+          helperText: "Your email must be specified."
+        }
+      });
+      this.emailInput.focus();
+    }
+    else{
+    
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+         const user = {
+              email: this.emailInput.value,
+              old_password1: this.old_password1.value,
+              old_password2: this.old_password2.value,
+              new_password: this.new_password.value,
+
+            };
+
+
+        // Request body
+        const body = JSON.stringify({ user });
+    
+        axios.post('/forgot_password', body, config)
+        .then(res =>{
+            this.setState({ msg: res.message })
+            }
+          
+        )
+        .catch(err => {
+            this.setState({ msg: err.message })
+      
+        })
+        
+     }
+  }
+
 
   render(){
     const { classes } = this.props;
@@ -137,6 +182,11 @@ class ChangePasswordForm extends React.Component {
               null
               )}
               
+              <Grid item xs>
+                <Link onClick={this.props.handler} variant="body2">
+                  Back to login
+                </Link>
+              </Grid>
             
           </form>
         </div>

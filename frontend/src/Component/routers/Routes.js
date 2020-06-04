@@ -26,8 +26,6 @@ class Routes extends Component {
         <div>
           <PrivateRoute exact path="/" component={Dashboard} authed={this.props.auth.isAuthenticated} />
           <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/changePass" component={ChangePasswordForm} />
-          <Route exact path="/forgotPass" component={ForgotPasswordForm} />
 
 
         </div>

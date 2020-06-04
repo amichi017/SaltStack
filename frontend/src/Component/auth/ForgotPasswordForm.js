@@ -146,7 +146,7 @@ class ForgotPassword extends React.Component {
               null
               )}
              <Grid item xs>
-                <Link href="/login" variant="body2">
+                <Link onClick={this.props.handler} variant="body2">
                   Back to login
                 </Link>
               </Grid>

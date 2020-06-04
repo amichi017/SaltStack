@@ -21,21 +21,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { StoreTwoTone } from '@material-ui/icons';
 import store from '../../store';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-
+import { Route } from 'react-router-dom';
+import ForgotPasswordForm from './ForgotPasswordForm';
+import ChangePasswordForm from './ChangePasswordForm';
 
 
 const styles = theme => ({
@@ -62,6 +50,7 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.signIn = this.signIn.bind(this);
+    this.handler = this.handler.bind(this);
     this.state = {
       email: { value: null, error: false, helperText: null },
       password: { value: null, error: false, helperText: null },
@@ -92,7 +81,11 @@ class LoginForm extends React.Component {
   }
 
 
-      
+   handler(){
+     this.setState(
+      {screen: 'login'}
+     )
+   }
   
 
    signIn(event){
@@ -122,6 +115,11 @@ class LoginForm extends React.Component {
   
 
   render(){
+    if (this.state.screen === 'forgot')
+      return <ForgotPasswordForm handler={this.handler}/>
+    if (this.state.screen === 'change')
+      return <ChangePasswordForm handler={this.handler}/>
+
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
@@ -183,12 +181,12 @@ class LoginForm extends React.Component {
 
             <Grid container>
               <Grid item xs>
-                <Link href="/forgotPass" variant="body2">
-                  Forgot password?
+                <Link onClick={() => this.setState({screen:'forgot'})} variant="body2">
+                {"Reset Your Password"}
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/changePass" variant="body2">
+                <Link onClick={() => this.setState({screen:'change'})} variant="body2">
                   {"Do you want to update your password?"}
                 </Link>
               </Grid>
