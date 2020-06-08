@@ -42,11 +42,7 @@ import {
 //import data from './f.json';
 
 const time =(str)=>{
-    const year =str.slice(0,4);
-    const month =String(parseInt(str.slice(4,6))-1);
-    const day =str.slice(6,8);
     const hower= str.slice(8,10);
-
     const minet=str.slice(10,12);
     return String(hower)+":"+String(minet);
 
@@ -54,8 +50,9 @@ const time =(str)=>{
 
 const  date=(str)=>{
     const year =str.slice(0,4);
-    const month =String(parseInt(str.slice(4,6))-1);
+    const month =String(parseInt(str.slice(4,6)));
     const day =str.slice(6,8);
+   
     return String(day)+"/"+String(month)+"/"+String(year);
 
 }
@@ -113,6 +110,46 @@ class Orders extends React.Component {
             dialogOpen:false,
             minion:"",
         }
+       
+    }
+    componentWillMount(){
+      
+        setTimeout(()=>{  
+            const start=store.getState().date.start;
+            let startTemp=new Date(start.getTime());
+          
+            startTemp.setHours(0,0,0);
+            const end=store.getState().date.end;
+            let endTemp=new Date(end.getTime());
+          
+           // console.log(endTemp,'new Date(end.getTime());')
+           // console.log(start,'store.getState().date.start;')
+            let saltTemp=store.getState().saltReturns.saltReturns
+            .filter((item)=>{return item.full_ret.fun === "state.apply"})
+            .filter((item)=>{
+                let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+                let time=new Date(str);
+                if(time >= startTemp && time<= endTemp){return item;}
+            })
+            .map((item)=>{
+    
+                return {
+    
+                    status:(item.full_ret.success === true)?'Success':'Fail',
+                    name:item.minion,
+                    date:date(item.full_ret.jid),
+                    id:item._id,
+                    time: time(item.full_ret.jid),
+    
+                    // return:item.return
+                };}
+            )
+        
+            this.setState({saltReturns:saltTemp});
+           // console.log(this.state.saltReturns,'setTimeout(()=>{this.setState({saltReturns:saltTemp});}, 600);');
+        }, 700);
+        //setTimeout(()=>{;}, 1000);
+       
     }
     selestMinion(event, rowData){
         //console.log(rowData, " equl");
@@ -133,19 +170,27 @@ class Orders extends React.Component {
 
         // console.log(store.getState(),";;;;;;;;;;");
         const start=store.getState().date.start;
+        let startTemp=new Date(start.getTime());
+      
+        startTemp.setHours(0,0,0);
         const end=store.getState().date.end;
         let endTemp=new Date(end.getTime());
-        endTemp.setDate(end.getDate()+1);
+        
         if(nextProps.saltReturns.saltReturns!==null)
         {
+        //console.logconsole.log(nextProps.saltReturns.saltReturns,'data from table conponent')
         if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
-           // console.log(this.props.saltReturns, 'this.props.saltReturns')
+           //console.log(this.props.saltReturns, 'this.props.saltReturns')
             this.state.saltReturns=nextProps.saltReturns.saltReturns
             .filter((item)=>{return item.full_ret.fun === "state.apply"})
             .filter((item)=>{
-                let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+                console.log(item,'item ..........................')
+                let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
                 let time=new Date(str);
-                if(time >= start && time<= endTemp){return item;}
+                // console.log(str,'str');
+                // console.log(time,'new Date(str);');
+                // console.log(endTemp,'endTemp');
+                if(time >= startTemp && time<= endTemp){return item;}
             })
             .map((item)=>{
 
@@ -163,6 +208,7 @@ class Orders extends React.Component {
             this.state.Returns=nextProps.saltReturns.saltReturns.map((item)=>{
                 return{Returns:item.full_ret.return}
             })
+            console.log(this.state.Returns,'this.state.Returns');
         }
 
             // console.log(store.getState());
@@ -170,6 +216,10 @@ class Orders extends React.Component {
             // console.log(this.state.Returns,"kkkkkkkkkkkkkkkk")
 
         }
+
+
+
+
     }
 
     render(){
@@ -222,7 +272,8 @@ class Orders extends React.Component {
                             {   (this.state.minion !== undefined )? (date(String(this.state.minion.jid))): " "}
                             {' at hour '}
                             {(this.state.minion !== undefined )? (time(String(this.state.minion.jid))): " "}
-                            {console.log(this.state.minion,"comment")}
+                            {//console.log(this.state.minion,"comment")}
+                             }
                         </Typography>
                     </DialogTitle>
 

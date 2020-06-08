@@ -74,8 +74,8 @@ const tableIcons = {
 
 const styles = theme => ({
     MaterialTable:{
-        marginLeft: theme.spacing(20),
-        marginTop: theme.spacing(1),
+        marginLeft: theme.spacing(12),
+        marginTop: theme.spacing(1.5),
         width:450, 
     },
     root: {
@@ -355,7 +355,8 @@ class SaltStack extends React.Component {
 
         </ButtonGroup>
 
-        <ButtonGroup 
+       {
+           /* <ButtonGroup 
             size="large" 
             color="primary" 
             orientation="horizontal"
@@ -382,6 +383,7 @@ class SaltStack extends React.Component {
             <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
             <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
         </ButtonGroup>
+    */}
     </div>
 
     <div className={this.props.classes.Divider}>
@@ -391,7 +393,7 @@ class SaltStack extends React.Component {
 
 
     {
-        <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:550}}>
+        <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:600}}>
         {store.getState().saveMinion.saveMinion.map(item =>{
             return(
                 

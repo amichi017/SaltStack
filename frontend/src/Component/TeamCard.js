@@ -1,4 +1,3 @@
-
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import store from '../store';
@@ -30,7 +29,8 @@ const styles = theme => ({
     root: {
         minWidth: 345,
         maxWidth: 400,
-        margin:theme.spacing(2.5)
+        margin:theme.spacing(2.5),
+       
       },
       media: {
         height: 0,
@@ -110,7 +110,7 @@ class TeamCard extends React.Component {
     {
       const colors = ['#ff0000', '#00ff00', '#0000ff'];
       const random_color = colors[Math.floor(Math.random() * colors.length)];
-      console.log(this.props);
+      //console.log(this.props);
         return (
       this.state.isDelete===false?
       (<Card className={this.props.classes.root}>

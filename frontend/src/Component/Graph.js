@@ -22,10 +22,10 @@ import { Store } from '@material-ui/icons';
 
 const time =(str)=>{
   const year =str.slice(0,4);
-  const month =String(parseInt(str.slice(4,6))-1);
+  const month =String(parseInt(str.slice(4,6)));
   const day =str.slice(6,8);
   const hower= str.slice(8,10);
-  
+  //console.log(month,'montg from graph');
   const minet=str.slice(10,12);
   return String(hower)+":"+String(minet);
 
@@ -101,10 +101,12 @@ const parseNumber= (str)=>{
       ];
       if(nextProps.saltReturns.saltReturns!==null)
       {
+        //console.log(nextProps.saltReturns.saltReturns,'data from graph conponent')
+      
        nextProps.saltReturns.saltReturns
        .filter((item)=>{return item.full_ret.fun === "state.apply"})
        .filter((item)=>{
-          let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+          let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
           //let time=new Date(str);
           // if(time >= start && time<= end){return item;}
           let time=new Date(str);
@@ -162,7 +164,7 @@ const parseNumber= (str)=>{
     store.getState().saltReturns.saltReturns
     .filter((item)=>{return item.full_ret.fun === "state.apply"})
     .filter((item)=>{
-    let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
+    let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
     // let time=new Date(str);
     // // if(time >= start && time<= end){return item;}
     

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
 import store from '../store';
-
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import {SAVE_MINION} from "../actions/types";
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -48,6 +48,7 @@ const styles = theme => ({
   },
   title: {
     fontSize: 16,
+    overflow:'wrap'
   },
   pos: {
     marginBottom: 12,
@@ -136,7 +137,7 @@ render(){
                         })}
                       >
                       <ListItemIcon>
-                        <FormatListBulletedRoundedIcon />
+                        <DashboardIcon />
                       </ListItemIcon>
                       
                       <ListItemText primary="See minions" />
