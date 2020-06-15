@@ -68,7 +68,7 @@ const parseNumber= (str)=>{
 
   constructor(props) {
     super(props);
-    
+    this.InitData=this.InitData.bind(this);
     this.state = {
       start: new Date(),
       end:new Date(),
@@ -82,6 +82,9 @@ const parseNumber= (str)=>{
               { time:"21:00",Success:0,Fail:0, amount:0 },
               { time:"24:00",Success:0,Fail:0, amount:0 },]
   };
+}
+InitData(){
+  
 }
   componentWillReceiveProps(nextProps) {
     if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
@@ -142,6 +145,23 @@ const parseNumber= (str)=>{
         //console.log(this.state.data,"this.state.data                             ");
       //  console.log("state                               ",store.getState());
     }
+    
+      const startTemp=store.getState().date.start;
+      const endTemp=store.getState().date.end;
+      if((startTemp.getTime()> endTemp.getTime())){
+      let temp=[
+        { time:"00:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"03:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"06:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"09:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"12:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"15:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"18:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"21:00",Succeeded:0,Fail:0, amount:0 },
+        { time:"24:00",Succeeded:0,Fail:0, amount:0 },
+      ];
+      this.state.data=temp;
+    }
   }
   componentWillUpdate() {
     const start=store.getState().date.start;
@@ -197,7 +217,22 @@ const parseNumber= (str)=>{
   }
   this.state.data= temp;
   //console.log(this.state.data,"this.state.data                             ");
-  
+  const startTemp=store.getState().date.start;
+  const endTemp=store.getState().date.end;
+  if((startTemp.getTime()> endTemp.getTime())){
+  let temp=[
+    { time:"00:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"03:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"06:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"09:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"12:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"15:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"18:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"21:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"24:00",Succeeded:0,Fail:0, amount:0 },
+  ];
+  this.state.data=temp;
+}
 }
   render(){
   return (
