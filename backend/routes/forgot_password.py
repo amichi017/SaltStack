@@ -8,6 +8,7 @@ from wtforms.validators import DataRequired, ValidationError
 from backend.app import db, bcrypt
 from backend.services.mail_service import send_email
 
+import asyncio
 
 class PasswordForm(Form):
     reset_token = HiddenField("reset_token")
@@ -17,6 +18,7 @@ class PasswordForm(Form):
 
 bp = Blueprint('forgot_password', __name__)
 
+loop = asyncio.new_event_loop()
 
 @bp.route("/forgot_password", methods=["POST"])
 def forgot_password():
@@ -44,13 +46,14 @@ def forgot_password():
 
     url = request.host_url + 'reset/'
     try:
-        return send_email('SaltStack GUI Reset Your Password',
+        res = loop.run_until_complete(send_email('SaltStack GUI Reset Your Password',
                    sender='notifsalt@gmail.com',
                    recipients=[email],
                    text_body=render_template('email/reset_password.txt',
                                              url=url + reset_token),
                    html_body=render_template('email/reset_password.html',
-                                             url=url + reset_token))
+                                             url=url + reset_token)))
+        return jsonify(res=res)
     except Exception as e:
         return jsonify(message="Bad Email"), 401
 
