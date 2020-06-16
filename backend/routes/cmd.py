@@ -20,7 +20,7 @@ loop = asyncio.new_event_loop()
 
 
 @bp.route("/get_connected_minions")
-# @jwt_required
+@jwt_required
 def get_connected_minions():
     loop.run_until_complete(asyncio.sleep(15))
     return jsonify(result=['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il'])
@@ -40,7 +40,8 @@ def saltstack_cmd():
     if salt_cmd is not None:
         pass
 
-    cmd = [func,tgt]
+    cmd = [func,tgt,salt_cmd]
+    print(cmd)
     loop.run_until_complete(asyncio.sleep(15))
 
 

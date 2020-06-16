@@ -46,16 +46,17 @@ def forgot_password():
 
     url = request.host_url + 'reset/'
     try:
-        res = loop.run_until_complete(send_email('SaltStack GUI Reset Your Password',
+        send_email('SaltStack GUI Reset Your Password',
                    sender='notifsalt@gmail.com',
                    recipients=[email],
                    text_body=render_template('email/reset_password.txt',
                                              url=url + reset_token),
                    html_body=render_template('email/reset_password.html',
-                                             url=url + reset_token)))
-        return jsonify(res=res)
+                                             url=url + reset_token))
     except Exception as e:
-        return jsonify(message="Bad Email"), 401
+        return jsonify(msg="Failed to send Email"), 401
+    finally:
+        return jsonify(msg="Email sent successfully")
 
 
 @bp.route("/reset_password", methods=["POST"])
