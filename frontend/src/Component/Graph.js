@@ -97,6 +97,7 @@ InitData(){
   ];
   return temp;
 }
+
   componentWillReceiveProps(nextProps) {
     if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
       this.setState({start:nextProps.date.start,end:nextProps.date.end});
@@ -189,6 +190,7 @@ InitData(){
     }
   }
   componentWillUpdate() {
+    console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     const start=store.getState().date.start;
     const end=store.getState().date.end;
    // console.log(store.getState());
