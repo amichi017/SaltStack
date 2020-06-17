@@ -84,14 +84,25 @@ const parseNumber= (str)=>{
   };
 }
 InitData(){
-  
+  let temp=[
+    { time:"00:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"03:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"06:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"09:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"12:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"15:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"18:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"21:00",Succeeded:0,Fail:0, amount:0 },
+    { time:"24:00",Succeeded:0,Fail:0, amount:0 },
+  ];
+  return temp;
 }
   componentWillReceiveProps(nextProps) {
     if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
       this.setState({start:nextProps.date.start,end:nextProps.date.end});
       const start=store.getState().date.start;
       const end=store.getState().date.end;
-      let temp=[
+      let tempArray=[
         { time:"00:00",Succeeded:0,Fail:0, amount:0 },
         { time:"03:00",Succeeded:0,Fail:0, amount:0 },
         { time:"06:00",Succeeded:0,Fail:0, amount:0 },
@@ -120,27 +131,41 @@ InitData(){
           if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
         })
         .forEach(item => {
+          let res=true;
+          if(item.full_ret.success === false){res=false}
+         // let temp =Object.entries(item.return);
+          if(Array.isArray(item.full_ret.return)){ res=true}
+          else{
+              console.log(item,'item');
+              let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
+              let flag=false;
+              dataTemp.forEach(item =>{
+                  console.log(Object.values(item),'Object.values(item)');
+                  if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
+                  else{res=false;flag=true;}
+              } )
+          }
         if(parseNumber(item.full_ret.jid)==="03:00")
-        { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Fail++)};
+        { res === true ?(tempArray[1].Success++):(tempArray[1].Fail++)};
         if(parseNumber(item.full_ret.jid)==="06:00")
-        { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Fail++)};
+        { res === true ?(tempArray[2].Success++):(tempArray[2].Fail++)};
         if(parseNumber(item.full_ret.jid)==="09:00")
-        { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Fail++)};
+        { res === true ?(tempArray[3].Success++):(tempArray[3].Fail++)};
         if(parseNumber(item.full_ret.jid)==="12:00")
-        { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Fail++)};
+        { res === true ?(tempArray[4].Success++):(tempArray[4].Fail++)};
         if(parseNumber(item.full_ret.jid)==="15:00")
-        { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Fail++)};
+        { res === true ?(tempArray[5].Success++):(tempArray[5].Fail++)};
         if(parseNumber(item.full_ret.jid)==="18:00")
-        { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Fail++)};
+        { res === true ?(tempArray[6].Success++):(tempArray[6].Fail++)};
         if(parseNumber(item.full_ret.jid)==="21:00")
-        { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Fail++)};
+        { res === true ?(tempArray[7].Success++):(tempArray[7].Fail++)};
         if(parseNumber(item.full_ret.jid)==="24:00")
-        { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Fail++)};
+        { res === true ?(tempArray[8].Success++):(tempArray[8].Fail++)};
        
         
         });
       }
-        this.state.data=temp;
+        this.state.data=tempArray;
 
         //console.log(this.state.data,"this.state.data                             ");
       //  console.log("state                               ",store.getState());
@@ -196,22 +221,36 @@ InitData(){
     if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
   })
   .forEach(item => {
+    let res=true;
+    if(item.full_ret.success === false){res=false}
+    //let temp =Object.entries(item.return);
+    if(Array.isArray(item.full_ret.return)){ res=true}
+    else{
+        console.log(item,'item');
+        let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
+        let flag=false;
+        dataTemp.forEach(item =>{
+            console.log(Object.values(item),'Object.values(item)');
+            if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
+            else{res=false;flag=true;}
+        } )
+    }
   if(parseNumber(item.full_ret.jid)==="03:00")
-  { item.full_ret.success === true ?(temp[1].Success++):(temp[1].Fail++)};
+  { res === true ?(temp[1].Success++):(temp[1].Fail++)};
   if(parseNumber(item.full_ret.jid)==="06:00")
-  { item.full_ret.success === true ?(temp[2].Success++):(temp[2].Fail++)};
+  { res === true ?(temp[2].Success++):(temp[2].Fail++)};
   if(parseNumber(item.full_ret.jid)==="09:00")
-  { item.full_ret.success === true ?(temp[3].Success++):(temp[3].Fail++)};
+  { res === true ?(temp[3].Success++):(temp[3].Fail++)};
   if(parseNumber(item.full_ret.jid)==="12:00")
-  { item.full_ret.success === true ?(temp[4].Success++):(temp[4].Fail++)};
+  { res === true ?(temp[4].Success++):(temp[4].Fail++)};
   if(parseNumber(item.full_ret.jid)==="15:00")
-  { item.full_ret.success === true ?(temp[5].Success++):(temp[5].Fail++)};
+  { res === true ?(temp[5].Success++):(temp[5].Fail++)};
   if(parseNumber(item.full_ret.jid)==="18:00")
-  { item.full_ret.success === true ?(temp[6].Success++):(temp[6].Fail++)};
+  { res === true ?(temp[6].Success++):(temp[6].Fail++)};
   if(parseNumber(item.full_ret.jid)==="21:00")
-  { item.full_ret.success === true ?(temp[7].Success++):(temp[7].Fail++)};
+  { res === true ?(temp[7].Success++):(temp[7].Fail++)};
   if(parseNumber(item.full_ret.jid)==="24:00")
-  { item.full_ret.success === true ?(temp[8].Success++):(temp[8].Fail++)};
+  { res === true ?(temp[8].Success++):(temp[8].Fail++)};
   });
   
   }
