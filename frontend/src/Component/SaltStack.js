@@ -50,6 +50,7 @@ import Grid from '@material-ui/core/Grid';
 import { returnErrors } from '../actions/errorActions';
 import { listMinions } from '../actions/date';
 import Icon from '@material-ui/core/Icon';
+import ClearIcon from '@material-ui/icons/Clear';
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -102,7 +103,7 @@ const styles = theme => ({
     },
     inputparms:{
         marginLeft: theme.spacing(1),
-        marginTop: 0,
+    
         //width: 400,
         flex: 1,
     },
@@ -110,15 +111,27 @@ const styles = theme => ({
         marginTop: theme.spacing(5),
         width:200
     },
+   
     iconButton: {
       padding: 10,
       height:55
     },
     Divider: {
-        marginTop: theme.spacing(5),
-      height: 28,
-      margin: 20,
+      marginTop: theme.spacing(5),
+      height: 50,
+      margin: 4,
     },
+    iconButtonParms: {
+     
+        padding: 10,
+        height: 10,
+        width:4,
+      },
+      dividerParms: {
+        marginTop: theme.spacing(5),
+        height: '100%',
+        margin: 4,
+      },
     msg:{
         width: '100%',
         '& > * + *': {
@@ -413,8 +426,19 @@ class SaltStack extends React.Component {
         placeholder="Command Line"
         inputProps={{ 'aria-label': 'Command Line' }}
         />
-                    
-        <IconButton color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
+        {
+            this.state.input!==""?(
+                <div>
+          
+            <IconButton color="primary" className={this.props.classes.iconButton} aria-label="directions" onClick={()=>{this.setState({input:""})}}>
+              <ClearIcon />
+            </IconButton>
+            </div>
+            )
+            :(<div></div>)
+        }
+        <Divider className={this.props.classes.divider} orientation="vertical" />     
+        <IconButton fontSize="small" color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
             <SendIcon />
         </IconButton>
     </Paper>
@@ -441,6 +465,27 @@ class SaltStack extends React.Component {
     placeholder="Parameters"
     inputProps={{ 'aria-label': 'Parameters' }}
     />
+    {
+    //     this.state.parms!==""?(
+            
+     
+    //         <Divider className={this.props.classes.divider} orientation="vertical" />
+       
+    //     )
+    //     :(<div></div>)
+    }
+  
+    {
+        this.state.parms!==""?(
+            
+     
+        <IconButton fontSize="small" color="primary" className={this.props.classes.iconButton} aria-label="directions" onClick={()=>{this.setState({parms:""})}}>
+        <ClearIcon />
+      </IconButton>
+       
+        )
+        :(<div></div>)
+    }
     {
 //     <Divider orientation="vertical" flexItem/>   
 //    <Button
@@ -477,7 +522,7 @@ class SaltStack extends React.Component {
            
          
 
-            <Button onClick={()=>this.sentCommand('cmd.run')}>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('cmd.run')}>cmd.run</Button>
             <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
             <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
 
