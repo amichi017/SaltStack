@@ -344,16 +344,7 @@ class SaltStack extends React.Component {
                     'Content-Type': 'application/json'
                 }
             }
-<<<<<<< HEAD
-            const cmd_body = {
-                func: this.state.command,
-                tgt: this.state.saveMinion,
-                salt_cmd: this.state.cmd_args
-            }
-            const body = JSON.stringify(cmd_body);
-            console.log(body)
 
-=======
             const words = this.state.input.split(' ');
             const parms_send=this.state.parms.split(' ');
             // for (let index = 2; index < words.length; index++) {
@@ -383,7 +374,7 @@ class SaltStack extends React.Component {
            // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
            // console.log(this.state.saveMinion,"this.state.saveMinion");
             const body = JSON.stringify(res);
->>>>>>> eba157aa47c432fcc04acd35d55c8100b0fea4b3
+
             let tokenTemp=this.tokenConfig();
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
