@@ -165,7 +165,7 @@ class SaltStack extends React.Component {
        
         let tokenTemp=this.tokenConfig();
       
-        axios.get('http://127.0.0.1:5000/get_connected_minions',tokenTemp)
+        axios.get('/get_connected_minions',tokenTemp)
         .then((res) => {
                 let arr=[];
                 for(let i=0;i<res.data.result.length;i++){
@@ -269,13 +269,18 @@ class SaltStack extends React.Component {
                     'Content-Type': 'application/json'
                 }
             }
-            // Request body
-           // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
-           // console.log(this.state.saveMinion,"this.state.saveMinion");
-            const body = JSON.stringify(this.state.saveMinion);
+            const cmd_body = {
+                func: this.state.command,
+                tgt: this.state.saveMinion,
+                salt_cmd: this.state.cmd_args
+            }
+            const body = JSON.stringify(cmd_body);
+            console.log(body)
+
             let tokenTemp=this.tokenConfig();
-            axios.post('http://127.0.0.1:5000/saltstack_cmd',body, tokenTemp)
+            axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
+                console.log(res)
             })
             .catch(err => {
                 console.log("err from SaltStack")

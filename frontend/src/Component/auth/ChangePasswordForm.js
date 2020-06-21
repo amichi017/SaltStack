@@ -45,8 +45,8 @@ class ChangePasswordForm extends React.Component {
     this.updatePass = this.updatePass.bind(this);
     this.state = {
       email: { value: null, error: false, helperText: null },
-      old_password1: { value: null, error: false, helperText: null },
-      old_password2: { value: null, error: false, helperText: null },
+      current_password: { value: null, error: false, helperText: null },
+      confirm_password: { value: null, error: false, helperText: null },
       new_password: { value: null, error: false, helperText: null },
       msg: null
     };
@@ -58,6 +58,7 @@ class ChangePasswordForm extends React.Component {
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === 'Weak Password') {
+        console.log(error)
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
@@ -88,8 +89,8 @@ class ChangePasswordForm extends React.Component {
 
          const user = {
               email: this.emailInput.value,
-              old_password1: this.old_password1.value,
-              old_password2: this.old_password2.value,
+              current_password: this.current_password.value,
+              confirm_password: this.confirm_password.value,
               new_password: this.new_password.value,
 
             };
@@ -131,10 +132,10 @@ class ChangePasswordForm extends React.Component {
               margin="normal"
               required
               fullWidth
+              placeholder='Email'
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
               autoFocus
               required
               inputRef={input => (this.emailInput = input)}
@@ -146,25 +147,36 @@ class ChangePasswordForm extends React.Component {
               margin="normal"
               required
               fullWidth
-              name="password1"
-              label="Password1"
-              type="password1"
-              id="password1"
-              autoComplete="current-password"
-              inputRef={input => (this.passwordInput = input)}
+              name="current_password"
+              label="current_password"
+              type="current_password"
+              id="current_password"
+              inputRef={input => (this.current_password = input)}
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password2"
-              label="Password2"
-              type="password2"
-              id="password2"
-              autoComplete="current-password"
-              inputRef={input => (this.passwordInput = input)}
+              name="confirm_password"
+              label="confirm_password"
+              type="confirm_password"
+              id="confirm_password"
+              inputRef={input => (this.confirm_password = input)}
             />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              placeholder='please type your new password'
+              name="new_password"
+              label="new_password"
+              type="new_password"
+              id="new_password"
+              inputRef={input => (this.new_password = input)}
+            />
+            
            
             <Button
               type="submit"

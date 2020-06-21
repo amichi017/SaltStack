@@ -5,24 +5,48 @@ from flask_jwt_extended import jwt_required
 
 
 # from backend.app import db
-# from salt import local
-bp = Blueprint('cmd',__name__)
+# import salt.config
+# import salt.client
 
+import asyncio
+
+
+# local = salt.client.LocalClient()
 loop = asyncio.new_event_loop()
 
-# # REAL MINIONS FUNCTION
-# @bp.route("/get_connected_minions")
-# # @jwt_required
-# def get_connected_minions():
-#     # return local.cmd_async('*','state.apply')
-#
+
+
+bp = Blueprint('cmd',__name__)
+
+
+# async def run_cmd(*cmd_args):
+#     '''
+#     :param list with the command's arguments:
+#     :return:
+#     '''
+#     print(cmd_args)
+#     return local.cmd(*cmd_args)
+async def run_cmd(*cmd_args):
+    print(cmd_args)
+    return cmd_args
+
+# REAL MINIONS FUNCTION
+@bp.route("/get_connected")
+# @jwt_required
+def get_connected():
+    cmd_args = ['*','test.ping']
+    minions = loop.run_until_complete(run_cmd(*cmd_args))
+    print(minions)
+    return jsonify(res=minions)
+
 
 
 
 @bp.route("/get_connected_minions")
 @jwt_required
 def get_connected_minions():
-    loop.run_until_complete(asyncio.sleep(15))
+    res = loop.run_until_complete(asyncio.sleep(15))
+    print(res)
     return jsonify(result=['sm-stud.jce.ac.il','sm-stud01.jce.ac.il','sm-stud02.jce.ac.il'])
 
 @bp.route("/saltstack_cmd" ,methods=["POST"])
@@ -40,12 +64,11 @@ def saltstack_cmd():
     if salt_cmd is not None:
         pass
 
-    cmd = [func,tgt,salt_cmd]
-    print(cmd)
-    loop.run_until_complete(asyncio.sleep(15))
+    cmd_args = [func,tgt,salt_cmd]
+    res = loop.run_until_complete(run_cmd(*cmd_args))
 
 
-    return jsonify(res = cmd)
+    return jsonify(res = res)
 
 
 # REAL COMMANDS FUNCTION

@@ -89,7 +89,7 @@ class TeamCard extends React.Component {
       this.setState((prevState) => ({open:!prevState.open}));
       const { password, ReturnPassword,Role,Email,first_name,last_name } = this.state;
       const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
-      axios.delete("http://127.0.0.1:5000/delete/"+this.props.id, tokenConfig(store.getState))
+      axios.delete("/delete/"+this.props.id, tokenConfig(store.getState))
       .then((res)=> {
         this.setState({isDelete:true});});
           //  this.props.arr=temp;

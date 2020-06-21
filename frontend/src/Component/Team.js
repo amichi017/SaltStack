@@ -143,7 +143,7 @@ class Team extends React.Component {
     }
 
     initTeam(){
-      axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
+      axios.get('/get_users',tokenConfig(store.getState))
       .then((res) => { 
        
         this.setState({Team:res.data});
@@ -221,7 +221,7 @@ class Team extends React.Component {
 
             const body = JSON.stringify({first_name:first_name,last_name:last_name,role:Role,email:Email, password:password });
             //console.log(body,'body')
-            axios.post("http://127.0.0.1:5000/register", body, tokenConfig(store.getState))
+            axios.post("/register", body, tokenConfig(store.getState))
           .then(res => 
             {
               this.state.Team.push({first_name:first_name,mail:Email,role:Role,last_name:last_name});
@@ -295,7 +295,7 @@ class Team extends React.Component {
     //   if(this.state.counter<=1)
     //   { 
         
-    //     axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
+    //     axios.get('/get_users',tokenConfig(store.getState))
     //   .then((res) => { 
        
     //     this.setState({Team:res.data});
