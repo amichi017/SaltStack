@@ -114,7 +114,7 @@ class Team extends React.Component {
         this.handleClickShowPasswordReturn = this.handleClickShowPasswordReturn.bind(this);
         this.handleMouseDownPasswordReturn = this.handleMouseDownPasswordReturn.bind(this);
         this.initTeam = this.initTeam.bind(this);
-       
+        //this.handleCloseAlert = this.handleCloseAlert.bind(this);
         this.state=
         {
           expanded:false,
@@ -202,11 +202,11 @@ class Team extends React.Component {
       const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{8,})");
       const emailRegex = new RegExp("[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,6}");    
       let flag=true;
-      if((strongRegex.test(password)===false) || ( password.length>30)  ){flag=false;this.setState({err_Password:true});setTimeout(()=>{this.setState({err_Password:false});}, 20000);}
-      if(first_name.length>30 ){flag=false;this.setState({err_first_name:true});setTimeout(()=>{this.setState({err_first_name:false});}, 8000);}
-      if(last_name.length>30 ){flag=false;this.setState({err_last_name:true});setTimeout(()=>{this.setState({err_last_name:false});}, 8000);}
-      if(Role.length>30 ){flag=false;this.setState({err_Role:true});setTimeout(()=>{this.setState({err_Role:false});}, 8000);}
-      if((Email.length>50) || (emailRegex.test(this.state.Email.toUpperCase())===false)){flag=false;this.setState({err_Email:true});setTimeout(()=>{this.setState({err_Email:false});}, 15000);}
+      if((strongRegex.test(password)===false) || ( password.length>30)  ){flag=false;this.setState({err_Password:true});setTimeout(()=>{this.setState({err_Password:false});}, 10000);}
+      if(first_name.length>30 ){flag=false;this.setState({err_first_name:true});setTimeout(()=>{this.setState({err_first_name:false});}, 6000);}
+      if(last_name.length>30 ){flag=false;this.setState({err_last_name:true});setTimeout(()=>{this.setState({err_last_name:false});}, 6000);}
+      if(Role.length>30 ){flag=false;this.setState({err_Role:true});setTimeout(()=>{this.setState({err_Role:false});}, 6000);}
+      if((Email.length>50) || (emailRegex.test(this.state.Email.toUpperCase())===false)){flag=false;this.setState({err_Email:true});setTimeout(()=>{this.setState({err_Email:false});}, 6000);}
       if (password===ReturnPassword){}
       else
       {
@@ -278,9 +278,15 @@ class Team extends React.Component {
         if (reason === 'clickaway') {
           return;
         }
-     
+    
+        
         this.setState({errPassword:false,saveCard:false});
     }
+    // handleCloseAlert(event){
+      
+    //   this.setState({ [event] : false});
+    //   console.log(this.state[event],)
+    // }
     // shouldComponentUpdate(nextProps, nextState) {
     //   console.log(nextState,"nextState");
     //  }
@@ -386,7 +392,7 @@ class Team extends React.Component {
               this.state.err_first_name===true?
               (   <div className={this.props.classes.msg}>
                 
-                  <Alert onClose={this.handleClose} severity="error">
+                  <Alert onClose={() =>{this.setState({err_first_name:false})}} severity="error">
                   The first name must be less than  <strong>30 characters  </strong>
                   </Alert>
                   </div>
@@ -420,7 +426,7 @@ class Team extends React.Component {
             this.state.err_last_name===true?
             (   <div className={this.props.classes.msg}>
               
-                <Alert onClose={this.handleClose} severity="error">
+                <Alert onClose={() =>{this.setState({err_last_name:false})}} severity="error">
                 The last name must be less than  <strong>30 characters  </strong>
                 </Alert>
                 </div>
@@ -454,7 +460,7 @@ class Team extends React.Component {
               this.state.err_Email===true?
               (   <div className={this.props.classes.msg}>
                 
-                  <Alert onClose={this.handleClose} severity="error">
+                  <Alert onClose={() =>{this.setState({err_Email:false})}} severity="error">
                    <strong> Invalid mail  </strong>
                   </Alert>
                   </div>
@@ -488,7 +494,7 @@ class Team extends React.Component {
               this.state.err_Role===true?
               (   <div className={this.props.classes.msg}>
                 
-                  <Alert onClose={this.handleClose} severity="error">
+                  <Alert onClose={() =>{this.setState({err_Role:false})}} severity="error">
                   The role name must be less than  <strong>30 characters  </strong>
                   </Alert>
                   </div>
@@ -538,7 +544,7 @@ class Team extends React.Component {
               this.state.err_Password===true?
               (   <div className={this.props.classes.msg}>
                 
-                  <Alert onClose={this.handleClose} severity="error">
+                  <Alert onClose={() =>{this.setState({err_Password:false})}} severity="error">
                   The password <strong>must </strong>  be at least 8 characters long, and include uppercase and lowercase letters, and special characters
                        <strong>{"{ !, @, #, \, $,%, \, ^ &, \, * }"}  </strong>
                   </Alert>
@@ -591,7 +597,7 @@ class Team extends React.Component {
             this.state.errPassword===true?
             (   <div className={this.props.classes.msg}>
               
-                <Alert onClose={this.handleClose} severity="error">
+                <Alert onClose={() =>{this.setState({errPassword:false})}} severity="error">
                  Passwords  <strong>unequal   </strong>
                 </Alert>
                 </div>
