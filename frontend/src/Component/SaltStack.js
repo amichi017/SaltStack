@@ -277,7 +277,7 @@ class SaltStack extends React.Component {
             this.setState({parms:""});
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
-            axios.post('http://127.0.0.1:5000/saltstack_cmd',body, tokenTemp)
+            axios.post('saltstack_cmd',body, tokenTemp)
             .then((res) => {
             })
             .catch(err => {

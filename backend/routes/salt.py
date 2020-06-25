@@ -5,23 +5,6 @@ from backend.app import db
 
 bp = Blueprint('api',__name__)
 
-@bp.route("/api/saltReturns")
-@jwt_required
-def get_SaltReturns():
-    """
-
-    :return:
-    """
-    saltReturns = db.saltReturns
-    print(saltReturns)
-    res = []
-    saltReturns = saltReturns.find()
-    for j in saltReturns:
-        j["_id"] = str(j["_id"])
-        res.append(j)
-    return jsonify(res)
-
-
 
 @bp.route("/api/saltReturns/apply")
 @jwt_required
@@ -61,6 +44,7 @@ def get_daily_applies(date_url):
         j["_id"] = str(j["_id"])
         res.append(j)
     return jsonify(res)
+
 
 @bp.route("/api/saltReturns/apply/month/<month>")
 @jwt_required
@@ -107,34 +91,28 @@ def get_yearly_applies(year):
 
 
 
-
-@bp.route("/api/jobs")
+@bp.route("/api/saltReturns/apply/<start_date>/<end_date>")
 @jwt_required
-def get_jobs():
+def get_table_returns(start_date,end_date):
     """
 
+    :param year:
     :return:
     """
-    jobs = db.jobs
+    saltReturns = db.saltReturns
+
+    # print(year)
+    # print(saltReturns)
     res = []
-    jobs = jobs.find()
-    for j in jobs:
+    saltReturns = saltReturns.find(
+        {"fun": "test.ping",
+         "jid": { "$gte": start_date, "$lte": end_date }
+         },{ "minion": 1, "jid": 1}
+    )
+
+    for j in saltReturns:
         j["_id"] = str(j["_id"])
         res.append(j)
     return jsonify(res)
 
 
-@bp.route("/api/events")
-@jwt_required
-def get_events():
-    """
-
-    :return:
-    """
-    events = db.events
-    res = []
-    events = events.find()
-    for j in events:
-        j["_id"] = str(j["_id"])
-        res.append(j)
-    return jsonify(res)
