@@ -207,13 +207,7 @@ class Dashboard extends React.Component {
               
              
 
-                <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                  <Badge badgeContent={4} color="secondary">
-                 
-                    <NotificationsIcon />
-                  </Badge>
-                  {/*<AccountCircleIcon />*/}
-                </IconButton>
+          
 
                 <Logout />
              
@@ -237,7 +231,7 @@ class Dashboard extends React.Component {
             </div>
             <Divider />
             <List>
-              
+    
             <ListItem button
             onClick={()=>{this.SelectMenu('Dashboard')}}
             >
@@ -250,7 +244,7 @@ class Dashboard extends React.Component {
           onClick={()=>{this.SelectMenu('SaltStack')}}
           >
             <ListItemIcon>
-              <SimCardIcon />
+            <SimCardIcon />
             </ListItemIcon>
             <ListItemText primary="SaltStack" />
           </ListItem>
@@ -262,8 +256,9 @@ class Dashboard extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Team" />
           </ListItem>
-
+         
             </List>
+           
           </Drawer>
           <main className={this.props.classes.content}>
             <div className={this.props.classes.appBarSpacer} />
@@ -319,17 +314,17 @@ class Dashboard extends React.Component {
             <Typography component="h1" variant="h6" color="inherit" noWrap className={this.props.classes.title}>
             SaltStack
             </Typography>
-  
-              <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                <Badge badgeContent={4} color="secondary">
-               
-                  <NotificationsIcon />
-                </Badge>
-                {/*<AccountCircleIcon />*/}
-              </IconButton>
+            
+           
+
+           
 
               <Logout />
- 
+           
+          
+          
+       
+  
           </Toolbar>
             </AppBar>
             <Drawer
@@ -346,34 +341,39 @@ class Dashboard extends React.Component {
               </div>
               <Divider />
               <List>
-              
-                      <ListItem button
-                      onClick={()=>{this.SelectMenu('Dashboard')}}
-                      >
-                      <ListItemIcon>
-                        <DashboardIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Dashboard" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('SaltStack')}}
-                    >
-                      <ListItemIcon>
-                        <SimCardIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="SaltStack" />
-                    </ListItem>
-                    <ListItem button
-                    onClick={()=>{this.SelectMenu('Team')}}
-                    >
-                      <ListItemIcon>
-                        <PeopleIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Team" />
-                    </ListItem>
-        
-                      </List>
-            
+      
+              <ListItem button
+              onClick={()=>{this.SelectMenu('Dashboard')}}
+              >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('SaltStack')}}
+            >
+              <ListItemIcon>
+                <SimCardIcon />
+              </ListItemIcon>
+              <ListItemText primary="SaltStack" />
+            </ListItem>
+            <ListItem button
+            onClick={()=>{this.SelectMenu('Team')}}
+            >
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Team" />
+            </ListItem>
+           
+              </List>
+             
+
+
+
+
+
             </Drawer>
 
             <main className={this.props.classes.content}>
@@ -392,7 +392,10 @@ class Dashboard extends React.Component {
       
           </div>
         );}
-                    
+
+
+
+       
               else if (this.state.menu==='Team'){
 
                 return (
@@ -419,13 +422,7 @@ class Dashboard extends React.Component {
                     
                    
         
-                      <IconButton color="inherit" className={this.props.classes.NotificationsIcon}>
-                        <Badge badgeContent={4} color="secondary">
-                       
-                          <NotificationsIcon />
-                        </Badge>
-                        {/*<AccountCircleIcon />*/}
-                      </IconButton>
+                     
         
                       <Logout />
                    
@@ -474,8 +471,9 @@ class Dashboard extends React.Component {
                       </ListItemIcon>
                       <ListItemText primary="Team" />
                     </ListItem>
-        
+                   
                       </List>
+                    
         
         
         

@@ -18,7 +18,6 @@ def get_salt_applies():
     res = []
     saltReturns = saltReturns.find({"fun": "state.apply"})
     for j in saltReturns:
-        jid = j["jid"]
         j["_id"] = str(j["_id"])
         res.append(j)
     return jsonify(res)
@@ -40,6 +39,7 @@ def get_daily_applies(date_url):
     saltReturns = saltReturns.find(
         {"fun": "state.apply", "jid": {"$regex": "%s.*" % (date)}}
     )
+
     for j in saltReturns:
         j["_id"] = str(j["_id"])
         res.append(j)
@@ -92,7 +92,7 @@ def get_yearly_applies(year):
 
 
 @bp.route("/api/saltReturns/apply/<start_date>/<end_date>")
-@jwt_required
+#@jwt_required
 def get_table_returns(start_date,end_date):
     """
 
@@ -105,14 +105,13 @@ def get_table_returns(start_date,end_date):
     # print(saltReturns)
     res = []
     saltReturns = saltReturns.find(
-        {"fun": "test.ping",
+        {"fun": "state.apply",
          "jid": { "$gte": start_date, "$lte": end_date }
-         },{ "minion": 1, "jid": 1}
+         },{ "minion": 1, "jid": 1, "return":1}
     )
 
     for j in saltReturns:
         j["_id"] = str(j["_id"])
         res.append(j)
     return jsonify(res)
-
 

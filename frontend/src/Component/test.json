@@ -1,4 +1,4 @@
-{
+[{
     "_id": "5eccf6fe13645c77861fff9f",
     "full_ret": {
         "fun": "state.apply",
@@ -218,7 +218,7 @@
                 "start_time": "14:00:21.011955"
             }
         },
-        "success": true
+        "success": false
     },
     "fun": "state.apply",
     "jid": "20200526110011911227",
@@ -436,3 +436,4 @@
         }
     }
 }
+]

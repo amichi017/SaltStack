@@ -87,12 +87,12 @@ class ForgotPassword extends React.Component {
     
         axios.post('/forgot_password', body, config)
         .then(res =>{
-            this.setState({ msg: res.msg })
+            this.setState({ msg: res.message })
             }
           
         )
         .catch(err => {
-            this.setState({ msg: err.msg })
+            this.setState({ msg: err.message })
       
         })
         

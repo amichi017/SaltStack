@@ -14,6 +14,8 @@ import { LineChart,
 } from 'recharts';
 import store from '../store';
 import Title from './Title';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { withStyles } from "@material-ui/core/styles";
 import { saltReturns } from '../actions/date';
 import { Store } from '@material-ui/icons';
 // import SaltData from'../demo/jsonPars.json';
@@ -62,16 +64,26 @@ const parseNumber= (str)=>{
  
 };
 
-
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    marginLeft: theme.spacing(50),
+    marginTop:theme.spacing(11),
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+});
 
  class Chart extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.InitData=this.InitData.bind(this);
+  
     this.state = {
       start: new Date(),
       end:new Date(),
+      graphIsPrepared:true,
       data:  [{ time:"00:00",Success:0,Fail:0, amount:0 },
               { time:"03:00",Success:0,Fail:0, amount:0 },
               { time:"06:00",Success:0,Fail:0, amount:0 },
@@ -83,26 +95,14 @@ const parseNumber= (str)=>{
               { time:"24:00",Success:0,Fail:0, amount:0 },]
   };
 }
-InitData(){
-  let temp=[
-    { time:"00:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"03:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"06:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"09:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"12:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"15:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"18:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"21:00",Succeeded:0,Fail:0, amount:0 },
-    { time:"24:00",Succeeded:0,Fail:0, amount:0 },
-  ];
-  return temp;
-}
+
 
   componentWillReceiveProps(nextProps) {
     if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
       this.setState({start:nextProps.date.start,end:nextProps.date.end});
       const start=store.getState().date.start;
       const end=store.getState().date.end;
+      this.setState({graphIsPrepared:false})
       let tempArray=[
         { time:"00:00",Succeeded:0,Fail:0, amount:0 },
         { time:"03:00",Succeeded:0,Fail:0, amount:0 },
@@ -116,58 +116,69 @@ InitData(){
       ];
       if(nextProps.saltReturns.saltReturns!==null)
       {
-        //console.log(nextProps.saltReturns.saltReturns,'data from graph conponent')
-      
+        let MonthEnd= String(parseInt(store.getState().date.end.getMonth())+1);
+        MonthEnd=parseInt(MonthEnd)<10?"0"+MonthEnd:MonthEnd;
+        let yearEnd=String(store.getState().date.end.getFullYear());
+        let DayEnd=store.getState().date.end.getDate()
+        DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
+        let EndStart=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"000000000000");
+
+        let End=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"235959595959")
+      //   console.log(store.getState(),'data from graph conponent');
+      // console.log(EndStart,"EndStart")
+      // console.log(End,"End")
        nextProps.saltReturns.saltReturns
-       .filter((item)=>{return item.full_ret.fun === "state.apply"})
+       //.filter((item)=>{return item.full_ret.fun === "state.apply"})
        .filter((item)=>{
-          let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-          //let time=new Date(str);
-          // if(time >= start && time<= end){return item;}
-          let time=new Date(str);
-          let startTemp=new Date(end.getTime());
-          let endTemp=new Date(end.getTime());
-          startTemp.setHours(0,0,0);
-          endTemp.setHours(23,59,59);
-          if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
+          // let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
+          // //let time=new Date(str);
+          // // if(time >= start && time<= end){return item;}
+          // let time=new Date(str);
+          // let startTemp=new Date(end.getTime());
+          // let endTemp=new Date(end.getTime());
+          // startTemp.setHours(0,0,0);
+          // endTemp.setHours(23,59,59);
+          // if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
+          if(parseInt(item.jid)>=EndStart && parseInt(item.jid)<=End){return item}
         })
         .forEach(item => {
           let res=true;
-          if(item.full_ret.success === false){res=false}
+         // if(item.full_ret.success === false){res=false}
          // let temp =Object.entries(item.return);
-          if(Array.isArray(item.full_ret.return)){ res=true}
+       //  console.log(item,"itemitemitemitemitemitemitemitem")
+          if(Array.isArray(item.return)){ res=true}
           else{
-              console.log(item,'item');
+             // console.log(item,'item');
               let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
               let flag=false;
               dataTemp.forEach(item =>{
-                  console.log(Object.values(item),'Object.values(item)');
+                  //console.log(Object.values(item),'Object.values(item)');
                   if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
                   else{res=false;flag=true;}
               } )
           }
-        if(parseNumber(item.full_ret.jid)==="03:00")
+        if(parseNumber(item.jid)==="03:00")
         { res === true ?(tempArray[1].Success++):(tempArray[1].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="06:00")
+        if(parseNumber(item.jid)==="06:00")
         { res === true ?(tempArray[2].Success++):(tempArray[2].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="09:00")
+        if(parseNumber(item.jid)==="09:00")
         { res === true ?(tempArray[3].Success++):(tempArray[3].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="12:00")
+        if(parseNumber(item.jid)==="12:00")
         { res === true ?(tempArray[4].Success++):(tempArray[4].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="15:00")
+        if(parseNumber(item.jid)==="15:00")
         { res === true ?(tempArray[5].Success++):(tempArray[5].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="18:00")
+        if(parseNumber(item.jid)==="18:00")
         { res === true ?(tempArray[6].Success++):(tempArray[6].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="21:00")
+        if(parseNumber(item.jid)==="21:00")
         { res === true ?(tempArray[7].Success++):(tempArray[7].Fail++)};
-        if(parseNumber(item.full_ret.jid)==="24:00")
+        if(parseNumber(item.jid)==="24:00")
         { res === true ?(tempArray[8].Success++):(tempArray[8].Fail++)};
        
         
         });
       }
         this.state.data=tempArray;
-
+        // console.log(this.state,"this.state")
         //console.log(this.state.data,"this.state.data                             ");
       //  console.log("state                               ",store.getState());
     }
@@ -186,11 +197,13 @@ InitData(){
         { time:"21:00",Succeeded:0,Fail:0, amount:0 },
         { time:"24:00",Succeeded:0,Fail:0, amount:0 },
       ];
+      this.setState({graphIsPrepared:true})
       this.state.data=temp;
     }
   }
+
   componentWillUpdate() {
-    console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    this.setState({graphIsPrepared:false})
     const start=store.getState().date.start;
     const end=store.getState().date.end;
    // console.log(store.getState());
@@ -208,56 +221,67 @@ InitData(){
 
    if( store.getState().saltReturns.saltReturns!==null)
    {
+    let MonthEnd= String(parseInt(store.getState().date.end.getMonth())+1);
+    MonthEnd=parseInt(MonthEnd)<10?"0"+MonthEnd:MonthEnd;
+    let yearEnd=String(store.getState().date.end.getFullYear());
+    let DayEnd=store.getState().date.end.getDate()
+    DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
+    let EndStart=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"000000000000");
+
+    let End=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"235959595959")
     store.getState().saltReturns.saltReturns
-    .filter((item)=>{return item.full_ret.fun === "state.apply"})
-    .filter((item)=>{
-    let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-    // let time=new Date(str);
-    // // if(time >= start && time<= end){return item;}
+  //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
+   .filter((item)=>{
+  //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
+  //   // let time=new Date(str);
+  //   // // if(time >= start && time<= end){return item;}
     
-    let time=new Date(str);
-    let startTemp=new Date(end.getTime());
-    let endTemp=new Date(end.getTime());
-    startTemp.setHours(0,0,0);
-    endTemp.setHours(23,59,59);
-    if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
-  })
+  //   let time=new Date(str);
+  //   let startTemp=new Date(end.getTime());
+  //   let endTemp=new Date(end.getTime());
+  //   startTemp.setHours(0,0,0);
+  //   endTemp.setHours(23,59,59);
+  //   if(((time.getTime() >=startTemp.getTime()))  && (time.getTime() <=endTemp.getTime())){return item;}
+  if(parseInt(item.jid)>=EndStart && parseInt(item.jid)<=End){return item}
+   })
   .forEach(item => {
     let res=true;
-    if(item.full_ret.success === false){res=false}
+   // if(item.full_ret.success === false){res=false}
     //let temp =Object.entries(item.return);
-    if(Array.isArray(item.full_ret.return)){ res=true}
+    if(Array.isArray(item.return)){ res=true}
     else{
-        console.log(item,'item');
+        //console.log(item,'item');
         let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
         let flag=false;
         dataTemp.forEach(item =>{
-            console.log(Object.values(item),'Object.values(item)');
+           // console.log(Object.values(item),'Object.values(item)');
             if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
             else{res=false;flag=true;}
         } )
     }
-  if(parseNumber(item.full_ret.jid)==="03:00")
+  if(parseNumber(item.jid)==="03:00")
   { res === true ?(temp[1].Success++):(temp[1].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="06:00")
+  if(parseNumber(item.jid)==="06:00")
   { res === true ?(temp[2].Success++):(temp[2].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="09:00")
+  if(parseNumber(item.jid)==="09:00")
   { res === true ?(temp[3].Success++):(temp[3].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="12:00")
+  if(parseNumber(item.jid)==="12:00")
   { res === true ?(temp[4].Success++):(temp[4].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="15:00")
+  if(parseNumber(item.jid)==="15:00")
   { res === true ?(temp[5].Success++):(temp[5].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="18:00")
+  if(parseNumber(item.jid)==="18:00")
   { res === true ?(temp[6].Success++):(temp[6].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="21:00")
+  if(parseNumber(item.jid)==="21:00")
   { res === true ?(temp[7].Success++):(temp[7].Fail++)};
-  if(parseNumber(item.full_ret.jid)==="24:00")
+  if(parseNumber(item.jid)==="24:00")
   { res === true ?(temp[8].Success++):(temp[8].Fail++)};
   });
   
   }
+   
+ 
   this.state.data= temp;
-  //console.log(this.state.data,"this.state.data                             ");
+//  console.log(this.state.data,"this.state.data                             ");
   const startTemp=store.getState().date.start;
   const endTemp=store.getState().date.end;
   if((startTemp.getTime()> endTemp.getTime())){
@@ -272,29 +296,34 @@ InitData(){
     { time:"21:00",Succeeded:0,Fail:0, amount:0 },
     { time:"24:00",Succeeded:0,Fail:0, amount:0 },
   ];
+ 
   this.state.data=temp;
 }
+this.setState({graphIsPrepared:true})
+ //console.log(this.state.graphIsPrepared,"ooooooooooooooooooooooo")
 }
   render(){
-  return (
-    <React.Fragment>
-      {/*<Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>*/}
-       {<Title style={{paddingLeft:5}}> {this.state.end.toLocaleDateString()}</Title>}
-      <ResponsiveContainer>
-          <LineChart
-            onClick={demoOnClick}
-            data={ this.state.data}
-            margin={{top: 16,right: 16,bottom: 0,left: 24,}}>
-          <XAxis dataKey="time" /><YAxis >{/* <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>(A/T)</Label>*/ }   
-          </YAxis>
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Fail" stroke="#ff6666" onClick={demoOnClick} />
-          <Line type="monotone" dataKey="Success" stroke="#82ca9d"  onClick={demoOnClick}/>
-        </LineChart>
-      </ResponsiveContainer>
-    </React.Fragment>
-  );
+   // console.log(this.state.graphIsPrepared,"pppppppppppppppp")
+      return(
+        <React.Fragment>
+        {/*<Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>*/}
+         {<Title style={{paddingLeft:5}}> {this.state.end.toLocaleDateString()}</Title>}
+        <ResponsiveContainer>
+            <LineChart
+              onClick={demoOnClick}
+              data={ this.state.data}
+              margin={{top: 16,right: 16,bottom: 0,left: 24,}}>
+            <XAxis dataKey="time" /><YAxis >{/* <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>(A/T)</Label>*/ }   
+            </YAxis>
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="Fail" stroke="#ff6666" onClick={demoOnClick} />
+            <Line type="monotone" dataKey="Success" stroke="#82ca9d"  onClick={demoOnClick}/>
+          </LineChart>
+        </ResponsiveContainer>
+      </React.Fragment>
+      )
+    
  }
 }
 
@@ -308,4 +337,5 @@ const mapStateToProps = (state) => {
 function matchDispatchToProps(dispatch){
   return bindActionCreators({dateSelect: dateSelect}, dispatch);
 }
-export default connect(mapStateToProps)(Chart);
+
+export default connect(mapStateToProps)(withStyles(styles)(Chart));

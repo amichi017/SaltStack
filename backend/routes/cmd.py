@@ -1,39 +1,29 @@
-import asyncio
-
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required
-
+from datetime import datetime, timedelta, timezone
 from backend.app import db
 
-# from backend.app import db
 # import salt.config
 # import salt.client
-
 import asyncio
-
+import subprocess
 
 # local = salt.client.LocalClient()
+#print(local)
 loop = asyncio.new_event_loop()
-
-
-
 bp = Blueprint('cmd',__name__)
 
 
-
-# async def run_cmd(*cmd_args):
-#     '''
-#     :param list with the command's arguments:
-#     :return:
-#     '''
-#     print(cmd_args)
-#     res = local.cmd(*cmd_args)
-#     return res
-
-# dummy run_cmd
 async def run_cmd(*cmd_args):
-    print(cmd_args)
-    return cmd_args
+    '''
+    :param list with the command's arguments:
+    :return:
+    '''
+    kwargs = {'tgt_type':'list'}
+    #print(cmd_args)
+    res = []
+    # res=local.cmd(*cmd_args,**kwargs)
+    return res
 
 # REAL MINIONS FUNCTION
 @bp.route("/get_connected_minions")
@@ -43,12 +33,14 @@ def get_connected_minions():
     :return:
     """
     saltReturns = db.saltReturns
-    # print(saltReturns)
+    now = datetime.now(timezone.utc)
+    delta = now - timedelta(minutes=5)
+    now = now.strftime('%Y%m%d%H%M%S%f')
+    delta = delta.strftime('%Y%m%d%H%M%S%f')
     res = []
-    saltReturns = saltReturns.find({"fun": "test.ping","jid": { "$gte": '2020062435', "$lte": '2020062540' }},{ "minion": 1, "jid": 1})
+    saltReturns = saltReturns.find({"fun": "test.ping","jid": { "$gte": delta, "$lte": now }}).distinct("minion")
     for j in saltReturns:
-        j["_id"] = str(j["_id"])
-        res.append(j["minion"])
+        res.append(j)
     return jsonify(result=res)
 
 @bp.route("/saltstack_cmd" ,methods=["POST"])
@@ -71,5 +63,15 @@ def saltstack_cmd():
     res = loop.run_until_complete(run_cmd(*cmd_args))
 
 
+
+
     return jsonify(res = res)
+
+
+#@bp.route("/test" ,methods=["GET"])
+#@jwt_required
+#def test():
+
+    #return local.cmd(['c310-1.academy.jce.ac.il','c310-2.academy.jce.ac.il'],'test.ping', tgt_type='list')
+
 

@@ -12,6 +12,11 @@ import {SALT_RETURNS} from "../actions/types";
 import store from '../store';
 import { saltReturns } from '../actions/date';
 import { forwardRef } from 'react';
+import TreeView from '@material-ui/lab/TreeView';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItem from '@material-ui/lab/TreeItem';
+import { withStyles } from "@material-ui/core/styles";
 import {
     Typography,
     Button,
@@ -40,6 +45,7 @@ import {
 
 }from '@material-ui/icons';
 //import data from './f.json';
+import data from '../Component/test.json';
 
 const time =(str)=>{
     const hower= str.slice(8,10);
@@ -94,14 +100,48 @@ const dataColumns =[
 ]
 
 const dataTable=[]
+const styles = theme => ({
+    root:{
+        height: 240,
+        flexGrow: 1,
+        maxWidth: 900,
+        fontSize: 20,
+        
+    },
+  //  TreeStyle: ,
+      text:{
+        paddingLeft: theme.spacing(6),
+        fontSize: 16,
+       
 
+      },
+      title:{
+        fontSize: 16,
+        paddingLeft:theme.spacing(2)
+      },
+      TreeItem:{
+        marginTop:theme.spacing(3.5),
+        flexGrow: 1,
+        maxWidth: 950,
+        fontSize: 18,
+      },
+      TreeItemText:{
+        fontSize: 18,
+      },
+      
+});
+//console.log(data,'cccccccccccccccccccccccccccccccccccccccccc')
+// const m=JSON.parse("'["+data+"]'");
+const x=Object.entries(data[0].return).map((e) => ( { [e[0]]: e[1] } ));
+//console.log(data,'data');
+//console.log(Object.entries(data[0].return),'llll')
+//console.log(x,'cccccccccccccccccccccccccccccccccccccccccc')
 class Orders extends React.Component {
     constructor(props) {
         super(props);
         this.selestMinion=this.selestMinion.bind(this);
         this.handleClickOpen=this.handleClickOpen.bind(this);
         this.handleClose=this.handleClose.bind(this);
-
         store.dispatch(saltReturns());
 
         this.state = {
@@ -109,53 +149,81 @@ class Orders extends React.Component {
             Returns:null,
             dialogOpen:false,
             minion:"",
+            data:[],
+            flag:false,
         }
        
     }
+ 
     componentWillMount(){
-      
-        setTimeout(()=>{  
-            const start=store.getState().date.start;
-            let startTemp=new Date(start.getTime());
-          
-            startTemp.setHours(0,0,0);
-            const end=store.getState().date.end;
-            let endTemp=new Date(end.getTime());
-          
-           // console.log(endTemp,'new Date(end.getTime());')
-           // console.log(start,'store.getState().date.start;')
-            let saltTemp=store.getState().saltReturns.saltReturns
-            .filter((item)=>{return item.full_ret.fun === "state.apply"})
-            .filter((item)=>{
-                let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
-                let time=new Date(str);
-                if(time >= startTemp && time<= endTemp){return item;}
-            })
-            .map((item)=>{
-    
-                return {
-    
-                    status:(item.full_ret.success === true)?'Success':'Fail',
-                    name:item.minion,
-                    date:date(item.full_ret.jid),
-                    id:item._id,
-                    time: time(item.full_ret.jid),
-    
-                    // return:item.return
-                };}
-            )
+       // console.log('componentWillMount');
+        if(store.getState().saltReturns.saltReturns!==null)
+        {
+            setTimeout(()=>{  
+                const start=store.getState().date.start;
+                let startTemp=new Date(start.getTime());
+            
+                startTemp.setHours(0,0,0);
+                const end=store.getState().date.end;
+                let endTemp=new Date(end.getTime());
+            
+            // console.log(endTemp,'new Date(end.getTime());')
+            // console.log(start,'store.getState().date.start;')
+                let saltTemp=store.getState().saltReturns.saltReturns
+                // .filter((item)=>{return item.full_ret.fun === "state.apply"})
+                // .filter((item)=>{
+                //     let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
+                //     let time=new Date(str);
+                //     if(time >= startTemp && time<= endTemp){return item;}
+                // })
+                .map((item)=>{
+                    let res=true;
+                    //if(item.full_ret.success === false){res=false}
+                    let temp =Object.entries(item.return);
+                    if(Array.isArray(item.return)){ res=true}
+                    else{
+                       // console.log(item,'item');
+                        let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
+                        let flag=false;
+                        dataTemp.forEach(item =>{
+                           // console.log(Object.values(item),'Object.values(item)');
+                            if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
+                            else{res=false;flag=true;}
+                        } )
+                    }
+                    return {
         
-            this.setState({saltReturns:saltTemp});
-           // console.log(this.state.saltReturns,'setTimeout(()=>{this.setState({saltReturns:saltTemp});}, 600);');
-        }, 700);
-        //setTimeout(()=>{;}, 1000);
-       
+                        status:(res=== true)?'Success':'Fail',
+                        name:item.minion,
+                        date:date(item.jid),
+                        id:item._id,
+                        time: time(item.jid),
+        
+                        // return:item.return
+                    };}
+                )
+            
+                this.setState({saltReturns:saltTemp});
+            // console.log(this.state.saltReturns,'setTimeout(()=>{this.setState({saltReturns:saltTemp});}, 600);');
+            }, 500);
+            //setTimeout(()=>{;}, 1000);
+        }
     }
     selestMinion(event, rowData){
-        //console.log(rowData, " equl");
-        let res = store.getState().saltReturns.saltReturns
-            .filter((item)=>{if((item.full_ret.success===false) && (item._id === rowData.id))
-            { this.setState({dialogOpen:true,minion:item}); return item;}})
+      //  console.log("selestMinion");
+      if(rowData.status==='Success'){return}
+         store.getState().saltReturns.saltReturns
+            .filter((item)=>{
+            if( (item._id === rowData.id)){
+
+
+                         this.setState({dialogOpen:true,minion:item});
+
+                         return item;
+                    }
+                
+            
+            })
 
 
     }
@@ -167,61 +235,65 @@ class Orders extends React.Component {
         this.setState({dialogOpen:false});
     };
     componentWillReceiveProps(nextProps,nextState) {
-
+        //console.log('componentWillReceiveProps');
         // console.log(store.getState(),";;;;;;;;;;");
-        const start=store.getState().date.start;
-        let startTemp=new Date(start.getTime());
-      
-        startTemp.setHours(0,0,0);
-        const end=store.getState().date.end;
-        let endTemp=new Date(end.getTime());
-        
-        if(nextProps.saltReturns.saltReturns!==null)
+        if(store.getState().saltReturns.saltReturns!==null)
         {
-        //console.logconsole.log(nextProps.saltReturns.saltReturns,'data from table conponent')
-        if(nextProps.saltReturns!==this.props.saltReturns || (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() )))){
-           //console.log(this.props.saltReturns, 'this.props.saltReturns')
-            this.state.saltReturns=nextProps.saltReturns.saltReturns
-            .filter((item)=>{return item.full_ret.fun === "state.apply"})
-            .filter((item)=>{
-                console.log(item,'item ..........................')
-                let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-                let time=new Date(str);
-                // console.log(str,'str');
-                // console.log(time,'new Date(str);');
-                // console.log(endTemp,'endTemp');
-                if(time >= startTemp && time<= endTemp){return item;}
-            })
-            .map((item)=>{
-
-                return {
-
-                    status:(item.full_ret.success === true)?'Success':'Fail',
-                    name:item.minion,
-                    date:date(item.full_ret.jid),
-                    id:item._id,
-                    time: time(item.full_ret.jid),
-
-                    // return:item.return
-                };}
-            )
-            this.state.Returns=nextProps.saltReturns.saltReturns.map((item)=>{
-                return{Returns:item.full_ret.return}
-            })
-            console.log(this.state.Returns,'this.state.Returns');
+            setTimeout(()=>{  
+                const start=store.getState().date.start;
+                let startTemp=new Date(start.getTime());
+            
+                startTemp.setHours(0,0,0);
+                const end=store.getState().date.end;
+                let endTemp=new Date(end.getTime());
+            
+            // console.log(endTemp,'new Date(end.getTime());')
+            // console.log(start,'store.getState().date.start;')
+                let saltTemp=store.getState().saltReturns.saltReturns
+                // .filter((item)=>{return item.full_ret.fun === "state.apply"})
+                // .filter((item)=>{
+                //     let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
+                //     let time=new Date(str);
+                //     if(time >= startTemp && time<= endTemp){return item;}
+                // })
+                .map((item)=>{
+                    let res=true;
+                    let temp =Object.entries(item.return);
+                    if(Array.isArray(item.return)){ res=true}
+                    else{
+                      //  console.log(item,'item');
+                        let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
+                        let flag=false;
+                        dataTemp.forEach(item =>{
+                           // console.log(Object.values(item),'Object.values(item)');
+                            if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
+                            else{res=false;flag=true;}
+                        } )
+                    }
+                    return {
+        
+                        status:(res=== true)?'Success':'Fail',
+                        name:item.minion,
+                        date:date(item.jid),
+                        id:item._id,
+                        time: time(item.jid),
+        
+                        // return:item.return
+                    };}
+                )
+            
+                this.setState({saltReturns:saltTemp});
+            // console.log(this.state.saltReturns,'setTimeout(()=>{this.setState({saltReturns:saltTemp});}, 600);');
+            }, 500);
+            //setTimeout(()=>{;}, 1000);
         }
-
-            // console.log(store.getState());
-            // this.setState({saltReturns:nextProps.saltReturns});
-            // console.log(this.state.Returns,"kkkkkkkkkkkkkkkk")
-
-        }
-
 
 
 
     }
-
+    // componentWillUpdate() {
+  
+    // }
     render(){
 
         return (
@@ -258,14 +330,14 @@ class Orders extends React.Component {
                     onClose={this.handleClose}
 
                     aria-describedby="alert-dialog-description"
-                    maxWidth="sm"
+                    maxWidth="lg"
                     scroll="paper"
                     aria-labelledby="confirmation-dialog-title"
                 >
 
                     <DialogTitle id="alert-dialog-title">
 
-                        <Typography style={{color:"#ff6666",fontSize:18} }>
+                    <Typography style={{color:"#ff6666",fontSize:18} }>
                             {"Failed "}
                             {this.state.minion.minion}
                             {" at date "}
@@ -279,27 +351,15 @@ class Orders extends React.Component {
 
 
                     <DialogContent dividers>
-                        <div style={{minWidth: 500,}}>
-                            <div>
-                                <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
-                                    _id : {this.state.minion._id}
-                                    {//this.state.minion.return=data
-                                    } 
+                    {//if you want to chenge width with 
+                    }
+                        <div style={{minWidth: 1000,}}>
+                            {
+                                <Typography>
+                                   id : {this.state.minion._id}
                                 </Typography>
+                            }
                              
-
-
-
-
-
-                                <Typography style={{fontSize: 14,}} color="textSecondary" gutterBottom>
-                                    return:{this.state.minion.return} 
-                                </Typography>
-                                
-                                <CardActions>
-
-                                </CardActions>
-                            </div>
                         </div>
                     </DialogContent>
                     <DialogActions>
@@ -328,4 +388,5 @@ function matchDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps)(Orders);
+
+export default connect(mapStateToProps)(withStyles(styles)(Orders));

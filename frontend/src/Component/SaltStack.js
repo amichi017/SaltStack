@@ -273,11 +273,11 @@ class SaltStack extends React.Component {
                 tgt:this.state.saveMinion.minions,
                 salt_cmd:this.state.parms===""?"":parms_send,
             }
-            console.log(res,'res');
+           // console.log(res,'res');
             this.setState({parms:""});
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
-            axios.post('saltstack_cmd',body, tokenTemp)
+            axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
             })
             .catch(err => {
@@ -320,7 +320,7 @@ class SaltStack extends React.Component {
         const data=rowData.map((row)=>row.name);
         let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
         this.state.saveMinion={minions:data,id:commntId,comment:''};
-        this.getMinionsFromServer();
+        //this.getMinionsFromServer();
         this.setState({alert:true,clickSave:true,});
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
@@ -344,7 +344,6 @@ class SaltStack extends React.Component {
                     'Content-Type': 'application/json'
                 }
             }
-
             const words = this.state.input.split(' ');
             const parms_send=this.state.parms.split(' ');
             // for (let index = 2; index < words.length; index++) {
@@ -369,19 +368,17 @@ class SaltStack extends React.Component {
                 salt_cmd:this.state.parms===""?"":parms_send,
             }
             this.setState({parms:""});
-            console.log(res,'res');
+          //  console.log(res,'res');
             // Request body
            // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
            // console.log(this.state.saveMinion,"this.state.saveMinion");
             const body = JSON.stringify(res);
-
             let tokenTemp=this.tokenConfig();
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
-                console.log(res)
             })
             .catch(err => {
-                console.log("err from SaltStack")
+                //console.log("err from SaltStack")
                 store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
                 // dispatch({
                 //     type: LOGIN_FAIL
@@ -614,6 +611,7 @@ class SaltStack extends React.Component {
                 onClick: (event, rowData) => {this.clickOpen(rowData)}
             }]}
         />
+     
         {
             this.state.clickSave === true?
                 (<div className={this.props.classes.msg}>
