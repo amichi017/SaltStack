@@ -3,12 +3,12 @@ from flask_jwt_extended import jwt_required
 from datetime import datetime, timedelta, timezone
 from backend.app import db
 
-# import salt.config
-# import salt.client
+import salt.config
+import salt.client
 import asyncio
 import subprocess
 
-# local = salt.client.LocalClient()
+local = salt.client.LocalClient()
 #print(local)
 loop = asyncio.new_event_loop()
 bp = Blueprint('cmd',__name__)
@@ -21,8 +21,8 @@ async def run_cmd(*cmd_args):
     '''
     kwargs = {'tgt_type':'list'}
     #print(cmd_args)
-    res = []
-    # res=local.cmd(*cmd_args,**kwargs)
+    #res = []
+    res=local.cmd(*cmd_args,**kwargs)
     return res
 
 # REAL MINIONS FUNCTION
