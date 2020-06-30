@@ -210,15 +210,27 @@ class Orders extends React.Component {
         }
     }
     selestMinion(event, rowData){
-      //  console.log("selestMinion");
-      if(rowData.status==='Success'){return}
-         store.getState().saltReturns.saltReturns
+        console.log("table - 213");
+        //console.log(rowData, " equl");
+        if(rowData.status==='Success'){return}
+        let res = store.getState().saltReturns.saltReturns
             .filter((item)=>{
-            if( (item._id === rowData.id)){
+            //if((item.full_ret.success===false) && (item._id === rowData.id))
+            if((item._id === rowData.id))
 
-
+                     { 
+                         let temp =Object.entries(item.return);
+                         if(temp[0][0]==="0"){ 
+                             this.setState({flag:true,data:temp[0]});
+                             console.log("table - 225");
+                            }
+                         else{
+                             let res=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
+                             this.setState({data:res})
+                             console.log("table - 230");
+                             }
                          this.setState({dialogOpen:true,minion:item});
-
+                         console.log("table - 230");
                          return item;
                     }
                 
@@ -337,7 +349,7 @@ class Orders extends React.Component {
 
                     <DialogTitle id="alert-dialog-title">
 
-                    <Typography style={{color:"#ff6666",fontSize:18} }>
+                        <Typography style={{color:"#ff6666",fontSize:18} }>
                             {"Failed "}
                             {this.state.minion.minion}
                             {" at date "}
@@ -354,12 +366,76 @@ class Orders extends React.Component {
                     {//if you want to chenge width with 
                     }
                         <div style={{minWidth: 1000,}}>
-                            {
-                                <Typography>
-                                   id : {this.state.minion._id}
-                                </Typography>
-                            }
+                            <div>
                              
+
+                              
+                                <TreeView
+                                style={{
+                                   
+                                    fontSize:18,
+                                }}
+                                defaultCollapseIcon={<ExpandMoreIcon />}
+                                defaultExpandIcon={<ChevronRightIcon />}
+                                >
+                                 {this.state.data.map((item,index)=>{
+                                        if(this.state.flag===false){
+                                            return (
+                                                <Typography  className={this.props.classes.TreeItem} > 
+                                                        <TreeItem 
+                                                        nodeId={index} 
+                                                        label={Object.keys(item)[0]} 
+                                                        style={{
+                                                            color:(Object.values(item)[0].result===true)?'#26a852':"#ff6666",
+                                                            fontSize:18,
+                                                        }}
+                                                        className={this.props.classes.TreeItemText}> 
+    
+                                                            {console.log("table - 394")}
+                                                            
+                                                            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+                                                            comment : 
+                                                            
+                                                            </Typography>
+    
+                                                            <Typography color="textSecondary" className={this.props.classes.text}>{(Object.values(item)[0]).comment}</Typography>
+    
+                                                            
+                                                            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+                                                             changes :
+                                                            </Typography>
+    
+                                                            <Typography color="textSecondary" className={this.props.classes.text}>{(String(Object.values(item)[0]).changes)}</Typography>
+    
+                                                            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+                                                              _id_ : 
+                                                            </Typography>
+    
+                                                            <Typography color="textSecondary" className={this.props.classes.text}>{(Object.values(item)[0])._id_}</Typography>
+                                               
+                                                        </TreeItem>
+                                                    </Typography>
+                                                       )
+                                        }
+                                        else{
+                                            if(index===1){
+                                                return(
+                                                    <Typography  color="textSecondary" gutterBottom>
+                                                                  return : {this.state.minion.return}
+                                                    </Typography>
+                                                )
+                                            }
+                                           
+                                        }
+                                           
+
+                                 })}
+                                 </TreeView>
+                       
+                                <CardActions>
+
+                                </CardActions>
+                            </div>
                         </div>
                     </DialogContent>
                     <DialogActions>

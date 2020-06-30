@@ -227,10 +227,12 @@ const styles = theme => ({
     let DayEnd=store.getState().date.end.getDate()
     DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
     let EndStart=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"000000000000");
-
+    console.log(EndStart,"EndStart")
+    console.log(End,"End")
     let End=parseInt(yearEnd+String(MonthEnd)+String(DayEnd)+"235959595959")
     store.getState().saltReturns.saltReturns
   //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
+
    .filter((item)=>{
   //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
   //   // let time=new Date(str);
@@ -304,6 +306,7 @@ this.setState({graphIsPrepared:true})
 }
   render(){
    // console.log(this.state.graphIsPrepared,"pppppppppppppppp")
+    if(this.state.graphIsPrepared===true){
       return(
         <React.Fragment>
         {/*<Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>*/}
@@ -323,6 +326,15 @@ this.setState({graphIsPrepared:true})
         </ResponsiveContainer>
       </React.Fragment>
       )
+    }
+ else{
+   return(
+        <div className={this.props.classes.root}>
+        <CircularProgress />
+        </div>
+   )
+ }
+   
     
  }
 }

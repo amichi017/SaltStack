@@ -102,12 +102,14 @@ export const teamList =  () => (dispatch, getState) => {
         MonthStart=parseInt(MonthStart)<10?"0"+MonthStart:MonthStart;
         let yearStart=String(store.getState().date.start.getFullYear());
         let DayStart=store.getState().date.start.getDate();
+        DayStart=parseInt(DayStart)<10?"0"+DayStart:DayStart;
         let Start=yearStart+String(MonthStart)+String(DayStart)+"000000000000"
 
         let MonthEnd= String(parseInt(store.getState().date.end.getMonth())+1);
         MonthEnd=parseInt(MonthEnd)<10?"0"+MonthEnd:MonthEnd;
         let yearEnd=String(store.getState().date.end.getFullYear());
         let DayEnd=store.getState().date.end.getDate()
+        DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
         //let End=yearEnd+String(MonthEnd)+String(DayEnd)+"000000000000"
         let End=yearEnd+String(MonthEnd)+String(DayEnd)+"235959595959"
         //  let startYear=new Date(year,Month,store.getState().date.start.getDate());
@@ -122,7 +124,7 @@ export const teamList =  () => (dispatch, getState) => {
        
         let year=String(new Date().getFullYear());
         let dayEnd=String(new Date(year, 12, 0).getDate());
-
+        DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
         Start= year+"0101"+"000000000000";
         End= year+"12"+dayEnd+"235959595959";
      }
@@ -131,6 +133,7 @@ export const teamList =  () => (dispatch, getState) => {
        
         let year=String(new Date().getFullYear());
         let dayEnd=String(new Date(year, new Date().getMonth()+1, 0).getDate());
+        DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
         let satrtCurrentMonth=(new Date().getMonth()+1);
         satrtCurrentMonth=parseInt( satrtCurrentMonth)<10?"0"+ satrtCurrentMonth: satrtCurrentMonth;
         Start= year+satrtCurrentMonth+"01"+"000000000000";
@@ -141,6 +144,7 @@ export const teamList =  () => (dispatch, getState) => {
        
         let year=String(new Date().getFullYear());
         let dayEnd=String(new Date(year, new Date().getMonth(), 0).getDate());
+        DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
         let satrtMonth=new Date(2020, new Date().getMonth()-2, 1).getMonth();
         satrtMonth=parseInt(satrtMonth)<10?"0"+satrtMonth:satrtMonth;
         let endtLastThreeMonths=String(new Date().getMonth());
@@ -148,15 +152,15 @@ export const teamList =  () => (dispatch, getState) => {
         Start= year+satrtMonth+"01"+"000000000000";
         End= year+endtLastThreeMonths+dayEnd+"235959595959";
      }
-     console.log(Start,"Start")
-     console.log(End,"End")
+    //  console.log(Start,"Start")
+    //  console.log(End,"End")
      let url='/api/saltReturns/apply/'+Start+"/"+End;
      //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
     .then((res) => {
 
         minions=minions.concat(res.data);
-        console.log(minions);
+       // console.log(minions);
        /// if(index === endYear){console.log(res,"res ");}
         store.dispatch({
             type: SALT_RETURNS,
