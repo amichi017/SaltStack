@@ -71,15 +71,15 @@ import { saltReturns } from '../actions/date';
  
   render () {
     return (
-      <React.Fragment>
-        <Typography component="p" variant="h4">
+      <React.Fragment style={{marginTop:-5}}>
+        <Typography  variant="h4" >
 
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils} >
             <Grid container justify="space-around">
             <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
-            label="Start Date"
+            label="Table Start Date"
             format="dd/MM/yyyy"
             value={this.state.start}
             onChange={(date)=>{this.handleDateChangeStart(date)}}
@@ -91,7 +91,7 @@ import { saltReturns } from '../actions/date';
           <KeyboardDatePicker
           margin="normal"
           id="date-picker-dialog"
-          label="End Date"
+          label="Table End Date"
           format="dd/MM/yyyy"
           value={this.state.end}
           onChange={(date)=>{this.handleDateChangeEnd(date)}}
@@ -100,7 +100,7 @@ import { saltReturns } from '../actions/date';
           }}
         />
       
-      <Typography style={{flex: 1,paddingTop:15}}>
+      <Typography style={{flex: 1,paddingTop:12}}>
       
        
        

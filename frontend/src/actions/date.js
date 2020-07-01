@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store'
- import { DATE_SELECT, SALT_RETURNS,LIST_MINIONS,TEAM_LIST} from './types';
+ import { DATE_SELECT, SALT_RETURNS,LIST_MINIONS,TEAM_LIST,GRAPH_DATE_SELECT,SALT_RETURNS_GRAPH} from './types';
  import data from '../Component/test.json';
  // Date is select
  export const dateSelect = (start , end) => {
@@ -13,6 +13,16 @@ import store from '../store'
      // console.log("end ",end);
 
  }
+ export const grapgDateSelect = (graphDate) => {
+
+    return  {
+                type: GRAPH_DATE_SELECT,
+                payload:{graphDate}
+             };
+    // console.log("start ",start);
+    // console.log("end ",end);
+
+}
  export const listMinions =  () => (dispatch, getState) => {
 
     axios.get('/get_connected_minions',tokenConfig(getState))
@@ -180,7 +190,58 @@ export const teamList =  () => (dispatch, getState) => {
 };
 
 
+export const saltReturnsForgraph =  (str) => (dispatch, getState) => {
+    //console.log("----------------------storeeeee--------------\n",store)
+    const time =new Date().toDateString();
+       let MonthStart= String(parseInt(store.getState().graphDate.graphDate.getMonth()+1));
+       MonthStart=parseInt(MonthStart)<10?"0"+MonthStart:MonthStart;
+       let yearStart=String(store.getState().graphDate.graphDate.getFullYear());
+       let DayStart=store.getState().graphDate.graphDate.getDate();
+       DayStart=parseInt(DayStart)<10?"0"+DayStart:DayStart;
+       let Start=yearStart+String(MonthStart)+String(DayStart)+"000000000000"
 
+       let MonthEnd= String(parseInt(store.getState().graphDate.graphDate.getMonth())+1);
+       MonthEnd=parseInt(MonthEnd)<10?"0"+MonthEnd:MonthEnd;
+       let yearEnd=String(store.getState().graphDate.graphDate.getFullYear());
+       let DayEnd=store.getState().graphDate.graphDate.getDate()
+       DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
+       //let End=yearEnd+String(MonthEnd)+String(DayEnd)+"000000000000"
+       let End=yearEnd+String(MonthEnd)+String(DayEnd)+"235959595959"
+       //  let startYear=new Date(year,Month,store.getState().date.start.getDate());
+       //  let endYear=store.getState().date.end;
+       //  let index = startYear;
+// if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
+       let minions=[];
+// for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
+  
+   
+    //console.log(Start,"Start")
+    //console.log(End,"End")
+    let url='/api/saltReturns/apply/'+Start+"/"+End;
+    //console.log("url" ,url);
+    axios.get(url, tokenConfig(getState))
+   .then((res) => {
+
+       minions=minions.concat(res.data);
+      // console.log(minions);
+     // console.log(minions,"minions")
+      /// if(index === endYear){console.log(res,"res ");}
+       store.dispatch({
+           type: SALT_RETURNS_GRAPH,
+           payload: minions
+       })
+       // console.log(res,"res");
+   })
+   .catch(err => {
+       console.log(err,"error in data");
+
+      });
+  // }
+
+
+      //console.log(store.getState(),"the store ");
+      //console.log(minions,"minions ");
+};
 // Setup config/headers and token
 export const tokenConfig = getState => {
    // console.log("getstatteeeeeslatl",getState())

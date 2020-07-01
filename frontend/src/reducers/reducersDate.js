@@ -5,6 +5,7 @@
 
      start: new Date(),
      end: new Date(),
+     graphDate: new Date(),
 
 
 };

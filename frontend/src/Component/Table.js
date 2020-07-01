@@ -330,7 +330,7 @@ class Orders extends React.Component {
                         {
 
                             icon: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-                            tooltip: 'Save User',
+                            tooltip: 'View commands',
                             onClick: (event, rowData) => {this.selestMinion(event, rowData)}
                         }
                     ]

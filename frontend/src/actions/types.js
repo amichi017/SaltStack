@@ -13,3 +13,5 @@ export const SALT_RETURNS = "SALT_RETURNS";
 export const SAVE_MINION = "SAVE_MINION";
 export const LIST_MINIONS = "LIST_MINIONS";
 export const TEAM_LIST = "TEAM_LIST";
+export const GRAPH_DATE_SELECT = "GRAPH_DATE_SELECT";
+export const SALT_RETURNS_GRAPH = "SALT_RETURNS_GRAPH";

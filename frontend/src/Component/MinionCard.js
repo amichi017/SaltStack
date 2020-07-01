@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import NoSsr from '@material-ui/core/NoSsr';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from '@material-ui/icons/Delete';
+
 import store from '../store';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import {SAVE_MINION} from "../actions/types";
@@ -17,7 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
@@ -170,6 +170,17 @@ render(){
      
        
       );
+      else if ((this.state.click === false) && (this.props.prepared===true))
+      {
+        return(
+          <Card className={this.props.classes.root}>
+            <CardContent>
+              {console.log(this.props,"props from minioncard")}
+            <CircularProgress />
+            </CardContent>
+          </Card>
+        );
+      }
       else{return(<div></div>);}
 }
   

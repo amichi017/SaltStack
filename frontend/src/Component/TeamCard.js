@@ -165,7 +165,7 @@ class TeamCard extends React.Component {
       </DialogContent>
       <DialogActions>
       <Button onClick={this.handleClickOpen} color="primary">
-        Disagree
+        Cancel
       </Button>
         <Button onClick={this.handleClose} color="secondary" autoFocus>
           Delete

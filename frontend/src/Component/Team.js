@@ -564,7 +564,7 @@ class Team extends React.Component {
               required
               fullWidth
               name="ReturnPassword"
-              label="Return Password"
+              label="Repeat Password"
               type={this.state.showPasswordReturn==='text' ? 'text' : 'password'}
               value={this.state.ReturnPassword}
                 onChange={this.handleInputChange}

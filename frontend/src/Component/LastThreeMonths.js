@@ -73,7 +73,7 @@ class LastThreeMonths extends PureComponent {
          //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-2;
         if(tempMonth<0){tempMonth+=12}
-       // console.log(tempMonth,"1");
+        console.log(tempMonth,"1");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
@@ -147,7 +147,7 @@ class LastThreeMonths extends PureComponent {
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-1;
         if(tempMonth<0){tempMonth+=12}
-       // console.log(tempMonth,"2");
+        console.log(tempMonth,"2");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
@@ -223,7 +223,7 @@ class LastThreeMonths extends PureComponent {
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth();
         if(tempMonth<0){tempMonth+=12}
-    // console.log(tempMonth,"3");
+     console.log(tempMonth,"3");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         // let temp=new Date(2019,10);
