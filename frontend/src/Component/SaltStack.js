@@ -172,7 +172,6 @@ class SaltStack extends React.Component {
         this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
         this.tokenConfig = this.tokenConfig.bind(this);
         store.dispatch(listMinions());
-       // console.log(store.getState(),"vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
         this.state={
         alert:false,
         msg:false,
@@ -281,26 +280,52 @@ class SaltStack extends React.Component {
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
             
+          
+            this.state.saveMinion.prepared=false;
+            this.state.history.unshift(this.state.saveMinion);
+            //console.log(this.state.saveMinion,"this.state.saveMinion")
+            //console.log(store.getState(),"store.getState()")
+           
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
             });
+            
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
-                this.state.saveMinion.prepared=true;
-                this.state.history.unshift(this.state.saveMinion);
                 this.setState({msg:true});
+                const temp=res.data.res;
+                const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
+               // console.log(result,"result")
                 minions.unshift(this.state.saveMinion);
+               // console.log(minions,"minions")
+               let buildRes=[];
+                result.forEach(minionRes => {
+                    minions[0].minions.map((item)=>{
+                        //console.log("item",item)
+                        //console.log("minionRes[0]",minionRes[0])
+                        if(minionRes[0]===item){
+                            buildRes.push([minionRes[0],minionRes[1]])
+                           // console.log(buildRes,"buildRes")
+                            item = buildRes;
+                            //console.log(item,"item")
+                        }
+                       // console.log(minions,"minions")
+                })
+            
+                });
+                minions[0].minions=buildRes;
+                this.state.saveMinion.prepared=true;
                 store.dispatch({
                     type: SAVE_MINION,
                     payload: minions
                 });
-               
+                console.log(store.getState(),"store.getState()")
             })
             .catch(err => {
-                console.log("err from SaltStack")
+                //console.log("err from SaltStack")
                 this.setState({err_cmd:err.response.data.message,err_cmd_flag:true})
-                console.log(this.state,"opopopopopopoo")
+                //console.log(this.state,"opopopopopopoo")
                 setTimeout(()=>{this.setState({err_cmd_flag:false});}, 2200);
                 store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
                 // dispatch({
@@ -346,6 +371,8 @@ class SaltStack extends React.Component {
         if( (this.state.countSaveMinion===0)){
 
            
+            this.state.saveMinion.prepared=false;
+
            
             this.state.saveMinion.comment=command;
             
@@ -388,27 +415,58 @@ class SaltStack extends React.Component {
            // console.log(this.state.saveMinion,"this.state.saveMinion");
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
+            this.state.history.unshift(this.state.saveMinion);
+            minions.unshift(this.state.saveMinion);
+            console.log(minions,"minions 1")
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
             });
+            console.log(store.getState(),"store.getState() first")
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
+                const temp=res.data.res;
+                const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
+               // console.log(result,"result")
+               console.log(minions,"minions 1")
+            
+              
+               console.log(minions,"minions 2")
+               let buildRes=[];
+                result.forEach(minionRes => {
+                    minions[0].minions.map((item)=>{
+                        //console.log("item",item)
+                        //console.log("minionRes[0]",minionRes[0])
+                        if(minionRes[0]===item){
+                            buildRes.push([minionRes[0],minionRes[1]])
+                           // console.log(buildRes,"buildRes")
+                            item = buildRes;
+                            //console.log(item,"item")
+                        }
+                       // console.log(minions,"minions")
+                })
+            
+                });
                 this.state.saveMinion.prepared=true;
                 this.state.history.unshift(this.state.saveMinion);
-                this.setState({msg:true});
+                minions[0].minions=buildRes;
+                minions.shift();
                 minions.unshift(this.state.saveMinion);
+                console.log(minions,"minions 2")
                 store.dispatch({
                     type: SAVE_MINION,
                     payload: minions
                 });
+                this.setState({msg:true});
+                console.log(store.getState(),"store.getState() 2")
+
             })
             .catch(err => {
                 //console.log("err from SaltStack")
-                this.setState({err_cmd:err.response.data.message,err_cmd_flag:true})
+                //this.setState({err_cmd:err.response.data.message,err_cmd_flag:true})
                
                 setTimeout(()=>{this.setState({err_cmd_flag:false});}, 4000);
-                store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
+                //store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
                 // dispatch({
                 //     type: LOGIN_FAIL
                 // })
@@ -546,43 +604,14 @@ class SaltStack extends React.Component {
             variant="text"
             style={{ marginTop:35,width:380,height:50,}}>
            
-         
+           <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
+            <Button onClick={()=>this.sentCommand('test.ping')}>test.ping</Button>
+            <Button onClick={()=>this.sentCommand('grains.items')}>grains.items</Button>
 
-            <Button onClick={()=>this.sentCommand('cmd.run')}>cmd.run</Button>
-            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
-            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
+        
 
         </ButtonGroup>
-
-       {
-           /* <ButtonGroup 
-            size="large" 
-            color="primary" 
-            orientation="horizontal"
-            color="primary"
-            aria-label="vertical contained primary button group"
-            variant="text"
-            style={{ marginTop:15,width:380,height:50,}}>
-
-            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
-            <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
-            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
-                            
-        </ButtonGroup>
-
-        <ButtonGroup size="large" 
-            color="primary" 
-            orientation="horizontal"
-            color="primary"
-            aria-label="vertical contained primary button group"
-            variant="text"
-            style={{ marginTop:15,width:380,height:50,}}>
-
-            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
-            <Button onClick={()=>this.sentCommand('state.fun')}>state.fun</Button>
-            <Button onClick={()=>this.sentCommand('cd')}>cd</Button>
-        </ButtonGroup>
-    */}
+      
     </div>
 
     <div className={this.props.classes.Divider}>

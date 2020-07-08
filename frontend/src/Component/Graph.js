@@ -157,7 +157,7 @@ axios.get(url, tokenConfig(store.getState()))
     { time:"24:00",Success:0,Fail:0, amount:0 },
   ];
   minions=minions.concat(res.data);
- console.log(minions,"minions");
+ //console.log(minions,"minions");
 // console.log(minions,"minions")
  /// if(index === endYear){console.log(res,"res ");}
   this.state.minions=minions;
@@ -250,8 +250,8 @@ axios.get(url, tokenConfig(store.getState()))
 
  
   render(){
-    console.log("render");
-    console.log(this.state,"this.state");
+   // console.log("render");
+    //console.log(this.state,"this.state");
    // console.log(this.state.graphIsPrepared,"pppppppppppppppp")
     if(this.state.graphIsPrepared===true){
       return(

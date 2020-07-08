@@ -7,7 +7,10 @@ import Button from '@material-ui/core/Button';
 import NoSsr from '@material-ui/core/NoSsr';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
-
+import TreeView from '@material-ui/lab/TreeView';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import TreeItem from '@material-ui/lab/TreeItem';
 import store from '../store';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import {SAVE_MINION} from "../actions/types";
@@ -24,8 +27,8 @@ import StarBorder from '@material-ui/icons/StarBorder';
 
 const styles = theme => ({
   root: {
-    maxWidth: 260,
-   
+    maxWidth: 400,
+    Width:400,
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
   },
@@ -55,10 +58,15 @@ const styles = theme => ({
     fontSize: 12,
   },
   container: {
-    width: 300,
+    width: 500,
     display: 'flex',
     flexWrap: 'wrap',
   },
+  minions:{
+    height: 240,
+    flexGrow: 1,
+    maxWidth: 400,
+  }
 });
 
 
@@ -77,6 +85,12 @@ class MinionCard extends React.Component {
           comment: commentg,
           listOpen:false
         };
+    }
+    componentWillReceiveProps(nextProps) {
+      //console.log(nextProps,"nextProps")
+      if(nextProps.prepared!==this.props.prepared){
+
+      }
     }
     onClickMinion(){
        this.setState({click:true});
@@ -104,78 +118,71 @@ class MinionCard extends React.Component {
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}
     const bull = <span className={this.props.classes.bullet}>•</span>;
+    console.log(this.props,"this.props")
     if(this.state.comment===''){this.state.click =true}
-    if(this.state.click === false)
-    return (
+    if(this.state.click === false && this.props.prepared===true){
+      return (
      
-      <Card className={this.props.classes.root}>
-        <CardContent>
-
-          <Button onClick={()=>{this.onClickMinion()}}>
-            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-            fun: {this.props.comment}
-            {/*this.props.fun*/}
-            </Typography>
-          </Button>
-
-            <Typography variant="h5" component="h2">
-              <div>
-                <div className={this.props.classes.container}>
-                  <List
-                      component="nav"
-                      aria-labelledby="nested-list-subheader"
-                      className={this.props.classes.root2}
-                    >
-                    <ListItem 
-                      button   
-                      onClick={() =>
-                        this.setState({
-                        listOpen: !this.state.listOpen,
-                        })}
-                      >
-                      <ListItemIcon>
-                        <DashboardIcon />
-                      </ListItemIcon>
-                      
-                      <ListItemText primary="See minions" />
-                          {this.state.listOpen ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      {
-                          this.props.minion.map((item)=>{
-                            return(
-                            <Collapse in={this.state.listOpen} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                              <ListItem  className={this.props.classes.nested}>
-                                  <ListItemIcon>
-                                      <StarBorder />
-                                  </ListItemIcon>
-                                  <ListItemText primary={item} />
-                              </ListItem>
-                            </List>
-                          </Collapse>
-                          )
-                          })
-                        }
-                  </List>
-                </div>
-               </div>
-            </Typography>
-            
-          {/*button*/}
-          </CardContent>
-          <CardActions>
-           
-        </CardActions>
-      </Card>
-     
+        <Card className={this.props.classes.root}>
+          <CardContent>
+  
+            <Button onClick={()=>{this.onClickMinion()}}>
+              <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+              fun: {this.props.comment}
+              {/*this.props.fun*/}
+              </Typography>
+            </Button>
+  
+              <Typography variant="h5" component="h2">
+                <div>
+                  <div className={this.props.classes.container}>
+                                <TreeView
+                                className={this.props.classes.root}
+                                defaultCollapseIcon={<ExpandMoreIcon />}
+                                defaultExpandIcon={<ChevronRightIcon />}
+                              >
+                        <TreeItem nodeId="1" label="See Minions">
+                        {
+                            this.props.minion.map((item,index)=>{
+                             // console.log(index,"index")
+                              return(
+                                <TreeItem nodeId={index+2} label={item[0]}>
+                                  <TreeItem nodeId={index+3} label={item[1]} />
+                                  
+                                </TreeItem>
+                            )
+                            })
+                          }
+                          </TreeItem>
+                    </TreeView>
+                  </div>
+                 </div>
+              </Typography>
+              
+            {/*button*/}
+            </CardContent>
+            <CardActions>
+             
+          </CardActions>
+        </Card>
        
-      );
-      else if ((this.state.click === false) && (this.props.prepared===true))
+         
+        );
+    }
+  
+      else if (this.props.prepared===false)
       {
+        //console.log("props from minioncard")
+        //console.log(this.props,"props from minioncard")
         return(
           <Card className={this.props.classes.root}>
+            
+              <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+              fun: {this.props.comment}
+              {/*this.props.fun*/}
+              </Typography>
+           
             <CardContent>
-              {console.log(this.props,"props from minioncard")}
             <CircularProgress />
             </CardContent>
           </Card>

@@ -147,10 +147,11 @@ const styles = theme => ({
     height: 361.489,
   },
   fixedHeightFirst:{
+    marginTop:theme.spacing(2),
     height: 231.6,
   },
   fixedHeightTow:{
-    marginTop:theme.spacing(2),
+   // marginTop:theme.spacing(2),
     height: 113,
   },
   Logout:{
@@ -310,12 +311,13 @@ class Dashboard extends React.Component {
                 </Grid>
                 {/* Recent SearchTime */}
                 <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaperTow}>
+                    < SearchTimeGraph />
+                  </Paper>
                   <Paper className={fixedHeightPaperFirst}>
                     <SearchTime />
                   </Paper>
-                  <Paper className={fixedHeightPaperTow}>
-                    < SearchTimeGraph />
-                  </Paper>
+                  
                 </Grid>
                 {/* Recent Table */}
                 <Grid item xs={20}>
