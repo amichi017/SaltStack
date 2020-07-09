@@ -182,7 +182,9 @@ render(){
                              // console.log(index,"index")
                               return(
                                 <TreeItem nodeId={index+2} label={item[0]} className={this.props.classes.TreeItem}>
+                                    <Typography  color="textSecondary" >
                                   <TreeItem nodeId={index+3} label={item[1]} />
+                                  </Typography>
                                   
                                 </TreeItem>
                             )
