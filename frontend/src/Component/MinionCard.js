@@ -160,7 +160,7 @@ render(){
   
            
               <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-              Fun: {this.props.comment}
+              Function: {this.props.comment}
               {/*this.props.fun*/}
               </Typography>
               <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
