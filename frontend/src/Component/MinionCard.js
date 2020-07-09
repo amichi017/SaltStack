@@ -24,7 +24,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 const styles = theme => ({
   root: {
     maxWidth: 400,
@@ -48,7 +53,9 @@ const styles = theme => ({
   },
   title: {
     fontSize: 16,
-    overflow:'wrap'
+    overflow:'wrap',
+    paddingLeft: theme.spacing(2),
+   // paddingTop: theme.spacing(2),
   },
   pos: {
     marginBottom: 12,
@@ -61,12 +68,25 @@ const styles = theme => ({
     width: 500,
     display: 'flex',
     flexWrap: 'wrap',
+    overflow:'wrap'
   },
   minions:{
     height: 240,
     flexGrow: 1,
     maxWidth: 400,
-  }
+  },
+  CardContent:{
+    maxWidth: 400,
+    width: 400,
+  
+  },
+  CircularProgress:{
+     paddingLeft: theme.spacing(20),
+    //paddingTop: theme.spacing(),
+  },
+  TreeItem:{
+    color:'#26a852',
+  },
 });
 
 
@@ -74,8 +94,7 @@ class MinionCard extends React.Component {
     constructor(props) {
         super(props);
         
-        this.onClickMinion = this.onClickMinion.bind(this);
-        this.handleClickButton = this.handleClickButton.bind(this);
+        
         const commentg= this.props.comment;
        // console.log(this.props.id,'constructor');
        this.state={ 
@@ -83,8 +102,13 @@ class MinionCard extends React.Component {
           defer: false,
           click:false,
           comment: commentg,
-          listOpen:false
+          listOpen:false,
+          open:false,
         };
+        this.onClickMinion = this.onClickMinion.bind(this);
+        this.handleClickButton = this.handleClickButton.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this. handleClose = this. handleClose.bind(this);
     }
     componentWillReceiveProps(nextProps) {
       //console.log(nextProps,"nextProps")
@@ -93,27 +117,35 @@ class MinionCard extends React.Component {
       }
     }
     onClickMinion(){
-       this.setState({click:true});
-       let array =store.getState().saveMinion.saveMinion;
-       
-      
-       let minions=array.filter((item)=>{
-         if(item.id !==this.props.id){return (item)}
-       });
-       minions=minions.map((item,index)=>{
-        return( {...item,id:index+1});
-       })
-       // minions.unshift(this.state.saveMinion[0]);
-       store.dispatch({
-           type: SAVE_MINION,
-           payload: minions
-       });
+    
       // console.log(store.getState(),"store.getState() from minionCard");
     }
     handleClickButton(){
       this.state.listOpen=!(this.state.listOpen);
   
   
+    }
+    handleClickOpen(){
+      this.setState((prevState) => ({open:!prevState.open}));
+      console.log(this.state,"stste from handleClickOpen")
+    }
+    handleClose(){
+      this.setState((prevState) => ({open:!prevState.open}));
+      this.setState({click:true});
+      let array =store.getState().saveMinion.saveMinion;
+      
+     
+      let minions=array.filter((item)=>{
+        if(item.id !==this.props.id){return (item)}
+      });
+      minions=minions.map((item,index)=>{
+       return( {...item,id:index+1});
+      })
+      // minions.unshift(this.state.saveMinion[0]);
+      store.dispatch({
+          type: SAVE_MINION,
+          payload: minions
+      });
     }
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}
@@ -126,14 +158,17 @@ render(){
         <Card className={this.props.classes.root}>
           <CardContent>
   
-            <Button onClick={()=>{this.onClickMinion()}}>
+           
               <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-              fun: {this.props.comment}
+              Fun: {this.props.comment}
               {/*this.props.fun*/}
               </Typography>
-            </Button>
-  
-              <Typography variant="h5" component="h2">
+              <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+              Parameter: {this.props.Parameter}
+              {/*this.props.fun*/}
+              </Typography>
+        
+              <Typography variant="h5" component="h2" color="textSecondary" >
                 <div>
                   <div className={this.props.classes.container}>
                                 <TreeView
@@ -146,7 +181,7 @@ render(){
                             this.props.minion.map((item,index)=>{
                              // console.log(index,"index")
                               return(
-                                <TreeItem nodeId={index+2} label={item[0]}>
+                                <TreeItem nodeId={index+2} label={item[0]} className={this.props.classes.TreeItem}>
                                   <TreeItem nodeId={index+3} label={item[1]} />
                                   
                                 </TreeItem>
@@ -161,9 +196,53 @@ render(){
               
             {/*button*/}
             </CardContent>
-            <CardActions>
-             
+            <CardActions disableSpacing>
+        
+        <IconButton 
+        aria-label="share"
+        variant="outlined" 
+        //color="primary" 
+        onClick={this.handleClickOpen}
+          //onClick={this.handleExpandClick}
+        color='secondary'
+          >
+              <DeleteIcon />
+        </IconButton>
+        <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+  
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Are you sure you want to delete the command from history?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={this.handleClickOpen} color="primary">
+          Cancel
+        </Button>
+          <Button onClick={this.handleClose} color="secondary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+        </Dialog>
+        {/*
+            <IconButton
+              className={clsx(this.props.classes.expand, {
+                [this.props.classes.expandOpen]: this.state.expanded,
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+            */}
           </CardActions>
+  
         </Card>
        
          
@@ -177,13 +256,18 @@ render(){
         return(
           <Card className={this.props.classes.root}>
             
+            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+              Fun: {this.props.comment}
+              {/*this.props.fun*/}
+              </Typography>
               <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-              fun: {this.props.comment}
+              Parameter: {this.props.Parameter}
               {/*this.props.fun*/}
               </Typography>
            
-            <CardContent>
-            <CircularProgress />
+            <CardContent className={this.props.classes.CardContent}>
+              <div className={this.props.classes.CircularProgress}> <CircularProgress /></div>
+            
             </CardContent>
           </Card>
         );

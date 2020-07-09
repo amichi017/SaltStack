@@ -245,47 +245,28 @@ class SaltStack extends React.Component {
         this.state.countSaveMinion--;
         
         if((this.state.input !== '')  &&  (this.state.countSaveMinion===0)){
-           
+            this.state.saveMinion.prepared=false;
             setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
             this.state.saveMinion.comment=this.state.input;
-           
-           
+
             let minions =store.getState().saveMinion.saveMinion;
             
             const words = this.state.input.split(' ');
             const parms_send=this.state.parms.split(' ');
-            // for (let index = 2; index < words.length; index++) {
-            //     parms.push(words[index]);
-                
-            // }
-        //    let tgt=[];
-        //    if(words[1]===""){tgt=this.state.saveMinion.minions}
-        //    else if(words[1]==="'*'"){tgt=["all minions"]}//all minions
-        //    else {
-        //     for (let index = 0; index < words[1].length; index++) {
-        //         tgt.push(words[1][index]);
-                
-        //     }
-        //    }
-           
-            // minions.unshift(this.state.saveMinion[0]);
            
             let res={
                 func:words[0],
                 tgt:this.state.saveMinion.minions,
                 salt_cmd:this.state.parms===""?"":parms_send,
             }
-           // console.log(res,'res');
+        
+           this.state.saveMinion.Parameter=parms_send;
             this.setState({parms:""});
+         
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
-            
-          
-            this.state.saveMinion.prepared=false;
             this.state.history.unshift(this.state.saveMinion);
-            //console.log(this.state.saveMinion,"this.state.saveMinion")
-            //console.log(store.getState(),"store.getState()")
-           
+            minions.unshift(this.state.saveMinion);
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
@@ -293,34 +274,30 @@ class SaltStack extends React.Component {
             
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
-                this.setState({msg:true});
                 const temp=res.data.res;
                 const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-               // console.log(result,"result")
-                minions.unshift(this.state.saveMinion);
-               // console.log(minions,"minions")
                let buildRes=[];
                 result.forEach(minionRes => {
                     minions[0].minions.map((item)=>{
-                        //console.log("item",item)
-                        //console.log("minionRes[0]",minionRes[0])
                         if(minionRes[0]===item){
                             buildRes.push([minionRes[0],minionRes[1]])
-                           // console.log(buildRes,"buildRes")
                             item = buildRes;
-                            //console.log(item,"item")
                         }
-                       // console.log(minions,"minions")
+                    
                 })
             
                 });
-                minions[0].minions=buildRes;
                 this.state.saveMinion.prepared=true;
+                this.state.history.unshift(this.state.saveMinion);
+                minions[0].minions=buildRes;
+                minions.shift();
+                minions.unshift(this.state.saveMinion);
+                console.log(minions,"minions 2")
                 store.dispatch({
                     type: SAVE_MINION,
                     payload: minions
                 });
-                console.log(store.getState(),"store.getState()")
+                this.setState({msg:true});
             })
             .catch(err => {
                 //console.log("err from SaltStack")
@@ -359,13 +336,13 @@ class SaltStack extends React.Component {
         const data=rowData.map((row)=>row.name);
         let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
         this.state.saveMinion={minions:data,id:commntId,comment:'',prepared:false};
-        this.getMinionsFromServer();
+       // this.getMinionsFromServer();
         this.setState({alert:true,clickSave:true,});
         setTimeout(()=>{this.setState({alert:false,});}, 2200);
         
     };
 
-    sentCommand(command){
+sentCommand(command){
         
         this.state.countSaveMinion--;
         if( (this.state.countSaveMinion===0)){
@@ -387,37 +364,20 @@ class SaltStack extends React.Component {
             }
             const words = this.state.input.split(' ');
             const parms_send=this.state.parms.split(' ');
-            // for (let index = 2; index < words.length; index++) {
-            //     parms.push(words[index]);
-                
-            // }
-        //    let tgt=[];
-        //    if(words[1]===""){tgt=this.state.saveMinion.minions}
-        //    else if(words[1]==="'*'"){tgt=["all minions"]}//all minions
-        //    else {
-        //     for (let index = 0; index < words[1].length; index++) {
-        //         tgt.push(words[1][index]);
-                
-        //     }
-        //    }
-           
-            // minions.unshift(this.state.saveMinion[0]);
            
             let res={
                 func:command,
                 tgt:this.state.saveMinion.minions,
                 salt_cmd:this.state.parms===""?"":parms_send,
             }
+            this.state.saveMinion.Parameter=parms_send;
             this.setState({parms:""});
-          //  console.log(res,'res');
-            // Request body
-           // console.log(JSON.stringify(this.state.saveMinion),"JSON.stringify(this.state.saveMinion)");
-           // console.log(this.state.saveMinion,"this.state.saveMinion");
+
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
             this.state.history.unshift(this.state.saveMinion);
             minions.unshift(this.state.saveMinion);
-            console.log(minions,"minions 1")
+          
             store.dispatch({
                 type: SAVE_MINION,
                 payload: minions
@@ -427,23 +387,14 @@ class SaltStack extends React.Component {
             .then((res) => {
                 const temp=res.data.res;
                 const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-               // console.log(result,"result")
-               console.log(minions,"minions 1")
-            
-              
-               console.log(minions,"minions 2")
                let buildRes=[];
                 result.forEach(minionRes => {
                     minions[0].minions.map((item)=>{
-                        //console.log("item",item)
-                        //console.log("minionRes[0]",minionRes[0])
                         if(minionRes[0]===item){
                             buildRes.push([minionRes[0],minionRes[1]])
-                           // console.log(buildRes,"buildRes")
                             item = buildRes;
-                            //console.log(item,"item")
                         }
-                       // console.log(minions,"minions")
+                    
                 })
             
                 });
@@ -458,7 +409,7 @@ class SaltStack extends React.Component {
                     payload: minions
                 });
                 this.setState({msg:true});
-                console.log(store.getState(),"store.getState() 2")
+      
 
             })
             .catch(err => {
@@ -625,7 +576,7 @@ class SaltStack extends React.Component {
         {store.getState().saveMinion.saveMinion.map(item =>{
             return(
                 
-                  <MinionCard  id={item.id} minion={item.minions} comment={item.comment} prepared={item.prepared} />
+                  <MinionCard  id={item.id} minion={item.minions} comment={item.comment} prepared={item.prepared} Parameter={item.Parameter}/>
         )})}
         </div>
     }  
