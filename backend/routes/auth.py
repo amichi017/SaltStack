@@ -1,3 +1,5 @@
+import datetime
+
 from bson import ObjectId
 from flask import Blueprint, request, jsonify
 from flask_bcrypt import check_password_hash
@@ -23,7 +25,7 @@ def login():
     test = db.users.find_one({"email": email})
     if test:
         if check_password_hash(test["password"], password):
-            access_token = create_access_token(identity=email)
+            access_token = create_access_token(identity=email,expires_delta=datetime.timedelta(hours=1))
             # refresh_token = create_refresh_token(identity=email)
             return (
                 jsonify(
@@ -92,17 +94,53 @@ def register():
         return jsonify(message="User added successfully"), 201
 
 
+
+@bp.route("/update/<id>", methods=["PUT"])
+@jwt_required
+def update(id):
+    """
+
+    :return:
+    """
+    if request.is_json:
+        first_name = request.json["first_name"]
+        last_name = request.json["last_name"]
+        role = request.json["role"]
+        email = request.json["email"]
+        old_password1 = request.json["old_password1"]
+        old_password2 = request.json["old_password2"]
+        new_password = request.json["new_password"]
+    else:
+        email = request.form["email"]
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        role = request.form["role"]
+        old_password1 = request.form["old_password1"]
+        old_password2 = request.form["old_password2"]
+        new_password = request.form["new_password"]
+
+
+    test = db.users.find_one({"_id": id})
+    if old_password1 != old_password2:
+        return jsonify(message="Bad Password Confirmation"), 401
+    if test:
+        myquery = {"_id": _id}
+        newvalues = {"$set": {"password": bcrypt.generate_password_hash(new_password),"email":email,"role":role,"first_name":first_name,"last_name":last_name}}
+        try:
+            user = db.users.update_one(myquery, newvalues)
+            return jsonify(message="User update successfully!"), 201
+        except:
+            return jsonify(message="Bad Email or Password"), 401
+
+    return jsonify(message="wrong password Password"), 401
+
 @bp.route("/get_users", methods=["GET"])
 @jwt_required
 def get_users():
-    users = db.users.find({})
+    users = db.users.find({},{  "first_name": 1, "last_name": 1,"email":1,"role":1})
     res = []
     for user in users:
         user["_id"] = str(user["_id"])
-        if "reset_token" in user:
-            del user['reset_token']
-        del user['password']
-
         res.append(user)
     return jsonify(res)
 
