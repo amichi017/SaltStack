@@ -4,10 +4,14 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_pymongo import MongoClient
+from functools import wraps
+import logging
 
 # from .database.db import initialize_db
 
 app = Flask(__name__, static_folder='../frontend/build', static_url_path='/')
+
+logging.basicConfig(filename='logging_files/demo.log',level=logging.DEBUG)
 app.config.from_pyfile('config.py')
 CORS(app)
 mail = Mail(app)
@@ -15,8 +19,6 @@ mail = Mail(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 db = MongoClient().salt
-
-
 
 from .routes import auth, cmd, forgot_password, salt
 

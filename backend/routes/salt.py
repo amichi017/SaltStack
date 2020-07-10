@@ -1,9 +1,31 @@
+import json
+import time
+
+import orjson as orjson
+from bson.json_util import loads,dumps
+
 from flask import jsonify, Blueprint
 from flask_jwt_extended import jwt_required
 
 from backend.app import db
 
+
 bp = Blueprint('api',__name__)
+
+def timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        if 'log_time' in kw:
+            name = kw.get('log_name', method.__name__.upper())
+            kw['log_time'][name] = int((te - ts) * 1000)
+        else:
+            print('%r  %2.2f ms' % \
+                  (method.__name__, (te - ts) * 1000))
+        return result
+
+    return timed
 
 
 @bp.route("/api/saltReturns/apply")
@@ -92,7 +114,8 @@ def get_yearly_applies(year):
 
 
 @bp.route("/api/saltReturns/apply/<start_date>/<end_date>")
-#@jwt_required
+@jwt_required
+# @timeit
 def get_table_returns(start_date,end_date):
     """
 
@@ -103,15 +126,14 @@ def get_table_returns(start_date,end_date):
 
     # print(year)
     # print(saltReturns)
-    res = []
-    saltReturns = saltReturns.find(
+    res = saltReturns.find(
         {"fun": "state.apply",
          "jid": { "$gte": start_date, "$lte": end_date }
-         },{ "minion": 1, "jid": 1, "return":1}
-    )
+         },{  "jid": 1, "minion": 1,"return":1})
 
-    for j in saltReturns:
-        j["_id"] = str(j["_id"])
-        res.append(j)
-    return jsonify(res)
+    res = sorted(list(res),key = lambda x: x['jid'])
+
+
+    return orjson.dumps(list(res),default=str)
+
 
