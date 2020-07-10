@@ -144,11 +144,11 @@ const styles = theme => ({
   
   },
   fixedHeight: {
-    height: 361.489,
+    height: 363,
   },
   fixedHeightFirst:{
     marginTop:theme.spacing(2),
-    height: 231.6,
+    height: 235,
   },
   fixedHeightTow:{
    // marginTop:theme.spacing(2),
