@@ -162,8 +162,8 @@ export const teamList =  () => (dispatch, getState) => {
         Start= year+satrtMonth+"01"+"000000000000";
         End= year+endtLastThreeMonths+dayEnd+"235959595959";
      }
-    //  console.log(Start,"Start")
-    //  console.log(End,"End")
+    console.log(Start,"Start")
+    console.log(End,"End")
      let url='/api/saltReturns/apply/'+Start+"/"+End;
      //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))

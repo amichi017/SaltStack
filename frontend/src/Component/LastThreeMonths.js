@@ -1,4 +1,3 @@
-
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import {
@@ -73,7 +72,7 @@ class LastThreeMonths extends PureComponent {
          //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-2;
         if(tempMonth<0){tempMonth+=12}
-        console.log(tempMonth,"1");
+       // console.log(tempMonth,"1");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
@@ -102,24 +101,34 @@ class LastThreeMonths extends PureComponent {
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
       })
       .forEach((item,index) => {
-          let place= (parseInt(item.jid.slice(6,8)));
+        let place= (parseInt(item.jid.slice(6,8))-1);
         //  console.log(place,"day");
-       
+        let flag=0;
         let res=true;
        // if(item.full_ret.success === false){res=false}
         let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true}
+        if(Array.isArray(item.return)){ res=true;  res === true ?(dataInit[place].Success++):(dataInit[place].Fail++);}
         else{
-              
-            let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
-            let flag=false;
-            dataTemp.forEach(item =>{
-               // console.log(Object.values(item),'Object.values(item)');
-                if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-                else{res=false;flag=true;}
-            } )
-        }
-          {res === true ?(dataInit[place-1].Success++):(dataInit[place-1].Fail++)}
+          //console.log(item,'item');
+         // let flag =0;
+          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+            if(e[1].result === false && flag===0){
+             dataInit[place].Fail++;
+             flag=1;
+             //break;
+            }
+           if(index===arr.length-1 && flag === 0){
+             dataInit[place].Success++;
+           }
+      
+        
+         });
+ 
+      }
+
+
+
+
         })
 
         }
@@ -147,7 +156,7 @@ class LastThreeMonths extends PureComponent {
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-1;
         if(tempMonth<0){tempMonth+=12}
-        console.log(tempMonth,"2");
+       // console.log(tempMonth,"2");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
@@ -176,23 +185,32 @@ class LastThreeMonths extends PureComponent {
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
       })
       .forEach((item,index) => {
-          let place= (parseInt(item.jid.slice(6,8)));
+          let place= (parseInt(item.jid.slice(6,8))-1);
          // console.log(place,"day");
+         let flag=0;
          let res=true;
-        // if(item.full_ret.success === false){res=false}
-         let temp =Object.entries(item.return);
-         if(Array.isArray(item.return)){ res=true}
+    
+         if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
          else{
-            // console.log(item,'item');
-             let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
-             let flag=false;
-             dataTemp.forEach(item =>{
-                // console.log(Object.values(item),'Object.values(item)');
-                 if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-                 else{res=false;flag=true;}
-             } )
-         }
-          {res === true ?(dataInit[place-1].Success++):(dataInit[place-1].Fail++)}
+          //console.log(item,'item');
+         // let flag =0;
+          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+            if(e[1].result === false && flag===0){
+             dataInit[place].Fail++;
+             flag=1;
+             //break;
+            }
+           if(index===arr.length-1 && flag === 0){
+             dataInit[place].Success++;
+             //console.log(place,"place")
+           }
+      
+        
+         });
+ 
+      }
+
+
         })
 
         }
@@ -223,7 +241,7 @@ class LastThreeMonths extends PureComponent {
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth();
         if(tempMonth<0){tempMonth+=12}
-     console.log(tempMonth,"3");
+     //console.log(tempMonth,"3");
         // let temp=new Date(2019,10);
       // console.log(tempMonth,"tempMonth")
         // let temp=new Date(2019,10);
@@ -255,23 +273,38 @@ class LastThreeMonths extends PureComponent {
        })
       .forEach((item,index) => {
      
-          let place= (parseInt(item.jid.slice(6,8)));
+        let place= (parseInt(item.jid.slice(6,8))-1);
         //   console.log(place,"day");
         let res=true;
+        let flag=0;
        // if(item.full_ret.success === false){res=false}
-        let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true}
-        else{
-           // console.log(item,'item');
-            let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
-            let flag=false;
-            dataTemp.forEach(item =>{
-               // console.log(Object.values(item),'Object.values(item)');
-                if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-                else{res=false;flag=true;}
-            } )
-        }
-          {res === true ?(dataInit[place-1].Success++):(dataInit[place-1].Fail++)}
+      
+       if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+       else{
+        //console.log(item,'item');
+       // let flag =0;
+        let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+          if(e[1].result === false && flag===0){
+           dataInit[place].Fail++;
+           flag=1;
+           //break;
+          }
+         if(index===arr.length-1 && flag === 0){
+           dataInit[place].Success++;
+         }
+      
+      
+       });
+      
+       
+     
+    }
+        
+
+
+
+
+
         })
 
         }
@@ -397,10 +430,3 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 export default connect(mapStateToProps)(withStyles(styles)(LastThreeMonths));
-
-
-
-
-// export default class Example extends PureComponent {
-//   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/mc8r7e6p/';
-
