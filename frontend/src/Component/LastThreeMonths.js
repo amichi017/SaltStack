@@ -432,9 +432,4 @@ const mapStateToProps = (state, ownProps) => {
       date: state.date
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> f7b6b1be5afdfc635c9535a61c4215ff5157700a
->>>>>>> 40c843fd8f544769c5c95c6c0fe9efaea38d9d04
 export default connect(mapStateToProps)(withStyles(styles)(LastThreeMonths));

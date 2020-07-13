@@ -209,7 +209,3 @@ class CurrentMonth extends PureComponent {
 // export default class Example extends PureComponent {
 //   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/mc8r7e6p/';
 
-<<<<<<< HEAD
-=======
->>>>>>> f7b6b1be5afdfc635c9535a61c4215ff5157700a
->>>>>>> 40c843fd8f544769c5c95c6c0fe9efaea38d9d04
