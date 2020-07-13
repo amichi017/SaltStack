@@ -1,3 +1,4 @@
+
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import {
@@ -431,4 +432,5 @@ const mapStateToProps = (state, ownProps) => {
       date: state.date
   }
 }
+
 export default connect(mapStateToProps)(withStyles(styles)(LastThreeMonths));

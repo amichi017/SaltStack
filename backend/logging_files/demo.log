@@ -5283,3 +5283,31 @@ INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 16:33:13] "GET /get_users HTTP/1.1" 200
 INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 16:33:16] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 16:33:16] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 16:33:19] "GET /api/saltReturns/apply/20200401000000000000/20200630235959595959 HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:23] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:23] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:23] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:23] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:23] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:43] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:43] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:54] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:43:54] "GET /static/js/main.1bb86a27.chunk.js HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:28] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:29] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:29] "GET /static/js/2.b9bd0a3b.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:29] "GET /static/js/main.17c686d0.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:29] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:29] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:31] "GET /static/js/main.17c686d0.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:31] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:31] "GET /api/saltReturns/apply/20200713000000000000/20200713235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:31] "GET /api/saltReturns/apply/20200713000000000000/20200713235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:31] "GET /api/saltReturns/apply/20200713000000000000/20200713235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:44:37] "GET /api/saltReturns/apply/20200401000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:45:17] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:45:18] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:45:21] "GET /api/saltReturns/apply/20200401000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [13/Jul/2020 17:45:39] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
