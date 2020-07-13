@@ -301,7 +301,7 @@ class Team extends React.Component {
     //   if(this.state.counter<=1)
     //   { 
         
-    //     axios.get('http://127.0.0.1:5000/get_users',tokenConfig(store.getState))
+    //     axios.get('/get_users',tokenConfig(store.getState))
     //   .then((res) => { 
        
     //     this.setState({Team:res.data});
