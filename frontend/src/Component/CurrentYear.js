@@ -49,6 +49,7 @@ class CurrentYear extends PureComponent {
       //   this.setState({data:this.dataInit()});
       // }
       dataInit(){
+        let time_1=new Date().getTime();
         let dataInit=[];
         // let temp=new Date(2019,10);
     
@@ -77,28 +78,43 @@ class CurrentYear extends PureComponent {
       //   let time=new Date(str);
       //   if(time.getFullYear() === temp.getFullYear()){return item;}
       // })
-      .forEach((item,index) => {
+      .forEach((item) => {
         let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
         let time=new Date(str);
         let place=time.getMonth();
         let res=true;
-       // if(item.full_ret.success === false){res=false}
-        let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true}
+        let flag=0;
+        //if(item.full_ret.success === false){res=false}
+        //let temp =Object.entries(item.return);
+        if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
         else{
             //console.log(item,'item');
-            let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
-            let flag=false;
-            dataTemp.forEach(item =>{
-               // console.log(Object.values(item),'Object.values(item)');
-                if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-                else{res=false;flag=true;}
-            } )
+           // let flag =0;
+            let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+              if(e[1].result === false && flag===0){
+               dataInit[place].Fail++;
+               flag=1;
+               //break;
+              }
+             if(index===arr.length-1 && flag === 0){
+               dataInit[place].Success++;
+             }
+           //  if(flag ===1){
+           //   { e[1].result === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
+           //  }
+          
+           });
+           //  let flag=false;
+           
+         //console.log(Object.entries(item.return),"Object.entries(item.return)");
+           //  dataTemp.forEach(item =>{
+           //     // console.log(Object.values(item),'Object.values(item)');
+           //      if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
+           //      else{res=false;flag=true;}
+           //  } )
         }
-          {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
-        })
 
-      }
+      })
         
     
       
@@ -108,8 +124,10 @@ class CurrentYear extends PureComponent {
         //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
         // }
         // console.log(dataInit);
+        let time_2=new Date().getTime();
+        console.log((time_2-time_1),"Time from year");
         return dataInit;
-      
+    }
       }
    
     render() {

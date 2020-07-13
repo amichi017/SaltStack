@@ -7,7 +7,7 @@
 };
 
 export default function(state=initialState, action) { 
-console.log("saltReturnsGraph",action.payload);
+
 switch(action.type){
     case SALT_RETURNS_GRAPH:
     return {
