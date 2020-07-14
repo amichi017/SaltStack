@@ -181,19 +181,27 @@ axios.get(url, tokenConfig(store.getState()))
       //   })
         .forEach(item => {
           let res=true;
-        // if(item.full_ret.success === false){res=false}
-        // let temp =Object.entries(item.return);
-      //  console.log(item,"itemitemitemitemitemitemitemitem")
-          if(Array.isArray(item.return)){ res=true}
+          let flag=0;
+         
+          if(Array.isArray(item.return)){ res=true;}
           else{
-            // console.log(item,'item');
-              let dataTemp=Object.entries(item.return).map((e) => ( { [e[0]]: e[1] } ));
-              let flag=false;
-              dataTemp.forEach(item =>{
-                  //console.log(Object.values(item),'Object.values(item)');
-                  if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-                  else{res=false;flag=true;}
-              } )
+           
+              let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+               if((e[1].result === false) && (flag===0)){
+                  res=false
+                 flag=1;
+              
+                }
+               if(index===arr.length-1 && flag === 0){
+                  flag=1;
+                  res=true;
+                
+               
+               }
+          
+            
+             });
+     
           }
         if(parseNumber(item.jid)==="03:00")
         { res === true ?(tempArray[1].Success++):(tempArray[1].Fail++)};

@@ -1,4 +1,3 @@
-
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import {
@@ -73,57 +72,41 @@ class LastThreeMonths extends PureComponent {
          //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-2;
         if(tempMonth<0){tempMonth+=12}
-        console.log(tempMonth,"1");
-        // let temp=new Date(2019,10);
-      // console.log(tempMonth,"tempMonth")
+     
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
       
-        //this.state.nameThree=listMonth[monthDay-2];
+     
       
            for (let i=1;i<=monthDay;i++){
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
-        
-        // let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-3);
-    
-
-        // let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-3, monthDay);
-        // mnontEnd.setHours(23,59,59);
-
-       // console.log(mnontStart,"gggggggggggggggggggggg");
-       // console.log(mnontEnd,"gggggggggggggggggggggg");
+   
         if(store.getState().saltReturns.saltReturns!==null){
         let funSaltReturns=store.getState().saltReturns.saltReturns
       //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
         .filter((item)=>{
-      //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-      //   let time=new Date(str);
-      //  if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
       })
       .forEach((item,index) => {
         let place= (parseInt(item.jid.slice(6,8))-1);
-        //  console.log(place,"day");
+        
         let flag=0;
         let res=true;
-       // if(item.full_ret.success === false){res=false}
+      
         let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+        if(Array.isArray(item.return)){ res=true;  res === true ?(dataInit[place].Success++):(dataInit[place].Fail++);}
         else{
-          //console.log(item,'item');
-         // let flag =0;
+
           let dataTemp=Object.entries(item.return).map((e,index,arr) => {
             if(e[1].result === false && flag===0){
              dataInit[place].Fail++;
              flag=1;
-             //break;
+         
             }
-           else if(index===arr.length-1 && flag === 0){
+           if(index===arr.length-1 && flag === 0){
              dataInit[place].Success++;
            }
-          else {
-            
-          }
+      
         
          });
  
@@ -135,16 +118,7 @@ class LastThreeMonths extends PureComponent {
         })
 
         }
-        
-        
-    
-      
-    //    console.log(dataInit,"dataInit");
-       
-        // for (let i=1;i<=mnonthDay;i++){
-        //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-        // }
-        // console.log(dataInit);
+
         return dataInit;
       
       }
@@ -159,53 +133,35 @@ class LastThreeMonths extends PureComponent {
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth()-1;
         if(tempMonth<0){tempMonth+=12}
-        console.log(tempMonth,"2");
-        // let temp=new Date(2019,10);
-      // console.log(tempMonth,"tempMonth")
+   
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
       
-        //this.state.nameThree=listMonth[monthDay-2];
+     
       
            for (let i=1;i<=monthDay;i++){
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
-        console.log(dataInit,"dataInit")
-        // let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-2);
-    
-
-        // let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-2, monthDay);
-        // mnontEnd.setHours(23,59,59);
-
-       // console.log(mnontStart,"gggggggggggggggggggggg");
-        //console.log(mnontEnd,"gggggggggggggggggggggg");
+       
+     
         if(store.getState().saltReturns.saltReturns!==null){
         let funSaltReturns=store.getState().saltReturns.saltReturns
       //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
       .filter((item)=>{
-      //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-      //   let time=new Date(str);
-      //   if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
       })
       .forEach((item,index) => {
-        let place= (parseInt(item.jid.slice(6,8))-1);
-         // console.log(place,"day");
+          let place= (parseInt(item.jid.slice(6,8))-1);
          let flag=0;
          let res=true;
     
          if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
          else{
-          //console.log(item,'item');
-         // let flag =0;
           let dataTemp=Object.entries(item.return).map((e,index,arr) => {
             if(e[1].result === false && flag===0){
              dataInit[place].Fail++;
              flag=1;
-             //break;
             }
            if(index===arr.length-1 && flag === 0){
-             console.log("place",place)
-             console.log("dataaa",dataInit)
              dataInit[place].Success++;
            }
       
@@ -219,36 +175,19 @@ class LastThreeMonths extends PureComponent {
 
         }
         
-        
-    
-      
-    //    console.log(dataInit,"dataInit");
-       
-        // for (let i=1;i<=mnonthDay;i++){
-        //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-        // }
-        // console.log(dataInit);
+ 
         return dataInit;
       
       }
 
-
-
-
-
       dataInitThree(){
         let dataInit=[];
-        let listMonth=['January','February','March','April',
-        'May','June','July','August','September',
-        'October','November','December'];
+       
         let temp=new Date();
         //let temp=new Date(2020,8);
         let tempMonth=temp.getMonth();
         if(tempMonth<0){tempMonth+=12}
-     console.log(tempMonth,"3");
-        // let temp=new Date(2019,10);
-      // console.log(tempMonth,"tempMonth")
-        // let temp=new Date(2019,10);
+    
       
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
        
@@ -257,40 +196,27 @@ class LastThreeMonths extends PureComponent {
            for (let i=1;i<=monthDay;i++){
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
-       
-        // let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-1);
-    
-
-        // let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-1, monthDay);
-        // mnontEnd.setHours(23,59,59);
-
-        // console.log(mnontStart,"gggggggggggggggggggggg");
-        // console.log(mnontEnd,"gggggggggggggggggggggg");
+  
         if(store.getState().saltReturns.saltReturns!==null){
         let funSaltReturns=store.getState().saltReturns.saltReturns
          //.filter((item)=>{return item.full_ret.fun === "state.apply"})
        .filter((item)=>{
-      //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-      //   let time=new Date(str);
-      //   if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
        })
       .forEach((item,index) => {
+     
         let place= (parseInt(item.jid.slice(6,8))-1);
-        //   console.log(place,"day");
         let res=true;
         let flag=0;
-       // if(item.full_ret.success === false){res=false}
       
        if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
        else{
-        //console.log(item,'item');
-       // let flag =0;
+        
         let dataTemp=Object.entries(item.return).map((e,index,arr) => {
           if(e[1].result === false && flag===0){
            dataInit[place].Fail++;
            flag=1;
-           //break;
+           
           }
          if(index===arr.length-1 && flag === 0){
            dataInit[place].Success++;
@@ -299,28 +225,13 @@ class LastThreeMonths extends PureComponent {
       
        });
       
-       
-     
     }
         
-
-
-
-
 
         })
 
         }
-        
-        
-    
-      
-      // console.log(dataInit,"dataInit 3");
-       
-        // for (let i=1;i<=mnonthDay;i++){
-        //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-        // }
-        // console.log(dataInit);
+  
         return dataInit;
       
       }

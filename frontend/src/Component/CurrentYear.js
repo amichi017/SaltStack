@@ -1,5 +1,4 @@
 
-
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import {
@@ -19,117 +18,94 @@ const styles = theme => ({
 class CurrentYear extends PureComponent {
     constructor(props) {
         super(props);
-         this.dataInit = this.dataInit.bind(this);
-         store.dispatch(saltReturns("CurrentYear"));
+         //this.dataInit = this.dataInit.bind(this);
+        // store.dispatch(saltReturns("CurrentYear"));
         this.state = {
             start: new Date(),
             end:new Date(),
-            data: this.dataInit(),
+            data:  store.getState().CurrentYear.CurrentYear,
             flag:true,
         };
       }
     
-      componentWillReceiveProps(nextProps) {
-        if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
-        && (this.state.flag===true)){
+      // componentWillReceiveProps(nextProps) {
+      //   if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
+      //   && (this.state.flag===true)){
 
-           this.setState({data:this.dataInit()});
+      //      this.setState({data:this.dataInit()});
           
-        }
-      }
-      shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.flag===true){
-          this.setState({data:this.dataInit(),flag:false});
-          return true;
-        }
-       return false;
+      //   }
+      // }
+      // shouldComponentUpdate(nextProps, nextState) {
+      //   if(this.state.flag===true){
+      //     this.setState({data:this.dataInit(),flag:false});
+      //     return true;
+      //   }
+      //  return false;
         
-      }
+      // }
      
       // componentWillUpdate() {
       //   this.setState({data:this.dataInit()});
-      // }
-      dataInit(){
-        let time_1=new Date().getTime();
-        let dataInit=[];
-        // let temp=new Date(2019,10);
+    //   // }
+    //   dataInit(){
+    //     let time_1=new Date().getTime();
+    //     let dataInit=[];
+    //     // let temp=new Date(2019,10);
     
-        dataInit.push( { name: String('January'), Fail:0, Success:0 });
-        dataInit.push( { name: String('February'), Fail:0, Success:0 });
-        dataInit.push( { name: String('March'), Fail:0, Success:0 });
-        dataInit.push( { name: String('April'), Fail:0, Success:0 });
-        dataInit.push( { name: String('May '), Fail:0, Success:0 });
-        dataInit.push( { name: String('June  '), Fail:0, Success:0 });
-        dataInit.push( { name: String('July  '), Fail:0, Success:0 });
-        dataInit.push( { name: String('August '), Fail:0, Success:0 });
-        dataInit.push( { name: String('September '),Fail:0, Success:0 });
-        dataInit.push( { name: String('October '), Fail:0, Success:0 });
-        dataInit.push( { name: String('November  '),Fail:0, Success:0 });
-        dataInit.push( { name: String('December '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('January'), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('February'), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('March'), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('April'), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('May '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('June  '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('July  '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('August '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('September '),Fail:0, Success:0 });
+    //     dataInit.push( { name: String('October '), Fail:0, Success:0 });
+    //     dataInit.push( { name: String('November  '),Fail:0, Success:0 });
+    //     dataInit.push( { name: String('December '), Fail:0, Success:0 });
         
-        if(store.getState().saltReturns.saltReturns!==null){
+    //     if(store.getState().saltReturns.saltReturns!==null){
 
         
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-        //.filter((item)=>{return item.full_ret.fun === "state.apply"})
-        //To check I put the next 6 lines in the comment
-      //   .filter((item)=>{
-      //     let temp=new Date();
-      //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6))-1)+"-"+item.jid.slice(6,8);
-      //   let time=new Date(str);
-      //   if(time.getFullYear() === temp.getFullYear()){return item;}
-      // })
-      .forEach((item) => {
-        let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-        let time=new Date(str);
-        let place=time.getMonth();
-        let res=true;
-        let flag=0;
-        //if(item.full_ret.success === false){res=false}
-        //let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-        else{
-            //console.log(item,'item');
-           // let flag =0;
-            let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-              if(e[1].result === false && flag===0){
-               dataInit[place].Fail++;
-               flag=1;
-               //break;
-              }
-             if(index===arr.length-1 && flag === 0){
-               dataInit[place].Success++;
-             }
-           //  if(flag ===1){
-           //   { e[1].result === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
-           //  }
+    //     let funSaltReturns=store.getState().saltReturns.saltReturns
+
+    //   .forEach((item) => {
+    //     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
+    //     let time=new Date(str);
+    //     let place=time.getMonth();
+    //     let res=true;
+    //     let flag=0;
+     
+    //     if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+    //     else{
           
-           });
-           //  let flag=false;
+    //         let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+    //           if(e[1].result === false && flag===0){
+    //            dataInit[place].Fail++;
+    //            flag=1;
+    //            //break;
+    //           }
+    //          if(index===arr.length-1 && flag === 0){
+    //            dataInit[place].Success++;
+    //          }
            
-         //console.log(Object.entries(item.return),"Object.entries(item.return)");
-           //  dataTemp.forEach(item =>{
-           //     // console.log(Object.values(item),'Object.values(item)');
-           //      if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-           //      else{res=false;flag=true;}
-           //  } )
-        }
+          
+    //        });
+          
+           
+        
+    //     }
 
-      })
+    //   })
         
     
-      
-      // console.log(dataInit,"dataInit");
-       
-        // for (let i=1;i<=mnonthDay;i++){
-        //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-        // }
-        // console.log(dataInit);
-        let time_2=new Date().getTime();
-        console.log((time_2-time_1),"Time from year");
-        return dataInit;
-    }
-      }
+    //     let time_2=new Date().getTime();
+    //     console.log((time_2-time_1),"Time from year");
+    //     return dataInit;
+    // }
+    //   }
    
     render() {
         return (
