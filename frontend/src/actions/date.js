@@ -1,6 +1,18 @@
 import axios from 'axios';
 import store from '../store'
- import { DATE_SELECT, SALT_RETURNS,LIST_MINIONS,TEAM_LIST,GRAPH_DATE_SELECT,SALT_RETURNS_GRAPH} from './types';
+ import { 
+     DATE_SELECT,
+     SALT_RETURNS,
+     LIST_MINIONS,
+     TEAM_LIST,
+     GRAPH_DATE_SELECT,
+     SALT_RETURNS_GRAPH,
+     CURRENT_MONTH,
+     //CURRENT_YEAR,
+     LAST_THREE_MONTHS_ONE,
+     LAST_THREE_MONTHS_TOW,
+     LAST_THREE_MONTHS_THREE
+    } from './types';
  import data from '../Component/test.json';
  // Date is select
  export const dateSelect = (start , end) => {
@@ -63,48 +75,7 @@ export const teamList =  () => (dispatch, getState) => {
     // console.log("end ",end);
 
 }
-//  // Clear date
-//   export const saltReturns =  () => (dispatch, getState) => {
 
-//     const time =new Date().toDateString();
-//     let Month= String(parseInt(store.getState().date.start.getMonth()));
-//     Month=parseInt(Month)<10?"0"+Month:Month;
-//     let year=String(store.getState().date.start.getFullYear());
-
-
-//     let startYear=new Date(year,Month,store.getState().date.start.getDate());
-//     let endYear=store.getState().date.end;
-
-//     console.log(startYear,"startYear");
-//     console.log(endYear,"endYear");
-
-
-//  if(store.getState().auth.token !== null){   }  // console.log("ppppppppppppppppp");}
-
-//    let data=[];
-
-// //  for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
-//     let index = startYear
-//     let url='/api/saltReturns/apply/'+index.getFullYear();
-//     console.log("url" ,url);
-//     axios.get(url, tokenConfig(getState))
-//     .then((res) => {
-//         console.log("res.data" ,res.data);
-//         store.dispatch({
-//             type: SALT_RETURNS,
-//             payload: res.data
-//         })
-
-//     })
-//     .catch(err => {
-//         console.log(err,"error in data");
-
-//        });
-//  //}
-
-// console.log(store.getState(),"the store from date ");
-// };
- //Clear date
  export const saltReturns =  (str) => (dispatch, getState) => {
      //console.log("----------------------storeeeee--------------\n",store)
      const time =new Date().toDateString();
@@ -152,7 +123,8 @@ export const teamList =  () => (dispatch, getState) => {
      else if(str === "LastThreeMonths"){
         
        
-        let year=String(new Date().getFullYear());
+        let yearTemp=String(new Date().getFullYear());
+        let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
         let dayEnd=String(new Date(year, new Date().getMonth(), 0).getDate());
         DayEnd=parseInt(DayEnd)<10?"0"+DayEnd:DayEnd;
         let satrtMonth=new Date(2020, new Date().getMonth()-2, 1).getMonth();
@@ -162,13 +134,12 @@ export const teamList =  () => (dispatch, getState) => {
         Start= year+satrtMonth+"01"+"000000000000";
         End= year+endtLastThreeMonths+dayEnd+"235959595959";
      }
-    console.log(Start,"Start")
-    console.log(End,"End")
+   
      let url='/api/saltReturns/apply/'+Start+"/"+End;
      //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
     .then((res) => {
-
+        //console.log("pppppppppppppppppppppppppppppppppppppp")
         minions=minions.concat(res.data);
        // console.log(minions);
        /// if(index === endYear){console.log(res,"res ");}
@@ -266,23 +237,3 @@ export const tokenConfig = getState => {
 
 
 
-// export const saltReturns =  () => (dispatch, getState) => {
-
-//     const time =new Date().toDateString();
-
-// // if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
-//     axios.get('/api/saltReturns/apply/2020', tokenConfig(getState))
-//    .then((res) => {
-
-//        // console.log(res,"res");
-//    store.dispatch({
-//        type: SALT_RETURNS,
-//        payload: res.data
-//    })})
-//    .catch(err => {
-//        console.log(err,"error in data");
-
-//       });
-
-//       console.log(store.getState(),"the store ");
-// };

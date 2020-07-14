@@ -234,17 +234,6 @@ axios.get(url, tokenConfig(store.getState()))
     
 }
   
-// shouldComponentUpdate(nextState){
-// console.log('shouldComponentUpdate',this.state.flag)
-//   if(this.state.flag===true){
-//     this.state.data=nextState.data;
-//     this.state.flag=false;
-  
-//     return false;
-//   }
-//   this.state.flag=true;
-//   return true;
-// }  
 
 
 

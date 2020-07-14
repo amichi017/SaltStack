@@ -7,6 +7,7 @@ import saveMinion  from './saveMinion';
 import listMinions  from './listMinions';
 import graphDate  from './graphDate';
 import saltReturnsGraph  from './saltReturnsGraph';
+
 const appReducer = combineReducers({
   saltReturns:saltReturns,
   saltReturnsGraph:saltReturnsGraph,
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   error: errorReducer,
   saveMinion:saveMinion,
   listMinions:listMinions,
+ 
   
 
 });
