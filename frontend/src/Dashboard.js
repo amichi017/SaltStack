@@ -26,6 +26,7 @@ import MinionCard from './Component/MinionCard';
 import { saltReturns } from './actions/date';
 import { CurrentMonthFun } from './actions/date';
 import { CurrentYearFun } from './actions/date';
+import { LastThreeMonthsFun } from './actions/date';
 import store from './store';
 import { Logout } from './Component/auth/Logout';
 import { withStyles } from "@material-ui/core/styles";
@@ -175,13 +176,15 @@ class Dashboard extends React.Component {
       //store.dispatch(saltReturns());
       store.dispatch(CurrentMonthFun());
       store.dispatch(CurrentYearFun());
+      store.dispatch(LastThreeMonthsFun());
+    
      // store.dispatch(listMinions());
       //console.log(store.getState(),"store from dashboard 2");
       this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
       this.handleDrawerClose = this.handleDrawerClose.bind(this);
       this.SelectMenu = this.SelectMenu.bind(this);
       this.state={open:true,menu:"Dashboard"};
-      console.log(store.getState(),"store.getState()")
+      //console.log(store.getState(),"store.getState()")
   }
   
  

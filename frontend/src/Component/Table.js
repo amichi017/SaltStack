@@ -132,7 +132,7 @@ const styles = theme => ({
 });
 //console.log(data,'cccccccccccccccccccccccccccccccccccccccccc')
 // const m=JSON.parse("'["+data+"]'");
-const x=Object.entries(data[0].return).map((e) => ( { [e[0]]: e[1] } ));
+//const x=Object.entries(data[0].return).map((e) => ( { [e[0]]: e[1] } ));
 //console.log(data,'data');
 //console.log(Object.entries(data[0].return),'llll')
 //console.log(x,'cccccccccccccccccccccccccccccccccccccccccc')
@@ -143,7 +143,7 @@ class Orders extends React.Component {
         this.handleClickOpen=this.handleClickOpen.bind(this);
         this.handleClose=this.handleClose.bind(this);
         store.dispatch(saltReturns());
-        
+        console.log(store.getState(),"store.getState()")
         this.state = {
             saltReturns: dataTable,
             Returns:null,

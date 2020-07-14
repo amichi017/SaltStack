@@ -9,7 +9,9 @@ import store from '../store'
      SALT_RETURNS_GRAPH,
      CURRENT_MONTH,
      CURRENT_YEAR,
-     LAST_THREE_MONTHS
+     LAST_THREE_MONTHS_ONE,
+     LAST_THREE_MONTHS_TOW,
+     LAST_THREE_MONTHS_THREE
     } from './types';
  import data from '../Component/test.json';
  // Date is select
@@ -132,13 +134,12 @@ export const teamList =  () => (dispatch, getState) => {
         Start= year+satrtMonth+"01"+"000000000000";
         End= year+endtLastThreeMonths+dayEnd+"235959595959";
      }
-    console.log(Start,"Start")
-    console.log(End,"End")
+   
      let url='/api/saltReturns/apply/'+Start+"/"+End;
      //console.log("url" ,url);
      axios.get(url, tokenConfig(getState))
     .then((res) => {
-        console.log("pppppppppppppppppppppppppppppppppppppp")
+        //console.log("pppppppppppppppppppppppppppppppppppppp")
         minions=minions.concat(res.data);
        // console.log(minions);
        /// if(index === endYear){console.log(res,"res ");}
@@ -233,70 +234,9 @@ export const tokenConfig = getState => {
  return config;
 }
 
-const getDataFromServer = (str,start,end) => (dispatch, getState) => {
-    console.log("getDataFronServer");
-        let minions=[];
-        let url='/api/saltReturns/apply/'+start+"/"+end;
-        //console.log("url" ,url);
-        axios.get(url, tokenConfig(getState))
-        .then((res) => {
-          let dataInit=[];
-         console.log(str,"str from server")
-          let temp=new Date();
-           let mnonthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
-              for (let i=1;i<=mnonthDay;i++){
-               dataInit.push( { name: String(i), Fail:0, Success:0 });
-           }
-          minions=minions.concat(res.data);
-        
-          if(minions!==null){
-            
-            let funSaltReturns=minions
-         
-          .forEach((item) => {
-              let place= (parseInt(item.jid.slice(6,8))-1);
-             
-             let res=true;
-             let flag=0;
-            
-             if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-             else{
-              
-                 let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-                  if((e[1].result === false) && (flag===0)){
-                    dataInit[place].Fail++;
-                    flag=1;
-                 
-                   }
-                  if(index===arr.length-1 && flag === 0){
-                    dataInit[place].Success++;
-                  }
-             
-               
-                });
-        
-             }
-           
-            })
-            store.dispatch({
-                type: str,
-                payload: dataInit
-            });
-            }
-            
-        
-            
-        })
-        .catch(err => {
-          console.log(err,"error in data");
-        
-         });
-    
-    }
-    
-    
 export const CurrentMonthFun =  (str) => (dispatch, getState) => {
-    console.log("CurrentMonthFun");
+    //console.log("CurrentMonthFun");
+    let timer_1=new Date().getTime();
     let year=String(new Date().getFullYear());
     let dayEnd=String(new Date(year, new Date().getMonth()+1, 0).getDate());
     dayEnd=parseInt(dayEnd)<10?"0"+dayEnd:dayEnd;
@@ -310,7 +250,7 @@ export const CurrentMonthFun =  (str) => (dispatch, getState) => {
     axios.get(url, tokenConfig(getState))
     .then((res) => {
       let dataInit=[];
-     console.log(str,"str from server")
+     //console.log(str,"str from server")
       let temp=new Date();
        let mnonthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
           for (let i=1;i<=mnonthDay;i++){
@@ -354,21 +294,22 @@ export const CurrentMonthFun =  (str) => (dispatch, getState) => {
         }
         
     
-        
+        let timer_2=new Date().getTime();
+        console.log(timer_2-timer_1,"time from  CurrentMonth")
     })
     .catch(err => {
       console.log(err,"error in data");
     
      });
           
-  
+    
 
 }
 
 
 
 export const CurrentYearFun =  (str) => (dispatch, getState) => {
-
+         let timer_1=new Date().getTime();
         let year=String(new Date().getFullYear());
         let dayEnd=String(new Date(year, 12, 0).getDate());
         dayEnd=parseInt(dayEnd)<10?"0"+dayEnd:dayEnd;
@@ -401,7 +342,7 @@ export const CurrentYearFun =  (str) => (dispatch, getState) => {
                 dataInit.push( { name: String('October '), Fail:0, Success:0 });
                 dataInit.push( { name: String('November  '),Fail:0, Success:0 });
                 dataInit.push( { name: String('December '), Fail:0, Success:0 });
-             console.log(str,"str from server")
+            // console.log(str,"str from server")
               //let temp=new Date();
             
               minions=minions.concat(res.data);
@@ -443,59 +384,26 @@ export const CurrentYearFun =  (str) => (dispatch, getState) => {
                 }
                 
             
-                
+                let timer_2=new Date().getTime();
+                console.log(timer_2-timer_1,"time from  year")
             })
             .catch(err => {
               console.log(err,"error in data");
             
              });
 
-
-
-
-
-
-
             
-            // .forEach((item) => {
-            //     //     let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-            //     //     let time=new Date(str);
-            //     //     let place=time.getMonth();
-            //     //     let res=true;
-            //     //     let flag=0;
-                 
-            //     //     if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-            //     //     else{
-                      
-            //     //         let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            //     //           if(e[1].result === false && flag===0){
-            //     //            dataInit[place].Fail++;
-            //     //            flag=1;
-            //     //            //break;
-            //     //           }
-            //     //          if(index===arr.length-1 && flag === 0){
-            //     //            dataInit[place].Success++;
-            //     //          }
-                       
-                      
-            //     //        });
-                      
-                       
-                    
-            //     //     }
-            
-            //     //   })
-   
 
 }
 
 
 
-export const LastThreeMonthsfun = (str,start,end) => (dispatch, getState) => {
+export const LastThreeMonthsFun = (str,start,end) => (dispatch, getState) => {
+   
    
     let yearTemp=String(new Date().getFullYear());
     let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
-    let dayEnd=String(new Date(year, new Date().getMonth(), 0).getDate());
+    let dayEnd=String(new Date(year, new Date().getMonth()-2, 0).getDate());
 
     dayEnd=parseInt(dayEnd)<10?"0"+dayEnd:dayEnd;
 
@@ -503,15 +411,150 @@ export const LastThreeMonthsfun = (str,start,end) => (dispatch, getState) => {
 
     satrtMonth=parseInt(satrtMonth)<10?"0"+satrtMonth:satrtMonth;
 
-    let endtLastThreeMonths=String(new Date().getMonth());
-    
-    endtLastThreeMonths=parseInt( endtLastThreeMonths)<10?"0"+ endtLastThreeMonths: endtLastThreeMonths;
     start= year+satrtMonth+"01"+"000000000000";
-    end= year+endtLastThreeMonths+dayEnd+"235959595959";
+    end= year+satrtMonth+dayEnd+"235959595959";
+  
+    getDataFromServer(LAST_THREE_MONTHS_ONE,start,end)
 
-   // getDataFronServer(LAST_THREE_MONTHS,start,end);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+   
+    let dayEndTow=String(new Date(year, new Date().getMonth()-1, 0).getDate());
+
+    dayEndTow=parseInt(dayEndTow)<10?"0"+dayEndTow:dayEndTow;
+
+    let satrtMonthTow=new Date(year, new Date().getMonth()-1, 1).getMonth();
+
+    satrtMonthTow=parseInt(satrtMonthTow)<10?"0"+satrtMonthTow:satrtMonthTow;
+
+    let startTow= year+satrtMonthTow+"01"+"000000000000";
+    let endTow= year+satrtMonthTow+dayEndTow+"235959595959";
+    getDataFromServer(LAST_THREE_MONTHS_TOW,startTow,endTow)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    let dayEndThree=String(new Date(year, new Date().getMonth(), 0).getDate());
+
+    dayEndThree=parseInt(dayEnd)<10?"0"+dayEndThree:dayEndThree;
+
+    let satrtMonthTrhee=new Date(year, new Date().getMonth(), 1).getMonth();
+
+    satrtMonthTrhee=parseInt(satrtMonth)<10?"0"+satrtMonthTrhee:satrtMonthTrhee;
+
+    let startTrhee= year+satrtMonthTrhee+"01"+"000000000000";
+    let endTrhee= year+satrtMonthTrhee+dayEndThree+"235959595959";
+
+    getDataFromServer(LAST_THREE_MONTHS_THREE,startTrhee,endTrhee)
+
+//console.log(store.getState(),"store.getState()")
 
 }
+const getDataFromServer = (str,start,end) => {
+    let timer_1=new Date().getTime();
+
+    let dataInit=[];
+    let temp=new Date();
+    if(str===LAST_THREE_MONTHS_ONE){
+
+        let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+        for (let i=1;i<=monthDayOne;i++){
+            dataInit.push( { name: String(i), Fail:0, Success:0 });
+            }
+          
+    }
+    else if(str===LAST_THREE_MONTHS_TOW){
+
+        let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+        for (let i=1;i<=monthDayTow;i++){
+            dataInit.push( { name: String(i), Fail:0, Success:0 });
+      }
+    }
+    else if(str===LAST_THREE_MONTHS_THREE){
+
+            
+        let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+        for (let i=1;i<=monthDayThree;i++){
+            dataInit.push( { name: String(i), Fail:0, Success:0 });
+    }
+}
+   
+        let minions=[];
+        let url='/api/saltReturns/apply/'+start+"/"+end;
+      
+       
+        //console.log("url" ,url);
+        axios.get(url, tokenConfigTow())
+        .then((res) => {
+          minions=minions.concat(res.data);
+         
+          if(minions!==null){
+            
+            let funSaltReturns=minions
+         
+          .forEach((item) => {
+              let place= (parseInt(item.jid.slice(6,8))-1);
+             
+             let res=true;
+             let flag=0;
+            
+             if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+             else{
+               
+                 let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+                  if((e[1].result === false) && (flag===0)){
+                    dataInit[place].Fail++;
+                    flag=1;
+                 
+                   }
+                  if(index===arr.length-1 && flag === 0){
+                    dataInit[place].Success++;
+                  }
+             
+               
+                });
+        
+             }
+           
+            })
+           // console.log(dataInit,"dataInit")
+            store.dispatch({
+                type: str,
+                payload: dataInit
+            });
+            }
+            
+            let timer_2=new Date().getTime();
+            console.log(timer_2-timer_1,"time from str")
+            
+        })
+        .catch(err => {
+          console.log(err,"error in data");
+        
+         });
+    
+    }
 
 
 
+
+
+const tokenConfigTow = () => {
+    // console.log("getstatteeeeeslatl",getState())
+     // Get token from localstorage
+     const token = store.getState().auth.token;
+  
+     // Headers
+     const config = {
+         headers: {
+             "Content-type": "multipart/form-data"
+         }
+     }
+  
+     // If token, add to headers
+     if(token) {
+        config.headers["Authorization"] = ` Bearer ${token} `;
+     }
+  
+  return config;
+  }

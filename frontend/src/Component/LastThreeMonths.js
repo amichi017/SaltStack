@@ -25,10 +25,10 @@ const styles = theme => ({
 class LastThreeMonths extends PureComponent {
     constructor(props) {
         super(props);
-         this.dataInitOne = this.dataInitOne.bind(this);
-         this.dataInitTow = this.dataInitTow.bind(this);
-         this.dataInitThree = this.dataInitThree.bind(this);
-         store.dispatch(saltReturns("LastThreeMonths"));
+        //  this.dataInitOne = this.dataInitOne.bind(this);
+        //  this.dataInitTow = this.dataInitTow.bind(this);
+        //  this.dataInitThree = this.dataInitThree.bind(this);
+         //store.dispatch(saltReturns("LastThreeMonths"));
         //  this.listMonth = this.listMonth.bind(this);
         this.state = {
             start: new Date(),
@@ -36,210 +36,206 @@ class LastThreeMonths extends PureComponent {
             nameOne:'',
             nameTow:'',
             nameThree:'',
-            one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree(),
+            one: store.getState().LastThreeMonths.dataInitOne,
+            tow: store.getState().LastThreeMonths.dataInitTow,
+            three:store.getState().LastThreeMonths.dataInitThree,
             flag:true,
          
         };
       }
-      componentWillReceiveProps(nextProps) {
-        if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
-        && (this.state.flag===true)){
+    //   componentWillReceiveProps(nextProps) {
+    //     if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
+    //     && (this.state.flag===true)){
 
-           this.setState({one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree()});
+    //        this.setState({one: this.dataInitOne(),
+    //         tow: this.dataInitTow(),
+    //         three: this.dataInitThree()});
           
-        }
-      }
-      shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.flag===true){
-          this.setState({one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree(),flag:false});
-          return true;
-        }
-       return false;
+    //     }
+    //   }
+    //   shouldComponentUpdate(nextProps, nextState) {
+    //     if(this.state.flag===true){
+    //       this.setState({one: this.dataInitOne(),
+    //         tow: this.dataInitTow(),
+    //         three: this.dataInitThree(),flag:false});
+    //       return true;
+    //     }
+    //    return false;
         
-      }
-      dataInitOne(){
-        let dataInit=[];
-        let listMonth=['January','February','March','April',
-        'May','June','July','August','September',
-        'October','November','December'];
-          let temp=new Date();
-         //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth()-2;
-        if(tempMonth<0){tempMonth+=12}
+    //   }
+    //   dataInitOne(){
+    //     let dataInit=[];
+      
+    //       let temp=new Date();
+    //      //let temp=new Date(2020,8);
+    //     let tempMonth=temp.getMonth()-2;
+    //     if(tempMonth<0){tempMonth+=12}
      
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
+    //     let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
       
      
       
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
+    //        for (let i=1;i<=monthDay;i++){
+    //         dataInit.push( { name: String(i), Fail:0, Success:0 });
+    //     }
    
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-      //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
-        .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-      })
-      .forEach((item,index) => {
-        let place= (parseInt(item.jid.slice(6,8))-1);
+    //     if(store.getState().saltReturns.saltReturns!==null){
+    //     let funSaltReturns=store.getState().saltReturns.saltReturns
+    //   //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
+    //     .filter((item)=>{
+    //   if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
+    //   })
+    //   .forEach((item,index) => {
+    //     let place= (parseInt(item.jid.slice(6,8))-1);
         
-        let flag=0;
-        let res=true;
+    //     let flag=0;
+    //     let res=true;
       
-        let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true;  res === true ?(dataInit[place].Success++):(dataInit[place].Fail++);}
-        else{
+    //     let temp =Object.entries(item.return);
+    //     if(Array.isArray(item.return)){ res=true;  res === true ?(dataInit[place].Success++):(dataInit[place].Fail++);}
+    //     else{
 
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
+    //       let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+    //         if(e[1].result === false && flag===0){
+    //          dataInit[place].Fail++;
+    //          flag=1;
          
-            }
-           if(index===arr.length-1 && flag === 0){
-             dataInit[place].Success++;
-           }
+    //         }
+    //        if(index===arr.length-1 && flag === 0){
+    //          dataInit[place].Success++;
+    //        }
       
         
-         });
+    //      });
  
-      }
+    //   }
 
 
 
 
-        })
+    //     })
 
-        }
+    //     }
 
-        return dataInit;
+    //     return dataInit;
       
-      }
+    //   }
 
 
-      dataInitTow(){
-        let dataInit=[];
-        let listMonth=['January','February','March','April',
-        'May','June','July','August','September',
-        'October','November','December'];
-        let temp=new Date();
-        //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth()-1;
-        if(tempMonth<0){tempMonth+=12}
+    //   dataInitTow(){
+    //     let dataInit=[];
+       
+    //     let temp=new Date();
+    //     //let temp=new Date(2020,8);
+    //     let tempMonth=temp.getMonth()-1;
+    //     if(tempMonth<0){tempMonth+=12}
    
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
+    //     let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
       
      
       
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
+    //        for (let i=1;i<=monthDay;i++){
+    //         dataInit.push( { name: String(i), Fail:0, Success:0 });
+    //     }
        
      
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-      //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
-      .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-      })
-      .forEach((item,index) => {
-          let place= (parseInt(item.jid.slice(6,8))-1);
-         let flag=0;
-         let res=true;
+    //     if(store.getState().saltReturns.saltReturns!==null){
+    //     let funSaltReturns=store.getState().saltReturns.saltReturns
+    //   //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
+    //   .filter((item)=>{
+    //   if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
+    //   })
+    //   .forEach((item,index) => {
+    //       let place= (parseInt(item.jid.slice(6,8))-1);
+    //      let flag=0;
+    //      let res=true;
     
-         if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-         else{
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
-            }
-           if(index===arr.length-1 && flag === 0){
-             dataInit[place].Success++;
-           }
+    //      if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+    //      else{
+    //       let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+    //         if(e[1].result === false && flag===0){
+    //          dataInit[place].Fail++;
+    //          flag=1;
+    //         }
+    //        if(index===arr.length-1 && flag === 0){
+    //          dataInit[place].Success++;
+    //        }
       
         
-         });
+    //      });
  
-      }
+    //   }
 
 
-        })
+    //     })
 
-        }
+    //     }
         
  
-        return dataInit;
+    //     return dataInit;
       
-      }
+    //   }
 
-      dataInitThree(){
-        let dataInit=[];
+    //   dataInitThree(){
+    //     let dataInit=[];
        
-        let temp=new Date();
-        //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth();
-        if(tempMonth<0){tempMonth+=12}
+    //     let temp=new Date();
+    //     //let temp=new Date(2020,8);
+    //     let tempMonth=temp.getMonth();
+    //     if(tempMonth<0){tempMonth+=12}
     
       
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+    //     let monthDay =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
        
-        // this.state.nameThree=this.state.month[monthDay-2];
-        //console.log(this.state.month,"this.state.month");
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
+    //     // this.state.nameThree=this.state.month[monthDay-2];
+    //     //console.log(this.state.month,"this.state.month");
+    //        for (let i=1;i<=monthDay;i++){
+    //         dataInit.push( { name: String(i), Fail:0, Success:0 });
+    //     }
   
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-         //.filter((item)=>{return item.full_ret.fun === "state.apply"})
-       .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-       })
-      .forEach((item,index) => {
+    //     if(store.getState().saltReturns.saltReturns!==null){
+    //     let funSaltReturns=store.getState().saltReturns.saltReturns
+    //      //.filter((item)=>{return item.full_ret.fun === "state.apply"})
+    //    .filter((item)=>{
+    //   if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
+    //    })
+    //   .forEach((item,index) => {
      
-        let place= (parseInt(item.jid.slice(6,8))-1);
-        let res=true;
-        let flag=0;
+    //     let place= (parseInt(item.jid.slice(6,8))-1);
+    //     let res=true;
+    //     let flag=0;
       
-       if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-       else{
+    //    if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+    //    else{
         
-        let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-          if(e[1].result === false && flag===0){
-           dataInit[place].Fail++;
-           flag=1;
+    //     let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+    //       if(e[1].result === false && flag===0){
+    //        dataInit[place].Fail++;
+    //        flag=1;
            
-          }
-         if(index===arr.length-1 && flag === 0){
-           dataInit[place].Success++;
-         }
+    //       }
+    //      if(index===arr.length-1 && flag === 0){
+    //        dataInit[place].Success++;
+    //      }
       
       
-       });
+    //    });
       
-    }
+    // }
         
 
-        })
+    //     })
 
-        }
+    //     }
   
-        return dataInit;
+    //     return dataInit;
       
-      }
+    //   }
 
 
-      componentDidMount(){
+    //   componentDidMount(){
        
-      }
+    //   }
    
     render() {
         let listMonth=['January','February','March','April',
