@@ -1,5 +1,4 @@
 
-
 import { withStyles } from "@material-ui/core/styles";
 import React, { PureComponent } from 'react';
 import {
@@ -38,7 +37,9 @@ class CurrentMonth extends PureComponent {
     constructor(props) {
         super(props);
          this.dataInit = this.dataInit.bind(this);
-         store.dispatch(saltReturns("CurrentMonth"));
+         //store.dispatch(saltReturns("CurrentMonth"));
+         //console.log(store.getState(),"store.getState()")
+         
         this.state = {
             start: new Date(),
             end:new Date(),
@@ -46,7 +47,7 @@ class CurrentMonth extends PureComponent {
             flag:true,
         };
       }
-    
+ 
       // componentWillUpdate(){
       //   this.setState({data:this.dataInit(),flag:false});
       // }
@@ -60,110 +61,83 @@ class CurrentMonth extends PureComponent {
         satrtCurrentMonth=parseInt( satrtCurrentMonth)<10?"0"+ satrtCurrentMonth: satrtCurrentMonth;
         let Start= year+satrtCurrentMonth+"01"+"000000000000";
         let End= year+satrtCurrentMonth+dayEnd+"235959595959";
-        //  let startYear=new Date(year,Month,store.getState().date.start.getDate());
-        //  let endYear=store.getState().date.end;
-        //  let index = startYear;
-      // if(getState().auth.token !== null){      console.log("ppppppppppppppppp");}
-        let minions=[];
-      // for (let index = startYear; index <= endYear; index.setFullYear(index.getFullYear() + 1)) {
-      
-      
      
-      //console.log(Start,"Start")
-      //console.log(End,"End")
+        let minions=[];
+      
+
       let url='/api/saltReturns/apply/'+Start+"/"+End;
-      //console.log("url" ,url);
+    
       axios.get(url, tokenConfig(store.getState()))
       .then((res) => {
         let dataInit=[];
-        // let temp=new Date(2020,4);
+       
         let temp=new Date();
          let mnonthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
             for (let i=1;i<=mnonthDay;i++){
              dataInit.push( { name: String(i), Fail:0, Success:0 });
          }
         minions=minions.concat(res.data);
-       // console.log(res.data,"res.data")
-       // console.log(minions,"minions")
+     
         if(minions!==null){
-          
-          let funSaltReturns=minions
-          //.filter((item)=>{return item.full_ret.fun === "state.apply"})
-        //   .filter((item)=>{
-        //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-        //   let time=new Date(str);
-        //   if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
-        // })
-        .forEach((item) => {
-            let place= (parseInt(item.jid.slice(6,8))-1);
-           // console.log(place,"day");
-           let res=true;
-           let flag=0;
-           //if(item.full_ret.success === false){res=false}
-           //let temp =Object.entries(item.return);
-           if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-           else{
-               //console.log(item,'item');
-              // let flag =0;
-               let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-                 if(e[1].result === false){
-                  dataInit[place].Fail++;
-                  flag=1;
-                  //break;
-                 }
-                if(index===arr.length-1 && flag === 0){
-                  dataInit[place].Success++;
-                }
-              //  if(flag ===1){
-              //   { e[1].result === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
-              //  }
-             
-              });
-              //  let flag=false;
-              
-            //console.log(Object.entries(item.return),"Object.entries(item.return)");
-              //  dataTemp.forEach(item =>{
-              //     // console.log(Object.values(item),'Object.values(item)');
-              //      if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-              //      else{res=false;flag=true;}
-              //  } )
-           }
          
-          })
+          const BreakException = {};
+          
+         
+           
+            let funSaltReturns=minions
+       
+            .forEach((item) => {
+                let place= (parseInt(item.jid.slice(6,8))-1);
+               
+               let res=true;
+               let flag=0;
+              
+               if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+
+
+
+               else{
+                try {
+                   let dataTemp=Object.entries(item.return).forEach((e,index,arr) => {
+                    if((e[1].result === false) && (flag===0)){
+                      dataInit[place].Fail++;
+                      flag=1;
+                      throw BreakException;
+                   
+                     }
+                    if(index===arr.length-1 && flag === 0){
+                      dataInit[place].Success++;
+                    }
+               
+                 
+                  });
+
+
+                } catch (e) {
+                  if (e !== BreakException) throw e;
+                }
+
+          
+               }
+               
+              })
+
+
+         
+     
           let time_2=new Date().getTime();
           console.log((time_2-time_1),"Time from month");
           }
           
-      
-        
-       //console.log(dataInit,"dataInit");
-         
-          // for (let i=1;i<=mnonthDay;i++){
-          //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-          // }
-         // console.log(dataInit);
+
           this.state.data= dataInit;
           this.forceUpdate();
-        //console.log("this.state 1",this.state)
-
-
     })
     .catch(err => {
         console.log(err,"error in data");
 
        });
-       
-       
-    //     let mnontStart=new Date(temp.getFullYear(), temp.getMonth());
-    // //console.log(mnontStart,"mnontStart");
 
-    //     let mnontEnd=new Date(temp.getFullYear(), temp.getMonth(), mnonthDay);
-    //     mnontEnd.setHours(23,59,59);
-       // console.log(mnontEnd,"mnontEnd");
-        // console.log(mnontStart,"gggggggggggggggggggggg");
-        // console.log(mnontEnd,"gggggggggggggggggggggg");
-      
-      
       }
       
     render() {

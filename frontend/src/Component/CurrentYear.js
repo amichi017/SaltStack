@@ -53,7 +53,7 @@ class CurrentYear extends PureComponent {
         let time_1=new Date().getTime();
         let dataInit=[];
         // let temp=new Date(2019,10);
-    
+        const BreakException = {};
         dataInit.push( { name: String('January'), Fail:0, Success:0 });
         dataInit.push( { name: String('February'), Fail:0, Success:0 });
         dataInit.push( { name: String('March'), Fail:0, Success:0 });
@@ -89,31 +89,28 @@ class CurrentYear extends PureComponent {
         //let temp =Object.entries(item.return);
         if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
         else{
-            //console.log(item,'item');
-           // let flag =0;
-            let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-              if(e[1].result === false && flag===0){
-               dataInit[place].Fail++;
-               flag=1;
-               //break;
+          try {
+             let dataTemp=Object.entries(item.return).forEach((e,index,arr) => {
+              if((e[1].result === false) && (flag===0)){
+                dataInit[place].Fail++;
+                flag=1;
+                throw BreakException;
+             
+               }
+              if(index===arr.length-1 && flag === 0){
+                dataInit[place].Success++;
               }
-             if(index===arr.length-1 && flag === 0){
-               dataInit[place].Success++;
-             }
-           //  if(flag ===1){
-           //   { e[1].result === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}
-           //  }
-          
-           });
-           //  let flag=false;
+         
            
-         //console.log(Object.entries(item.return),"Object.entries(item.return)");
-           //  dataTemp.forEach(item =>{
-           //     // console.log(Object.values(item),'Object.values(item)');
-           //      if((Object.values(item)[0].result===true)&& (flag===false)){res=true}
-           //      else{res=false;flag=true;}
-           //  } )
-        }
+            });
+
+
+          } catch (e) {
+            if (e !== BreakException) throw e;
+          }
+
+    
+         }
 
       })
         

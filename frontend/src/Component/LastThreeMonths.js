@@ -30,7 +30,7 @@ class LastThreeMonths extends PureComponent {
          this.dataInitTow = this.dataInitTow.bind(this);
          this.dataInitThree = this.dataInitThree.bind(this);
          store.dispatch(saltReturns("LastThreeMonths"));
-        //  this.listMonth = this.listMonth.bind(this);
+  
         this.state = {
             start: new Date(),
             end:new Date(),
@@ -66,6 +66,7 @@ class LastThreeMonths extends PureComponent {
       }
       dataInitOne(){
         let dataInit=[];
+        const BreakException = {};
         let listMonth=['January','February','March','April',
         'May','June','July','August','September',
         'October','November','December'];
@@ -74,31 +75,20 @@ class LastThreeMonths extends PureComponent {
         let tempMonth=temp.getMonth()-2;
         if(tempMonth<0){tempMonth+=12}
         console.log(tempMonth,"1");
-        // let temp=new Date(2019,10);
-      // console.log(tempMonth,"tempMonth")
+    
         let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
       
-        //this.state.nameThree=listMonth[monthDay-2];
       
            for (let i=1;i<=monthDay;i++){
             dataInit.push( { name: String(i), Fail:0, Success:0 });
         }
         
-        // let mnontStart=new Date(temp.getFullYear(), temp.getMonth()-3);
-    
-
-        // let mnontEnd=new Date(temp.getFullYear(), temp.getMonth()-3, monthDay);
-        // mnontEnd.setHours(23,59,59);
-
-       // console.log(mnontStart,"gggggggggggggggggggggg");
-       // console.log(mnontEnd,"gggggggggggggggggggggg");
+       
         if(store.getState().saltReturns.saltReturns!==null){
         let funSaltReturns=store.getState().saltReturns.saltReturns
-      //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
+      
         .filter((item)=>{
-      //   let str=item.jid.slice(0,4)+"-"+String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-      //   let time=new Date(str);
-      //  if(((time.getTime() >=mnontStart.getTime()))  && (time.getTime() <=mnontEnd.getTime())){return item;}
+      
       if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
       })
       .forEach((item,index) => {
@@ -110,47 +100,36 @@ class LastThreeMonths extends PureComponent {
         let temp =Object.entries(item.return);
         if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
         else{
-          //console.log(item,'item');
-         // let flag =0;
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
-             //break;
-            }
-           else if(index===arr.length-1 && flag === 0){
-             dataInit[place].Success++;
-           }
-          else {
-            
+          try {
+             let dataTemp=Object.entries(item.return).forEach((e,index,arr) => {
+              if((e[1].result === false) && (flag===0)){
+                dataInit[place].Fail++;
+                flag=1;
+                throw BreakException;
+             
+               }
+              if(index===arr.length-1 && flag === 0){
+                dataInit[place].Success++;
+              }
+         
+           
+            });
+
+
+          } catch (e) {
+            if (e !== BreakException) throw e;
           }
-        
-         });
- 
-      }
 
-
-
-
-        })
-
-        }
-        
-        
     
-      
-    //    console.log(dataInit,"dataInit");
-       
-        // for (let i=1;i<=mnonthDay;i++){
-        //     dataInit.push( { name: String(i), Fail: i+10*2/(i+1*2), Success: i+5/(i+1)*5 });
-        // }
-        // console.log(dataInit);
+         }  }) }
+        
         return dataInit;
       
       }
 
 
       dataInitTow(){
+        const BreakException = {};
         let dataInit=[];
         let listMonth=['January','February','March','April',
         'May','June','July','August','September',
@@ -195,24 +174,28 @@ class LastThreeMonths extends PureComponent {
     
          if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
          else{
-          //console.log(item,'item');
-         // let flag =0;
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
-             //break;
-            }
-           if(index===arr.length-1 && flag === 0){
-             console.log("place",place)
-             console.log("dataaa",dataInit)
-             dataInit[place].Success++;
-           }
-      
-        
-         });
- 
-      }
+          try {
+             let dataTemp=Object.entries(item.return).forEach((e,index,arr) => {
+              if((e[1].result === false) && (flag===0)){
+                dataInit[place].Fail++;
+                flag=1;
+                throw BreakException;
+             
+               }
+              if(index===arr.length-1 && flag === 0){
+                dataInit[place].Success++;
+              }
+         
+           
+            });
+
+
+          } catch (e) {
+            if (e !== BreakException) throw e;
+          }
+
+    
+         }
 
 
         })
@@ -237,6 +220,8 @@ class LastThreeMonths extends PureComponent {
 
 
       dataInitThree(){
+      
+        const BreakException = {};
         let dataInit=[];
         let listMonth=['January','February','March','April',
         'May','June','July','August','September',
@@ -284,24 +269,28 @@ class LastThreeMonths extends PureComponent {
       
        if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
        else{
-        //console.log(item,'item');
-       // let flag =0;
-        let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-          if(e[1].result === false && flag===0){
-           dataInit[place].Fail++;
-           flag=1;
-           //break;
-          }
-         if(index===arr.length-1 && flag === 0){
-           dataInit[place].Success++;
-         }
-      
-      
-       });
-      
+        try {
+           let dataTemp=Object.entries(item.return).forEach((e,index,arr) => {
+            if((e[1].result === false) && (flag===0)){
+              dataInit[place].Fail++;
+              flag=1;
+              throw BreakException;
+           
+             }
+            if(index===arr.length-1 && flag === 0){
+              dataInit[place].Success++;
+            }
        
-     
-    }
+         
+          });
+
+
+        } catch (e) {
+          if (e !== BreakException) throw e;
+        }
+
+  
+       }
         
 
 
