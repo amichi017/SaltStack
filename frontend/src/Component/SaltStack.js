@@ -559,7 +559,7 @@ sentCommand(command){
             color="primary"
             aria-label="vertical contained primary button group"
             variant="text"
-            style={{ marginTop:35,width:380,height:50,}}>
+            style={{ marginTop:35,width:420,height:50,}}>
            
            <Button onClick={()=>this.sentCommand('state.apply')}>state.apply</Button>
             <Button onClick={()=>this.sentCommand('test.ping')}>test.ping</Button>
@@ -568,7 +568,30 @@ sentCommand(command){
         
 
         </ButtonGroup>
-      
+        <ButtonGroup 
+            size="large" 
+            color="primary" 
+            orientation="horizontal"
+            color="primary"
+            aria-label="vertical contained primary button group"
+            variant="text"
+            style={{ marginTop:15,width:380,height:50,}}>
+
+            <Button onClick={()=>this.sentCommand('pillar.items')}>pillar.items</Button>
+            <Button onClick={()=>this.sentCommand('saltutil.refresh_grains')}>saltutil.refresh_grains</Button>
+           
+                            
+        </ButtonGroup>
+        <ButtonGroup 
+            size="large" 
+            color="primary" 
+            orientation="horizontal"
+            color="primary"
+            aria-label="vertical contained primary button group"
+            variant="text"
+            style={{ marginTop:15,width:380,height:50,}}>
+        <Button onClick={()=>this.sentCommand('saltutil.refresh_pillar')}>saltutil.refresh_pillar</Button>
+        </ButtonGroup>
     </div>
 
     <div className={this.props.classes.Divider}>

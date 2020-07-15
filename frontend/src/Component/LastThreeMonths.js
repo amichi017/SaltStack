@@ -6,12 +6,16 @@ import {
 import store from '../store';
 import { saltReturns } from '../actions/date';
 import {connect} from 'react-redux';
-
+import axios from 'axios'
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-
+import {
+  LAST_THREE_MONTHS_ONE,
+     LAST_THREE_MONTHS_TOW,
+     LAST_THREE_MONTHS_THREE
+} from '../actions/types';
 
 const styles = theme => ({
     root: {
@@ -20,226 +24,336 @@ const styles = theme => ({
         maxWidth: 400,
       },
 });
+const getDataFromServer = (str,start,end) => {
+  let timer_1=new Date().getTime();
 
+  let dataInit=[];
+  let temp=new Date();
+  if(str===LAST_THREE_MONTHS_ONE){
 
+      let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+      for (let i=1;i<=monthDayOne;i++){
+          dataInit.push( { name: String(i), Fail:0, Success:0 });
+          }
+        
+  }
+  else if(str===LAST_THREE_MONTHS_TOW){
+
+      let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+      for (let i=1;i<=monthDayTow;i++){
+          dataInit.push( { name: String(i), Fail:0, Success:0 });
+    }
+  }
+  else if(str===LAST_THREE_MONTHS_THREE){
+
+          
+      let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+      for (let i=1;i<=monthDayThree;i++){
+          dataInit.push( { name: String(i), Fail:0, Success:0 });
+  }
+}
+ 
+      let minions=[];
+      let url='/api/saltReturns/apply/'+start+"/"+end;
+    
+     
+      console.log("url" ,url);
+      axios.get(url, tokenConfig())
+      .then((res) => {
+        minions=minions.concat(res.data);
+       
+        if(minions!==null){
+          
+          let funSaltReturns=minions
+       
+        .forEach((item) => {
+            let place= (parseInt(item.jid.slice(6,8))-1);
+           
+           let res=true;
+           let flag=0;
+          
+           if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+           else{
+             
+               let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+                if((e[1].result === false) && (flag===0)){
+                  dataInit[place].Fail++;
+                  flag=1;
+               
+                 }
+                if(index===arr.length-1 && flag === 0){
+                  dataInit[place].Success++;
+                }
+           
+             
+              });
+      
+           }
+         
+          })
+       
+          }
+          if(str===LAST_THREE_MONTHS_ONE){
+            this.state.one=dataInit;
+          }
+          else if(str===LAST_THREE_MONTHS_TOW){
+            this.state.tow=dataInit;
+          }
+          else if(str===LAST_THREE_MONTHS_THREE){
+            this.state.three=dataInit;
+          }
+          let timer_2=new Date().getTime();
+          console.log(timer_2-timer_1,"time from str")
+          
+      })
+      .catch(err => {
+        console.log(err,"error in data");
+      
+       });
+  
+  }
+const tokenConfig = () => {
+  // console.log("getstatteeeeeslatl",getState())
+   // Get token from localstorage
+   const token = store.getState().auth.token;
+
+   // Headers
+   const config = {
+       headers: {
+           "Content-type": "multipart/form-data"
+       }
+   }
+
+   // If token, add to headers
+   if(token) {
+      config.headers["Authorization"] = ` Bearer ${token} `;
+   }
+
+return config;
+}
 class LastThreeMonths extends PureComponent {
     constructor(props) {
         super(props);
+        this.initWithoutInformation = this.initWithoutInformation.bind(this);
          this.dataInitOne = this.dataInitOne.bind(this);
          this.dataInitTow = this.dataInitTow.bind(this);
          this.dataInitThree = this.dataInitThree.bind(this);
-         store.dispatch(saltReturns("LastThreeMonths"));
-        //  this.listMonth = this.listMonth.bind(this);
+         this.getDataFromServer = this.getDataFromServer.bind(this);
+        // store.dispatch(saltReturns("LastThreeMonths"));
+  
         this.state = {
             start: new Date(),
             end:new Date(),
             nameOne:'',
             nameTow:'',
             nameThree:'',
-            one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree(),
+            one: [],
+            tow: [],
+            three: [],
             flag:true,
          
         };
+        this.initWithoutInformation();
+         this.dataInitOne();
+        this.dataInitTow();
+        this.dataInitThree();
       }
-      componentWillReceiveProps(nextProps) {
-        if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
-        && (this.state.flag===true)){
+      // componentWillReceiveProps(nextProps) {
+      //   if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
+      //   && (this.state.flag===true)){
 
-           this.setState({one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree()});
+      //      this.setState({one: this.dataInitOne(),
+      //       tow: this.dataInitTow(),
+      //       three: this.dataInitThree()});
           
-        }
-      }
-      shouldComponentUpdate(nextProps, nextState) {
-        if(this.state.flag===true){
-          this.setState({one: this.dataInitOne(),
-            tow: this.dataInitTow(),
-            three: this.dataInitThree(),flag:false});
-          return true;
-        }
-       return false;
+      //   }
+      // }
+      // shouldComponentUpdate(nextProps, nextState) {
+      //   if(this.state.flag===true){
+      //     this.setState({one: this.dataInitOne(),
+      //       tow: this.dataInitTow(),
+      //       three: this.dataInitThree(),flag:false});
+      //     return true;
+      //   }
+      //  return false;
         
+      // }
+initWithoutInformation(){
+        
+      let dataInitOne=[];
+
+      let temp=new Date();
+      // let temp=new Date(2019,10);
+
+      let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+        for (let i=1;i<=monthDayOne;i++){
+          dataInitOne.push( { name: String(i), Fail:0, Success:0 });
       }
-      dataInitOne(){
+      this.state.one=dataInitOne;
+      ////////////////////////////////////////////////////////////////////////////////////
+
+
+      let dataInitTow=[];
+
+      let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+        for (let i=1;i<=monthDayTow;i++){
+          dataInitTow.push( { name: String(i), Fail:0, Success:0 });
+      }
+      this.state.tow=dataInitTow;
+      ///////////////////////////////////////////////////////////////////////////////////
+
+
+      let dataInitThree=[];
+
+
+      let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+        for (let i=1;i<=monthDayThree;i++){
+          dataInitThree.push( { name: String(i), Fail:0, Success:0 });
+      }
+      this.state.three=dataInitThree;
+}
+getDataFromServer (str,start,end) {
+        let timer_1=new Date().getTime();
+      
         let dataInit=[];
-        let listMonth=['January','February','March','April',
-        'May','June','July','August','September',
-        'October','November','December'];
-          let temp=new Date();
-         //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth()-2;
-        if(tempMonth<0){tempMonth+=12}
-     
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-4, 0).getDate();
-      
-     
-      
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
-   
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-      //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
-        .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-      })
-      .forEach((item,index) => {
-        let place= (parseInt(item.jid.slice(6,8))-1);
-        
-        let flag=0;
-        let res=true;
-      
-        let temp =Object.entries(item.return);
-        if(Array.isArray(item.return)){ res=true;  res === true ?(dataInit[place].Success++):(dataInit[place].Fail++);}
-        else{
-
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
-         
-            }
-           if(index===arr.length-1 && flag === 0){
-             dataInit[place].Success++;
-           }
-      
-        
-         });
- 
-      }
-
-
-
-
-        })
-
-        }
-
-        return dataInit;
-      
-      }
-
-
-      dataInitTow(){
-        let dataInit=[];
-        let listMonth=['January','February','March','April',
-        'May','June','July','August','September',
-        'October','November','December'];
         let temp=new Date();
-        //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth()-1;
-        if(tempMonth<0){tempMonth+=12}
-   
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-3, 0).getDate();
+        if(str===LAST_THREE_MONTHS_ONE){
       
-     
-      
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
+            let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+            for (let i=1;i<=monthDayOne;i++){
+                dataInit.push( { name: String(i), Fail:0, Success:0 });
+                }
+              
         }
+        else if(str===LAST_THREE_MONTHS_TOW){
+      
+            let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+            for (let i=1;i<=monthDayTow;i++){
+                dataInit.push( { name: String(i), Fail:0, Success:0 });
+          }
+        }
+        else if(str===LAST_THREE_MONTHS_THREE){
+      
+                
+            let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+            for (let i=1;i<=monthDayThree;i++){
+                dataInit.push( { name: String(i), Fail:0, Success:0 });
+        }
+      }
        
-     
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-      //   .filter((item)=>{return item.full_ret.fun === "state.apply"})
-      .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-      })
-      .forEach((item,index) => {
-          let place= (parseInt(item.jid.slice(6,8))-1);
-         let flag=0;
-         let res=true;
+            let minions=[];
+            let url='/api/saltReturns/apply/'+start+"/"+end;
+          
+           
+            console.log("url" ,url);
+            axios.get(url, tokenConfig())
+            .then((res) => {
+              minions=minions.concat(res.data);
+             
+              if(minions!==null){
+                
+                let funSaltReturns=minions
+             
+              .forEach((item) => {
+                  let place= (parseInt(item.jid.slice(6,8))-1);
+                 
+                 let res=true;
+                 let flag=0;
+                
+                 if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
+                 else{
+                   
+                     let dataTemp=Object.entries(item.return).map((e,index,arr) => {
+                      if((e[1].result === false) && (flag===0)){
+                        dataInit[place].Fail++;
+                        flag=1;
+                     
+                       }
+                      if(index===arr.length-1 && flag === 0){
+                        dataInit[place].Success++;
+                      }
+                 
+                   
+                    });
+            
+                 }
+               
+                })
+             
+                }
+                if(str===LAST_THREE_MONTHS_ONE){
+                  this.state.one=dataInit;
+                }
+                else if(str===LAST_THREE_MONTHS_TOW){
+                  this.state.tow=dataInit;
+                }
+                else if(str===LAST_THREE_MONTHS_THREE){
+                  this.state.three=dataInit;
+                }
+                let timer_2=new Date().getTime();
+                console.log(timer_2-timer_1,"time from str")
+                this.forceUpdate();
+            })
+            .catch(err => {
+              console.log(err,"error in data");
+            
+             });
+        
+}
+dataInitOne(){
+        let yearTemp=String(new Date().getFullYear());
+        let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
+        let dayEnd=String(new Date(year, new Date().getMonth()-2, 0).getDate());
     
-         if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-         else{
-          let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-            if(e[1].result === false && flag===0){
-             dataInit[place].Fail++;
-             flag=1;
-            }
-           if(index===arr.length-1 && flag === 0){
-             dataInit[place].Success++;
-           }
+        dayEnd=parseInt(dayEnd)<10?"0"+dayEnd:dayEnd;
+    
+        let satrtMonth=new Date(year, new Date().getMonth()-2, 1).getMonth();
+    
+        satrtMonth=parseInt(satrtMonth)<10?"0"+satrtMonth:satrtMonth;
+    
+        let start= year+satrtMonth+"01"+"000000000000";
+        let end= year+satrtMonth+dayEnd+"235959595959";
       
-        
-         });
- 
-      }
+        this.getDataFromServer(LAST_THREE_MONTHS_ONE,start,end)
+}
 
+    //     })
 
-        })
+dataInitTow(){
+         
+        let yearTemp=String(new Date().getFullYear());
+        let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
+        let dayEndTow=String(new Date(year, new Date().getMonth()-1, 0).getDate());
 
-        }
-        
- 
-        return dataInit;
-      
-      }
+        dayEndTow=parseInt(dayEndTow)<10?"0"+dayEndTow:dayEndTow;
+    
+        let satrtMonthTow=new Date(year, new Date().getMonth()-1, 1).getMonth();
+    
+        satrtMonthTow=parseInt(satrtMonthTow)<10?"0"+satrtMonthTow:satrtMonthTow;
+    
+        let startTow= year+satrtMonthTow+"01"+"000000000000";
+        let endTow= year+satrtMonthTow+dayEndTow+"235959595959";
+        this.getDataFromServer(LAST_THREE_MONTHS_TOW,startTow,endTow)
+}
 
       dataInitThree(){
-        let dataInit=[];
-       
-        let temp=new Date();
-        //let temp=new Date(2020,8);
-        let tempMonth=temp.getMonth();
-        if(tempMonth<0){tempMonth+=12}
+        let yearTemp=String(new Date().getFullYear());
+        let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
+        let dayEndThree=String(new Date(year, new Date().getMonth(), 0).getDate());
+
+        dayEndThree=parseInt(dayEndThree)<10?"0"+dayEndThree:dayEndThree;
     
-      
-        let monthDay =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
-       
-        // this.state.nameThree=this.state.month[monthDay-2];
-        //console.log(this.state.month,"this.state.month");
-           for (let i=1;i<=monthDay;i++){
-            dataInit.push( { name: String(i), Fail:0, Success:0 });
-        }
-  
-        if(store.getState().saltReturns.saltReturns!==null){
-        let funSaltReturns=store.getState().saltReturns.saltReturns
-         //.filter((item)=>{return item.full_ret.fun === "state.apply"})
-       .filter((item)=>{
-      if(tempMonth===parseInt(item.jid.slice(4,6))){return item;}
-       })
-      .forEach((item,index) => {
-     
-        let place= (parseInt(item.jid.slice(6,8))-1);
-        let res=true;
-        let flag=0;
-      
-       if(Array.isArray(item.return)){ res=true;   {res === true ?(dataInit[place].Success++):(dataInit[place].Fail++)}}
-       else{
-        
-        let dataTemp=Object.entries(item.return).map((e,index,arr) => {
-          if(e[1].result === false && flag===0){
-           dataInit[place].Fail++;
-           flag=1;
-           
-          }
-         if(index===arr.length-1 && flag === 0){
-           dataInit[place].Success++;
-         }
-      
-      
-       });
-      
-    }
-        
-
-        })
-
-        }
-  
-        return dataInit;
-      
+        let satrtMonthTrhee=new Date(year, new Date().getMonth(), 1).getMonth();
+    
+        satrtMonthTrhee=parseInt(satrtMonthTrhee)<10?"0"+satrtMonthTrhee:satrtMonthTrhee;
+    
+        let startTrhee= year+satrtMonthTrhee+"01"+"000000000000";
+        let endTrhee= year+satrtMonthTrhee+dayEndThree+"235959595959";
+    
+        this.getDataFromServer(LAST_THREE_MONTHS_THREE,startTrhee,endTrhee)
       }
 
-
-      componentDidMount(){
-       
-      }
+    
    
     render() {
         let listMonth=['January','February','March','April',
