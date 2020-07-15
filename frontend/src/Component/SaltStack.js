@@ -385,19 +385,25 @@ sentCommand(command){
             console.log(store.getState(),"store.getState() first")
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
+                console.log("CMD_RESULT",res)
                 const temp=res.data.res;
+                console.log("data.res",temp)
                 const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
+                console.log("result",result)
+
                let buildRes=[];
-                result.forEach(minionRes => {
-                    minions[0].minions.map((item)=>{
-                        if(minionRes[0]===item){
-                            buildRes.push([minionRes[0],minionRes[1]])
-                            item = buildRes;
-                        }
+                result.forEach(item => buildRes.push([item[0],item[1]]))
+                // result.forEach(minionRes => {
+                //     minions[0].minions.map((item)=>{
+                //         console.log("item",item)
+                //         if(minionRes[0]===item){
+                //             buildRes.push([minionRes[0],minionRes[1]])
+                //             item = buildRes;
+                //         }
                     
-                })
+                // })
             
-                });
+                // });
                 this.state.saveMinion.prepared=true;
                 this.state.history.unshift(this.state.saveMinion);
                 minions[0].minions=buildRes;
@@ -581,7 +587,7 @@ sentCommand(command){
         </div>
     }  
 
-    
+Minion
     <div className={this.props.classes.Divider}>
         <Divider light  style={{width:400}}/>
     </div>

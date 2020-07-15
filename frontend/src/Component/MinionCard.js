@@ -179,7 +179,7 @@ render(){
                         <TreeItem nodeId="1" label="See Minions">
                         {
                             this.props.minion.map((item,index)=>{
-                             // console.log(index,"index")
+                              console.log("minion card item", item)
                               return(
                                 <TreeItem nodeId={index+2} label={item[0]} className={this.props.classes.TreeItem}>
                                     <Typography  color="textSecondary" >
