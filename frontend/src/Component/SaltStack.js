@@ -385,25 +385,28 @@ sentCommand(command){
             console.log(store.getState(),"store.getState() first")
             axios.post('/saltstack_cmd',body, tokenTemp)
             .then((res) => {
-                console.log("CMD_RESULT",res)
+                // console.log("CMD_RESULT",res)
                 const temp=res.data.res;
-                console.log("data.res",temp)
-                const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-                console.log("result",result)
-
-               let buildRes=[];
-                result.forEach(item => buildRes.push([item[0],item[1]]))
-                // result.forEach(minionRes => {
-                //     minions[0].minions.map((item)=>{
-                //         console.log("item",item)
-                //         if(minionRes[0]===item){
-                //             buildRes.push([minionRes[0],minionRes[1]])
-                //             item = buildRes;
-                //         }
+                // console.log("data.res",temp)
+                let cur_minions = this.state.saveMinion.minions
+                // console.log("this minions", cur_minions)
+                
+                const buildRes = cur_minions.map(minion => [minion,JSON.stringify(temp[minion])])
+                // const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
+                // console.log("result",result)
+                
+            //    let buildRes=[];
+            //     result.forEach(minionRes => {
+            //         minions[0].minions.map((item)=>{
+            //             console.log("item",item)
+            //             if(minionRes[0]===item){
+            //                 buildRes.push([minionRes[0],minionRes[1]])
+            //                 item = buildRes;
+            //             }
                     
-                // })
+            //     })
             
-                // });
+            //     });
                 this.state.saveMinion.prepared=true;
                 this.state.history.unshift(this.state.saveMinion);
                 minions[0].minions=buildRes;

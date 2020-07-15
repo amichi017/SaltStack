@@ -139,6 +139,7 @@ class MinionCard extends React.Component {
         if(item.id !==this.props.id){return (item)}
       });
       minions=minions.map((item,index)=>{
+        console.log(item)
        return( {...item,id:index+1});
       })
       // minions.unshift(this.state.saveMinion[0]);
