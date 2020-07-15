@@ -139,7 +139,7 @@ class MinionCard extends React.Component {
         if(item.id !==this.props.id){return (item)}
       });
       minions=minions.map((item,index)=>{
-        console.log(item)
+        // console.log(item)
        return( {...item,id:index+1});
       })
       // minions.unshift(this.state.saveMinion[0]);
@@ -151,7 +151,7 @@ class MinionCard extends React.Component {
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}
     const bull = <span className={this.props.classes.bullet}>•</span>;
-    console.log(this.props,"this.props")
+    // console.log(this.props,"this.props")
     if(this.state.comment===''){this.state.click =true}
     if(this.state.click === false && this.props.prepared===true){
       return (
@@ -180,7 +180,7 @@ render(){
                         <TreeItem nodeId="1" label="See Minions">
                         {
                             this.props.minion.map((item,index)=>{
-                              console.log("minion card item", item)
+                              // console.log("minion card item", item)
                               return(
                                 <TreeItem nodeId={index+2} label={item[0]} className={this.props.classes.TreeItem}>
                                     <Typography  color="textSecondary" >
