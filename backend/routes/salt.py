@@ -8,7 +8,7 @@ from flask import jsonify, Blueprint
 from flask_jwt_extended import jwt_required
 
 from backend.app import db
-
+from bson.code import Code
 
 bp = Blueprint('api',__name__)
 
@@ -117,6 +117,30 @@ def get_yearly_applies(year):
 @jwt_required
 # @timeit
 def get_table_returns(start_date,end_date):
+    """
+
+    :param year:
+    :return:
+    """
+    saltReturns = db.saltReturns
+
+    # print(year)
+    # print(saltReturns)
+    res = saltReturns.find(
+        {"fun": "state.apply",
+         "jid": { "$gte": start_date, "$lte": end_date }
+         },{  "jid": 1, "minion": 1,"return":1})
+
+    res = sorted(list(res),key = lambda x: x['jid'])
+
+
+    return orjson.dumps(list(res),default=str)
+
+
+@bp.route("/api/report/<start_date>/<end_date>")
+@jwt_required
+# @timeit
+def get_reports(start_date,end_date):
     """
 
     :param year:
