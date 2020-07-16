@@ -276,17 +276,24 @@ class SaltStack extends React.Component {
             .then((res) => {
                 const temp=res.data.res;
                 const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-               let buildRes=[];
-                result.forEach(minionRes => {
-                    minions[0].minions.map((item)=>{
-                        if(minionRes[0]===item){
-                            buildRes.push([minionRes[0],minionRes[1]])
-                            item = buildRes;
-                        }
+                let cur_minions = this.state.saveMinion.minions
+                
+                
+                const buildRes = cur_minions.map(minion => [minion,JSON.stringify(temp[minion])])
+           
+           
+           
+                //    let buildRes=[];
+            //     result.forEach(minionRes => {
+            //         minions[0].minions.map((item)=>{
+            //             if(minionRes[0]===item){
+            //                 buildRes.push([minionRes[0],minionRes[1]])
+            //                 item = buildRes;
+            //             }
                     
-                })
+            //     })
             
-                });
+            //     });
                 this.state.saveMinion.prepared=true;
                 this.state.history.unshift(this.state.saveMinion);
                 minions[0].minions=buildRes;

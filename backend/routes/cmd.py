@@ -10,7 +10,6 @@ import subprocess
 
 # local = salt.client.LocalClient()
 #print(local)
-loop = asyncio.new_event_loop()
 bp = Blueprint('cmd',__name__)
 
 responses = {
@@ -72,12 +71,13 @@ def saltstack_cmd():
         tgt = request.form["tgt"]
         salt_cmd = request.json["salt_cmd"]
 
+    loop = asyncio.new_event_loop()
+
     cmd_args = [tgt,func]
     print(cmd_args)
     if len(salt_cmd) > 0:
         cmd_args.append(salt_cmd)
     res = loop.run_until_complete(run_cmd(*cmd_args))
-    print("res",res)
     return jsonify(res = res)
 
 
