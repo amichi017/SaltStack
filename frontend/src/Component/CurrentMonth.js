@@ -8,10 +8,17 @@ import store from '../store';
 import axios from 'axios'
 import { saltReturns } from '../actions/date';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import {CURRENT_MONTH} from '../actions/types'
 const styles = theme => ({
     root: {
       display: 'flex',
     },
+    button:{
+      margin: theme.spacing(1),
+    }
 });
 
 export const tokenConfig = getState => {
@@ -37,21 +44,42 @@ class CurrentMonth extends PureComponent {
     constructor(props) {
         super(props);
          this.dataInit = this.dataInit.bind(this);
+         this.initWithoutInformation = this.initWithoutInformation.bind(this);
          //store.dispatch(saltReturns("CurrentMonth"));
          //console.log(store.getState(),"store.getState()")
-         
+         this.initFirstTime = this.initFirstTime.bind(this);
         this.state = {
             start: new Date(),
             end:new Date(),
-            data: this.dataInit(),
+            data:[],
             flag:true,
         };
+       
+        this.initWithoutInformation()
       }
- 
+      initFirstTime(){
+        let dataInit=[];
+        let temp=new Date();
+        let mnonthDay =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+           for (let i=1;i<=mnonthDay;i++){
+            dataInit.push( { name: String(i), Fail:0, Success:0 });
+        }
+        this.state.data= dataInit;
+      }
       // componentWillUpdate(){
       //   this.setState({data:this.dataInit(),flag:false});
-      // }
+      initWithoutInformation(){
+        if(store.getState().CurrentMonth.CurrentMonth.length>0){
+         this.state.data= store.getState().CurrentMonth.CurrentMonth;
+          this.forceUpdate();
+          
+        }
+        else{
+          this.dataInit();
+        }
+       
      
+      }
       dataInit(){
         let time_1=new Date().getTime();
         let year=String(new Date().getFullYear());
@@ -63,12 +91,6 @@ class CurrentMonth extends PureComponent {
         let End= year+satrtCurrentMonth+dayEnd+"235959595959";
      
         let minions=[];
-      
-
-      let url='/api/saltReturns/apply/'+Start+"/"+End;
-    
-      axios.get(url, tokenConfig(store.getState()))
-      .then((res) => {
         let dataInit=[];
        
         let temp=new Date();
@@ -76,6 +98,12 @@ class CurrentMonth extends PureComponent {
             for (let i=1;i<=mnonthDay;i++){
              dataInit.push( { name: String(i), Fail:0, Success:0 });
          }
+
+      let url='/api/saltReturns/apply/'+Start+"/"+End;
+    
+      axios.get(url, tokenConfig(store.getState()))
+      .then((res) => {
+        
         minions=minions.concat(res.data);
      
         if(minions!==null){
@@ -129,7 +157,10 @@ class CurrentMonth extends PureComponent {
           console.log((time_2-time_1),"Time from month");
           }
           
-
+          store.dispatch({
+            type:CURRENT_MONTH,
+            payload:dataInit
+          })
           this.state.data= dataInit;
           this.forceUpdate();
     })
@@ -143,6 +174,17 @@ class CurrentMonth extends PureComponent {
     render() {
      // console.log("this.state 2",this.state)
         return (
+          <div>
+          <Button
+          variant="contained"
+          color="primary"
+       
+          onClick={()=>{this.dataInit()}}
+          className={this.props.classes.button}
+          startIcon={<RefreshIcon />}
+        >
+          Refresh
+        </Button>
           <BarChart
             width={1220}
             height={500}
@@ -161,6 +203,7 @@ class CurrentMonth extends PureComponent {
             <Bar dataKey="Fail" fill="#ff6666"/>
             <Bar dataKey="Success" fill="#82ca9d" />
           </BarChart>
+          </div>
         );
       }
     }

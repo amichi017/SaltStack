@@ -832,3 +832,827 @@ DEBUG:asyncio:Using selector: EpollSelector
 INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:22:02] "POST /saltstack_cmd HTTP/1.1" 200 -
 DEBUG:asyncio:Using selector: EpollSelector
 INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:22:06] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:25:12] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:25:13] "GET /api/saltReturns/apply/20200401000000000000/20200430235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:25:13] "GET /api/saltReturns/apply/20200501000000000000/20200531235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:25:14] "GET /api/saltReturns/apply/20200601000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:25:18] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:26:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:26:47] "GET /static/js/main.c7afac8c.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:26:51] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:26:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:26:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:15] "GET /static/js/main.c7afac8c.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:18] "GET /static/js/main.c7afac8c.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:18] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:27] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:27] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:27] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:29] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:29] "GET /get_connected_minions HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:38] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:27:42] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:28:19] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:28:20] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:16] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:19] "GET /get_connected_minions HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:28] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:34] "GET /static/js/main.c7afac8c.chunk.js.map HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:29:45] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:30:46] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:30:52] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 14:30:59] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:02] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:06] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:06] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:06] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:09] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:09] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:10] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:11] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:11] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:20] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:57:23] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:42] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:42] "GET /static/js/main.eda307cc.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:43] "GET /logo192.png HTTP/1.1" 404 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:52] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:52] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:57] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:57] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:57] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:58] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:58:58] "GET /get_connected_minions HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:03] "POST /saltstack_cmd HTTP/1.1" 500 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:06] "POST /saltstack_cmd HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:13] "GET /static/js/main.eda307cc.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:41] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:42] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:46] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:47] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:47] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:49] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:49] "GET /get_connected_minions HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 15:59:55] "POST /saltstack_cmd HTTP/1.1" 500 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:00:41] "POST /saltstack_cmd HTTP/1.1" 500 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:08] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:08] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:15] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:15] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:15] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:17] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:17] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:24] "POST /saltstack_cmd HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 81, in saltstack_cmd
+    res = loop.run_until_complete(run_cmd(*cmd_args))
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 566, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 521, in run_forever
+    raise RuntimeError('This event loop is already running')
+RuntimeError: This event loop is already running
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:30] "POST /saltstack_cmd HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:01:31] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:49] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:50] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:55] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:57] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:02:57] "GET /get_connected_minions HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:03:01] "POST /saltstack_cmd HTTP/1.1" 500 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+UnboundLocalError: local variable 'res' referenced before assignment
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:03:03] "POST /saltstack_cmd HTTP/1.1" 500 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:12] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:13] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:17] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:26] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:29] "POST /saltstack_cmd HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 86, in saltstack_cmd
+    return jsonify(res = res)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type KeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:05:51] "POST /saltstack_cmd HTTP/1.1" 500 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:33] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:34] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:37] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:38] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:38] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:40] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:40] "GET /get_connected_minions HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 87, in saltstack_cmd
+    return jsonify(res = res)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type KeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:47] "POST /saltstack_cmd HTTP/1.1" 500 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 87, in saltstack_cmd
+    return jsonify(res = res)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 370, in jsonify
+    dumps(data, indent=indent, separators=separators) + "\n",
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 211, in dumps
+    rv = _json.dumps(obj, **kwargs)
+  File "/usr/lib/python3.7/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/json/__init__.py", line 100, in default
+    return _json.JSONEncoder.default(self, o)
+  File "/usr/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type KeyError is not JSON serializable
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:06:58] "POST /saltstack_cmd HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:07:02] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:38] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:39] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:40] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:44] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:45] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:45] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:46] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:47] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:47] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:09:55] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:10:05] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:01] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:01] "GET /static/js/main.5ac22e25.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:02] "GET /static/js/main.5ac22e25.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:02] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:11] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:11] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:11] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:13] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:13] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:21] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:14:26] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:48] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:48] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:55] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:57] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:16:57] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:17:06] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:19] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:19] "GET /static/js/main.a8027097.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:19] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:19] "GET /static/js/main.a8027097.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:25] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:25] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:25] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:30] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:30] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:20:36] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:00] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:00] "GET /static/js/2.2496efd6.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:00] "GET /static/js/main.a8027097.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:06] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:06] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:06] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:10] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:10] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:18] "GET /static/js/2.2496efd6.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:18] "GET /static/js/main.a8027097.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:18] "GET /static/css/main.c6281679.chunk.css.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:18] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:33] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:21:41] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:16] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:20] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:21] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:21] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:29] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:43] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:48] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:48] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:48] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:49] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:49] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:24:56] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:25:00] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:33] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:33] "GET /static/js/main.91750a55.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:33] "GET /static/js/main.91750a55.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:33] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:38] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:38] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:38] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:41] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:41] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:28:51] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:00] "GET /static/js/main.91750a55.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:01] "GET /static/js/main.91750a55.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:05] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:05] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:05] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:08] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:09] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:09] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:29:19] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:30:13] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:30:14] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:30:32] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:41] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:41] "GET /static/js/main.841239d0.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:42] "GET /static/js/main.841239d0.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:42] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:47] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:48] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:48] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:52] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:31:52] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:32:00] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:32:18] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:32:24] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:25] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:25] "GET /static/js/main.841239d0.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:26] "GET /static/js/main.841239d0.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:30] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:31] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:31] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:32] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:32] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:35:40] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 16:36:18] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:00] "GET /static/js/main.c0aa1821.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:01] "GET /static/js/main.c0aa1821.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:02] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:10] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:11] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:11] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:30] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:46:45] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:47:07] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:47:19] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:47:32] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:49] "GET /static/js/main.252389dc.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:50] "GET /static/js/main.252389dc.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:57] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:57] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:56:57] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:57:00] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:57:00] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:57:07] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:57:14] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 18:57:29] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:11] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:11] "GET /static/js/main.5d4a4205.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:13] "GET /static/js/main.5d4a4205.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:18] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:19] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:19] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:20] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:20] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:11:28] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:44] "GET /static/js/main.35718951.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:44] "GET /static/js/main.35718951.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:52] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:59] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:16:59] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:17:07] "POST /saltstack_cmd HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 85, in saltstack_cmd
+    res = loop.run_until_complete(run_cmd(*cmd_args))
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 566, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 521, in run_forever
+    raise RuntimeError('This event loop is already running')
+RuntimeError: This event loop is already running
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:17:17] "POST /saltstack_cmd HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:17:18] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:17:34] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:04] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:04] "GET /static/js/main.d57dff10.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:04] "GET /static/js/main.d57dff10.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:17] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:17] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:23:26] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:13] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:18] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:18] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:18] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:22] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:29:30] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:29] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:30] "GET /static/js/main.ba9f7473.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:30] "GET /static/js/main.ba9f7473.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:39] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:40] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:40] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:42] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:42] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:50] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:35:57] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:36:15] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:20] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:20] "GET /static/js/main.712ed2df.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:21] "GET /static/js/main.712ed2df.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:26] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:27] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:27] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:29] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:29] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:36] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:40:40] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:41:01] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:41:06] "POST /saltstack_cmd HTTP/1.1" 200 -
+ERROR:backend.app:Exception on /saltstack_cmd [POST]
+Traceback (most recent call last):
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/avraham/SaltStack/backend/venv/lib/python3.7/site-packages/flask_jwt_extended/view_decorators.py", line 108, in wrapper
+    return fn(*args, **kwargs)
+  File "/home/avraham/SaltStack/backend/routes/cmd.py", line 85, in saltstack_cmd
+    res = loop.run_until_complete(run_cmd(*cmd_args))
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 566, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.7/asyncio/base_events.py", line 521, in run_forever
+    raise RuntimeError('This event loop is already running')
+RuntimeError: This event loop is already running
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:42:00] "POST /saltstack_cmd HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:42:01] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 19:42:35] "POST /saltstack_cmd HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:01] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:02] "GET /static/js/main.75de6ea9.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:03] "GET /static/js/main.75de6ea9.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:11] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:12] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:12] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:16] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:13:16] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:45] "GET /static/js/main.d83a4625.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:45] "GET /static/js/main.d83a4625.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:52] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:52] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:57] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:18:57] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:12] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:25] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:26] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:26] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:36] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:24:36] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:27:49] "GET / HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:27:56] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:27:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:27:56] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:28:05] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 20:28:05] "GET /get_connected_minions HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:00:44] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:00:45] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:00:48] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:00:48] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:00:55] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:01:00] "GET / HTTP/1.1" 404 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:01:11] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:03:54] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:03:55] "GET /static/js/2.2496efd6.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:03:55] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:03:55] "GET /static/js/main.2a68a928.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:03:58] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:29] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:31] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:31] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:33] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:33] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:04:44] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:05:15] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:05:34] "GET /api/saltReturns/apply/20200401000000000000/20200430235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:05:35] "GET /api/saltReturns/apply/20200501000000000000/20200531235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:05:36] "GET /api/saltReturns/apply/20200601000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:05:52] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:00] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:00] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:16] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:17] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:17] "GET /static/js/main.2a68a928.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:19] "GET /static/js/2.2496efd6.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:06:19] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:03] "POST /auth HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:08] "POST /auth HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:24] "POST /auth HTTP/1.1" 401 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:43] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:44] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:44] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:50] "GET /static/js/main.2a68a928.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:52] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:58] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:07:58] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:08:03] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:08:14] "GET /static/js/main.2a68a928.chunk.js.map HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:08:19] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:08:20] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:08:28] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:10] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:12] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:12] "GET /static/js/2.2496efd6.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:12] "GET /static/js/main.2a68a928.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:25] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:25] "GET /favicon.ico HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:53] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:55] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:55] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:09:56] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:11] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:15] "GET /api/saltReturns/apply/20200716000000000000/20200716235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:21] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:24] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:36] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:44] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:10:48] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:11:01] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:11:09] "GET /api/saltReturns/apply/20200401000000000000/20200430235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:11:09] "GET /api/saltReturns/apply/20200501000000000000/20200531235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:11:10] "GET /api/saltReturns/apply/20200601000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:11:19] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:12:19] "GET /api/saltReturns/apply/20200401000000000000/20200430235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:12:21] "GET /api/saltReturns/apply/20200501000000000000/20200531235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:12:21] "GET /api/saltReturns/apply/20200601000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:13:29] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:13:34] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jul/2020 22:13:51] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+DEBUG:asyncio:Using selector: EpollSelector
+DEBUG:asyncio:Using selector: EpollSelector
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:14] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:15] "GET /static/css/main.c6281679.chunk.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:15] "GET /static/js/2.9b8cb6e4.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:15] "GET /static/js/main.01b1c7f4.chunk.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:18] "GET /manifest.json HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:18] "GET /logo192.png HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:30] "POST /auth HTTP/1.1" 201 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:32] "GET /api/saltReturns/apply/20200717000000000000/20200717235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:32] "GET /api/saltReturns/apply/20200717000000000000/20200717235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:34] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:35] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:44] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:54] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:08:58] "POST /saltstack_cmd HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:06] "GET /api/saltReturns/apply/20200101000000000000/20201231235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:11] "GET /api/saltReturns/apply/20200401000000000000/20200430235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:12] "GET /api/saltReturns/apply/20200501000000000000/20200531235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:13] "GET /api/saltReturns/apply/20200601000000000000/20200630235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:16] "GET /api/saltReturns/apply/20200701000000000000/20200731235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:17] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:18] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:18] "GET /get_connected_minions HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:19] "GET /api/saltReturns/apply/20200717000000000000/20200717235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:19] "GET /api/saltReturns/apply/20200717000000000000/20200717235959595959 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2020 10:09:26] "GET /api/saltReturns/apply/20190717000000000000/20200717235959595959 HTTP/1.1" 200 -

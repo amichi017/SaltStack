@@ -8,6 +8,8 @@ from backend.app import db
 import asyncio
 import subprocess
 
+loop = asyncio.new_event_loop()
+
 # local = salt.client.LocalClient()
 #print(local)
 bp = Blueprint('cmd',__name__)
@@ -33,10 +35,14 @@ async def run_cmd(*cmd_args):
     await asyncio.sleep(3)
     res = []
     cmd_name = cmd_args[1]
-    if cmd_name in cmd_options:
+    # if cmd_name in cmd_options:
+    #     res = responses[cmd_name]
+    try:
         res = responses[cmd_name]
+    except:
+       return ["err"]
     # print("done")
-    print(cmd_args)
+    # print(cmd_args)
 
     return res
 
@@ -71,7 +77,6 @@ def saltstack_cmd():
         tgt = request.form["tgt"]
         salt_cmd = request.json["salt_cmd"]
 
-    loop = asyncio.new_event_loop()
 
     cmd_args = [tgt,func]
     print(cmd_args)

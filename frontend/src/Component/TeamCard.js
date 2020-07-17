@@ -24,7 +24,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios';
+import { FAB_WITH_DATA,FAB } from '../actions/types';
+import FormOfTeam from './FormOfTeam';
 const styles = theme => ({
     root: {
         minWidth: 345,
@@ -81,7 +84,8 @@ class TeamCard extends React.Component {
         this.deleteIcon = this.deleteIcon.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.state={expanded:false,UpperCase:'',open:false,isDelete:false};
+        this.edit = this.edit.bind(this);
+        this.state={expanded:false,UpperCase:'',open:false,isDelete:false,form:false};
         let strName=this.props.first_name.toUpperCase();
         this.props.first_name !== ''?this.state.UpperCase=this.props.first_name.toUpperCase()[0]:this.state.UpperCase="";
     }
@@ -104,102 +108,140 @@ class TeamCard extends React.Component {
     //       this.setState((prevState) => ({expanded:!prevState.expanded}));
     // }
 
-
+    edit(){
+      let res={first_name:this.props.first_name,
+        last_name:this.props.last_name,
+        Role:this.props.role,
+        Email:this.props.mail,
+        upDate:true
+      }
+       
+    store.dispatch({
+        type:FAB_WITH_DATA,
+        payload:res
+      })
+     // this.state.form=true;
+    }
 
     render()
     {
-      const colors = ['#ff0000', '#00ff00', '#0000ff'];
-      const random_color = colors[Math.floor(Math.random() * colors.length)];
-      //console.log(this.props);
-        return (
-      this.state.isDelete===false?
-      (<Card className={this.props.classes.root}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="recipe" className={this.props.classes.avatar}>
-              {this.state.UpperCase}
-            </Avatar>
-          }
-      // action={
-      //       <IconButton aria-label="settings">
-      //         <AccountCircleIcon />
-      //       </IconButton>
-      //     }first_name
-          title={this.props.first_name+' '+this.props.last_name}
-          subheader={this.props.role}
-        />
+          // const colors = ['#ff0000', '#00ff00', '#0000ff'];
+          // const random_color = colors[Math.floor(Math.random() * colors.length)];
+          //console.log(this.props);
+          if(this.state.form===false){
+            
+              return (
+                this.state.isDelete===false?
+                (<Card className={this.props.classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="recipe" className={this.props.classes.avatar}>
+                        {this.state.UpperCase}
+                      </Avatar>
+                    }
+                action={
+                  <IconButton 
+                  aria-label="share"
+                  variant="outlined" 
+                  //color="primary" 
+                  onClick={this.edit}
+                  size="small"
+                    //onClick={this.handleExpandClick}
+                  
+                    >
+                        <EditIcon />
+                  </IconButton>
+                    }
+                    title={this.props.first_name+' '+this.props.last_name}
+                    subheader={this.props.role}
+                  />
+                
+                  <CardContent>
+                    <Typography paragraph className={this.props.classes.paragraph}>
+                    Email:{this.props.mail}
+                    </Typography>
+                    <Typography paragraph className={this.props.classes.paragraph}>
+                  {/* number:0549494949*/}
+                    </Typography>
       
-        <CardContent>
-          <Typography paragraph className={this.props.classes.paragraph}>
-          Email:{this.props.mail}
-          </Typography>
-          <Typography paragraph className={this.props.classes.paragraph}>
-        {/* number:0549494949*/}
-          </Typography>
-
-        </CardContent>
-
-        <CardActions disableSpacing>
-        
-      <IconButton 
-      aria-label="share"
-      variant="outlined" 
-      //color="primary" 
-      onClick={this.handleClickOpen}
-        //onClick={this.handleExpandClick}
-      color='secondary'
-        >
-            <DeleteIcon />
-      </IconButton>
-      <Dialog
-      open={this.state.open}
-      onClose={this.handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      >
-
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-        Are you sure you want to delete a user from the system?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-      <Button onClick={this.handleClickOpen} color="primary">
-        Cancel
-      </Button>
-        <Button onClick={this.handleClose} color="secondary" autoFocus>
-          Delete
-        </Button>
-      </DialogActions>
-      </Dialog>
-      {/*
-          <IconButton
-            className={clsx(this.props.classes.expand, {
-              [this.props.classes.expandOpen]: this.state.expanded,
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-          */}
-        </CardActions>
-
-
-        {/*<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>
-              Heat
-            </Typography>
-          </CardContent>
-        </Collapse>*/}
-      </Card>)
-:<div></div>
+                  </CardContent>
+      
+                  <CardActions disableSpacing>
+                  
+                <IconButton 
+                aria-label="share"
+                variant="outlined" 
+                //color="primary" 
+                onClick={this.handleClickOpen}
+                  //onClick={this.handleExpandClick}
+                color='secondary'
+                  >
+                      <DeleteIcon />
+                </IconButton>
+              
+                <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+      
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                  Are you sure you want to delete a user from the system?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={this.handleClickOpen} color="primary">
+                  Cancel
+                </Button>
+                  <Button onClick={this.handleClose} color="secondary" autoFocus>
+                    Delete
+                  </Button>
+                </DialogActions>
+                </Dialog>
+                {/*
+                    <IconButton
+                      className={clsx(this.props.classes.expand, {
+                        [this.props.classes.expandOpen]: this.state.expanded,
+                      })}
+                      onClick={this.handleExpandClick}
+                      aria-expanded={this.state.expanded}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                    */}
+                  </CardActions>
+      
+      
+                  {/*<Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>
+                        Heat
+                      </Typography>
+                    </CardContent>
+                  </Collapse>*/}
+                </Card>)
+          :<div></div>
+              
+      
+      
+        );
+            
+          }
+        //   else{
+        //     return(
+        //       <FormOfTeam 
+        //       first_name={this.props.first_name} 
+        //       last_name={this.props.last_name} 
+        //       Role={this.props.Role} 
+        //       Email={this.props.Email}
+        //       updete={true}
+        //       ></FormOfTeam>
+        //     )
+        //   }
     
-
-
-          );
         }
     
 }
