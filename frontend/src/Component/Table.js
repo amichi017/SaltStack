@@ -268,15 +268,7 @@ class Orders extends React.Component {
                 const end=store.getState().date.end;
                 let endTemp=new Date(end.getTime());
             
-            // console.log(endTemp,'new Date(end.getTime());')
-            // console.log(start,'store.getState().date.start;')
                 let saltTemp=store.getState().saltReturns.saltReturns
-                // .filter((item)=>{return item.full_ret.fun === "state.apply"})
-                // .filter((item)=>{
-                //     let str=item.jid.slice(0,4)+"-"+ String(parseInt(item.jid.slice(4,6)))+"-"+item.jid.slice(6,8);
-                //     let time=new Date(str);
-                //     if(time >= startTemp && time<= endTemp){return item;}
-                // })
                 .map((item)=>{
                     let res=true;
                     let flag=0;
@@ -337,13 +329,12 @@ class Orders extends React.Component {
                     icons={tableIcons}
                     onRowClick={((evt, selectedRow) => this.setState({ selectedRow }))}
 
-
+                    
                     options={{
-                        exportButton: true,
+                       
                         filtering: true,
-
-                        //rowStyle: rowData => ({
-                        // color: (rowData.name==='su') ? '#daa9d9' : '#ff1a1a'})
+                        exportButton: true,
+                        exportAllData:true,
 
                     }}
                     actions={[

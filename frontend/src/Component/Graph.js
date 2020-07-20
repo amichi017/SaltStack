@@ -19,6 +19,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { saltReturnsForgraph } from '../actions/date';
 import { Store } from '@material-ui/icons';
 import axios from 'axios';
+import { Alert } from '@material-ui/lab';
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 const time =(str)=>{
@@ -102,6 +104,7 @@ const styles = theme => ({
       graphDate: new Date(),
       flag:true,
       minions:null,
+      error:false,
       graphIsPrepared:true,
       data:  [{ time:"00:00",Success:0,Fail:0, amount:0 },
               { time:"03:00",Success:0,Fail:0, amount:0 },
@@ -224,6 +227,8 @@ axios.get(url, tokenConfig(store.getState()))
 )
 .catch(err => {
   console.log(err,"error in data");
+  this.setState({error:true});
+  setTimeout(()=>{this.setState({error:false});}, 8000);
 
  });
 // }
@@ -244,6 +249,7 @@ axios.get(url, tokenConfig(store.getState()))
    // console.log(this.state.graphIsPrepared,"pppppppppppppppp")
     if(this.state.graphIsPrepared===true){
       return(
+
         <React.Fragment>
         {/*<Title style={{paddingLeft:5}}>{(this.state.start.toLocaleDateString() === this.state.end.toLocaleDateString())?this.state.start.toLocaleDateString():this.state.start.toLocaleDateString() + ' - '+ this.state.end.toLocaleDateString()}</Title>*/}
          {<Title style={{paddingLeft:5}}> {store.getState().graphDate.graphDate.toLocaleDateString()}</Title>}
@@ -267,6 +273,13 @@ axios.get(url, tokenConfig(store.getState()))
  else{
    return(
         <div className={this.props.classes.root}>
+             <div className={this.props.classes.msg}>
+        <Snackbar open={this.state.error} autoHideDuration={8000} onClose={this.handleClose}>
+            <Alert onClose={this.handleClose} severity="error">
+            The system did not load the data in the Dashboard <strong>because Internal Server Error  </strong>
+            </Alert>
+            </Snackbar>
+       </div>
         <CircularProgress />
         </div>
    )

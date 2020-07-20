@@ -8,10 +8,19 @@ import store from '../store';
 import axios from 'axios'
 import { saltReturns } from '../actions/date';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import {CURRENT_YEAR} from '../actions/types'
+import { Alert } from '@material-ui/lab';
+import Snackbar from '@material-ui/core/Snackbar';
 const styles = theme => ({
     root: {
       display: 'flex',
     },
+    button:{
+      margin: theme.spacing(1),
+    }
 });
 const tokenConfig = getState => {
   // console.log("getstatteeeeeslatl",getState())
@@ -37,35 +46,49 @@ class CurrentYear extends PureComponent {
     constructor(props) {
         super(props);
          this.dataInit = this.dataInit.bind(this);
+         this.initWithoutInformation = this.initWithoutInformation.bind(this);
+         this.initFirstTime = this.initFirstTime.bind(this);
          //store.dispatch(saltReturns("CurrentYear"));
         this.state = {
             start: new Date(),
             end:new Date(),
-            data: this.dataInit(),
+            data:[],
             flag:true,
+            error:false,
         };
+        this.initFirstTime();
+        this.initWithoutInformation()
       }
-    
-      // componentWillReceiveProps(nextProps) {
-      //   if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
-      //   && (this.state.flag===true)){
-
-      //      this.setState({data:this.dataInit()});
-          
-      //   }
-      // }
-      // shouldComponentUpdate(nextProps, nextState) {
-      //   if(this.state.flag===true){
-      //     this.setState({data:this.dataInit(),flag:false});
-      //     return true;
-      //   }
-      //  return false;
-        
-      // }
+    initFirstTime(){
+      let dataInit=[];
+      // let temp=new Date(2019,10);
      
-      // componentWillUpdate() {
-      //   this.setState({data:this.dataInit()});
-      // }
+      dataInit.push( { name: String('January'), Fail:0, Success:0 });
+      dataInit.push( { name: String('February'), Fail:0, Success:0 });
+      dataInit.push( { name: String('March'), Fail:0, Success:0 });
+      dataInit.push( { name: String('April'), Fail:0, Success:0 });
+      dataInit.push( { name: String('May '), Fail:0, Success:0 });
+      dataInit.push( { name: String('June  '), Fail:0, Success:0 });
+      dataInit.push( { name: String('July  '), Fail:0, Success:0 });
+      dataInit.push( { name: String('August '), Fail:0, Success:0 });
+      dataInit.push( { name: String('September '),Fail:0, Success:0 });
+      dataInit.push( { name: String('October '), Fail:0, Success:0 });
+      dataInit.push( { name: String('November  '),Fail:0, Success:0 });
+      dataInit.push( { name: String('December '), Fail:0, Success:0 });
+      this.state.data= dataInit;
+    }
+      initWithoutInformation(){
+        if(store.getState().CurrentYear.CurrentYear.length>0){
+         this.state.data= store.getState().CurrentYear.CurrentYear;
+          this.forceUpdate();
+         
+        }
+        else{
+          this.dataInit();
+         
+        }
+
+      }
       dataInit(){
         let time_1=new Date().getTime();
         let dataInit=[];
@@ -138,12 +161,18 @@ class CurrentYear extends PureComponent {
 
           }
           this.state.data= dataInit;
+          store.dispatch({
+            type:CURRENT_YEAR,
+            payload:dataInit
+          })
           this.forceUpdate();
+        
         }).catch(err => {
-        console.log(err,"error in data");
+          this.setState({error:true});
+          setTimeout(()=>{this.setState({error:false});}, 8000);
 
        });
-
+      
         let time_2=new Date().getTime();
         console.log((time_2-time_1),"Time from year");
      
@@ -152,6 +181,24 @@ class CurrentYear extends PureComponent {
    
     render() {
         return (
+          <div>
+              <div className={this.props.classes.msg}>
+                <Snackbar open={this.state.error} autoHideDuration={8000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="error">
+                    The system did not load the information for the current year <strong>because Internal Server Error  </strong>
+                    </Alert>
+                    </Snackbar>
+               </div>
+          <Button
+          variant="contained"
+          color="primary"
+       
+          onClick={()=>{this.dataInit()}}
+          className={this.props.classes.button}
+          startIcon={<RefreshIcon />}
+        >
+          Refresh
+        </Button>
             <BarChart   
                 width={1220}
                 height={500} 
@@ -168,6 +215,7 @@ class CurrentYear extends PureComponent {
                 <Bar dataKey="Fail" fill="#ff6666"/>
                 <Bar dataKey="Success" fill="#82ca9d" />
             </BarChart>
+            </div>
         
       
         );

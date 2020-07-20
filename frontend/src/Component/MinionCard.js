@@ -32,17 +32,17 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 const styles = theme => ({
   root: {
-    maxWidth: 400,
-    Width:400,
+    maxWidth: 500,
+    minWidth:500,
+    Width:500,
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
   },
-  root2: {
-    width: 230,
-    maxWidth: 360,
-    fontSize:12,
-    backgroundColor: theme.palette.background.paper,
+  Tree_Res:{
+    maxWidth: 450,
+    Width:450,
   },
+ 
   nested: {
     paddingLeft: theme.spacing(4),
   },
@@ -65,8 +65,9 @@ const styles = theme => ({
     fontSize: 12,
   },
   container: {
-    width: 500,
-    display: 'flex',
+    width: 400,
+    maxWidth: 400,
+    //display: 'flex',
     flexWrap: 'wrap',
     overflow:'wrap'
   },
@@ -76,19 +77,24 @@ const styles = theme => ({
     maxWidth: 400,
   },
   CardContent:{
-    maxWidth: 400,
-    width: 400,
+    maxWidth: 250,
+    width: 250,
   
   },
   CircularProgress:{
-     paddingLeft: theme.spacing(20),
+     paddingLeft: theme.spacing(27),
     //paddingTop: theme.spacing(),
   },
   TreeItem:{
     color:'#26a852',
+    flexWrap: 'wrap',maxWidth:400,width:400,wordWrap: 'break-word',
+  },
+  res_of_cmd:{
+    maxWidth:400,
+    flexWrap: 'wrap',
+    wordWrap: 'break-word',
   },
 });
-
 
 class MinionCard extends React.Component {
     constructor(props) {
@@ -127,7 +133,7 @@ class MinionCard extends React.Component {
     }
     handleClickOpen(){
       this.setState((prevState) => ({open:!prevState.open}));
-      console.log(this.state,"stste from handleClickOpen")
+     //console.log(this.state,"stste from handleClickOpen")
     }
     handleClose(){
       this.setState((prevState) => ({open:!prevState.open}));
@@ -150,7 +156,7 @@ class MinionCard extends React.Component {
 render(){
   // id={item.id} minion={item.minions} comment={item.comment}
     const bull = <span className={this.props.classes.bullet}>•</span>;
-    console.log(this.props,"this.props")
+    //console.log(this.props,"this.props")
     if(this.state.comment===''){this.state.click =true}
     if(this.state.click === false && this.props.prepared===true){
       return (
@@ -172,18 +178,19 @@ render(){
                 <div>
                   <div className={this.props.classes.container}>
                                 <TreeView
-                                className={this.props.classes.root}
+                                className={this.props.classes.Tree_Res}
                                 defaultCollapseIcon={<ExpandMoreIcon />}
                                 defaultExpandIcon={<ChevronRightIcon />}
                               >
                         <TreeItem nodeId="1" label="See Minions">
                         {
                             this.props.minion.map((item,index)=>{
+                              //console.log(item,"item") <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:850,width:800}}>
                              // console.log(index,"index")
                               return(
                                 <TreeItem nodeId={index+2} label={item[0]} className={this.props.classes.TreeItem}>
-                                    <Typography  color="textSecondary" >
-                                  <TreeItem nodeId={index+3} label={item[1]} />
+                                    <Typography  color="textSecondary"  >
+                                      <TreeItem nodeId={index+3} label={item[1]} className={this.props.classes.res_of_cmd} />
                                   </Typography>
                                   
                                 </TreeItem>
@@ -274,10 +281,30 @@ render(){
           </Card>
         );
       }
+      else if (this.props.err===true)
+      {
+        //console.log("props from minioncard")
+        //console.log(this.props,"props from minioncard")
+        return(
+          <Card className={this.props.classes.root}>
+            
+           
+            <CardContent className={this.props.classes.CardContent}>
+              
+            <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
+             Error from server
+              {/*this.props.fun*/}
+              </Typography>
+            </CardContent>
+          </Card>
+        );
+      }
       else{return(<div></div>);}
 }
   
 }
+
+
 
 export default withStyles(styles)(MinionCard);
 

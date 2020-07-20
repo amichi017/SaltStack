@@ -7,7 +7,10 @@ import saveMinion  from './saveMinion';
 import listMinions  from './listMinions';
 import graphDate  from './graphDate';
 import saltReturnsGraph  from './saltReturnsGraph';
-
+import CurrentMonth  from './CurrentMonth';
+import CurrentYear  from './CurrentYear';
+import LastThreeMonths  from './LastThreeMonths';
+import fab  from './fab';
 const appReducer = combineReducers({
   saltReturns:saltReturns,
   saltReturnsGraph:saltReturnsGraph,
@@ -17,7 +20,10 @@ const appReducer = combineReducers({
   error: errorReducer,
   saveMinion:saveMinion,
   listMinions:listMinions,
- 
+  CurrentMonth:CurrentMonth,
+  CurrentYear:CurrentYear,
+  LastThreeMonths:LastThreeMonths,
+  fab:fab,
   
 
 });

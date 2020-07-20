@@ -11,11 +11,17 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import { Alert } from '@material-ui/lab';
+import Snackbar from '@material-ui/core/Snackbar';
 import {
   LAST_THREE_MONTHS_ONE,
      LAST_THREE_MONTHS_TOW,
      LAST_THREE_MONTHS_THREE
 } from '../actions/types';
+import { ThreeDRotationSharp } from "@material-ui/icons";
 
 const styles = theme => ({
     root: {
@@ -23,6 +29,9 @@ const styles = theme => ({
         flexGrow: 1,
         maxWidth: 400,
       },
+      button:{
+        margin: theme.spacing(1),
+      }
 });
 const getDataFromServer = (str,start,end) => {
   let timer_1=new Date().getTime();
@@ -107,7 +116,8 @@ const getDataFromServer = (str,start,end) => {
           
       })
       .catch(err => {
-        console.log(err,"error in data");
+        this.setState({error:true});
+        setTimeout(()=>{this.setState({error:false});}, 8000);
       
        });
   
@@ -139,6 +149,7 @@ class LastThreeMonths extends PureComponent {
          this.dataInitTow = this.dataInitTow.bind(this);
          this.dataInitThree = this.dataInitThree.bind(this);
          this.getDataFromServer = this.getDataFromServer.bind(this);
+         this.initFirstTime = this.initFirstTime.bind(this);
         // store.dispatch(saltReturns("LastThreeMonths"));
   
         this.state = {
@@ -151,66 +162,107 @@ class LastThreeMonths extends PureComponent {
             tow: [],
             three: [],
             flag:true,
+            erroe:false,
          
         };
+        this.initFirstTime();
         this.initWithoutInformation();
-         this.dataInitOne();
-        this.dataInitTow();
-        this.dataInitThree();
+      
       }
-      // componentWillReceiveProps(nextProps) {
-      //   if( (((this.props.date.start.toLocaleDateString()!== nextProps.date.start.toLocaleDateString()) || (this.props.date.end.toLocaleDateString()!== nextProps.date.end.toLocaleDateString() ))) 
-      //   && (this.state.flag===true)){
+initFirstTime(){
+                  
+          let dataInitOne=[];
 
-      //      this.setState({one: this.dataInitOne(),
-      //       tow: this.dataInitTow(),
-      //       three: this.dataInitThree()});
-          
-      //   }
-      // }
-      // shouldComponentUpdate(nextProps, nextState) {
-      //   if(this.state.flag===true){
-      //     this.setState({one: this.dataInitOne(),
-      //       tow: this.dataInitTow(),
-      //       three: this.dataInitThree(),flag:false});
-      //     return true;
-      //   }
-      //  return false;
-        
-      // }
+
+
+          let temp=new Date();
+          // let temp=new Date(2019,10);
+
+          let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+            for (let i=1;i<=monthDayOne;i++){
+              dataInitOne.push( { name: String(i), Fail:0, Success:0 });
+          }
+          this.state.one=dataInitOne;
+          ////////////////////////////////////////////////////////////////////////////////////
+
+
+          let dataInitTow=[];
+
+          let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+            for (let i=1;i<=monthDayTow;i++){
+              dataInitTow.push( { name: String(i), Fail:0, Success:0 });
+          }
+          this.state.tow=dataInitTow;
+          ///////////////////////////////////////////////////////////////////////////////////
+
+
+          let dataInitThree=[];
+
+
+          let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+            for (let i=1;i<=monthDayThree;i++){
+              dataInitThree.push( { name: String(i), Fail:0, Success:0 });
+          }
+          this.state.three=dataInitThree;
+}
 initWithoutInformation(){
-        
-      let dataInitOne=[];
+  if(store.getState().LastThreeMonths.dataInitOne.length>0){
+    this.state.one= store.getState().LastThreeMonths.dataInitOne;
+    console.log("this.state.three= store.getState().LastThreeMonths.dataInitOne;")
+     this.forceUpdate();
+    
+   }
+   else{ this.dataInitOne();  console.log(" this.dataInitOne();")}
 
-      let temp=new Date();
-      // let temp=new Date(2019,10);
+   if(store.getState().LastThreeMonths.dataInitTow.length>0){
+    this.state.tow= store.getState().LastThreeMonths.dataInitTow;
+    console.log("this.state.three= store.getState().LastThreeMonths.dataInitTow;")
+     this.forceUpdate();
+    
+   }
+   else{  this.dataInitTow();  console.log(" this.dataInitTow();")}
 
-      let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
-        for (let i=1;i<=monthDayOne;i++){
-          dataInitOne.push( { name: String(i), Fail:0, Success:0 });
-      }
-      this.state.one=dataInitOne;
-      ////////////////////////////////////////////////////////////////////////////////////
+   if(store.getState().LastThreeMonths.dataInitThree.length>0){
+    this.state.three= store.getState().LastThreeMonths.dataInitThree;
+     this.forceUpdate();
+     console.log("this.state.three= store.getState().LastThreeMonths.dataInitThree;")
+    
+   }
+   else{ this.dataInitThree(); console.log(" this.dataInitThree();")}
+  
+  
+
+      // let dataInitOne=[];
+
+      // let temp=new Date();
+      // // let temp=new Date(2019,10);
+
+      // let monthDayOne =new Date(temp.getFullYear(), temp.getMonth()-2, 0).getDate();
+      //   for (let i=1;i<=monthDayOne;i++){
+      //     dataInitOne.push( { name: String(i), Fail:0, Success:0 });
+      // }
+      // this.state.one=dataInitOne;
+      // ////////////////////////////////////////////////////////////////////////////////////
 
 
-      let dataInitTow=[];
+      // let dataInitTow=[];
 
-      let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
-        for (let i=1;i<=monthDayTow;i++){
-          dataInitTow.push( { name: String(i), Fail:0, Success:0 });
-      }
-      this.state.tow=dataInitTow;
-      ///////////////////////////////////////////////////////////////////////////////////
-
-
-      let dataInitThree=[];
+      // let monthDayTow =new Date(temp.getFullYear(), temp.getMonth()-1, 0).getDate();
+      //   for (let i=1;i<=monthDayTow;i++){
+      //     dataInitTow.push( { name: String(i), Fail:0, Success:0 });
+      // }
+      // this.state.tow=dataInitTow;
+      // ///////////////////////////////////////////////////////////////////////////////////
 
 
-      let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
-        for (let i=1;i<=monthDayThree;i++){
-          dataInitThree.push( { name: String(i), Fail:0, Success:0 });
-      }
-      this.state.three=dataInitThree;
+      // let dataInitThree=[];
+
+
+      // let monthDayThree =new Date(temp.getFullYear(), temp.getMonth(), 0).getDate();
+      //   for (let i=1;i<=monthDayThree;i++){
+      //     dataInitThree.push( { name: String(i), Fail:0, Success:0 });
+      // }
+      // this.state.three=dataInitThree;
 }
 getDataFromServer (str,start,end) {
         let timer_1=new Date().getTime();
@@ -282,12 +334,24 @@ getDataFromServer (str,start,end) {
              
                 }
                 if(str===LAST_THREE_MONTHS_ONE){
+                  store.dispatch({
+                    type:LAST_THREE_MONTHS_ONE,
+                    payload:dataInit
+                  })
                   this.state.one=dataInit;
                 }
                 else if(str===LAST_THREE_MONTHS_TOW){
+                  store.dispatch({
+                    type:LAST_THREE_MONTHS_TOW,
+                    payload:dataInit
+                  })
                   this.state.tow=dataInit;
                 }
                 else if(str===LAST_THREE_MONTHS_THREE){
+                  store.dispatch({
+                    type:LAST_THREE_MONTHS_THREE,
+                    payload:dataInit
+                  })
                   this.state.three=dataInit;
                 }
                 let timer_2=new Date().getTime();
@@ -336,7 +400,7 @@ dataInitTow(){
         this.getDataFromServer(LAST_THREE_MONTHS_TOW,startTow,endTow)
 }
 
-      dataInitThree(){
+dataInitThree(){
         let yearTemp=String(new Date().getFullYear());
         let year =String(new Date(yearTemp, new Date().getMonth()-2, 1).getFullYear());
         let dayEndThree=String(new Date(year, new Date().getMonth(), 0).getDate());
@@ -351,7 +415,7 @@ dataInitTow(){
         let endTrhee= year+satrtMonthTrhee+dayEndThree+"235959595959";
     
         this.getDataFromServer(LAST_THREE_MONTHS_THREE,startTrhee,endTrhee)
-      }
+}
 
     
    
@@ -369,7 +433,27 @@ dataInitTow(){
         this.state.nameOne=listMonth[tempMonth-3];
     
         return (
-            
+          <div>
+            <div className={this.props.classes.msg}>
+                <Snackbar open={this.state.error} autoHideDuration={8000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="error">
+                    The system did not load the information for the past three months <strong>because Internal Server Error  </strong>
+                    </Alert>
+                    </Snackbar>
+               </div>
+          <Button
+          variant="contained"
+          color="primary"
+     
+          onClick={()=>{  
+            this.dataInitOne();
+            this.dataInitTow();
+            this.dataInitThree();}}
+          className={this.props.classes.button}
+          startIcon={<RefreshIcon />}
+        >
+          Refresh
+        </Button>
             <TreeView
             className={this.props.classes.root}
             defaultCollapseIcon={<ExpandMoreIcon />}
@@ -442,7 +526,7 @@ dataInitTow(){
             
             
           </TreeView>
-
+      </div>
           
        
         );

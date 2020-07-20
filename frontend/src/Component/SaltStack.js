@@ -1,5 +1,3 @@
-
-
 import React, { Component } from "react";
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -31,7 +29,7 @@ import {
 import { withAlert } from 'react-alert';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -74,7 +72,7 @@ const tableIcons = {
 
 const styles = theme => ({
     MaterialTable:{
-        marginLeft: theme.spacing(12),
+        marginLeft: theme.spacing(-15),
         marginTop: theme.spacing(1),
         width:450, 
     },
@@ -167,8 +165,9 @@ class SaltStack extends React.Component {
         super(props);
         this.clickOpen = this.clickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        //this.handleClick = this.handleClick.bind(this);
         this.sentCommand = this.sentCommand.bind(this);
+        this.ClickCSend = this.ClickCSend.bind(this);
         this.getMinionsFromServer = this.getMinionsFromServer.bind(this);
         this.tokenConfig = this.tokenConfig.bind(this);
         store.dispatch(listMinions());
@@ -186,13 +185,32 @@ class SaltStack extends React.Component {
         countSaveMinion:0,
         warninginput:false,
         warningNoMinionSelected:false,
+        err_from_server_run_cmd:false,
         err_cmd:"",
         err_cmd_flag:false,
         data:[],
+        minions_send_to_server:[],
+        cmd_no_run_bacuse:"",
+        
         };
         
-        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
        this.getMinionsFromServer();
+     
+       if(this.state.history.length===0){
+           this.state.history=store.getState().saveMinion.saveMinion;
+       }
+    }
+    ClickCSend(){
+        if(this.state.input === ''){ 
+            this.setState({warninginput:true});
+            setTimeout(()=>{this.setState({warninginput:false});}, 2200);
+        }
+        else{
+            this.sentCommand(this.state.input);
+        }
+       
+        
     }
     getMinionsFromServer(){
        
@@ -240,200 +258,151 @@ class SaltStack extends React.Component {
         this.setState({msg:false,warninginput:false,warningNoMinionSelected:false});
     };
 
-    handleClick = () => 
-    {
-        this.state.countSaveMinion--;
-        
-        if((this.state.input !== '')  &&  (this.state.countSaveMinion===0)){
-            this.state.saveMinion.prepared=false;
-            setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
-            this.state.saveMinion.comment=this.state.input;
-
-            let minions =store.getState().saveMinion.saveMinion;
-            
-            const words = this.state.input.split(' ');
-            const parms_send=this.state.parms.split(' ');
-           
-            let res={
-                func:words[0],
-                tgt:this.state.saveMinion.minions,
-                salt_cmd:this.state.parms===""?"":parms_send,
-            }
-        
-           this.state.saveMinion.Parameter=parms_send;
-            this.setState({parms:""});
-         
-            const body = JSON.stringify(res);
-            let tokenTemp=this.tokenConfig();
-            this.state.history.unshift(this.state.saveMinion);
-            minions.unshift(this.state.saveMinion);
-            store.dispatch({
-                type: SAVE_MINION,
-                payload: minions
-            });
-            
-            axios.post('/saltstack_cmd',body, tokenTemp)
-            .then((res) => {
-                const temp=res.data.res;
-                const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-               let buildRes=[];
-                result.forEach(minionRes => {
-                    minions[0].minions.map((item)=>{
-                        if(minionRes[0]===item){
-                            buildRes.push([minionRes[0],minionRes[1]])
-                            item = buildRes;
-                        }
-                    
-                })
-            
-                });
-                this.state.saveMinion.prepared=true;
-                this.state.history.unshift(this.state.saveMinion);
-                minions[0].minions=buildRes;
-                minions.shift();
-                minions.unshift(this.state.saveMinion);
-                console.log(minions,"minions 2")
-                store.dispatch({
-                    type: SAVE_MINION,
-                    payload: minions
-                });
-                this.setState({msg:true});
-            })
-            .catch(err => {
-                //console.log("err from SaltStack")
-                this.setState({err_cmd:err.response.data.message,err_cmd_flag:true})
-                //console.log(this.state,"opopopopopopoo")
-                setTimeout(()=>{this.setState({err_cmd_flag:false});}, 2200);
-                store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
-                // dispatch({
-                //     type: LOGIN_FAIL
-                // })
-            })
-        
-          
-            //console.log(store.getState(),"store from saltstack");
-            
-        }
-        
-        if(this.state.input === ''){ 
-            this.setState({warninginput:true});
-            setTimeout(()=>{this.setState({warninginput:false});}, 2200);
-        }
-        if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1) &&(this.state.input !== '')  ){ 
-            this.setState({warningNoMinionSelected:true});
-            setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
-        }
-
-        this.setState({input:'',parms:""});
-
-
-      };
+  
    
     clickOpen (rowData){
         //  console.log(rowData,'rowData')
         this.state.countSaveMinion=0;
         this.state.countSaveMinion++;
         const data=rowData.map((row)=>row.name);
+        this.state.minions_send_to_server=data;
         let commntId=(store.getState().saveMinion.saveMinion.length)+1; 
-        this.state.saveMinion={minions:data,id:commntId,comment:'',prepared:false};
+       // this.state.saveMinion={minions:data,id:commntId,comment:'',prepared:false};
+        //this.state.history.push({prepared:false,comment:'',Parameter:"",id:"",minions_send_to_server:data})
        // this.getMinionsFromServer();
+      
         this.setState({alert:true,clickSave:true,});
-        setTimeout(()=>{this.setState({alert:false,});}, 2200);
+        setTimeout(()=>{this.setState({alert:false,});}, 5000);
         
     };
+    componentWillReceiveProps(nextProps,nextState) {
+    
+         if(nextProps.saveMinion!==this.props.saveMinion){
+             setTimeout(() => {
+                this.forceUpdate();
+             }, 500);
+           
+           //console.log("if")
+   
+       }
+   
+     }
+    //  componentDidUpdate(prevState){
+    //     this.state.history=prevState.history;
 
+    //  }
 sentCommand(command){
         
-        this.state.countSaveMinion--;
-        if( (this.state.countSaveMinion===0)){
 
-           
-            this.state.saveMinion.prepared=false;
-
-           
-            this.state.saveMinion.comment=command;
-            
-            let minions =store.getState().saveMinion.saveMinion;
-            //  console.log(store.getState().saveMinion.saveMinion,"store.getState().saveMinion.saveMinion")
-           
-          
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+    this.state.countSaveMinion--;
+    if( (this.state.countSaveMinion===0)){
+            let list_card_from_store=store.getState().saveMinion.saveMinion.length;
+            console.log(store.getState(),"store.getState(");
+            console.log(this.state.history,"this.state.history");
+            if(list_card_from_store!== this.state.history.length){
+                this.state.history=store.getState().saveMinion.saveMinion;
+            }
+            const config = {headers: {'Content-Type': 'application/json'}
             }
             const words = this.state.input.split(' ');
             const parms_send=this.state.parms.split(' ');
-           
+            let id_of_commnd = new Date().getTime()
+            let x = {prepared:false,comment:command,Parameter:parms_send,id:id_of_commnd,minions:this.state.minions_send_to_server};
+            
+            this.state.input="";
+            this.state.history.unshift(x)
             let res={
                 func:command,
-                tgt:this.state.saveMinion.minions,
+                tgt:this.state.minions_send_to_server,
                 salt_cmd:this.state.parms===""?"":parms_send,
+              
             }
-            this.state.saveMinion.Parameter=parms_send;
+          
             this.setState({parms:""});
-
+           
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
-            this.state.history.unshift(this.state.saveMinion);
-            minions.unshift(this.state.saveMinion);
-          
+            
+            //console.log(" his.state.history.minions", this.state.history.minions)
             store.dispatch({
                 type: SAVE_MINION,
-                payload: minions
+                payload: this.state.history
             });
-            console.log(store.getState(),"store.getState() first")
-            axios.post('/saltstack_cmd',body, tokenTemp)
-            .then((res) => {
-                const temp=res.data.res;
-                const result = Object.keys(temp).map((key) => [String(key), temp[key]]);
-               let buildRes=[];
-                result.forEach(minionRes => {
-                    minions[0].minions.map((item)=>{
-                        if(minionRes[0]===item){
-                            buildRes.push([minionRes[0],minionRes[1]])
-                            item = buildRes;
-                        }
-                    
-                })
-            
-                });
-                this.state.saveMinion.prepared=true;
-                this.state.history.unshift(this.state.saveMinion);
-                minions[0].minions=buildRes;
-                minions.shift();
-                minions.unshift(this.state.saveMinion);
-                console.log(minions,"minions 2")
-                store.dispatch({
-                    type: SAVE_MINION,
-                    payload: minions
-                });
-                this.setState({msg:true});
-      
+          axios.post('/saltstack_cmd',body, tokenTemp)
+          .then((res) => {
 
-            })
-            .catch(err => {
-                //console.log("err from SaltStack")
-                //this.setState({err_cmd:err.response.data.message,err_cmd_flag:true})
+              const temp=res.data.res;
+              let cur_minions = this.state.minions_send_to_server
+              const buildRes = cur_minions.map(minion => [minion,JSON.stringify(temp[minion])])
+              //console.log(this.state,"this.state 1")
+             
+              this.state.history =this.state.history.map((item)=>{
+                      if(item.id === id_of_commnd ){
+                          //console.log(item,"item")
+                          return({prepared:true,comment:command,Parameter:parms_send,id:id_of_commnd,minions:buildRes})
+                        
+                      }
+                      else{return item}
+                  
+                 
+              }).filter((item)=>{if(item!==undefined){return item}})
+              
+             
+             console.log(this.state,"this.state 2")
+             store.dispatch({
+                type: SAVE_MINION,
+                payload: this.state.history
+            });
+            console.log(store.getState(),"store.getState()")
+            this.setState({parms:""});
+           // this.forceUpdate();
+          })
+          .catch(err => {
+            //console.log("1111111111111111111111")
+            console.log("err",err)
+           
+            setTimeout(() => {
+                this.state.history=this.state.history.filter((item)=>{
+                 
+                    if(item.id !== id_of_commnd ){
+                       
+                        return item;
+                    }
+                    else{ this.state.cmd_no_run_bacuse=item.comment;}
+                  })
+                  
+                  this.setState({err_cmd_flag:true})
+                  setTimeout(()=>{this.setState({err_cmd_flag:false});}, 6500);
                
-                setTimeout(()=>{this.setState({err_cmd_flag:false});}, 4000);
-                //store.dispatch(returnErrors(err.response.data.message, err.response.status, 'CMD_FAIL'));
-                // dispatch({
-                //     type: LOGIN_FAIL
-                // })
-            })
+                
+            }, 5000);
+              
+
           
-           // console.log(this.state.history,'this.state.history')
-            
-            setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
+           // this.forceUpdate();
+          })
+         
+          
          
         }
+       
       
-        if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1)   ){ 
+        else if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1)){ 
+            console.log("pppppppppppppppppppppp")// && (this.state.countSaveMinion!==1)   
             this.setState({warningNoMinionSelected:true});
             setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
         }
-        this.setState({parms:""});
+        else{
+           
+            setTimeout(()=>{this.setState({msg:false,clickSave:false});}, 2200);
+        }
+        
+        // if((this.state.countSaveMinion !==0) && (this.state.countSaveMinion!==1) &&(this.state.input !== '')  ){ 
+        //     this.setState({warningNoMinionSelected:true});
+        //     setTimeout(()=>{this.setState({warningNoMinionSelected:false});}, 2200);
+        // }
+       
+        
 
     };
 
@@ -473,7 +442,7 @@ sentCommand(command){
             :(<div></div>)
         }
         <Divider className={this.props.classes.divider} orientation="vertical" />     
-        <IconButton fontSize="small" color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.handleClick}>
+        <IconButton fontSize="small" color='primary' size='medium' className={this.props.classes.iconButton} aria-label="directions" onClick={this.ClickCSend}>
             <SendIcon />
         </IconButton>
     </Paper>
@@ -522,18 +491,18 @@ sentCommand(command){
         :(<div></div>)
     }
     {
-//     <Divider orientation="vertical" flexItem/>   
-//    <Button
-//         variant="contained"
-//         color="primary"
-//         className={this.props.classes.button}
-//         //disabled
-//         //endIcon={<SendIcon />}
-//       >
-//         {//Send
-//         }
-//      </Button>
-    }
+    //     <Divider orientation="vertical" flexItem/>   
+    //    <Button
+    //         variant="contained"
+    //         color="primary"
+    //         className={this.props.classes.button}
+    //         //disabled
+    //         //endIcon={<SendIcon />}
+    //       >
+    //         {//Send
+    //         }
+    //      </Button>
+        }
 
     </Paper>
 
@@ -595,8 +564,9 @@ sentCommand(command){
 
 
     {
-        <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:600}}>
-        {store.getState().saveMinion.saveMinion.map(item =>{
+        <div style={{ display: 'flex',flexDirection: 'row',flexFlow: 'row wrap',maxWidth:850,width:800}}>
+          {console.log(this.state.history,"this.state.history")}
+        {this.state.history.map(item =>{
             return(
                 
                   <MinionCard  id={item.id} minion={item.minions} comment={item.comment} prepared={item.prepared} Parameter={item.Parameter}/>
@@ -604,7 +574,7 @@ sentCommand(command){
         </div>
     }  
 
-    
+
     <div className={this.props.classes.Divider}>
         <Divider light  style={{width:400}}/>
     </div>
@@ -684,7 +654,7 @@ sentCommand(command){
             (   <div className={this.props.classes.msg}>
                 <Snackbar open={this.state.err_cmd_flag} autoHideDuration={6000} onClose={this.handleClose}>
                     <Alert onClose={this.handleClose} severity="error">
-                              command not sent because <strong>Internal Server Error   </strong>
+                              The command  <strong>{this.state.cmd_no_run_bacuse}</strong>  not sent because <strong>Internal Server Error   </strong>
                         </Alert>
                   
                     </Snackbar>
@@ -706,4 +676,10 @@ sentCommand(command){
 
 }
 
-export default withStyles(styles)(SaltStack);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        saveMinion: state.saveMinion,
+        
+    }
+}
+  export default connect(mapStateToProps)(withStyles(styles)(SaltStack));

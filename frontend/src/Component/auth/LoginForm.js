@@ -73,7 +73,7 @@ class LoginForm extends React.Component {
         this.setState({ msg: error.msg });
         setTimeout(function(){
           this.setState({msg:null});
-          }.bind(this),3000);  // clear error after 3 seconds
+          }.bind(this),6000);  // clear error after 6 seconds
       } else {
         this.setState({ msg: null });
       }

@@ -145,7 +145,7 @@ const styles = theme => ({
   
   },
   fixedHeight: {
-    height: 363,
+    height: 364,
   },
   fixedHeightFirst:{
     marginTop:theme.spacing(2),

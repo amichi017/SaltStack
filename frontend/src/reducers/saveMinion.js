@@ -8,6 +8,7 @@ import {SAVE_MINION} from '../actions/types';
 
 export default function(state=initialState, action) { 
  //console.log("SALT_RETURNS",action.payload);
+ //saveMinion.concat(action.payload);
 switch(action.type){
     case SAVE_MINION:
     return {
