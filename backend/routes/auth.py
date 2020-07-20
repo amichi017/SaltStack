@@ -124,7 +124,7 @@ def update(id):
     if old_password1 != old_password2:
         return jsonify(message="Bad Password Confirmation"), 401
     if test:
-        myquery = {"_id": _id}
+        myquery = {"_id": id}
         newvalues = {"$set": {"password": bcrypt.generate_password_hash(new_password),"email":email,"role":role,"first_name":first_name,"last_name":last_name}}
         try:
             user = db.users.update_one(myquery, newvalues)
