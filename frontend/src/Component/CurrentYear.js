@@ -90,6 +90,7 @@ class CurrentYear extends PureComponent {
 
       }
       dataInit(){
+        this.initFirstTime();
         let time_1=new Date().getTime();
         let dataInit=[];
         // let temp=new Date(2019,10);

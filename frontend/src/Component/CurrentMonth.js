@@ -84,6 +84,7 @@ class CurrentMonth extends PureComponent {
      
       }
       dataInit(){
+        this.initFirstTime();
         let time_1=new Date().getTime();
         let year=String(new Date().getFullYear());
         let dayEnd=String(new Date(year, new Date().getMonth()+1, 0).getDate());
@@ -164,6 +165,7 @@ class CurrentMonth extends PureComponent {
             type:CURRENT_MONTH,
             payload:dataInit
           })
+          localStorage.setItem("CurrentMonth",dataInit);
           this.state.data= dataInit;
           this.forceUpdate();
     })

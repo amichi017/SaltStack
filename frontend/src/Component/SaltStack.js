@@ -72,11 +72,7 @@ const tableIcons = {
 
 const styles = theme => ({
     MaterialTable:{
-<<<<<<< HEAD
         marginLeft: theme.spacing(-15),
-=======
-        marginLeft: theme.spacing(-8),
->>>>>>> 00ce104ffbc429e346bb4ddc2db5d08d084aed1f
         marginTop: theme.spacing(1),
         width:450, 
     },
@@ -327,11 +323,7 @@ sentCommand(command){
             const body = JSON.stringify(res);
             let tokenTemp=this.tokenConfig();
             
-<<<<<<< HEAD
             //console.log(" his.state.history.minions", this.state.history.minions)
-=======
-            console.log(" his.state.history.minions", this.state.history.minions)
->>>>>>> 00ce104ffbc429e346bb4ddc2db5d08d084aed1f
             store.dispatch({
                 type: SAVE_MINION,
                 payload: this.state.history
@@ -342,19 +334,11 @@ sentCommand(command){
               const temp=res.data.res;
               let cur_minions = this.state.minions_send_to_server
               const buildRes = cur_minions.map(minion => [minion,JSON.stringify(temp[minion])])
-<<<<<<< HEAD
               //console.log(this.state,"this.state 1")
              
               this.state.history =this.state.history.map((item)=>{
                       if(item.id === id_of_commnd ){
                           //console.log(item,"item")
-=======
-              console.log(this.state,"this.state 1")
-             
-              this.state.history =this.state.history.map((item)=>{
-                      if(item.id === id_of_commnd ){
-                          console.log(item,"item")
->>>>>>> 00ce104ffbc429e346bb4ddc2db5d08d084aed1f
                           return({prepared:true,comment:command,Parameter:parms_send,id:id_of_commnd,minions:buildRes})
                         
                       }
