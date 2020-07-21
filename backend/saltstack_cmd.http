@@ -1,0 +1,8 @@
+POST http://127.0.0.1:5000/saltstack_cmd
+Content-Type: application/json
+Accept: application/json
+{
+   "func":"test.ping",
+   "tgt":["account-1.minhala.jce.ac.il","account-4.minhala.jce.ac.il"],
+   "salt_cmd":""
+}

@@ -107,32 +107,46 @@ def update(id):
         last_name = request.json["last_name"]
         role = request.json["role"]
         email = request.json["email"]
-        old_password1 = request.json["old_password1"]
-        old_password2 = request.json["old_password2"]
-        new_password = request.json["new_password"]
+        new_password1 = request.json["new_password1"]
+        new_password2 = request.json["new_password2"]
     else:
         email = request.form["email"]
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
         role = request.form["role"]
-        old_password1 = request.form["old_password1"]
-        old_password2 = request.form["old_password2"]
-        new_password = request.form["new_password"]
+        new_password1 = request.form["new_password1"]
+        new_password2 = request.form["new_password2"]
 
-
-    test = db.users.find_one({"_id": id})
-    if old_password1 != old_password2:
-        return jsonify(message="Bad Password Confirmation"), 401
+    user_id = ObjectId(id)
+    test = db.users.find_one({"_id": user_id})
     if test:
-        myquery = {"_id": id}
-        newvalues = {"$set": {"password": bcrypt.generate_password_hash(new_password),"email":email,"role":role,"first_name":first_name,"last_name":last_name}}
-        try:
-            user = db.users.update_one(myquery, newvalues)
-            return jsonify(message="User update successfully!"), 201
-        except:
-            return jsonify(message="Bad Email or Password"), 401
+        if new_password1 == '' and new_password2 == '':
+            myquery = {"_id": user_id}
+            newvalues = {
+                "$set": {"email": email, "role": role,
+                            "first_name": first_name, "last_name": last_name}}
+            try:
+                user = db.users.update_one(myquery, newvalues)
+            except:
+                return jsonify(message="User update failed"), 401
+            finally:
+                return jsonify(message="User update successfully!"), 200
 
-    return jsonify(message="wrong password Password"), 401
+        if new_password1 != new_password2:
+            return jsonify(message="Illegal Password"), 401
+        else:
+            myquery = {"_id": user_id}
+            newvalues = {"$set": {"password": bcrypt.generate_password_hash(new_password1), "email": email, "role": role,
+                                      "first_name": first_name, "last_name": last_name}}
+            try:
+                user = db.users.update_one(myquery, newvalues)
+            except:
+                return jsonify(message="Bad Email or Password"), 401
+
+            return jsonify(message="User update successfully!"), 201
+
+
+    return jsonify(message="Bad Password Confirmation"), 401
 
 @bp.route("/get_users", methods=["GET"])
 @jwt_required
